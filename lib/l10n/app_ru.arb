@@ -25,7 +25,7 @@
   "dontHaveAccount": "Нет аккаунта? ",
   "@dontHaveAccount": {"description": "Don’t have an account?"},
 
-  "signUp": "Зарегистрироваться",
+  "signUp": "Регистрация",
   "@signUp": {"description": "Sign Up"}
 
 }
