@@ -1,0 +1,31 @@
+{
+  "@@locale": "en",
+
+  "signIn": "Sign In",
+  "@signIn": {"description": "Sign In"},
+
+  "email": "Email",
+  "@email": {"description": "Email"},
+
+  "invalidEmail": "Invalid email",
+  "@invalidEmail": {"description": "Invalid email"},
+
+  "password": "Password",
+  "@password": {"description": "Password"},
+
+  "invalidPassword": "Must be > 7 characters",
+  "@invalidPassword": {"description": "Invalid password"},
+
+  "next": "Continue",
+  "@next": {"description": "Continue"},
+
+  "signInWithGoogle": "Sign in with Google",
+  "@signInWithGoogle": {"description": "Sign in with Google"},
+
+  "dontHaveAccount": "Don’t have an account? ",
+  "@dontHaveAccount": {"description": "Don’t have an account?"},
+
+  "signUp": "Sign Up",
+  "@signUp": {"description": "Sign Up"}
+
+}

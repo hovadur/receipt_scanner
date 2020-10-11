@@ -1,0 +1,31 @@
+{
+  "@@locale": "ru",
+
+  "signIn": "Вход",
+  "@signIn": {"description": "Sign In"},
+
+  "email": "Электронная почта",
+  "@email": {"description": "Email"},
+
+  "invalidEmail": "Неверный емайл",
+  "@invalidEmail": {"description": "Invalid email"},
+
+  "password": "Пароль",
+  "@password": {"description": "Password"},
+
+  "invalidPassword": "Должно быть > 7 символов",
+  "@invalidPassword": {"description": "Invalid password"},
+
+  "next": "Продолжить",
+  "@next": {"description": "Next"},
+
+  "signInWithGoogle": "Google-аккаунт",
+  "@signInWithGoogle": {"description": "Sign in with Google"},
+
+  "dontHaveAccount": "Нет аккаунта? ",
+  "@dontHaveAccount": {"description": "Don’t have an account?"},
+
+  "signUp": "Зарегистрироваться",
+  "@signUp": {"description": "Sign Up"}
+
+}

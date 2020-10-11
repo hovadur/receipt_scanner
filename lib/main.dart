@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sign_button/constants.dart';
 import 'package:sign_button/create_button.dart';
+import 'l10n/app_localizations.dart';
 
 void main() {
   runApp(MyApp());
@@ -12,6 +13,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         title: 'Flutter Demo',
+        // Add the `localizationsDelegate` and `supportedLocales` lines.
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
         theme: ThemeData.light().copyWith(
             colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
         darkTheme: ThemeData.dark().copyWith(
@@ -39,7 +43,7 @@ class SignInScreen extends StatelessWidget {
     // https://stackoverflow.com/a/32686261/9449426
     final email = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
     return Scaffold(
-      appBar: AppBar(title: Text("Sign In")),
+      appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -50,19 +54,19 @@ class SignInScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     TextFormField(
-                      decoration: const InputDecoration(hintText: "Email"),
+                      decoration: InputDecoration(hintText: AppLocalizations.of(context).email),
                       validator: (String value) {
                         if (value != null && !email.hasMatch(value)) {
-                          return "Invalid email";
+                          return AppLocalizations.of(context).invalidEmail;
                         }
                         return null;
                       },
                     ),
                     TextFormField(
-                      decoration: const InputDecoration(hintText: "Password"),
+                      decoration: InputDecoration(hintText: AppLocalizations.of(context).password),
                       validator: (String value) {
                         if (value != null && value.length < 8) {
-                          return "Must be > 7 characters";
+                          return AppLocalizations.of(context).invalidPassword;
                         }
                         return null;
                       },
@@ -78,14 +82,14 @@ class SignInScreen extends StatelessWidget {
                               return null;
                             }
                           },
-                          child: Text("Next"),
+                          child: Text(AppLocalizations.of(context).next),
                         ),
                       ),
                     )
                   ],
                 )),
             SignInButton(
-                btnText: "Sign in with Google",
+                btnText: AppLocalizations.of(context).signInWithGoogle,
                 buttonType: ButtonType.google,
                 onPressed: () {}),
             SizedBox(height: 16),
@@ -93,12 +97,12 @@ class SignInScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  "Don’t have an account? ",
+                  AppLocalizations.of(context).dontHaveAccount,
                 ),
                 InkWell(
                   onTap: () => onTapped(),
                   child: Text(
-                    "Sign Up",
+                    AppLocalizations.of(context).signUp,
                     style: TextStyle(
                         color: Colors.blue,
                         decoration: TextDecoration.underline),
