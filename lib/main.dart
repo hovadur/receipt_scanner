@@ -11,17 +11,27 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData.light().copyWith(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
-      darkTheme: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
-      home: LoginScreen(),
-    );
+        title: 'Flutter Demo',
+        theme: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
+        darkTheme: ThemeData.dark().copyWith(
+            colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
+        home: Navigator(pages: [
+          MaterialPage(child: SignInScreen(() {
+            debugDumpApp();
+          })),
+        ],
+        onPopPage: (route, result) {
+          if (!route.didPop(result)) return false;
+          return true;
+        }));
   }
 }
 
-class LoginScreen extends StatelessWidget {
+class SignInScreen extends StatelessWidget {
+  SignInScreen(this.onTapped);
+
+  final GestureTapCallback onTapped;
   final _formKey = GlobalKey<FormState>();
 
   @override
@@ -29,7 +39,7 @@ class LoginScreen extends StatelessWidget {
     // https://stackoverflow.com/a/32686261/9449426
     final email = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
     return Scaffold(
-      appBar: AppBar(leading: Icon(Icons.menu), title: Text("Authorization")),
+      appBar: AppBar(title: Text("Sign In")),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
@@ -41,7 +51,7 @@ class LoginScreen extends StatelessWidget {
                   children: <Widget>[
                     TextFormField(
                       decoration: const InputDecoration(hintText: "Email"),
-                      validator: (String? value) {
+                      validator: (String value) {
                         if (value != null && !email.hasMatch(value)) {
                           return "Invalid email";
                         }
@@ -50,7 +60,7 @@ class LoginScreen extends StatelessWidget {
                     ),
                     TextFormField(
                       decoration: const InputDecoration(hintText: "Password"),
-                      validator: (String? value) {
+                      validator: (String value) {
                         if (value != null && value.length < 8) {
                           return "Must be > 7 characters";
                         }
@@ -78,6 +88,24 @@ class LoginScreen extends StatelessWidget {
                 btnText: "Sign in with Google",
                 buttonType: ButtonType.google,
                 onPressed: () {}),
+            SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Don’t have an account? ",
+                ),
+                InkWell(
+                  onTap: () => onTapped(),
+                  child: Text(
+                    "Sign Up",
+                    style: TextStyle(
+                        color: Colors.blue,
+                        decoration: TextDecoration.underline),
+                  ),
+                ),
+              ],
+            )
           ],
         ),
       ),
