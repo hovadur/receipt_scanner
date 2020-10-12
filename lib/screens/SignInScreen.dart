@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:sign_button/constants.dart';
-import 'package:sign_button/create_button.dart';
+import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({@required this.onSignUp});
@@ -22,8 +21,8 @@ class SignInScreen extends StatelessWidget {
     final email = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: SafeArea(
+        minimum: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             Form(
@@ -69,10 +68,14 @@ class SignInScreen extends StatelessWidget {
                     )
                   ],
                 )),
-            SignInButton(
-                btnText: AppLocalizations.of(context).signInWithGoogle,
-                buttonType: ButtonType.google,
-                onPressed: () {}),
+            ElevatedButton.icon(
+                onPressed: () {},
+                icon: SvgPicture.asset("assets/icons/google-icon.svg"),
+                label: Text(AppLocalizations.of(context).signInWithGoogle),
+                style: ElevatedButton.styleFrom(
+                    primary: Color(0xfff7f7f7),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(18)))),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
