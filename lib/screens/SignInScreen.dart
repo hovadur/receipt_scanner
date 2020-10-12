@@ -24,6 +24,9 @@ class SignInScreen extends StatelessWidget {
       body: SafeArea(
         minimum: const EdgeInsets.all(16.0),
         child: Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Form(
                 key: _formKey,
