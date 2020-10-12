@@ -18,22 +18,23 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) => MaterialApp(
+      builder: (BuildContext context, Widget child) {
+        final MediaQueryData data = MediaQuery.of(context);
+        return MediaQuery(
+          data: data.copyWith(
+              textScaleFactor:
+                  data.textScaleFactor < 1.1 ? 1.1 : data.textScaleFactor),
+          child: child,
+        );
+      },
       title: 'Flutter Demo',
       // Add the `localizationsDelegate` and `supportedLocales` lines.
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData.light().copyWith(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-          textTheme: TextTheme(
-              subtitle1: TextStyle(fontSize: 20),
-              bodyText2: TextStyle(fontSize: 20),
-              button: TextStyle(fontSize: 20))),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
       darkTheme: ThemeData.dark().copyWith(
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange),
-          textTheme: TextTheme(
-              subtitle1: TextStyle(fontSize: 20),
-              bodyText2: TextStyle(fontSize: 20),
-              button: TextStyle(fontSize: 20))),
+          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)),
       home: Navigator(
           pages: [
             MaterialPage(
