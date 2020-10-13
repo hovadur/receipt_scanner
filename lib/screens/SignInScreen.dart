@@ -9,11 +9,10 @@ class SignInScreen extends StatelessWidget {
   final GestureTapCallback onSignUp;
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
-      body: SafeArea(
-        minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
         child: Column(
           children: [
             SizedBox(height: 40),
@@ -46,9 +45,7 @@ class SignInScreen extends StatelessWidget {
             )
           ],
         ),
-      ),
-    );
-  }
+      ));
 }
 
 class LoginForm extends StatelessWidget {
