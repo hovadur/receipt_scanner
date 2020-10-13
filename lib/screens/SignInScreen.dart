@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -22,12 +22,10 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
       body: SafeArea(
-        minimum: const EdgeInsets.all(16.0),
+        minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
         child: Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
+            SizedBox(height: 40),
             Form(
                 key: _formKey,
                 child: Column(
@@ -65,6 +63,10 @@ class SignInScreen extends StatelessWidget {
                         child: ElevatedButton(
                           autofocus: true,
                           onPressed: () => _submit(),
+                          style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(
+                                vertical: 16.0, horizontal: 4.0),
+                          ),
                           child: Text(AppLocalizations.of(context).next),
                         ),
                       ),
