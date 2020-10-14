@@ -17,15 +17,15 @@ class SignInViewModel with ChangeNotifier {
     if (value != null && emailCheck.hasMatch(value)) {
       _email = ValidationItem(value, null);
     } else {
-      _email = ValidationItem(null, AppLocalizations.of(context).invalidEmail);
+      _email = ValidationItem(value, AppLocalizations.of(context).invalidEmail);
     }
     notifyListeners();
   }
 
   void changePassword(String value, context) {
-    if (value != null && value.length < 8) {
+    if (value == null || (value != null && value.length < 8)) {
       _password =
-          ValidationItem(null, AppLocalizations.of(context).invalidPassword);
+          ValidationItem(value, AppLocalizations.of(context).invalidPassword);
     } else {
       _password = ValidationItem(value, null);
     }
@@ -35,13 +35,15 @@ class SignInViewModel with ChangeNotifier {
   bool _isValid(context) {
     changeEmail(_email.value, context);
     changePassword(_password.value, context);
-    if (_email.value != null && _password.value != null)
+    if (_email.error == null && _password.error == null)
       return true;
     else
       return false;
   }
 
   void submit(context) {
-    if (_isValid(context)) {}
+    if (_isValid(context)) {
+      print("submit");
+    }
   }
 }
