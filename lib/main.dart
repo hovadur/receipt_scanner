@@ -4,7 +4,6 @@ import 'package:ctr/screens/signin/signin_viewmodel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -33,7 +32,7 @@ class _MyAppState extends State<MyApp> {
               child: child,
             );
           },
-          title: 'Flutter Demo',
+          title: "Checking The Receipt",
           // Add the `localizationsDelegate` and `supportedLocales` lines.
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
