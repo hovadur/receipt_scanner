@@ -26,6 +26,12 @@
   "@dontHaveAccount": {"description": "Don’t have an account?"},
 
   "signUp": "Регистрация",
-  "@signUp": {"description": "Sign Up"}
+  "@signUp": {"description": "Sign Up"},
+
+  "confirmPassword": "Подтверждение пароля",
+  "@confirmPassword": {"description": "Confirm password"},
+
+  "invalidConfirmPassword": "Неверное подтверждение",
+  "@invalidConfirmPassword": {"description": "Invalid confirm password"}
 
 }

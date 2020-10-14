@@ -122,6 +122,12 @@ abstract class AppLocalizations {
 
   // Sign Up
   String get signUp;
+
+  // Confirm password
+  String get confirmPassword;
+
+  // Invalid confirm password
+  String get invalidConfirmPassword;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
