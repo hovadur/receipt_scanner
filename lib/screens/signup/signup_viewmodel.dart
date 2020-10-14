@@ -1,5 +1,6 @@
 import 'package:ctr/domain/data/validation_item.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
 class SignUpViewModel with ChangeNotifier {
@@ -58,7 +59,7 @@ class SignUpViewModel with ChangeNotifier {
 
   void submit(context) {
     if (_isValid(context)) {
-      print("submit");
+      Fimber.d("submit");
     }
   }
 }

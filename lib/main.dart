@@ -2,6 +2,7 @@ import 'package:ctr/screens/signin/signin_screen.dart';
 import 'package:ctr/screens/signin/signin_viewmodel.dart';
 import 'package:ctr/screens/signup/signup_screen.dart';
 import 'package:ctr/screens/signup/signup_viewmodel.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ import 'package:provider/provider.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
+  Fimber.plantTree(DebugTree());
   runApp(MyApp());
 }
 
@@ -63,7 +65,7 @@ class _MyAppState extends State<MyApp> {
                                   setState(() => isContinue = true)))
                   ],
                   onPopPage: (route, result) {
-                    print("asdf");
+                    Fimber.d("asdf");
                     if (!route.didPop(result)) return false;
                     if (isSignUp) setState(() => isSignUp = false);
                     return true;
