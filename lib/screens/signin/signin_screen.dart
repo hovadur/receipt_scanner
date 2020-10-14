@@ -1,6 +1,8 @@
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/screens/signin/signin_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {
   SignInScreen({@required this.onContinue, @required this.onSignUp});
@@ -49,49 +51,32 @@ class SignInScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  final _formKey = GlobalKey<FormState>();
-
-  void _submit() {
-    if (_formKey.currentState?.validate() == false) {
-      return null;
-    }
-    print("_submit");
-  }
-
-  // https://stackoverflow.com/a/32686261/9449426
-  final email = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
-
   @override
-  Widget build(BuildContext context) => Form(
-      key: _formKey,
-      child: Column(
+  Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          TextFormField(
+          TextField(
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
-            decoration:
-                InputDecoration(labelText: AppLocalizations.of(context).email),
-            validator: (String value) {
-              if (value != null && !email.hasMatch(value)) {
-                return AppLocalizations.of(context).invalidEmail;
-              }
-              return null;
-            },
+            decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).email,
+                errorText: context
+                    .select((SignInViewModel value) => value.emailError)),
+            onChanged: (String value) =>
+                context.read<SignInViewModel>().changeEmail(value, context),
           ),
           SizedBox(height: 16),
-          TextFormField(
+          TextField(
             obscureText: true,
             textInputAction: TextInputAction.done,
-            onFieldSubmitted: (String value) => _submit(),
+            onSubmitted: (String value) =>
+                context.read<SignInViewModel>().submit(),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).password),
-            validator: (String value) {
-              if (value != null && value.length < 8) {
-                return AppLocalizations.of(context).invalidPassword;
-              }
-              return null;
-            },
+                labelText: AppLocalizations.of(context).password,
+                errorText: context
+                    .select((SignInViewModel value) => value.passwordError)),
+            onChanged: (String value) =>
+                context.read<SignInViewModel>().changePassword(value, context),
           ),
           SizedBox(
             width: double.infinity,
@@ -99,7 +84,7 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ElevatedButton(
                 autofocus: true,
-                onPressed: () => _submit(),
+                onPressed: () => context.read<SignInViewModel>().submit(),
                 style: ElevatedButton.styleFrom(
                   padding:
                       EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
@@ -109,5 +94,5 @@ class LoginForm extends StatelessWidget {
             ),
           )
         ],
-      ));
+      );
 }

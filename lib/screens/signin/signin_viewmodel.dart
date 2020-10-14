@@ -1,0 +1,45 @@
+import 'package:ctr/domain/data/validation_item.dart';
+import 'package:ctr/l10n/app_localizations.dart';
+import 'package:flutter/material.dart';
+
+class SignInViewModel with ChangeNotifier {
+  // https://stackoverflow.com/a/32686261/9449426
+  final emailCheck = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
+
+  ValidationItem _email = ValidationItem(null, null);
+  ValidationItem _password = ValidationItem(null, null);
+
+  String get emailError => _email.error;
+
+  String get passwordError => _password.error;
+
+  void changeEmail(String value, context) {
+    if (value != null && emailCheck.hasMatch(value)) {
+      _email = ValidationItem(value, null);
+    } else {
+      _email = ValidationItem(null, AppLocalizations.of(context).invalidEmail);
+    }
+    notifyListeners();
+  }
+
+  void changePassword(String value, context) {
+    if (value != null && value.length < 8) {
+      _password =
+          ValidationItem(null, AppLocalizations.of(context).invalidPassword);
+    } else {
+      _password = ValidationItem(value, null);
+    }
+    notifyListeners();
+  }
+
+  bool get _isValid {
+    if (_email.value != null && _password.value != null)
+      return true;
+    else
+      return false;
+  }
+
+  void submit() {
+    if (_isValid) {}
+  }
+}
