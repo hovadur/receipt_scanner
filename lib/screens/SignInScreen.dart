@@ -71,7 +71,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration:
-                InputDecoration(hintText: AppLocalizations.of(context).email),
+                InputDecoration(labelText: AppLocalizations.of(context).email),
             validator: (String value) {
               if (value != null && !email.hasMatch(value)) {
                 return AppLocalizations.of(context).invalidEmail;
@@ -85,7 +85,7 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onFieldSubmitted: (String value) => _submit(),
             decoration: InputDecoration(
-                hintText: AppLocalizations.of(context).password),
+                labelText: AppLocalizations.of(context).password),
             validator: (String value) {
               if (value != null && value.length < 8) {
                 return AppLocalizations.of(context).invalidPassword;
