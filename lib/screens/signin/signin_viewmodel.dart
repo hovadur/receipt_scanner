@@ -32,14 +32,16 @@ class SignInViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  bool get _isValid {
+  bool _isValid(context) {
+    changeEmail(_email.value, context);
+    changePassword(_password.value, context);
     if (_email.value != null && _password.value != null)
       return true;
     else
       return false;
   }
 
-  void submit() {
-    if (_isValid) {}
+  void submit(context) {
+    if (_isValid(context)) {}
   }
 }
