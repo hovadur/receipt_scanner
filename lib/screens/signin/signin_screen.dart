@@ -15,50 +15,52 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-        child: Column(
-          children: [
-            SizedBox(height: 40),
-            LoginForm(),
-            ElevatedButton.icon(
-                onPressed: () async {
-                  context
-                      .read<SignInViewModel>()
-                      .signInWithGoogle()
-                      .then((auth.User user) {
-                    onContinue();
-                  }).catchError((e) => Fimber.e(e.toString()));
-                },
-                icon: SvgPicture.asset("assets/icons/google-icon.svg"),
-                label: Text(AppLocalizations.of(context).signInWithGoogle),
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0xfff7f7f7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18)))),
-            SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  AppLocalizations.of(context).dontHaveAccount,
-                ),
-                InkWell(
-                  onTap: () {
-                    onSignUp();
-                  },
-                  child: Text(
-                    AppLocalizations.of(context).signUp,
-                    style: TextStyle(
-                        color: Colors.blue,
-                        decoration: TextDecoration.underline),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
-      ));
+      body: ChangeNotifierProvider(
+          create: (_) => SignInViewModel(),
+          builder: (context, _) => SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+              child: Column(
+                children: [
+                  SizedBox(height: 40),
+                  LoginForm(),
+                  ElevatedButton.icon(
+                      onPressed: () async {
+                        context
+                            .read<SignInViewModel>()
+                            .signInWithGoogle()
+                            .then((auth.User user) {
+                          onContinue();
+                        }).catchError((e) => Fimber.e(e.toString()));
+                      },
+                      icon: SvgPicture.asset("assets/icons/google-icon.svg"),
+                      label:
+                          Text(AppLocalizations.of(context).signInWithGoogle),
+                      style: ElevatedButton.styleFrom(
+                          primary: Color(0xfff7f7f7),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(18)))),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        AppLocalizations.of(context).dontHaveAccount,
+                      ),
+                      InkWell(
+                        onTap: () {
+                          onSignUp();
+                        },
+                        child: Text(
+                          AppLocalizations.of(context).signUp,
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ))));
 }
 
 class LoginForm extends StatelessWidget {

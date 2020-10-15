@@ -12,23 +12,26 @@ class SignUpScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signUp)),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-        child: Column(
-          children: [
-            SizedBox(height: 40),
-            LoginForm(),
-            ElevatedButton.icon(
-                onPressed: () {},
-                icon: SvgPicture.asset("assets/icons/google-icon.svg"),
-                label: Text(AppLocalizations.of(context).signInWithGoogle),
-                style: ElevatedButton.styleFrom(
-                    primary: Color(0xfff7f7f7),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(18))))
-          ],
-        ),
-      ));
+      body: ChangeNotifierProvider(
+          create: (_) => SignUpViewModel(),
+          builder: (context, _) => SingleChildScrollView(
+                padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+                child: Column(
+                  children: [
+                    SizedBox(height: 40),
+                    LoginForm(),
+                    ElevatedButton.icon(
+                        onPressed: () {},
+                        icon: SvgPicture.asset("assets/icons/google-icon.svg"),
+                        label:
+                            Text(AppLocalizations.of(context).signInWithGoogle),
+                        style: ElevatedButton.styleFrom(
+                            primary: Color(0xfff7f7f7),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18))))
+                  ],
+                ),
+              )));
 }
 
 class LoginForm extends StatelessWidget {
@@ -67,10 +70,11 @@ class LoginForm extends StatelessWidget {
                 context.read<SignUpViewModel>().submit(context),
             decoration: InputDecoration(
                 labelText: AppLocalizations.of(context).confirmPassword,
-                errorText: context
-                    .select((SignUpViewModel value) => value.confirmPasswordError)),
-            onChanged: (String value) =>
-                context.read<SignUpViewModel>().changeConfirmPassword(value, context),
+                errorText: context.select(
+                    (SignUpViewModel value) => value.confirmPasswordError)),
+            onChanged: (String value) => context
+                .read<SignUpViewModel>()
+                .changeConfirmPassword(value, context),
           ),
           SizedBox(
             width: double.infinity,
@@ -78,7 +82,8 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ElevatedButton(
                 autofocus: true,
-                onPressed: () => context.read<SignUpViewModel>().submit(context),
+                onPressed: () =>
+                    context.read<SignUpViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
                   padding:
                       EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
