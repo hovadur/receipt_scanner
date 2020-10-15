@@ -1,5 +1,7 @@
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/screens/signin/signin_viewmodel.dart';
+import 'package:fimber/fimber_base.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +22,14 @@ class SignInScreen extends StatelessWidget {
             SizedBox(height: 40),
             LoginForm(),
             ElevatedButton.icon(
-                onPressed: () {},
+                onPressed: () async {
+                  context
+                      .read<SignInViewModel>()
+                      .signInWithGoogle()
+                      .then((auth.User user) {
+                    onContinue();
+                  }).catchError((e) => Fimber.e(e.toString()));
+                },
                 icon: SvgPicture.asset("assets/icons/google-icon.svg"),
                 label: Text(AppLocalizations.of(context).signInWithGoogle),
                 style: ElevatedButton.styleFrom(
@@ -35,7 +44,9 @@ class SignInScreen extends StatelessWidget {
                   AppLocalizations.of(context).dontHaveAccount,
                 ),
                 InkWell(
-                  onTap: () => onSignUp(),
+                  onTap: () {
+                    onSignUp();
+                  },
                   child: Text(
                     AppLocalizations.of(context).signUp,
                     style: TextStyle(
@@ -84,7 +95,8 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ElevatedButton(
                 autofocus: true,
-                onPressed: () => context.read<SignInViewModel>().submit(context),
+                onPressed: () =>
+                    context.read<SignInViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
                   padding:
                       EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),

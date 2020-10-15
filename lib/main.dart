@@ -3,14 +3,17 @@ import 'package:ctr/screens/signin/signin_viewmodel.dart';
 import 'package:ctr/screens/signup/signup_screen.dart';
 import 'package:ctr/screens/signup/signup_viewmodel.dart';
 import 'package:fimber/fimber_base.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'l10n/app_localizations.dart';
 
-void main() {
+void main() async {
   Fimber.plantTree(DebugTree());
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 

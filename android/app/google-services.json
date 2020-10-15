@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1039843265985",
+    "firebase_url": "https://checking-the-receipt.firebaseio.com",
+    "project_id": "checking-the-receipt",
+    "storage_bucket": "checking-the-receipt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1039843265985:android:ae1d293aff1ce92a28b340",
+        "android_client_info": {
+          "package_name": "ru.julia.ctr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1039843265985-0v4hcd5e0l0p8aot5h8ppd00ctnjff5k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ru.julia.ctr",
+            "certificate_hash": "879bb724ab548ef39f6a6d86565a33fd8e27bbf5"
+          }
+        },
+        {
+          "client_id": "1039843265985-212if4ng2acrfosgustjuhl9onl9eef6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhH2Du0MYnEDBqh86xVD4KIL_OqqIeZkY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1039843265985-212if4ng2acrfosgustjuhl9onl9eef6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1039843265985-r2mosqhce0ts43bkcb7f049oho4bebo7.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ru.julia.ctr"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
