@@ -12,15 +12,20 @@ class CameraViewModel with ChangeNotifier {
 
   @override
   void dispose() {
+    _isMounted = false;
     _camera.dispose();
     super.dispose();
   }
 
   CameraController _camera;
   bool _isDetecting = false;
+  bool _isMounted = true;
   dynamic _scanResults;
 
   dynamic get scanResults => _scanResults;
+
+  bool get isDetecting => _isDetecting;
+  bool get isMounted => _isMounted;
 
   CameraController get camera => _camera;
 
@@ -51,7 +56,9 @@ class CameraViewModel with ChangeNotifier {
       ).then(
         (dynamic results) {
           _scanResults = results;
+          if (_isMounted) {
             notifyListeners();
+          }
         },
       ).whenComplete(() => _isDetecting = false);
     });
