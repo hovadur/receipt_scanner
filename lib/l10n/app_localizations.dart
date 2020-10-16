@@ -128,6 +128,9 @@ abstract class AppLocalizations {
 
   // Invalid confirm password
   String get invalidConfirmPassword;
+
+  // Scanning
+  String get scanning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

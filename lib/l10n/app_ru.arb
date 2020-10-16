@@ -32,6 +32,9 @@
   "@confirmPassword": {"description": "Confirm password"},
 
   "invalidConfirmPassword": "Неверное подтверждение",
-  "@invalidConfirmPassword": {"description": "Invalid confirm password"}
+  "@invalidConfirmPassword": {"description": "Invalid confirm password"},
+
+  "scanning": "Сканирование",
+  "@scanning": {"description": "Scanning"}
 
 }

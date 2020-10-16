@@ -1,3 +1,4 @@
+import 'package:ctr/screens/camera/camera_screen.dart';
 import 'package:ctr/screens/signin/signin_screen.dart';
 import 'package:ctr/screens/signup/signup_screen.dart';
 import 'package:fimber/fimber_base.dart';
@@ -53,7 +54,9 @@ class _MyAppState extends State<MyApp> {
               MaterialPage(
                   key: ValueKey("SignUpScreen"),
                   child: SignUpScreen(
-                      onContinue: () => setState(() => isContinue = true)))
+                      onContinue: () => setState(() => isContinue = true))),
+            if (isContinue)
+              MaterialPage(key: ValueKey("CameraScreen"), child: CameraScreen())
           ],
           onPopPage: (route, result) {
             Fimber.d("asdf");

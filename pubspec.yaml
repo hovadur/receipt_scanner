@@ -36,6 +36,8 @@ dependencies:
   fimber: ^0.4.4
   google_sign_in: ^4.5.4
   firebase_auth: ^0.18.1+2
+  firebase_ml_vision: ^0.9.7
+  camera: ^0.5.8+9
 
 dev_dependencies:
   flutter_test:
