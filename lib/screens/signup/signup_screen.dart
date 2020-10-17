@@ -5,10 +5,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
-  SignUpScreen({@required this.onContinue});
-
-  final GestureTapCallback onContinue;
-
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signUp)),

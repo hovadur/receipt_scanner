@@ -1,5 +1,9 @@
+import 'package:ctr/domain/navigation/app_navigator.dart';
+import 'package:ctr/domain/navigation/route_names.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/screens/camera/camera_screen.dart';
 import 'package:ctr/screens/signin/signin_viewmodel.dart';
+import 'package:ctr/screens/signup/signup_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
@@ -7,11 +11,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {
-  SignInScreen({@required this.onContinue, @required this.onSignUp});
-
-  final GestureTapCallback onContinue;
-  final GestureTapCallback onSignUp;
-
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
@@ -29,7 +28,8 @@ class SignInScreen extends StatelessWidget {
                             .read<SignInViewModel>()
                             .signInWithGoogle()
                             .then((auth.User user) {
-                          onContinue();
+                          AppNavigator.of(context).clearAndPush(MaterialPage(
+                              name: CameraRoute, child: CameraScreen()));
                         }).catchError((e) => Fimber.e(e.toString()));
                       },
                       icon: SvgPicture.asset("assets/icons/google-icon.svg"),
@@ -48,7 +48,8 @@ class SignInScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          onSignUp();
+                          AppNavigator.of(context).push(MaterialPage(
+                              name: SignUpRoute, child: SignUpScreen()));
                         },
                         child: Text(
                           AppLocalizations.of(context).signUp,
