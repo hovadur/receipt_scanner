@@ -50,6 +50,10 @@ class CameraScreen extends StatelessWidget {
       camera.value.previewSize.height,
       camera.value.previewSize.width,
     );
-    return CustomPaint(painter: BarcodeDetectorPainter(imageSize, scanResults));
+    if (scanResults.isEmpty) {
+      return CustomPaint(painter: BarcodeDetectorPainter(imageSize, scanResults));
+    } else {
+      return Text(scanResults[0].rawValue);
+    }
   }
 }

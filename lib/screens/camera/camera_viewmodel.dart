@@ -20,9 +20,9 @@ class CameraViewModel with ChangeNotifier {
   CameraController _camera;
   bool _isDetecting = false;
   bool _isMounted = true;
-  dynamic _scanResults;
+  List<Barcode> _scanResults;
 
-  dynamic get scanResults => _scanResults;
+  List<Barcode> get scanResults => _scanResults;
 
   bool get isDetecting => _isDetecting;
   bool get isMounted => _isMounted;
@@ -54,7 +54,7 @@ class CameraViewModel with ChangeNotifier {
         detectInImage: _barcodeDetector.detectInImage,
         imageRotation: description.sensorOrientation,
       ).then(
-        (dynamic results) {
+        (List<Barcode> results) {
           _scanResults = results;
           if (_isMounted) {
             notifyListeners();
@@ -72,9 +72,9 @@ class CameraViewModel with ChangeNotifier {
     );
   }
 
-  static Future<dynamic> _detect({
+  static Future<List<Barcode>> _detect({
     @required CameraImage image,
-    @required Future<dynamic> Function(FirebaseVisionImage image) detectInImage,
+    @required Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
     @required int imageRotation,
   }) async {
     return detectInImage(
