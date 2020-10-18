@@ -1,4 +1,4 @@
-import 'package:ctr/domain/user_interactor.dart';
+import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/screens/camera/camera_screen.dart';

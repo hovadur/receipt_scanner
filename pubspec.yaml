@@ -38,6 +38,8 @@ dependencies:
   firebase_auth: ^0.18.1+2
   firebase_ml_vision: ^0.9.7
   camera: ^0.5.8+9
+  http: ^0.12.2
+  device_info: ^0.4.2+9
 
 dev_dependencies:
   flutter_test:

@@ -58,7 +58,9 @@ class CameraScreen extends StatelessWidget {
       return CustomPaint(
           painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
-      return Text(scanResults[0].rawValue);
+      var qr = scanResults[0].rawValue;
+      context.watch<CameraViewModel>().getTicket(qr);
+      return Text(qr);
     }
   }
 }

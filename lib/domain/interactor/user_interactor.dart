@@ -2,7 +2,7 @@ import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
 
-import 'data/user.dart';
+import '../data/user.dart';
 
 class UserInteractor {
   User getCurrentUser() => User(auth.FirebaseAuth.instance.currentUser.email,

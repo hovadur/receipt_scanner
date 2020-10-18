@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -125,5 +126,9 @@ class CameraViewModel with ChangeNotifier {
         assert(rotation == 270);
         return ImageRotation.rotation270;
     }
+  }
+
+  void getTicket(String qr) {
+    IrkktRepo().getTicket(qr);
   }
 }
