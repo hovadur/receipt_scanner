@@ -96,8 +96,14 @@ abstract class AppLocalizations {
     Locale('ru')
   ];
 
+  // Checking The Receipt
+  String get appTitle;
+
   // Sign In
   String get signIn;
+
+  // Sign Out
+  String get signOut;
 
   // Email
   String get email;
@@ -131,6 +137,9 @@ abstract class AppLocalizations {
 
   // Scanning
   String get scanning;
+
+  // Initializing Camera...
+  String get cameraInit;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

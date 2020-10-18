@@ -2,13 +2,17 @@ import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/barcode_detector_painter.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/screens/camera/camera_viewmodel.dart';
+import 'package:ctr/screens/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatelessWidget {
+  static const String routeName = "CameraScreen";
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).scanning)),
+      drawer: MainDrawer(),
       body: ChangeNotifierProvider(
           create: (_) => CameraViewModel(),
           builder: (context, _) => Container(
@@ -20,7 +24,7 @@ class CameraScreen extends StatelessWidget {
     if (camera == null) {
       return Center(
         child: Text(
-          'Initializing Camera...',
+          AppLocalizations.of(context).cameraInit,
           style: TextStyle(
             color: Colors.green,
             fontSize: 30.0,
@@ -42,7 +46,7 @@ class CameraScreen extends StatelessWidget {
     const Text noResultsText = Text('No results!');
     final scanResults =
         context.select((CameraViewModel value) => value.scanResults);
-    if (scanResults == null || !camera.value.isInitialized ) {
+    if (scanResults == null || !camera.value.isInitialized) {
       return noResultsText;
     }
 
@@ -51,7 +55,8 @@ class CameraScreen extends StatelessWidget {
       camera.value.previewSize.width,
     );
     if (scanResults.isEmpty) {
-      return CustomPaint(painter: BarcodeDetectorPainter(imageSize, scanResults));
+      return CustomPaint(
+          painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
       return Text(scanResults[0].rawValue);
     }

@@ -1,8 +1,14 @@
 {
   "@@locale": "en",
 
+  "appTitle": "Checking The Receipt",
+  "@appTitle": {"description": "Checking The Receipt"},
+
   "signIn": "Sign In",
   "@signIn": {"description": "Sign In"},
+
+  "signOut": "Sign Out",
+  "@signOut": {"description": "Sign Out"},
 
   "email": "Email",
   "@email": {"description": "Email"},
@@ -35,6 +41,9 @@
   "@invalidConfirmPassword": {"description": "Invalid confirm password"},
 
   "scanning": "Scanning",
-  "@scanning": {"description": "Scanning"}
+  "@scanning": {"description": "Scanning"},
+
+  "cameraInit": "Initializing Camera...",
+  "@cameraInit": {"description": "Initializing Camera..."}
 
 }

@@ -1,8 +1,14 @@
 {
   "@@locale": "ru",
 
+  "appTitle": "Проверка чека",
+  "@appTitle": {"description": "Checking The Receipt"},
+
   "signIn": "Вход",
   "@signIn": {"description": "Sign In"},
+
+  "signOut": "Выйти",
+  "@signOut": {"description": "Sign Out"},
 
   "email": "Электронная почта",
   "@email": {"description": "Email"},
@@ -35,6 +41,9 @@
   "@invalidConfirmPassword": {"description": "Invalid confirm password"},
 
   "scanning": "Сканирование",
-  "@scanning": {"description": "Scanning"}
+  "@scanning": {"description": "Scanning"},
+
+  "cameraInit": "Инициализация камеры...",
+  "@cameraInit": {"description": "Initializing Camera..."}
 
 }

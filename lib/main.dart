@@ -1,4 +1,3 @@
-import 'package:ctr/domain/navigation/route_names.dart';
 import 'package:ctr/screens/camera/camera_screen.dart';
 import 'package:ctr/screens/signin/signin_screen.dart';
 import 'package:fimber/fimber_base.dart';
@@ -28,9 +27,11 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Page _defaultHome = MaterialPage(name: SignInRoute, child: SignInScreen());
+    Page _defaultHome =
+        MaterialPage(name: SignInScreen.routeName, child: SignInScreen());
     if (auth.FirebaseAuth.instance.currentUser != null) {
-      _defaultHome = MaterialPage(name: CameraRoute, child: CameraScreen());
+      _defaultHome =
+          MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
     }
 
     return MaterialApp(
@@ -47,6 +48,7 @@ class _MyAppState extends State<MyApp> {
           );
         },
         title: "Checking The Receipt",
+        onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         // Add the `localizationsDelegate` and `supportedLocales` lines.
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

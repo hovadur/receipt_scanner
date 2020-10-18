@@ -1,15 +1,25 @@
+import 'package:ctr/domain/user_interactor.dart';
+import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/screens/camera/camera_screen.dart';
 import 'package:ctr/screens/signup/signup_viewmodel.dart';
+import 'package:fimber/fimber_base.dart';
+import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
+  static const String routeName = "SignUpScreen";
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signUp)),
-      body: ChangeNotifierProvider(
-          create: (_) => SignUpViewModel(),
+      body: MultiProvider(
+          providers: [
+            ChangeNotifierProvider(create: (_) => SignUpViewModel()),
+            Provider(create: (_) => UserInteractor())
+          ],
           builder: (context, _) => SingleChildScrollView(
                 padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
                 child: Column(
@@ -17,7 +27,16 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(height: 40),
                     LoginForm(),
                     ElevatedButton.icon(
-                        onPressed: () {},
+                        onPressed: () async {
+                          context
+                              .read<UserInteractor>()
+                              .signInWithGoogle()
+                              .then((auth.User user) {
+                            AppNavigator.of(context).clearAndPush(MaterialPage(
+                                name: CameraScreen.routeName,
+                                child: CameraScreen()));
+                          }).catchError((e) => Fimber.e(e.toString()));
+                        },
                         icon: SvgPicture.asset("assets/icons/google-icon.svg"),
                         label:
                             Text(AppLocalizations.of(context).signInWithGoogle),
