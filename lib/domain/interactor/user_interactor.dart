@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
@@ -28,6 +29,12 @@ class UserInteractor {
     assert(_user.uid == currentUser.uid);
     Fimber.d("User Name: ${_user.displayName}");
     Fimber.d("User Email ${_user.email}");
+
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+    var userStore = await users.doc(_user.uid).get();
+    if (!userStore.exists) {
+      users.doc(_user.uid).set({'id': _user.uid});
+    }
     return _user;
   }
 }

@@ -140,6 +140,9 @@ abstract class AppLocalizations {
 
   // Initializing Camera...
   String get cameraInit;
+
+  // My Receipt
+  String get myReceipts;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

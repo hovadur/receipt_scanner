@@ -44,6 +44,9 @@
   "@scanning": {"description": "Scanning"},
 
   "cameraInit": "Initializing Camera...",
-  "@cameraInit": {"description": "Initializing Camera..."}
+  "@cameraInit": {"description": "Initializing Camera..."},
+
+  "myReceipts": "My Receipts",
+  "@myReceipts": {"description": "My Receipt"}
 
 }
