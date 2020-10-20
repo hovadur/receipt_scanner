@@ -47,6 +47,9 @@
   "@cameraInit": {"description": "Initializing Camera..."},
 
   "myReceipts": "My Receipts",
-  "@myReceipts": {"description": "My Receipt"}
+  "@myReceipts": {"description": "My Receipt"},
+
+  "notAuthorized": "Not authorized",
+  "@notAuthorized": {"description": "Not authorized"}
 
 }

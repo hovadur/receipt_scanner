@@ -1,6 +1,6 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/screens/myreceipts/my_receipts_viewmodel.dart';
+import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,8 +1,8 @@
 import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/barcode_detector_painter.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/screens/camera/camera_viewmodel.dart';
-import 'package:ctr/screens/drawer.dart';
+import 'package:ctr/presentation/camera/camera_viewmodel.dart';
+import 'package:ctr/presentation/drawer/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

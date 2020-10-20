@@ -143,6 +143,9 @@ abstract class AppLocalizations {
 
   // My Receipt
   String get myReceipts;
+
+  // Not authorized
+  String get notAuthorized;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

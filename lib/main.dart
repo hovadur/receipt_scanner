@@ -1,7 +1,5 @@
-import 'package:ctr/screens/camera/camera_screen.dart';
-import 'package:ctr/screens/signin/signin_screen.dart';
+import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:fimber/fimber_base.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
@@ -28,11 +26,7 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     Page _defaultHome =
-        MaterialPage(name: SignInScreen.routeName, child: SignInScreen());
-    if (auth.FirebaseAuth.instance.currentUser != null) {
-      _defaultHome =
-          MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
-    }
+        MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
 
     return MaterialApp(
         builder: (BuildContext context, Widget child) {

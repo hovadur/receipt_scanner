@@ -47,6 +47,9 @@
   "@cameraInit": {"description": "Initializing Camera..."},
 
   "myReceipts": "Мои чеки",
-  "@myReceipts": {"description": "My Receipt"}
+  "@myReceipts": {"description": "My Receipt"},
+
+  "notAuthorized": "Не авторизован",
+  "@notAuthorized": {"description": "Not authorized"}
 
 }
