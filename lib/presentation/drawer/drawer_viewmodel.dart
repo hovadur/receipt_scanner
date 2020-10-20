@@ -13,7 +13,6 @@ class DrawerViewModel with ChangeNotifier {
     } else {
       _signOutName = AppLocalizations.of(context).signIn;
     }
-
   }
   String _email = '';
   String _displayName = '';
