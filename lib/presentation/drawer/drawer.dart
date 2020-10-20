@@ -1,5 +1,6 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/drawer/drawer_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
 import 'package:ctr/presentation/signin/signin_screen.dart';
@@ -17,6 +18,14 @@ class MainDrawer extends StatelessWidget {
               children: <Widget>[
                 _makeHeader(context),
                 ListTile(
+                  title: Text(AppLocalizations.of(context).scanning),
+                  onTap: () {
+                    FirebaseAuth.instance.signOut();
+                    AppNavigator.of(context).clearAndPush(MaterialPage(
+                        name: CameraScreen.routeName, child: CameraScreen()));
+                  },
+                ),
+                ListTile(
                   title: Text(AppLocalizations.of(context).myReceipts),
                   onTap: () {
                     AppNavigator.of(context).push(MaterialPage(
@@ -24,6 +33,7 @@ class MainDrawer extends StatelessWidget {
                         child: MyReceiptsScreen()));
                   },
                 ),
+                Divider(),
                 ListTile(
                   title: Text(context
                       .select((DrawerViewModel value) => value.signOutName)),

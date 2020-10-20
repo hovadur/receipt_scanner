@@ -1,5 +1,6 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/drawer/drawer.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -9,6 +10,7 @@ class MyReceiptsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).myReceipts)),
+      drawer: MainDrawer(),
       body: ChangeNotifierProvider(
           create: (_) => MyReceiptsViewModel(),
           builder: (context, _) => FutureBuilder<List<Receipt>>(
