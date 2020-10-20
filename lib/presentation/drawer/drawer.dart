@@ -35,8 +35,7 @@ class MainDrawer extends StatelessWidget {
                 ),
                 Divider(),
                 ListTile(
-                  title: Text(context
-                      .select((DrawerViewModel value) => value.signOutName)),
+                  title: Text(context.watch<DrawerViewModel>().ui.signOutName),
                   onTap: () {
                     FirebaseAuth.instance.signOut();
                     AppNavigator.of(context).clearAndPush(MaterialPage(
@@ -47,12 +46,10 @@ class MainDrawer extends StatelessWidget {
             ),
           ));
   Widget _makeHeader(BuildContext context) {
-    if (context.select((DrawerViewModel value) => value.isSignIn)) {
+    if (context.watch<DrawerViewModel>().ui.isSignIn) {
       return UserAccountsDrawerHeader(
-          accountEmail:
-              Text(context.select((DrawerViewModel value) => value.email)),
-          accountName: Text(
-              context.select((DrawerViewModel value) => value.displayName)));
+          accountEmail: Text(context.watch<DrawerViewModel>().ui.email),
+          accountName: Text(context.watch<DrawerViewModel>().ui.displayName));
     } else {
       return DrawerHeader(
           child: Text(AppLocalizations.of(context).notAuthorized));
