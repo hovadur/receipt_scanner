@@ -50,6 +50,12 @@
   "@myReceipts": {"description": "My Receipt"},
 
   "notAuthorized": "Not authorized",
-  "@notAuthorized": {"description": "Not authorized"}
+  "@notAuthorized": {"description": "Not authorized"},
+
+  "manual": "Manual",
+  "@manual": {"description": "Manual input"},
+
+  "addProduct": "Add Product",
+  "@addProduct": {"description": "Add Product"}
 
 }

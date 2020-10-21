@@ -146,6 +146,12 @@ abstract class AppLocalizations {
 
   // Not authorized
   String get notAuthorized;
+
+  // Manual input
+  String get manual;
+
+  // Add Product
+  String get addProduct;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
