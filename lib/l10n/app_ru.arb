@@ -58,9 +58,18 @@
   "addProduct": "Товар",
   "@addProduct": {"description": "Add Product"},
 
+  "product": "Товар",
+  "@product": {"description": "Product"},
+
   "total": "Общая сумма",
   "@total": {"description": "Total"},
 
   "totalError": "Неверная сумма",
-  "@totalError": {"description": "Invalid total"}
+  "@totalError": {"description": "Invalid total"},
+
+  "price": "Цена",
+  "@price": {"description": "Price"},
+
+  "apply": "Применить",
+  "@apply": {"description": "Apply"}
 }

@@ -153,11 +153,20 @@ abstract class AppLocalizations {
   // Add Product
   String get addProduct;
 
+  // Product
+  String get product;
+
   // Total
   String get total;
 
   // Invalid total
   String get totalError;
+
+  // Price
+  String get price;
+
+  // Apply
+  String get apply;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
