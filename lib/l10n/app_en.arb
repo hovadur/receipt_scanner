@@ -56,6 +56,12 @@
   "@manual": {"description": "Manual input"},
 
   "addProduct": "Add Product",
-  "@addProduct": {"description": "Add Product"}
+  "@addProduct": {"description": "Add Product"},
+
+  "total": "Total",
+  "@total": {"description": "Total"},
+
+  "totalError": "Invalid total",
+  "@totalError": {"description": "Invalid total"}
 
 }

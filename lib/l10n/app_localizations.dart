@@ -152,6 +152,12 @@ abstract class AppLocalizations {
 
   // Add Product
   String get addProduct;
+
+  // Total
+  String get total;
+
+  // Invalid total
+  String get totalError;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

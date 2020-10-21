@@ -11,7 +11,7 @@ class ManualScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => ManualViewModel(),
-      child: Scaffold(
+      builder: (context, _) => Scaffold(
           appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
           floatingActionButton: FloatingActionButton.extended(
             icon: Icon(Icons.add),
@@ -24,10 +24,25 @@ class ManualScreen extends StatelessWidget {
               DateTimePicker(
                 locale: Localizations.localeOf(context),
                 type: DateTimePickerType.dateTimeSeparate,
-                initialValue: DateTime.now().toString(),
+                initialValue: context.select(
+                    (ManualViewModel value) => value.currentDate.toString()),
                 firstDate: DateTime.fromMillisecondsSinceEpoch(0),
-                lastDate: DateTime.now(),
-              )
+                lastDate: context
+                    .select((ManualViewModel value) => value.currentDate),
+                onChanged: (String value) =>
+                    context.read<ManualViewModel>().changeDateTime(value),
+              ),
+              SizedBox(height: 16),
+              TextField(
+                keyboardType: TextInputType.number,
+                textInputAction: TextInputAction.next,
+                decoration: InputDecoration(
+                    labelText: AppLocalizations.of(context).total,
+                    errorText: context
+                        .select((ManualViewModel value) => value.totalError)),
+                onChanged: (String value) =>
+                    context.read<ManualViewModel>().changeTotal(value, context),
+              ),
             ]),
           )));
 }

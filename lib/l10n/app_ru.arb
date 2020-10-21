@@ -56,6 +56,11 @@
   "@manual": {"description": "Manual input"},
 
   "addProduct": "Товар",
-  "@addProduct": {"description": "Add Product"}
+  "@addProduct": {"description": "Add Product"},
 
+  "total": "Общая сумма",
+  "@total": {"description": "Total"},
+
+  "totalError": "Неверная сумма",
+  "@totalError": {"description": "Invalid total"}
 }
