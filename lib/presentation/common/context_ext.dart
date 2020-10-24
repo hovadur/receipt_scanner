@@ -1,6 +1,7 @@
 import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
+import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/cupertino.dart';
@@ -19,14 +20,14 @@ extension GoogleSignIn on BuildContext {
       showDialog(
           context: this,
           builder: (dialogContext) => AlertDialog(
-                title: Text("Warning"),
+                title: Text(AppLocalizations.of(this).warning),
                 content: Text(e.message),
                 actions: [
                   ElevatedButton(
                       onPressed: () {
                         Navigator.of(dialogContext).pop();
                       },
-                      child: Text("Close"))
+                      child: Text(AppLocalizations.of(this).close))
                 ],
               ));
       Fimber.e(e.toString());

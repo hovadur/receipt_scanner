@@ -71,5 +71,12 @@
   "@price": {"description": "Price"},
 
   "apply": "Применить",
-  "@apply": {"description": "Apply"}
+  "@apply": {"description": "Apply"},
+
+  "warning": "Внимание",
+  "@warning": {"description": "Warning"},
+
+  "close": "Закрыть",
+  "@close": {"description": "Close"}
+
 }

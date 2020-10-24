@@ -71,6 +71,12 @@
   "@price": {"description": "Price"},
 
   "apply": "Apply",
-  "@apply": {"description": "Apply"}
+  "@apply": {"description": "Apply"},
+
+  "warning": "Warning",
+  "@warning": {"description": "Warning"},
+
+  "close": "Close",
+  "@close": {"description": "Close"}
 
 }
