@@ -167,6 +167,12 @@ abstract class AppLocalizations {
 
   // Apply
   String get apply;
+
+  // Warning
+  String get warning;
+
+  // Close
+  String get close;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
