@@ -1,10 +1,10 @@
+import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/signup/signup_viewmodel.dart';
 import 'package:fimber/fimber_base.dart';
-import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +31,7 @@ class SignUpScreen extends StatelessWidget {
                           context
                               .read<UserInteractor>()
                               .signInWithGoogle()
-                              .then((auth.User user) {
+                              .then((User user) {
                             AppNavigator.of(context).clearAndPush(MaterialPage(
                                 name: CameraScreen.routeName,
                                 child: CameraScreen()));

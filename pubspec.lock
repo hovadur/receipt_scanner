@@ -21,7 +21,7 @@ packages:
       name: camera
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.8+9"
+    version: "0.5.8+11"
   characters:
     dependency: transitive
     description:
@@ -185,7 +185,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.19.0"
+    version: "0.19.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -202,7 +202,7 @@ packages:
       name: google_sign_in
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.5.4"
+    version: "4.5.5"
   google_sign_in_platform_interface:
     dependency: transitive
     description:
