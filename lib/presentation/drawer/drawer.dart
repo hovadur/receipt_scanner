@@ -1,10 +1,10 @@
+import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/drawer/drawer_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
 import 'package:ctr/presentation/signin/signin_screen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -20,7 +20,7 @@ class MainDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(AppLocalizations.of(context).scanning),
                   onTap: () {
-                    FirebaseAuth.instance.signOut();
+                    UserInteractor().signOut();
                     AppNavigator.of(context).clearAndPush(MaterialPage(
                         name: CameraScreen.routeName, child: CameraScreen()));
                   },
@@ -37,7 +37,7 @@ class MainDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(context.watch<DrawerViewModel>().ui.signOutName),
                   onTap: () {
-                    FirebaseAuth.instance.signOut();
+                    UserInteractor().signOut();
                     AppNavigator.of(context).clearAndPush(MaterialPage(
                         name: SignInScreen.routeName, child: SignInScreen()));
                   },
@@ -45,6 +45,7 @@ class MainDrawer extends StatelessWidget {
               ],
             ),
           ));
+
   Widget _makeHeader(BuildContext context) {
     if (context.watch<DrawerViewModel>().ui.isSignIn) {
       return UserAccountsDrawerHeader(

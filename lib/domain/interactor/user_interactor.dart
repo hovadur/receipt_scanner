@@ -2,13 +2,24 @@ import 'package:ctr/domain/entity/user.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
+
 import '../../database.dart';
 
 class UserInteractor {
-  Future<User> signInWithGoogle() async {
-    final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
+  final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
+  User getCurrentUser() {
+    if (_auth.currentUser == null)
+      return null;
+    else
+      return User(
+          id: _auth.currentUser.uid,
+          email: _auth.currentUser.email,
+          name: _auth.currentUser.displayName);
+  }
+
+  Future<User> signInWithGoogle() async {
+    final GoogleSignIn _googleSignIn = GoogleSignIn();
     GoogleSignInAccount account = await _googleSignIn.signIn();
     if (account != null) {
       GoogleSignInAuthentication authentication = await account.authentication;
@@ -17,15 +28,17 @@ class UserInteractor {
         idToken: authentication.idToken,
       );
       auth.UserCredential authResult =
-      await _auth.signInWithCredential(credential);
-      var _user = User(
-          id: authResult.user.uid,
-          email: authResult.user.email,
-          name: authResult.user.displayName);
-      Fimber.d("User Name: ${_user.name}");
-      Fimber.d("User Email ${_user.email}");
+          await _auth.signInWithCredential(credential);
+      Fimber.d("User Name: ${authResult.user.displayName}");
+      Fimber.d("User Email ${authResult.user.email}");
+      var _user = getCurrentUser();
       await Database().createUser(_user);
       return _user;
-    } else return null;
+    } else
+      return null;
+  }
+
+  void signOut() {
+    auth.FirebaseAuth.instance.signOut();
   }
 }
