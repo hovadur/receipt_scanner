@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 
 import 'package:ctr/domain/data/dto/ticket_resp.dart';
 import 'package:ctr/domain/data/dto/ticket_id_resp.dart';
+import 'package:ctr/domain/entity/receipt.dart';
 import 'package:device_info/device_info.dart';
 import 'package:http/http.dart' as http;
 
@@ -21,9 +22,9 @@ class IrkktRepo {
     }
   }
 
-  Future<TicketKktResp> getTicket(String qr) async {
+  Future<Receipt> getTicket(String qr) async {
     final sessionId =
-        "5f6a49ff0b851a7cd267a068:cd6463ef-1e1e-45f3-ac75-5dd9671d54a1";
+        "5f6a49ff0b851a7cd267a068:f6b6028e-3b4d-4e43-86ac-fe2d6fa43e9b";
     var jsonQr = jsonEncode({"qr": qr});
     var response = await http.post(host + "ticket",
         headers: {"Content-Type": "application/json", "sessionId": sessionId},
@@ -40,6 +41,6 @@ class IrkktRepo {
     responseJson = jsonDecode(response.body);
     TicketKktResp ticket =
         TicketKktResp.fromJson(responseJson as Map<String, dynamic>);
-    return ticket;
+    return Receipt.fromTicketResp(ticket);
   }
 }

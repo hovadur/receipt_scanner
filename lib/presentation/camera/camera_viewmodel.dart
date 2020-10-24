@@ -1,7 +1,9 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:ctr/database.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
+import 'package:ctr/domain/entity/receipt.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
@@ -133,7 +135,8 @@ class CameraViewModel with ChangeNotifier {
     }
   }
 
-  void getTicket(String qr) {
-    IrkktRepo().getTicket(qr);
+  void getTicket(String qr) async {
+    Receipt receipt = await IrkktRepo().getTicket(qr);
+    Database().saveReceipt(receipt);
   }
 }
