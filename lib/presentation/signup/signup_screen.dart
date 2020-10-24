@@ -1,10 +1,7 @@
-import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/camera/camera_screen.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signup/signup_viewmodel.dart';
-import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
@@ -27,16 +24,7 @@ class SignUpScreen extends StatelessWidget {
                     SizedBox(height: 40),
                     LoginForm(),
                     ElevatedButton.icon(
-                        onPressed: () async {
-                          context
-                              .read<UserInteractor>()
-                              .signInWithGoogle()
-                              .then((User user) {
-                            AppNavigator.of(context).clearAndPush(MaterialPage(
-                                name: CameraScreen.routeName,
-                                child: CameraScreen()));
-                          }).catchError((e) => Fimber.e(e.toString()));
-                        },
+                        onPressed: () => context.googleSignIn(),
                         icon: SvgPicture.asset("assets/icons/google-icon.svg"),
                         label:
                             Text(AppLocalizations.of(context).signInWithGoogle),

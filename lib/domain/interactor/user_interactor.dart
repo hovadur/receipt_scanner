@@ -10,20 +10,22 @@ class UserInteractor {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
 
     GoogleSignInAccount account = await _googleSignIn.signIn();
-    GoogleSignInAuthentication authentication = await account.authentication;
-    auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
-      accessToken: authentication.accessToken,
-      idToken: authentication.idToken,
-    );
-    auth.UserCredential authResult =
-        await _auth.signInWithCredential(credential);
-    var _user = User(
-        id: authResult.user.uid,
-        email: authResult.user.email,
-        name: authResult.user.displayName);
-    Fimber.d("User Name: ${_user.name}");
-    Fimber.d("User Email ${_user.email}");
-    await Database().createUser(_user);
-    return _user;
+    if (account != null) {
+      GoogleSignInAuthentication authentication = await account.authentication;
+      auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
+        accessToken: authentication.accessToken,
+        idToken: authentication.idToken,
+      );
+      auth.UserCredential authResult =
+      await _auth.signInWithCredential(credential);
+      var _user = User(
+          id: authResult.user.uid,
+          email: authResult.user.email,
+          name: authResult.user.displayName);
+      Fimber.d("User Name: ${_user.name}");
+      Fimber.d("User Email ${_user.email}");
+      await Database().createUser(_user);
+      return _user;
+    } else return null;
   }
 }
