@@ -2,19 +2,24 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CameraViewModel with ChangeNotifier {
   CameraViewModel() {
-    _initializeCamera();
+    try {
+      _initializeCamera();
+    } catch (e) {
+      Fimber.e(e);
+    }
   }
 
   @override
   void dispose() {
     _isMounted = false;
-    _camera.dispose();
+    if (camera != null) _camera.dispose();
     super.dispose();
   }
 
@@ -25,7 +30,6 @@ class CameraViewModel with ChangeNotifier {
 
   List<Barcode> get scanResults => _scanResults;
 
-  bool get isDetecting => _isDetecting;
   bool get isMounted => _isMounted;
 
   CameraController get camera => _camera;
@@ -75,7 +79,8 @@ class CameraViewModel with ChangeNotifier {
 
   static Future<List<Barcode>> _detect({
     @required CameraImage image,
-    @required Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
+    @required
+        Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
     @required int imageRotation,
   }) async {
     return detectInImage(
