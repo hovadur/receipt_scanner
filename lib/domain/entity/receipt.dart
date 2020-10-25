@@ -4,7 +4,7 @@ import 'package:ctr/domain/data/dto/ticket_resp.dart';
 class Receipt {
   String id;
   int type = 1;
-  DateTime timestamp;
+  DateTime dateTime;
   int totalSum;
   int fiscalDocumentNumber;
   String fiscalDriveNumber;
@@ -14,7 +14,7 @@ class Receipt {
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {
     id = doc['id'];
     type = doc['type'];
-    timestamp = (doc['timestamp'] as Timestamp).toDate();
+    dateTime = (doc['dateTime'] as Timestamp).toDate();
     totalSum = doc['totalSum'];
     fiscalDocumentNumber = doc['fiscalDocumentNumber'];
     fiscalDriveNumber = doc['fiscalDriveNumber'];
@@ -24,7 +24,7 @@ class Receipt {
   Receipt.fromTicketResp(TicketKktResp ticket) {
     var receipt = ticket.ticket.document.receipt;
     id = ticket.id;
-    timestamp = DateTime.fromMillisecondsSinceEpoch(receipt.dateTime);
+    dateTime = DateTime.fromMillisecondsSinceEpoch(receipt.dateTime * 1000);
     totalSum = receipt.totalSum;
     fiscalDocumentNumber = receipt.fiscalDocumentNumber;
     fiscalDriveNumber = receipt.fiscalDriveNumber;

@@ -34,7 +34,7 @@ class Database {
         .set({
       'id': receipt.id,
       'type': receipt.type,
-      'timestamp': receipt.timestamp,
+      'dateTime': receipt.dateTime,
       'totalSum': receipt.totalSum,
       'fiscalDocumentNumber': receipt.fiscalDocumentNumber,
       'fiscalDriveNumber': receipt.fiscalDriveNumber,

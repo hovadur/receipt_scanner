@@ -10,7 +10,6 @@ class MyReceiptsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).myReceipts)),
-      drawer: MainDrawer(),
       body: ChangeNotifierProvider(
           create: (_) => MyReceiptsViewModel(),
           builder: (context, _) => FutureBuilder<List<Receipt>>(
@@ -33,7 +32,7 @@ class MyReceiptsScreen extends StatelessWidget {
                               children: <Widget>[
                                 ListTile(
                                   leading: Icon(Icons.album),
-                                  title: Text(receipt.timestamp.toString()),
+                                  title: Text(receipt.dateTime.toString()),
                                   subtitle: Text(receipt.totalSum.toString()),
                                 ),
                                 Row(
