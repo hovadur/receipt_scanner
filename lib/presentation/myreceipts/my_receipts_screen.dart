@@ -35,21 +35,6 @@ class MyReceiptsScreen extends StatelessWidget {
                                   title: Text(receipt.dateTime.toString()),
                                   subtitle: Text(receipt.totalSum.toString()),
                                 ),
-                                Row(
-                                  mainAxisAlignment: MainAxisAlignment.end,
-                                  children: <Widget>[
-                                    TextButton(
-                                      child: const Text('BUY TICKETS'),
-                                      onPressed: () {/* ... */},
-                                    ),
-                                    const SizedBox(width: 8),
-                                    TextButton(
-                                      child: const Text('LISTEN'),
-                                      onPressed: () {/* ... */},
-                                    ),
-                                    const SizedBox(width: 8),
-                                  ],
-                                ),
                               ],
                             )));
                       });
