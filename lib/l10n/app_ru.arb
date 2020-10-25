@@ -77,6 +77,33 @@
   "@warning": {"description": "Warning"},
 
   "close": "Закрыть",
-  "@close": {"description": "Close"}
+  "@close": {"description": "Close"},
+
+  "categories": "Категории",
+  "@categories": {"description": "Categories"},
+
+  "food": "Еда",
+  "@food": {"description": "Food"},
+
+  "home": "Жилье",
+  "@home": {"description": "Home"},
+
+  "transport": "Транспорт",
+  "@transport": {"description": "Transport"},
+
+  "entertainment": "Развлечения",
+  "@entertainment": {"description": "Entertainment"},
+
+  "clothes": "Одежда",
+  "@clothes": {"description": "Clothes"},
+
+  "connection": "Связь",
+  "@connection": {"description": "Connection"},
+
+  "health": "Здоровье",
+  "@health": {"description": "Health"},
+
+  "cosmetics": "Косметика",
+  "@cosmetics": {"description": "Cosmetics"}
 
 }

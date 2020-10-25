@@ -173,6 +173,33 @@ abstract class AppLocalizations {
 
   // Close
   String get close;
+
+  // Categories
+  String get categories;
+
+  // Food
+  String get food;
+
+  // Home
+  String get home;
+
+  // Transport
+  String get transport;
+
+  // Entertainment
+  String get entertainment;
+
+  // Clothes
+  String get clothes;
+
+  // Connection
+  String get connection;
+
+  // Health
+  String get health;
+
+  // Cosmetics
+  String get cosmetics;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

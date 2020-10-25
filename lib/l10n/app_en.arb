@@ -77,6 +77,33 @@
   "@warning": {"description": "Warning"},
 
   "close": "Close",
-  "@close": {"description": "Close"}
+  "@close": {"description": "Close"},
+
+  "categories": "Categories",
+  "@categories": {"description": "Categories"},
+
+  "food": "Food",
+  "@food": {"description": "Food"},
+
+  "home": "Home",
+  "@home": {"description": "Home"},
+
+  "transport": "Transport",
+  "@transport": {"description": "Transport"},
+
+  "entertainment": "Entertainment",
+  "@entertainment": {"description": "Entertainment"},
+
+  "clothes": "Clothes",
+  "@clothes": {"description": "Clothes"},
+
+  "connection": "Connection",
+  "@connection": {"description": "Connection"},
+
+  "health": "Health",
+  "@health": {"description": "Health"},
+
+  "cosmetics": "Cosmetics",
+  "@cosmetics": {"description": "Cosmetics"}
 
 }

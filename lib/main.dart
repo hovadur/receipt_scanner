@@ -27,6 +27,8 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     Page _defaultHome =
         MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
+    // Page _defaultHome =
+    // MaterialPage(name: CategoryScreen.routeName, child: CategoryScreen());
 
     return MaterialApp(
         builder: (BuildContext context, Widget child) {

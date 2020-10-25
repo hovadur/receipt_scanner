@@ -24,7 +24,7 @@ class IrkktRepo {
 
   Future<Receipt> getTicket(String qr) async {
     final sessionId =
-        "5f6a49ff0b851a7cd267a068:f6b6028e-3b4d-4e43-86ac-fe2d6fa43e9b";
+        "5f6a49ff0b851a7cd267a068:0e416d4f-6e7d-41b4-8107-8fd917d3c207";
     var jsonQr = jsonEncode({"qr": qr});
     var response = await http.post(host + "ticket",
         headers: {"Content-Type": "application/json", "sessionId": sessionId},
