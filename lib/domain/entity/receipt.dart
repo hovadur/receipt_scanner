@@ -3,7 +3,6 @@ import 'package:ctr/domain/data/dto/ticket_resp.dart';
 
 class Receipt {
   String id;
-  int type = 1;
   DateTime dateTime;
   int totalSum;
   int fiscalDocumentNumber;
@@ -13,7 +12,6 @@ class Receipt {
 
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {
     id = doc['id'];
-    type = doc['type'];
     dateTime = (doc['dateTime'] as Timestamp).toDate();
     totalSum = doc['totalSum'];
     fiscalDocumentNumber = doc['fiscalDocumentNumber'];
@@ -36,12 +34,13 @@ class Receipt {
 }
 
 class ReceiptItem {
+  int type = 1;
   String name;
   int price;
   int quantity;
 
   Map<String, dynamic> toJson() =>
-      {'name': name, 'price': price, 'quantity': quantity};
+      {'type': type, 'name': name, 'price': price, 'quantity': quantity};
 
   ReceiptItem.fromItemsResp(ItemsResp item) {
     name = item.name;

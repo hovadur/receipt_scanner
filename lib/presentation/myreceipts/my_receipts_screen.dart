@@ -1,5 +1,4 @@
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,10 +41,9 @@ class MyReceiptsScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
-          leading: CircleAvatar(
-              child: Icon(context.category().keys.elementAt(receipt.type))),
+          leading: CircleAvatar(child: Icon(Icons.fact_check)),
           title: Text(receipt.dateTime),
-          subtitle: Text(receipt.totalSum),
+          trailing: Text(receipt.totalSum),
         ),
       ],
     ));

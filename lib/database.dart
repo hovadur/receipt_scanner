@@ -33,7 +33,6 @@ class Database {
         .doc(receipt.id)
         .set({
       'id': receipt.id,
-      'type': receipt.type,
       'dateTime': receipt.dateTime,
       'totalSum': receipt.totalSum,
       'fiscalDocumentNumber': receipt.fiscalDocumentNumber,

@@ -137,7 +137,7 @@ class CameraViewModel with ChangeNotifier {
 
   void getTicket(String qr, int index) async {
     Receipt receipt = await IrkktRepo().getTicket(qr);
-    receipt.type = index;
+    //receipt.type = index;
     Database().saveReceipt(receipt);
   }
 }

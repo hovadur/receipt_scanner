@@ -14,7 +14,6 @@ class MyReceiptsViewModel with ChangeNotifier {
             final totalSum =
                 NumberFormat.compactCurrency(locale: locale.languageCode)
                     .format(item.totalSum / 100);
-            return MyReceiptUI(
-                type: item.type, dateTime: dateTime, totalSum: totalSum);
+            return MyReceiptUI(dateTime: dateTime, totalSum: totalSum);
           }).toList());
 }
