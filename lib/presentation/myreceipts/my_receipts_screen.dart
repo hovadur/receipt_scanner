@@ -1,9 +1,11 @@
+import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'my_receipt_ui.dart';
+import '../mapper/my_receipt_ui.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
   static const String routeName = "MyReceiptsScreen";
@@ -14,9 +16,7 @@ class MyReceiptsScreen extends StatelessWidget {
       body: ChangeNotifierProvider(
           create: (_) => MyReceiptsViewModel(),
           builder: (context, _) => FutureBuilder<List<MyReceiptUI>>(
-              future: context
-                  .watch<MyReceiptsViewModel>()
-                  .receipts(Localizations.localeOf(context)),
+              future: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
                 if (snapshot.hasError) {
                   return Text("Something went wrong");
@@ -44,6 +44,11 @@ class MyReceiptsScreen extends StatelessWidget {
           leading: CircleAvatar(child: Icon(Icons.fact_check)),
           title: Text(receipt.dateTime),
           trailing: Text(receipt.totalSum),
+          onTap: () {
+            AppNavigator.of(context).push(MaterialPage(
+                name: ReceiptDetailsScreen.routeName,
+                child: ReceiptDetailsScreen(receipt.receipt)));
+          },
         ),
       ],
     ));

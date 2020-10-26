@@ -17,6 +17,8 @@ class Receipt {
     fiscalDocumentNumber = doc['fiscalDocumentNumber'];
     fiscalDriveNumber = doc['fiscalDriveNumber'];
     fiscalSign = doc['fiscalSign'];
+    final list = List.castFrom(doc['items']).toList();
+    items = list.map((e) => ReceiptItem.fromJson(e)).toList();
   }
 
   Receipt.fromTicketResp(TicketKktResp ticket) {
@@ -41,6 +43,12 @@ class ReceiptItem {
 
   Map<String, dynamic> toJson() =>
       {'type': type, 'name': name, 'price': price, 'quantity': quantity};
+
+  ReceiptItem.fromJson(Map<String, dynamic> doc) {
+    name = doc['name'];
+    quantity = doc['quantity'];
+    price = doc['price'];
+  }
 
   ReceiptItem.fromItemsResp(ItemsResp item) {
     name = item.name;

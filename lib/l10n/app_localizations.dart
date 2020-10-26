@@ -200,6 +200,15 @@ abstract class AppLocalizations {
 
   // Cosmetics
   String get cosmetics;
+
+  // Details
+  String get details;
+
+  // Categorize
+  String get categorize;
+
+  // qty
+  String get qty;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

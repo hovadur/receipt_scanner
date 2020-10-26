@@ -104,6 +104,15 @@
   "@health": {"description": "Health"},
 
   "cosmetics": "Cosmetics",
-  "@cosmetics": {"description": "Cosmetics"}
+  "@cosmetics": {"description": "Cosmetics"},
+
+  "details": "Details",
+  "@details": {"description": "Details"},
+
+  "categorize": "Categorize",
+  "@categorize": {"description": "Categorize"},
+
+  "qty": "qty",
+  "@qty": {"description": "qty"}
 
 }

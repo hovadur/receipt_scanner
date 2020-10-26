@@ -104,6 +104,14 @@
   "@health": {"description": "Health"},
 
   "cosmetics": "Косметика",
-  "@cosmetics": {"description": "Cosmetics"}
+  "@cosmetics": {"description": "Cosmetics"},
 
+  "details": "Детализация",
+  "@details": {"description": "Details"},
+
+  "categorize": "Разбить на категории",
+  "@categorize": {"description": "Categorize"},
+
+  "qty": "кол-во",
+  "@qty": {"description": "qty"}
 }
