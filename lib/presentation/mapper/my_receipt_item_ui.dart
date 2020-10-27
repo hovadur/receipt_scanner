@@ -9,12 +9,14 @@ class MyReceiptItemUI {
   String quantity;
   String price;
 
-  MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item)
-      : type = item.type,
-        name = item.name,
-        quantity =
-            AppLocalizations.of(context).qty + ' ' + item.quantity.toString(),
-        price = NumberFormat.decimalPattern(
-                Localizations.localeOf(context).languageCode)
-            .format(item.price / 100);
+  MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item) {
+    final locale = Localizations.localeOf(context);
+    type = item.type;
+    name = item.name;
+    quantity = AppLocalizations.of(context).qty +
+        ' ' +
+        NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
+    price = NumberFormat.decimalPattern(locale.languageCode)
+        .format(item.price / 100);
+  }
 }
