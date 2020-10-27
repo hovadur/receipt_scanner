@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyReceiptItemUI {
+  int type;
   String name;
   String quantity;
   String price;
 
   MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item)
-      : name = item.name,
+      : type = item.type,
+        name = item.name,
         quantity =
             AppLocalizations.of(context).qty + ' ' + item.quantity.toString(),
         price = NumberFormat.decimalPattern(

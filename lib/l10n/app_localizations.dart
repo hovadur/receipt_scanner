@@ -204,8 +204,8 @@ abstract class AppLocalizations {
   // Details
   String get details;
 
-  // Categorize
-  String get categorize;
+  // set a category for everyone
+  String get categoryAll;
 
   // qty
   String get qty;

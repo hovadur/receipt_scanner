@@ -1,5 +1,8 @@
 import 'package:ctr/domain/entity/receipt.dart';
+import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/categorize/category_screen.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
 import 'package:flutter/material.dart';
@@ -47,9 +50,16 @@ class ReceiptDetailsScreen extends StatelessWidget {
           trailing: Text(ui.fpd),
         ),
         InkWell(
-          onTap: () {},
+          onTap: () => AppNavigator.of(context).push(MaterialPage(
+              name: CategoryScreen.routeName,
+              child: CategoryScreen(
+                onPressed: (type) {
+                  context.read<ReceiptDetailsViewModel>().saveTypeAll(type);
+                  Navigator.of(context).pop();
+                },
+              ))),
           child: Text(
-            AppLocalizations.of(context).categorize,
+            AppLocalizations.of(context).categoryAll,
             style: TextStyle(
                 color: Colors.blue, decoration: TextDecoration.underline),
           ),
@@ -62,7 +72,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
               return Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
-                  child: _buildItem(context, ui.items[index]));
+                  child: _buildItem(context, ui.items[index], index));
             }),
         Divider(),
         ListTile(
@@ -73,8 +83,20 @@ class ReceiptDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, MyReceiptItemUI item) {
+  Widget _buildItem(BuildContext context, MyReceiptItemUI item, int index) {
+    final entries = context.category().entries.toList();
     return ListTile(
+        leading: InkWell(
+          child: CircleAvatar(child: Icon(entries.elementAt(item.type).key)),
+          onTap: () => AppNavigator.of(context).push(MaterialPage(
+              name: CategoryScreen.routeName,
+              child: CategoryScreen(
+                onPressed: (type) {
+                  context.read<ReceiptDetailsViewModel>().saveType(index, type);
+                  Navigator.of(context).pop();
+                },
+              ))),
+        ),
         title: Text(item.quantity),
         subtitle: Text(item.name),
         trailing: Text(item.price));

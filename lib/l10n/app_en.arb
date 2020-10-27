@@ -109,8 +109,8 @@
   "details": "Details",
   "@details": {"description": "Details"},
 
-  "categorize": "Categorize",
-  "@categorize": {"description": "Categorize"},
+  "categoryAll": "set a category for everyone",
+  "@categoryAll": {"description": "set a category for everyone"},
 
   "qty": "qty",
   "@qty": {"description": "qty"}

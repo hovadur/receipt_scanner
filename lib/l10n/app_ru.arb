@@ -109,8 +109,8 @@
   "details": "Детализация",
   "@details": {"description": "Details"},
 
-  "categorize": "Разбить на категории",
-  "@categorize": {"description": "Categorize"},
+  "categoryAll": "установить категорию для всех",
+  "@categoryAll": {"description": "set a category for everyone"},
 
   "qty": "кол-во",
   "@qty": {"description": "qty"}
