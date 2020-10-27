@@ -61,8 +61,8 @@
   "product": "Product",
   "@product": {"description": "Product"},
 
-  "total": "Total",
-  "@total": {"description": "Total"},
+  "totalAmount": "Total",
+  "@totalAmount": {"description": "Total"},
 
   "totalError": "Invalid total",
   "@totalError": {"description": "Invalid total"},
@@ -113,6 +113,21 @@
   "@categoryAll": {"description": "set a category for everyone"},
 
   "qty": "qty",
-  "@qty": {"description": "qty"}
+  "@qty": {"description": "qty"},
+
+  "dateTime": "Date",
+  "@dateTime": {"description": "Date"},
+
+  "storage": "Storage",
+  "@storage": {"description": "Storage"},
+
+  "document": "Document",
+  "@document": {"description": "Document"},
+
+  "documentAttribute": "Document attribute",
+  "@documentAttribute": {"description": "Document attribute"},
+
+  "total": "Total",
+  "@total": {"description": "Total"}
 
 }

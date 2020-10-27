@@ -34,19 +34,19 @@ class ReceiptDetailsScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          leading: Text("Дата покупки"),
+          leading: Text(AppLocalizations.of(context).dateTime),
           trailing: Text(ui.dateTime),
         ),
         ListTile(
-          leading: Text("Накопитель"),
+          leading: Text(AppLocalizations.of(context).storage),
           trailing: Text(ui.fn),
         ),
         ListTile(
-          leading: Text("Документ"),
+          leading: Text(AppLocalizations.of(context).document),
           trailing: Text(ui.fd),
         ),
         ListTile(
-          leading: Text("Признак документа"),
+          leading: Text(AppLocalizations.of(context).documentAttribute),
           trailing: Text(ui.fpd),
         ),
         InkWell(
@@ -76,7 +76,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             }),
         Divider(),
         ListTile(
-          leading: Text("Итого"),
+          leading: Text(AppLocalizations.of(context).total),
           trailing: Text(ui.totalSum),
         ),
       ],

@@ -157,7 +157,7 @@ abstract class AppLocalizations {
   String get product;
 
   // Total
-  String get total;
+  String get totalAmount;
 
   // Invalid total
   String get totalError;
@@ -209,6 +209,21 @@ abstract class AppLocalizations {
 
   // qty
   String get qty;
+
+  // Date
+  String get dateTime;
+
+  // Storage
+  String get storage;
+
+  // Document
+  String get document;
+
+  // Document attribute
+  String get documentAttribute;
+
+  // Total
+  String get total;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

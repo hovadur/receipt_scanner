@@ -40,7 +40,7 @@ class ManualScreen extends StatelessWidget {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                    labelText: AppLocalizations.of(context).total,
+                    labelText: AppLocalizations.of(context).totalAmount,
                     errorText: context
                         .select((ManualViewModel value) => value.totalError)),
                 onChanged: (String value) =>

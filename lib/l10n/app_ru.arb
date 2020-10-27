@@ -61,8 +61,8 @@
   "product": "Товар",
   "@product": {"description": "Product"},
 
-  "total": "Общая сумма",
-  "@total": {"description": "Total"},
+  "totalAmount": "Общая сумма",
+  "@totalAmount": {"description": "Total"},
 
   "totalError": "Неверная сумма",
   "@totalError": {"description": "Invalid total"},
@@ -113,5 +113,24 @@
   "@categoryAll": {"description": "set a category for everyone"},
 
   "qty": "кол-во",
-  "@qty": {"description": "qty"}
+  "@qty": {"description": "qty"},
+
+  "dateTime": "Дата покупки",
+  "@dateTime": {"description": "Date"},
+
+  "storage": "Накопитель",
+  "@storage": {"description": "Storage"},
+
+  "document": "Документ",
+  "@document": {"description": "Document"},
+
+  "documentAttribute": "Признак документа",
+  "@documentAttribute": {"description": "Document attribute"},
+
+  "ti": "Документ",
+  "@document": {"description": "Document"},
+
+  "total": "Итого",
+  "@total": {"description": "Total"}
+
 }
