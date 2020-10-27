@@ -9,7 +9,7 @@ class ReceiptMapper {
     final locale = Localizations.localeOf(context);
     final dateTime = DateFormat('MMM dd, yyyy - HH:mm', locale.languageCode)
         .format(value.dateTime);
-    final totalSum = NumberFormat.compactCurrency(locale: locale.languageCode)
+    final totalSum = NumberFormat.decimalPattern(locale.languageCode)
         .format(value.totalSum / 100);
     return MyReceiptUI(
         dateTime: dateTime,

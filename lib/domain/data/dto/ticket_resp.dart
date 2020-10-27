@@ -95,14 +95,20 @@ class ReceiptResp {
 class ItemsResp {
   String name;
   int price;
-  int quantity;
+  double quantity;
   int sum;
 
-  ItemsResp.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        price = json['price'],
-        quantity = json['quantity'],
-        sum = json['sum'];
+  ItemsResp.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    price = json['price'];
+    final q = json['quantity'];
+    if (q is int) {
+      quantity = q.toDouble();
+    } else if (q is double)  {
+      quantity = q;
+    }
+    sum = json['sum'];
+  }
 }
 
 class OperationResp {

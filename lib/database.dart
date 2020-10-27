@@ -26,6 +26,14 @@ class Database {
     return list.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
   }
 
+  void removeReceipt(Receipt receipt) async {
+    await users
+        .doc(UserInteractor().getCurrentUser().id)
+        .collection('receipts')
+        .doc(receipt.id)
+        .delete();
+  }
+
   void saveReceipt(Receipt receipt) async {
     await users
         .doc(UserInteractor().getCurrentUser().id)
@@ -33,11 +41,13 @@ class Database {
         .doc(receipt.id)
         .set({
       'id': receipt.id,
+      'operationType': receipt.operationType,
       'dateTime': receipt.dateTime,
       'totalSum': receipt.totalSum,
       'fiscalDocumentNumber': receipt.fiscalDocumentNumber,
       'fiscalDriveNumber': receipt.fiscalDriveNumber,
       'fiscalSign': receipt.fiscalSign,
+      'qr': receipt.qr,
       'items': receipt.items.map((e) => e.toJson()).toList()
     });
   }

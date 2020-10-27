@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class IrkktRepo {
   static const String host = "https://irkkt-mobile.nalog.ru:8888/v2/";
   final sessionId =
-      "5f6a49ff0b851a7cd267a068:0e416d4f-6e7d-41b4-8107-8fd917d3c207";
+      "5f6a49ff0b851a7cd267a068:e71cd471-7964-4215-aa5d-b08ce948bf72";
 
   Future<String> _getId() async {
     var deviceInfo = DeviceInfoPlugin();
@@ -29,7 +29,7 @@ class IrkktRepo {
     var response = await http.post(host + "ticket",
         headers: {"Content-Type": "application/json", "sessionId": sessionId},
         body: jsonQr);
-    if (response.statusCode == HttpStatus.accepted) {
+    if (response.statusCode == HttpStatus.ok) {
       var responseJson = jsonDecode(response.body);
       var deviceId = await _getId();
       TicketIdResp ticketId =
@@ -39,7 +39,7 @@ class IrkktRepo {
         "Device-Id": deviceId,
         "sessionId": sessionId
       });
-      if (response.statusCode == 200) {
+      if (response.statusCode == HttpStatus.ok) {
         responseJson = jsonDecode(response.body);
         TicketKktResp ticket =
             TicketKktResp.fromJson(responseJson as Map<String, dynamic>);
