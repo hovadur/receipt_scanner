@@ -4,8 +4,10 @@ import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_viewmodel.dart';
 import 'package:ctr/presentation/category.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/drawer/drawer.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
@@ -76,7 +78,11 @@ class CameraScreen extends StatelessWidget {
             name: CategoryScreen.routeName,
             child: CategoryScreen(
               onPressed: (index) {
-                context.read<CameraViewModel>().getTicket(qr, index);
+                context.read<CameraViewModel>().getTicket(qr, index).catchError(
+                    (e) {
+                  context.showError(e.message);
+                  Fimber.e(e.toString());
+                }, test: (e) => e is Exception);
                 Navigator.of(context).pop();
               },
             )));

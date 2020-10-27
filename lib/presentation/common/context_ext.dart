@@ -17,21 +17,25 @@ extension GoogleSignIn on BuildContext {
             MaterialPage(name: CameraScreen.routeName, child: CameraScreen()));
       }
     }).catchError((e) {
-      showDialog(
-          context: this,
-          builder: (dialogContext) => AlertDialog(
-                title: Text(AppLocalizations.of(this).warning),
-                content: Text(e.message),
-                actions: [
-                  ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(dialogContext).pop();
-                      },
-                      child: Text(AppLocalizations.of(this).close))
-                ],
-              ));
+      this.showError(e.message);
       Fimber.e(e.toString());
     }, test: (e) => e is PlatformException);
+  }
+
+  void showError(String message) {
+    showDialog(
+        context: this,
+        builder: (dialogContext) => AlertDialog(
+              title: Text(AppLocalizations.of(this).warning),
+              content: Text(message),
+              actions: [
+                ElevatedButton(
+                    onPressed: () {
+                      Navigator.of(dialogContext).pop();
+                    },
+                    child: Text(AppLocalizations.of(this).close))
+              ],
+            ));
   }
 
   Map<IconData, String> category() {
