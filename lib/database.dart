@@ -26,6 +26,15 @@ class Database {
     return list.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
   }
 
+  Future<bool> receiptExists(String id) async {
+    var doc = await users
+        .doc(UserInteractor().getCurrentUser().id)
+        .collection('receipts')
+        .doc(id)
+        .get();
+    return doc.exists;
+  }
+
   void removeReceipt(Receipt receipt) async {
     await users
         .doc(UserInteractor().getCurrentUser().id)

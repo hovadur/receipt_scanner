@@ -76,6 +76,7 @@ class ReceiptItem {
       {'type': type, 'name': name, 'price': price, 'quantity': quantity};
 
   ReceiptItem.fromJson(Map<String, dynamic> doc) {
+    type = doc['type'];
     name = doc['name'];
     quantity = doc['quantity'];
     price = doc['price'];
