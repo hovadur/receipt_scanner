@@ -2,7 +2,9 @@ import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import 'domain/interactor/user_interactor.dart';
 import 'domain/navigation/app_navigator.dart';
 import 'l10n/app_localizations.dart';
 
@@ -32,14 +34,16 @@ class _MyAppState extends State<MyApp> {
         builder: (BuildContext context, Widget child) {
           final MediaQueryData data = MediaQuery.of(context);
           return MediaQuery(
-            data: data.copyWith(
-                textScaleFactor:
-                    data.textScaleFactor < 1.1 ? 1.1 : data.textScaleFactor),
-            child: AppNavigator(
-              navigatorKey: _navigatorKey,
-              initialPages: [_defaultHome],
-            ),
-          );
+              data: data.copyWith(
+                  textScaleFactor:
+                      data.textScaleFactor < 1.1 ? 1.1 : data.textScaleFactor),
+              child: MultiProvider(
+                providers: [Provider(create: (_) => UserInteractor())],
+                builder: (context, _) => AppNavigator(
+                  navigatorKey: _navigatorKey,
+                  initialPages: [_defaultHome],
+                ),
+              ));
         },
         title: "Checking The Receipt",
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,

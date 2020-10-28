@@ -10,46 +10,40 @@ import 'package:provider/provider.dart';
 
 class MainDrawer extends StatelessWidget {
   @override
-  Widget build(BuildContext context) => MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => DrawerViewModel(context)),
-            Provider(create: (_) => UserInteractor())
-          ],
-          builder: (context, _) => Drawer(
-                child: ListView(
-                  padding: EdgeInsets.zero,
-                  children: <Widget>[
-                    _makeHeader(context),
-                    ListTile(
-                      title: Text(AppLocalizations.of(context).scanning),
-                      onTap: () {
-                        AppNavigator.of(context).clearAndPush(MaterialPage(
-                            name: CameraScreen.routeName,
-                            child: CameraScreen()));
-                      },
-                    ),
-                    ListTile(
-                      title: Text(AppLocalizations.of(context).myReceipts),
-                      onTap: () {
-                        AppNavigator.of(context).push(MaterialPage(
-                            name: MyReceiptsScreen.routeName,
-                            child: MyReceiptsScreen()));
-                      },
-                    ),
-                    Divider(),
-                    ListTile(
-                      title:
-                          Text(context.watch<DrawerViewModel>().ui.signOutName),
-                      onTap: () {
-                        context.read<UserInteractor>().signOut();
-                        AppNavigator.of(context).clearAndPush(MaterialPage(
-                            name: SignInScreen.routeName,
-                            child: SignInScreen()));
-                      },
-                    ),
-                  ],
+  Widget build(BuildContext context) => ChangeNotifierProvider(
+      create: (_) => DrawerViewModel(context),
+      builder: (context, _) => Drawer(
+            child: ListView(
+              padding: EdgeInsets.zero,
+              children: <Widget>[
+                _makeHeader(context),
+                ListTile(
+                  title: Text(AppLocalizations.of(context).scanning),
+                  onTap: () {
+                    AppNavigator.of(context).clearAndPush(MaterialPage(
+                        name: CameraScreen.routeName, child: CameraScreen()));
+                  },
                 ),
-              ));
+                ListTile(
+                  title: Text(AppLocalizations.of(context).myReceipts),
+                  onTap: () {
+                    AppNavigator.of(context).push(MaterialPage(
+                        name: MyReceiptsScreen.routeName,
+                        child: MyReceiptsScreen()));
+                  },
+                ),
+                Divider(),
+                ListTile(
+                  title: Text(context.watch<DrawerViewModel>().ui.signOutName),
+                  onTap: () {
+                    context.read<UserInteractor>().signOut();
+                    AppNavigator.of(context).clearAndPush(MaterialPage(
+                        name: SignInScreen.routeName, child: SignInScreen()));
+                  },
+                ),
+              ],
+            ),
+          ));
 
   Widget _makeHeader(BuildContext context) {
     if (context.watch<DrawerViewModel>().ui.isSignIn) {

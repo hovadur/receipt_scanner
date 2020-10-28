@@ -1,4 +1,3 @@
-import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
@@ -15,11 +14,8 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
-      body: MultiProvider(
-          providers: [
-            ChangeNotifierProvider(create: (_) => SignInViewModel()),
-            Provider(create: (_) => UserInteractor())
-          ],
+      body: ChangeNotifierProvider(
+          create: (_) => SignInViewModel(),
           builder: (context, _) => SingleChildScrollView(
               padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
               child: Column(
