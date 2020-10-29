@@ -67,26 +67,29 @@ class Receipt {
 }
 
 class ReceiptItem {
-  ReceiptItem(this.type, this.name, this.price, this.quantity);
+  ReceiptItem(this.type, this.name, this.price, this.quantity, this.sum);
 
   int type = 1;
   String name;
   int price;
   num quantity;
+  int sum;
 
   Map<String, dynamic> toJson() =>
-      {'type': type, 'name': name, 'price': price, 'quantity': quantity};
+      {'type': type, 'name': name, 'price': price, 'quantity': quantity, 'sum': sum};
 
   ReceiptItem.fromJson(Map<String, dynamic> doc) {
     type = doc['type'];
     name = doc['name'];
     quantity = doc['quantity'];
     price = doc['price'];
+    sum = doc['sum'];
   }
 
   ReceiptItem.fromItemsResp(ItemsResp item) {
     name = item.name;
     price = item.price;
     quantity = item.quantity;
+    sum = item.sum;
   }
 }

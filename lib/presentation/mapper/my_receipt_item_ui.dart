@@ -7,7 +7,7 @@ class MyReceiptItemUI {
   int type;
   String name;
   String quantity;
-  String price;
+  String sum;
 
   MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item) {
     final locale = Localizations.localeOf(context);
@@ -16,7 +16,7 @@ class MyReceiptItemUI {
     quantity = AppLocalizations.of(context).qty +
         ' ' +
         NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
-    price = NumberFormat.decimalPattern(locale.languageCode)
-        .format(item.price / 100);
+    sum = NumberFormat.decimalPattern(locale.languageCode)
+        .format(item.sum / 100);
   }
 }

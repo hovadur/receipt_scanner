@@ -162,8 +162,11 @@ abstract class AppLocalizations {
   // Invalid total
   String get totalError;
 
-  // Price
-  String get price;
+  // Invalid quantity
+  String get qtyError;
+
+  // Sum
+  String get sum;
 
   // Apply
   String get apply;
@@ -209,6 +212,9 @@ abstract class AppLocalizations {
 
   // qty
   String get qty;
+
+  // Qty
+  String get qtyy;
 
   // Date
   String get dateTime;

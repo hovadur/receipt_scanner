@@ -55,7 +55,7 @@
   "manual": "Ручной ввод",
   "@manual": {"description": "Manual input"},
 
-  "addProduct": "Товар",
+  "addProduct": "Добавить товар",
   "@addProduct": {"description": "Add Product"},
 
   "product": "Товар",
@@ -67,8 +67,11 @@
   "totalError": "Неверная сумма",
   "@totalError": {"description": "Invalid total"},
 
-  "price": "Цена",
-  "@price": {"description": "Price"},
+  "qtyError": "Неверное количество",
+  "@qtyError": {"description": "Invalid quantity"},
+
+  "sum": "Сумма",
+  "@sum": {"description": "Sum"},
 
   "apply": "Применить",
   "@apply": {"description": "Apply"},
@@ -114,6 +117,9 @@
 
   "qty": "кол-во",
   "@qty": {"description": "qty"},
+
+  "qtyy": "Кол-во",
+  "@qtyy": {"description": "Qty"},
 
   "dateTime": "Дата покупки",
   "@dateTime": {"description": "Date"},

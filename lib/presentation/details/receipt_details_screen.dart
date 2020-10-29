@@ -99,6 +99,6 @@ class ReceiptDetailsScreen extends StatelessWidget {
         ),
         title: Text(item.quantity),
         subtitle: Text(item.name),
-        trailing: Text(item.price));
+        trailing: Text(item.sum));
   }
 }

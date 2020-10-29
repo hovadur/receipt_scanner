@@ -67,8 +67,11 @@
   "totalError": "Invalid total",
   "@totalError": {"description": "Invalid total"},
 
-  "price": "Price",
-  "@price": {"description": "Price"},
+  "qtyError": "Invalid quantity",
+  "@qtyError": {"description": "Invalid quantity"},
+
+  "sum": "Sum",
+  "@sum": {"description": "Sum"},
 
   "apply": "Apply",
   "@apply": {"description": "Apply"},
@@ -114,6 +117,9 @@
 
   "qty": "qty",
   "@qty": {"description": "qty"},
+
+  "qtyy": "Qty",
+  "@qtyy": {"description": "Qty"},
 
   "dateTime": "Date",
   "@dateTime": {"description": "Date"},
