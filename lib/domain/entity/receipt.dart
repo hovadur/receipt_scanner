@@ -3,15 +3,17 @@ import 'package:ctr/domain/data/dto/ticket_resp.dart';
 import 'package:flutter/material.dart';
 
 class Receipt {
-  String id;
-  int operationType;
+  Receipt({this.dateTime, this.totalSum, this.items});
+
+  String id = UniqueKey().toString();
+  int operationType = 1;
   DateTime dateTime;
   int totalSum;
-  int fiscalDocumentNumber;
-  String fiscalDriveNumber;
-  int fiscalSign;
-  String qr;
-  List<ReceiptItem> items;
+  int fiscalDocumentNumber = 0;
+  String fiscalDriveNumber = '';
+  int fiscalSign = 0;
+  String qr = '';
+  List<ReceiptItem> items = [];
 
   //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
   Receipt.fromQr(String qr) {
@@ -32,8 +34,6 @@ class Receipt {
       fiscalSign = int.parse(list[4]);
       operationType = int.parse(list[5]);
       this.qr = qr;
-      id = UniqueKey().toString();
-      items = [];
     }
   }
 
@@ -75,8 +75,13 @@ class ReceiptItem {
   num quantity;
   int sum;
 
-  Map<String, dynamic> toJson() =>
-      {'type': type, 'name': name, 'price': price, 'quantity': quantity, 'sum': sum};
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'name': name,
+        'price': price,
+        'quantity': quantity,
+        'sum': sum
+      };
 
   ReceiptItem.fromJson(Map<String, dynamic> doc) {
     type = doc['type'];

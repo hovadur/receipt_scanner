@@ -22,7 +22,8 @@ class ManualScreen extends StatelessWidget {
             icon: Icon(Icons.approval),
             label: Text(AppLocalizations.of(context).apply),
             onPressed: () {
-              context.read<ManualViewModel>().apply();
+              if (context.read<ManualViewModel>().apply())
+                AppNavigator.of(context).pop();
             },
           ),
           body: SafeArea(
