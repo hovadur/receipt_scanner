@@ -67,10 +67,12 @@ class Receipt {
 }
 
 class ReceiptItem {
+  ReceiptItem(this.type, this.name, this.price, this.quantity);
+
   int type = 1;
   String name;
   int price;
-  double quantity;
+  num quantity;
 
   Map<String, dynamic> toJson() =>
       {'type': type, 'name': name, 'price': price, 'quantity': quantity};
