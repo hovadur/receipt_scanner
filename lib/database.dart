@@ -18,12 +18,14 @@ class Database {
     }
   }
 
-  Future<List<Receipt>> getReceipts() async {
-    var list = await users
+  Stream<List<Receipt>> getReceipts() {
+    return users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
-        .get();
-    return list.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
+        .snapshots()
+        .map((event) {
+      return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
+    });
   }
 
   Future<bool> receiptExists(String id) async {
@@ -35,7 +37,7 @@ class Database {
     return doc.exists;
   }
 
-  void removeReceipt(Receipt receipt) async {
+  void deleteReceipt(Receipt receipt) async {
     await users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')

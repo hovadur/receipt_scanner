@@ -15,13 +15,13 @@ class MyReceiptsScreen extends StatelessWidget {
       appBar: AppBar(title: Text(AppLocalizations.of(context).myReceipts)),
       body: ChangeNotifierProvider(
           create: (_) => MyReceiptsViewModel(),
-          builder: (context, _) => FutureBuilder<List<MyReceiptUI>>(
-              future: context.watch<MyReceiptsViewModel>().receipts(context),
+          builder: (context, _) => StreamBuilder<List<MyReceiptUI>>(
+              stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
                 if (snapshot.hasError) {
                   return Text("Something went wrong");
                 }
-                if (snapshot.connectionState == ConnectionState.done) {
+                if (snapshot.connectionState == ConnectionState.active) {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (BuildContext context, int index) {

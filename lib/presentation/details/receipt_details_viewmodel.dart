@@ -14,10 +14,10 @@ class ReceiptDetailsViewModel with ChangeNotifier {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
     notifyListeners();
-    if (receipt.items.isEmpty) {
+    if (receipt.items.isEmpty && receipt.qr.isNotEmpty) {
       _db.saveReceipt(receipt);
       IrkktRepo().getTicket(receipt.qr).then((Receipt receiptKkt) {
-        _db.removeReceipt(receipt);
+        _db.deleteReceipt(receipt);
         _db.saveReceipt(receiptKkt);
         _receipt = receiptKkt;
         _ui = ReceiptMapper().map(context, receiptKkt);
@@ -42,5 +42,9 @@ class ReceiptDetailsViewModel with ChangeNotifier {
     _ui.items[index].type = type;
     notifyListeners();
     _db.saveReceipt(_receipt);
+  }
+
+  void deleteReceipt() {
+    _db.deleteReceipt(_receipt);
   }
 }

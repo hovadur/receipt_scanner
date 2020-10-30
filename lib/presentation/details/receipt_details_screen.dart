@@ -21,6 +21,14 @@ class ReceiptDetailsScreen extends StatelessWidget {
       builder: (context, _) => Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context).details),
+            actions: [
+              IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    context.read<ReceiptDetailsViewModel>().deleteReceipt();
+                    AppNavigator.of(context).pop();
+                  })
+            ],
           ),
           body: Container(
               margin: const EdgeInsets.all(16),
