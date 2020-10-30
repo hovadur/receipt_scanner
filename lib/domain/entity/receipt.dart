@@ -33,7 +33,8 @@ class Receipt {
       fiscalSign = int.parse(match[5]);
       operationType = int.parse(match[6]);
       this.qr = qr;
-    }
+    } else
+      throw Exception('invalid format');
   }
 
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {

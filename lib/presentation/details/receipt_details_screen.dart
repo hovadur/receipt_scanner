@@ -30,13 +30,36 @@ class ReceiptDetailsScreen extends StatelessWidget {
                   })
             ],
           ),
-          body: Container(
+          body: Column(mainAxisSize: MainAxisSize.min, children: [
+            Container(
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
                   border: Border.all(color: Theme.of(context).dividerColor)),
-              child: _buildBody(context))));
+              child: _buildBody(context),
+            ),
+            _buildIrkktBody(context),
+          ])));
+
+  Widget _buildIrkktBody(BuildContext context) {
+    return FutureBuilder<int>(
+        future:
+            context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
+        builder: (context, AsyncSnapshot<int> snapshot) {
+          if (snapshot.hasError) {
+            return Text("Something went wrong");
+          }
+          if (snapshot.connectionState == ConnectionState.done) {
+            if (snapshot.data == 1) return Text("Получены данные от ФНС");
+            if (snapshot.data == 2)
+              return ElevatedButton(onPressed: () {}, child: Text("ФНС вход"));
+            return Container();
+          }
+          return LinearProgressIndicator();
+        });
+  }
 
   Widget _buildBody(BuildContext context) {
+    context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context);
     final ui = context.watch<ReceiptDetailsViewModel>().ui;
     return Column(
       mainAxisSize: MainAxisSize.min,

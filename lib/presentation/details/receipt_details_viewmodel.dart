@@ -1,3 +1,4 @@
+import 'package:ctr/domain/data/error/irkkt_not_login.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/presentation/mapper/my_receipt_ui.dart';
@@ -16,19 +17,28 @@ class ReceiptDetailsViewModel with ChangeNotifier {
     notifyListeners();
     if (receipt.items.isEmpty && receipt.qr.isNotEmpty) {
       _db.saveReceipt(receipt);
-      IrkktRepo().getTicket(receipt.qr).then((Receipt receiptKkt) {
-        _db.deleteReceipt(receipt);
-        _db.saveReceipt(receiptKkt);
-        _receipt = receiptKkt;
-        _ui = ReceiptMapper().map(context, receiptKkt);
-        notifyListeners();
-      });
     }
   }
 
   MyReceiptUI _ui;
 
   MyReceiptUI get ui => _ui;
+
+  Future<int> getIrkktReceipt(BuildContext context) async {
+    if (_receipt.items.isEmpty && _receipt.qr.isNotEmpty) {
+      try {
+        var receiptKkt = await IrkktRepo().getTicket(_receipt.qr);
+        _db.deleteReceipt(_receipt);
+        _db.saveReceipt(receiptKkt);
+        _receipt = receiptKkt;
+        _ui = ReceiptMapper().map(context, receiptKkt);
+        return 1;
+      } on IrkktNotLogin {
+        return 2;
+      }
+    } else
+      return 0;
+  }
 
   void saveTypeAll(int type) {
     _receipt.items.forEach((e) => e.type = type);

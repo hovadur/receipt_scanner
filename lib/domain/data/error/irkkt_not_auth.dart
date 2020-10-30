@@ -1,0 +1,1 @@
+class IrkktNotAuth implements Exception {}

@@ -1,0 +1,1 @@
+class IrkktNotLogin implements Exception {}
