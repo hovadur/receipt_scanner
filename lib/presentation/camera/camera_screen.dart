@@ -73,10 +73,13 @@ class CameraScreen extends StatelessWidget {
     } else {
       var qr = scanResults[0].rawValue;
       SchedulerBinding.instance.addPostFrameCallback((_) {
-        final receipt = Receipt.fromQr(qr);
-        AppNavigator.of(context).push(MaterialPage(
-            name: ReceiptDetailsScreen.routeName,
-            child: ReceiptDetailsScreen(receipt)));
+        if (AppNavigator.of(context).getLast().name !=
+            ReceiptDetailsScreen.routeName) {
+          final receipt = Receipt.fromQr(qr);
+          AppNavigator.of(context).push(MaterialPage(
+              name: ReceiptDetailsScreen.routeName,
+              child: ReceiptDetailsScreen(receipt)));
+        }
       });
       return Text(qr);
     }

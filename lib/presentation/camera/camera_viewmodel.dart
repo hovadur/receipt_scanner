@@ -1,9 +1,6 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
-import 'package:ctr/database.dart';
-import 'package:ctr/domain/data/repo/irkkt_repo.dart';
-import 'package:ctr/domain/entity/receipt.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
@@ -31,8 +28,6 @@ class CameraViewModel with ChangeNotifier {
   List<Barcode> _scanResults;
 
   List<Barcode> get scanResults => _scanResults;
-
-  bool get isMounted => _isMounted;
 
   CameraController get camera => _camera;
 
@@ -133,11 +128,5 @@ class CameraViewModel with ChangeNotifier {
         assert(rotation == 270);
         return ImageRotation.rotation270;
     }
-  }
-
-  Future getTicket(String qr, int index) async {
-    Receipt receipt = await IrkktRepo().getTicket(qr);
-    //receipt.type = index;
-    Database().saveReceipt(receipt);
   }
 }

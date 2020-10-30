@@ -28,13 +28,13 @@ class Database {
     });
   }
 
-  Future<bool> receiptExists(String id) async {
+  Future<bool> receiptExists(String qr) async {
     var doc = await users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
-        .doc(id)
+        .where('qr', isEqualTo: qr)
         .get();
-    return doc.exists;
+    return doc.docs.isNotEmpty;
   }
 
   void deleteReceipt(Receipt receipt) async {

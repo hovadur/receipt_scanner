@@ -17,22 +17,21 @@ class Receipt {
 
   //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
   Receipt.fromQr(String qr) {
-    var list = qr
-        .split('&')
-        .map((e) => e.replaceFirst(RegExp(r'[tsfnifpn=]+'), ''))
-        .toList();
-    if (list.length == 6) {
-      int year = int.parse(list[0].substring(0, 4));
-      int month = int.parse(list[0].substring(4, 6));
-      int day = int.parse(list[0].substring(6, 8));
-      int hour = int.parse(list[0].substring(9, 11));
-      int minute = int.parse(list[0].substring(11, 13));
+    var match =
+        RegExp(r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)')
+            .firstMatch(qr);
+    if (match != null && match.groupCount == 6) {
+      int year = int.parse(match[1].substring(0, 4));
+      int month = int.parse(match[1].substring(4, 6));
+      int day = int.parse(match[1].substring(6, 8));
+      int hour = int.parse(match[1].substring(9, 11));
+      int minute = int.parse(match[1].substring(11, 13));
       dateTime = DateTime.utc(year, month, day, hour, minute);
-      totalSum = int.tryParse(list[1].replaceFirst('.', ''));
-      fiscalDriveNumber = list[2];
-      fiscalDocumentNumber = int.parse(list[3]);
-      fiscalSign = int.parse(list[4]);
-      operationType = int.parse(list[5]);
+      totalSum = int.tryParse(match[2].replaceFirst('.', ''));
+      fiscalDriveNumber = match[3];
+      fiscalDocumentNumber = int.parse(match[4]);
+      fiscalSign = int.parse(match[5]);
+      operationType = int.parse(match[6]);
       this.qr = qr;
     }
   }

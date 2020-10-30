@@ -10,7 +10,7 @@ import 'package:http/http.dart' as http;
 class IrkktRepo {
   static const String host = "https://irkkt-mobile.nalog.ru:8888/v2/";
   final sessionId =
-      "5f6a49ff0b851a7cd267a068:cdfdb13f-0ff1-4c80-99c1-95cca0a506c6";
+      "5f6a49ff0b851a7cd267a068:64587ce3-b36d-434f-8fa6-5797365e01f4";
 
   Future<String> _getId() async {
     var deviceInfo = DeviceInfoPlugin();

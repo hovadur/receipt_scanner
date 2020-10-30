@@ -39,6 +39,10 @@ class AppNavigatorState extends State<AppNavigator> {
     setState(() => _stack.add(page));
   }
 
+  Page getLast() {
+    return _stack.last;
+  }
+
   bool pop() {
     if (_stack.isNotEmpty) {
       setState(() => _stack.removeLast());

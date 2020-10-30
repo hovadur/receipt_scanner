@@ -21,18 +21,18 @@ class MyReceiptsScreen extends StatelessWidget {
                 if (snapshot.hasError) {
                   return Text("Something went wrong");
                 }
-                if (snapshot.connectionState == ConnectionState.active) {
-                  return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder: (BuildContext context, int index) {
-                        MyReceiptUI receipt = snapshot.data[index];
-                        return Padding(
-                            padding: const EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 4),
-                            child: _buildCardItem(context, receipt));
-                      });
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LinearProgressIndicator();
                 }
-                return LinearProgressIndicator();
+                return ListView.builder(
+                    itemCount: snapshot.data.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      MyReceiptUI receipt = snapshot.data[index];
+                      return Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 4),
+                          child: _buildCardItem(context, receipt));
+                    });
               })));
 
   Widget _buildCardItem(BuildContext context, MyReceiptUI receipt) {
