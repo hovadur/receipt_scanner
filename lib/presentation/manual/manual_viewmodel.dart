@@ -55,7 +55,7 @@ class ManualViewModel with ChangeNotifier {
   }
 
   bool apply() {
-    if (_totalError != null && _total == 0) return false;
+    if (_totalError != null || _total == 0) return false;
     Receipt receipt =
         Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
     Database().saveReceipt(receipt);
