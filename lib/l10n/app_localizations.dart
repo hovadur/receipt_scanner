@@ -248,6 +248,15 @@ abstract class AppLocalizations {
 
   // INN
   String get inn;
+
+  // Check receipt in FNS
+  String get checkReceiptInFNS;
+
+  // Data received from the FNS
+  String get dataReceivedFromFNS;
+
+  // TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session
+  String get ftsWarning;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

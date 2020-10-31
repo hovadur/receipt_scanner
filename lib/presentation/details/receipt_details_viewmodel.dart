@@ -32,6 +32,7 @@ class ReceiptDetailsViewModel with ChangeNotifier {
         _db.saveReceipt(receiptKkt);
         _receipt = receiptKkt;
         _ui = ReceiptMapper().map(context, receiptKkt);
+        notifyListeners();
         return 1;
       } on IrkktNotLogin {
         return 2;
@@ -56,5 +57,9 @@ class ReceiptDetailsViewModel with ChangeNotifier {
 
   void deleteReceipt() {
     _db.deleteReceipt(_receipt);
+  }
+
+  void update() {
+    notifyListeners();
   }
 }

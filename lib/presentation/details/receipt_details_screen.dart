@@ -54,7 +54,8 @@ class ReceiptDetailsScreen extends StatelessWidget {
             return Text("Something went wrong");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data == 1) return Text("Получены данные от ФНС");
+            if (snapshot.data == 1)
+              return Text(AppLocalizations.of(context).dataReceivedFromFNS);
             if (snapshot.data == 2)
               return RichText(
                 text: TextSpan(
@@ -69,18 +70,30 @@ class ReceiptDetailsScreen extends StatelessWidget {
                             ..onTap = () {
                               AppNavigator.of(context).push(MaterialPage(
                                   name: SignInFnsScreen.routeName,
-                                  child: SignInFnsScreen()));
+                                  child: SignInFnsScreen(
+                                    onPressed: () {
+                                      context
+                                          .read<ReceiptDetailsViewModel>()
+                                          .update();
+                                    },
+                                  )));
                             }),
                     ]),
               );
             return Container();
           }
-          return LinearProgressIndicator();
+          return Stack(children: [
+            LinearProgressIndicator(),
+            Container(
+                padding: EdgeInsets.all(8.0),
+                child: Align(
+                  child: Text(AppLocalizations.of(context).checkReceiptInFNS),
+                ))
+          ]);
         });
   }
 
   Widget _buildBody(BuildContext context) {
-    context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context);
     final ui = context.watch<ReceiptDetailsViewModel>().ui;
     return Column(
       mainAxisSize: MainAxisSize.min,
@@ -101,21 +114,22 @@ class ReceiptDetailsScreen extends StatelessWidget {
           leading: Text(AppLocalizations.of(context).documentAttribute),
           trailing: Text(ui.fpd),
         ),
-        InkWell(
-          onTap: () => AppNavigator.of(context).push(MaterialPage(
-              name: CategoryScreen.routeName,
-              child: CategoryScreen(
-                onPressed: (type) {
-                  context.read<ReceiptDetailsViewModel>().saveTypeAll(type);
-                  Navigator.of(context).pop();
-                },
-              ))),
-          child: Text(
-            AppLocalizations.of(context).categoryAll,
-            style: TextStyle(
-                color: Colors.blue, decoration: TextDecoration.underline),
+        if (ui.items.isNotEmpty)
+          InkWell(
+            onTap: () => AppNavigator.of(context).push(MaterialPage(
+                name: CategoryScreen.routeName,
+                child: CategoryScreen(
+                  onPressed: (type) {
+                    context.read<ReceiptDetailsViewModel>().saveTypeAll(type);
+                    Navigator.of(context).pop();
+                  },
+                ))),
+            child: Text(
+              AppLocalizations.of(context).categoryAll,
+              style: TextStyle(
+                  color: Colors.blue, decoration: TextDecoration.underline),
+            ),
           ),
-        ),
         ListView.builder(
             scrollDirection: Axis.vertical,
             shrinkWrap: true,

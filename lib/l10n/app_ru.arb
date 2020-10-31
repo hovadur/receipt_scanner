@@ -155,6 +155,14 @@
   "@fnsAccount": {"description": "FNS Account"},
 
   "inn": "ИНН",
-  "@inn": {"description": "INN"}
+  "@inn": {"description": "INN"},
 
+  "checkReceiptInFNS": "Проверка чека в ФНС",
+  "@checkReceiptInFNS": {"description": "Check receipt in FNS"},
+
+  "dataReceivedFromFNS": "Получены данные от ФНС",
+  "@dataReceivedFromFNS": {"description": "Data received from the FNS"},
+
+  "ftsWarning": "ИНН и пароль не сохраняются. Хранится только сессия. Иногда может потребоваться снова произвести вход в аккаунт ФНС для обновления сессии",
+  "@ftsWarning": {"description": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session"}
 }

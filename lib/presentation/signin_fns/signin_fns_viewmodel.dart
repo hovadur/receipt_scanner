@@ -1,7 +1,7 @@
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/data/validation_item.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/domain/string_ext.dart';
+import 'package:ctr/l10n/app_localizations.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
@@ -41,11 +41,11 @@ class SignInFnsViewModel with ChangeNotifier {
       return false;
   }
 
-  bool submit(context) {
+  Future<bool> submit(context) async {
     Fimber.d("submit");
     if (_isValid(context)) {
       try {
-        IrkktRepo().login(_inn.value, _password.value);
+        await IrkktRepo().login(_inn.value, _password.value);
         return true;
       } catch (_) {
         return false;

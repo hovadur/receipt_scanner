@@ -9,6 +9,10 @@ import 'package:provider/provider.dart';
 class SignInFnsScreen extends StatelessWidget {
   static const String routeName = "SignInFnsScreen";
 
+  SignInFnsScreen({@required this.onPressed});
+
+  final Function onPressed;
+
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).fnsAccount)),
@@ -19,12 +23,17 @@ class SignInFnsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   SizedBox(height: 40),
-                  LoginForm(),
+                  Text(AppLocalizations.of(context).ftsWarning),
+                  LoginForm(onPressed: onPressed),
                 ],
               ))));
 }
 
 class LoginForm extends StatelessWidget {
+  LoginForm({@required this.onPressed});
+
+  final Function onPressed;
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -71,10 +80,13 @@ class LoginForm extends StatelessWidget {
       );
 
   void submit(BuildContext context) {
-    if (context.read<SignInFnsViewModel>().submit(context))
-      AppNavigator.of(context).pop();
-    else {
-      context.showError(AppLocalizations.of(context).invalidCredentials);
-    }
+    context.read<SignInFnsViewModel>().submit(context).then((value) {
+      if (value) {
+        onPressed();
+        AppNavigator.of(context).pop();
+      } else {
+        context.showError(AppLocalizations.of(context).invalidCredentials);
+      }
+    });
   }
 }

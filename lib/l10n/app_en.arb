@@ -152,6 +152,15 @@
   "@fnsAccount": {"description": "FNS Account"},
 
   "inn": "INN",
-  "@inn": {"description": "INN"}
+  "@inn": {"description": "INN"},
+
+  "checkReceiptInFNS": "Check receipt in FNS",
+  "@checkReceiptInFNS": {"description": "Check receipt in FNS"},
+
+  "dataReceivedFromFNS": "Data received from the FNS",
+  "@dataReceivedFromFNS": {"description": "Data received from the FNS"},
+
+  "ftsWarning": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session",
+  "@ftsWarning": {"description": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session"}
 
 }
