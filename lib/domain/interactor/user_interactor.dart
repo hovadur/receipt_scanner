@@ -2,6 +2,7 @@ import 'package:ctr/domain/entity/user.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../database.dart';
 
@@ -10,7 +11,7 @@ class UserInteractor {
 
   User getCurrentUser() {
     if (_auth.currentUser == null)
-      return null;
+      return User(id: ' ', email: '', name: '');
     else
       return User(
           id: _auth.currentUser.uid,
@@ -38,7 +39,9 @@ class UserInteractor {
       return null;
   }
 
-  void signOut() {
+  void signOut() async {
     auth.FirebaseAuth.instance.signOut();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.clear();
   }
 }

@@ -16,10 +16,11 @@ class Receipt {
   List<ReceiptItem> items = [];
 
   //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
+  static final qrPattern = RegExp(
+      r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)');
+
   Receipt.fromQr(String qr) {
-    var match =
-        RegExp(r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)')
-            .firstMatch(qr);
+    var match = qrPattern.firstMatch(qr);
     if (match != null && match.groupCount == 6) {
       int year = int.parse(match[1].substring(0, 4));
       int month = int.parse(match[1].substring(4, 6));
@@ -75,7 +76,8 @@ class ReceiptItem {
   num quantity;
   int sum;
 
-  Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() =>
+      {
         'type': type,
         'name': name,
         'price': price,

@@ -111,6 +111,12 @@ abstract class AppLocalizations {
   // Invalid email
   String get invalidEmail;
 
+  // Invalid INN
+  String get invalidInn;
+
+  // Invalid credentials
+  String get invalidCredentials;
+
   // Password
   String get password;
 
@@ -128,6 +134,12 @@ abstract class AppLocalizations {
 
   // Sign Up
   String get signUp;
+
+  // To get the contents of the check, log in to your 
+  String get dontHaveFnsAccount;
+
+  // nalog.ru account
+  String get nalogruAccount;
 
   // Confirm password
   String get confirmPassword;
@@ -230,6 +242,12 @@ abstract class AppLocalizations {
 
   // Total
   String get total;
+
+  // FNS Account
+  String get fnsAccount;
+
+  // INN
+  String get inn;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

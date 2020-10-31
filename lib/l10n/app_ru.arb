@@ -16,6 +16,12 @@
   "invalidEmail": "Неверный емайл",
   "@invalidEmail": {"description": "Invalid email"},
 
+  "invalidInn": "Неверное ИНН",
+  "@invalidInn": {"description": "Invalid INN"},
+
+  "invalidCredentials": "Неверные учетные данные",
+  "@invalidCredentials": {"description": "Invalid credentials"},
+
   "password": "Пароль",
   "@password": {"description": "Password"},
 
@@ -33,6 +39,12 @@
 
   "signUp": "Регистрация",
   "@signUp": {"description": "Sign Up"},
+
+  "dontHaveFnsAccount": "Для получения содержимого чека осуществите вход в ",
+  "@dontHaveFnsAccount": {"description": "To get the contents of the check, log in to your "},
+
+  "nalogruAccount": "аккаунт nalog.ru",
+  "@nalogruAccount": {"description": "nalog.ru account"},
 
   "confirmPassword": "Подтверждение пароля",
   "@confirmPassword": {"description": "Confirm password"},
@@ -137,6 +149,12 @@
   "@document": {"description": "Document"},
 
   "total": "Итого",
-  "@total": {"description": "Total"}
+  "@total": {"description": "Total"},
+
+  "fnsAccount": "ФНС аккаунт",
+  "@fnsAccount": {"description": "FNS Account"},
+
+  "inn": "ИНН",
+  "@inn": {"description": "INN"}
 
 }

@@ -16,6 +16,12 @@
   "invalidEmail": "Invalid email",
   "@invalidEmail": {"description": "Invalid email"},
 
+  "invalidInn": "Invalid INN",
+  "@invalidInn": {"description": "Invalid INN"},
+
+  "invalidCredentials": "Invalid credentials",
+  "@invalidCredentials": {"description": "Invalid credentials"},
+
   "password": "Password",
   "@password": {"description": "Password"},
 
@@ -33,6 +39,12 @@
 
   "signUp": "Sign Up",
   "@signUp": {"description": "Sign Up"},
+
+  "dontHaveFnsAccount": "To get the contents of the check, log in to your ",
+  "@dontHaveFnsAccount": {"description": "To get the contents of the check, log in to your "},
+
+  "nalogruAccount": "nalog.ru account",
+  "@nalogruAccount": {"description": "nalog.ru account"},
 
   "confirmPassword": "Confirm password",
   "@confirmPassword": {"description": "Confirm password"},
@@ -134,6 +146,12 @@
   "@documentAttribute": {"description": "Document attribute"},
 
   "total": "Total",
-  "@total": {"description": "Total"}
+  "@total": {"description": "Total"},
+
+  "fnsAccount": "FNS Account",
+  "@fnsAccount": {"description": "FNS Account"},
+
+  "inn": "INN",
+  "@inn": {"description": "INN"}
 
 }

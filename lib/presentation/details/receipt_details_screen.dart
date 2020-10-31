@@ -1,10 +1,12 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/categorize/category_screen.dart';
+import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -37,7 +39,10 @@ class ReceiptDetailsScreen extends StatelessWidget {
                   border: Border.all(color: Theme.of(context).dividerColor)),
               child: _buildBody(context),
             ),
-            _buildIrkktBody(context),
+            Container(
+              margin: const EdgeInsets.all(16),
+              child: _buildIrkktBody(context),
+            )
           ])));
 
   Widget _buildIrkktBody(BuildContext context) {
@@ -51,7 +56,23 @@ class ReceiptDetailsScreen extends StatelessWidget {
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == 1) return Text("Получены данные от ФНС");
             if (snapshot.data == 2)
-              return ElevatedButton(onPressed: () {}, child: Text("ФНС вход"));
+              return RichText(
+                text: TextSpan(
+                    text: AppLocalizations.of(context).dontHaveFnsAccount,
+                    children: <TextSpan>[
+                      TextSpan(
+                          text: AppLocalizations.of(context).nalogruAccount,
+                          style: TextStyle(
+                              color: Colors.blue,
+                              decoration: TextDecoration.underline),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              AppNavigator.of(context).push(MaterialPage(
+                                  name: SignInFnsScreen.routeName,
+                                  child: SignInFnsScreen()));
+                            }),
+                    ]),
+              );
             return Container();
           }
           return LinearProgressIndicator();
