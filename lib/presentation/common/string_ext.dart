@@ -6,16 +6,16 @@ extension IsValidINN on String {
     }
     int length = inn.length;
     if (length == 12) {
-      return _INNStep(inn, 2, 1) && _INNStep(inn, 1, 0);
+      return _innStep(inn, 2, 1) && _innStep(inn, 1, 0);
     } else {
-      return _INNStep(inn, 1, 2);
+      return _innStep(inn, 1, 2);
     }
   }
 
   static final _innPattern = RegExp(r'\d{10}|\d{12}');
   static final _checkArr = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
 
-  bool _INNStep(String inn, int offset, int arrOffset) {
+  bool _innStep(String inn, int offset, int arrOffset) {
     int sum = 0;
     int length = inn.length;
     for (int i = 0; i < length - offset; i++) {
