@@ -31,7 +31,7 @@ class CameraViewModel with ChangeNotifier {
 
   CameraController get camera => _camera;
 
-  void _initializeCamera() async {
+  Future<void> _initializeCamera() async {
     final CameraDescription description =
         await _getCamera(CameraLensDirection.back);
 
@@ -50,7 +50,7 @@ class CameraViewModel with ChangeNotifier {
 
       final BarcodeDetector _barcodeDetector = FirebaseVision.instance
           .barcodeDetector(
-              BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
+              const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
       _detect(
         image: image,
         detectInImage: _barcodeDetector.detectInImage,
@@ -67,7 +67,7 @@ class CameraViewModel with ChangeNotifier {
   }
 
   static Future<CameraDescription> _getCamera(CameraLensDirection dir) async {
-    return await availableCameras().then(
+    return availableCameras().then(
       (List<CameraDescription> cameras) => cameras.firstWhere(
         (CameraDescription camera) => camera.lensDirection == dir,
       ),
@@ -90,7 +90,7 @@ class CameraViewModel with ChangeNotifier {
 
   static Uint8List _concatenatePlanes(List<Plane> planes) {
     final WriteBuffer allBytes = WriteBuffer();
-    for (Plane plane in planes) {
+    for (final Plane plane in planes) {
       allBytes.putUint8List(plane.bytes);
     }
     return allBytes.done().buffer.asUint8List();

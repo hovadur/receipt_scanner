@@ -19,15 +19,15 @@ class MyReceiptsScreen extends StatelessWidget {
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return Text("Something went wrong");
+                  return const Text("Something went wrong");
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return LinearProgressIndicator();
+                  return const LinearProgressIndicator();
                 }
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      MyReceiptUI receipt = snapshot.data[index];
+                      final MyReceiptUI receipt = snapshot.data[index];
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
@@ -41,7 +41,7 @@ class MyReceiptsScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: <Widget>[
         ListTile(
-          leading: CircleAvatar(child: Icon(Icons.fact_check)),
+          leading: const CircleAvatar(child: Icon(Icons.fact_check)),
           title: Text(receipt.dateTime),
           trailing: Text(receipt.totalSum),
           onTap: () {

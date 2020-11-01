@@ -20,13 +20,13 @@ class Receipt {
       r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)');
 
   Receipt.fromQr(String qr) {
-    var match = qrPattern.firstMatch(qr);
+    final match = qrPattern.firstMatch(qr);
     if (match != null && match.groupCount == 6) {
-      int year = int.parse(match[1].substring(0, 4));
-      int month = int.parse(match[1].substring(4, 6));
-      int day = int.parse(match[1].substring(6, 8));
-      int hour = int.parse(match[1].substring(9, 11));
-      int minute = int.parse(match[1].substring(11, 13));
+      final int year = int.parse(match[1].substring(0, 4));
+      final int month = int.parse(match[1].substring(4, 6));
+      final int day = int.parse(match[1].substring(6, 8));
+      final int hour = int.parse(match[1].substring(9, 11));
+      final int minute = int.parse(match[1].substring(11, 13));
       dateTime = DateTime.utc(year, month, day, hour, minute);
       totalSum = int.tryParse(match[2].replaceFirst('.', ''));
       fiscalDriveNumber = match[3];
@@ -34,8 +34,9 @@ class Receipt {
       fiscalSign = int.parse(match[5]);
       operationType = int.parse(match[6]);
       this.qr = qr;
-    } else
+    } else {
       throw Exception('invalid format');
+    }
   }
 
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {
@@ -52,7 +53,7 @@ class Receipt {
   }
 
   Receipt.fromTicketResp(TicketKktResp ticket) {
-    var receipt = ticket.ticket.document.receipt;
+    final receipt = ticket.ticket.document.receipt;
     id = ticket.id;
     operationType = receipt.operationType;
     dateTime = DateTime.fromMillisecondsSinceEpoch(receipt.dateTime * 1000);

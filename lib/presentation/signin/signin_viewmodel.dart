@@ -14,7 +14,7 @@ class SignInViewModel with ChangeNotifier {
 
   String get passwordError => _password.error;
 
-  void changeEmail(String value, context) {
+  void changeEmail(String value, BuildContext context) {
     if (value != null && emailCheck.hasMatch(value)) {
       _email = ValidationItem(value, null);
     } else {
@@ -23,7 +23,7 @@ class SignInViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  void changePassword(String value, context) {
+  void changePassword(String value, BuildContext context) {
     if (value == null || (value != null && value.length < 8)) {
       _password =
           ValidationItem(value, AppLocalizations.of(context).invalidPassword);
@@ -33,16 +33,17 @@ class SignInViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  bool _isValid(context) {
+  bool _isValid(BuildContext context) {
     changeEmail(_email.value, context);
     changePassword(_password.value, context);
-    if (_email.error == null && _password.error == null)
+    if (_email.error == null && _password.error == null) {
       return true;
-    else
+    } else {
       return false;
+    }
   }
 
-  void submit(context) {
+  void submit(BuildContext context) {
     if (_isValid(context)) {
       Fimber.d("submit");
     }

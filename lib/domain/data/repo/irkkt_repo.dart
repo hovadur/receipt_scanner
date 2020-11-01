@@ -22,39 +22,41 @@ class IrkktRepo {
   final api = IrkktApi();
 
   Future<void> login(String inn, String pass) async {
-    var json =
+    final json =
         jsonEncode({"inn": inn, "password": pass, "client_secret": secret});
-    var deviceId = await _getId();
-    var response = await api.login(json, deviceId);
+    final deviceId = await _getId();
+    final response = await api.login(json, deviceId);
     if (response.statusCode == HttpStatus.ok) {
-      var responseJson = jsonDecode(response.body);
-      var value = AuthResp.fromJson(responseJson as Map<String, dynamic>);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final responseJson = jsonDecode(response.body);
+      final value = AuthResp.fromJson(responseJson as Map<String, dynamic>);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString(sessionIdKey, value.sessionId);
       await prefs.setString(refreshTokenKey, value.refreshToken);
-    } else
+    } else {
       throw IrkktNotLogin();
+    }
   }
 
   Future<void> refresh() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var sessionId = prefs.getString(sessionIdKey);
-    var refreshToken = prefs.getString(refreshTokenKey);
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final sessionId = prefs.getString(sessionIdKey);
+    final refreshToken = prefs.getString(refreshTokenKey);
     if (sessionId == null && refreshToken == null) {
       throw IrkktNotLogin();
     }
-    var json =
+    final json =
         jsonEncode({"refresh_token": refreshToken, "client_secret": secret});
-    var deviceId = await _getId();
-    var response = await api.refresh(json, deviceId);
+    final deviceId = await _getId();
+    final response = await api.refresh(json, deviceId);
     if (response.statusCode == HttpStatus.ok) {
-      var responseJson = jsonDecode(response.body);
-      var value = RefreshResp.fromJson(responseJson as Map<String, dynamic>);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final responseJson = jsonDecode(response.body);
+      final value = RefreshResp.fromJson(responseJson as Map<String, dynamic>);
+      final SharedPreferences prefs = await SharedPreferences.getInstance();
       await prefs.setString(sessionIdKey, value.sessionId);
       await prefs.setString(refreshTokenKey, value.refreshToken);
-    } else
+    } else {
       throw IrkktNotLogin();
+    }
   }
 
   Future<Receipt> getTicket(String qr) async {
@@ -62,44 +64,46 @@ class IrkktRepo {
       return await _getTicket(qr);
     } on IrkktNotAuth {
       await refresh();
-      return await _getTicket(qr);
+      return _getTicket(qr);
     }
   }
 
   Future<Receipt> _getTicket(String qr) async {
-    var json = jsonEncode({"qr": qr});
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var sessionId = prefs.getString(sessionIdKey);
+    final json = jsonEncode({"qr": qr});
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final sessionId = prefs.getString(sessionIdKey);
     var response = await api.getTicketId(json, sessionId);
     if (response.statusCode == HttpStatus.ok) {
       var responseJson = jsonDecode(response.body);
-      var deviceId = await _getId();
-      TicketIdResp ticketId =
+      final deviceId = await _getId();
+      final TicketIdResp ticketId =
           TicketIdResp.fromJson(responseJson as Map<String, dynamic>);
       response = await api.getTicket(ticketId.id, sessionId, deviceId);
       if (response.statusCode == HttpStatus.ok) {
         responseJson = jsonDecode(response.body);
-        TicketKktResp ticket =
+        final TicketKktResp ticket =
             TicketKktResp.fromJson(responseJson as Map<String, dynamic>);
         return Receipt.fromTicketResp(ticket);
-      } else
-        throw Exception('Request failed with status: ${response.statusCode}.' +
-            response.body);
+      } else {
+        throw Exception(
+            '${'Request failed with status: ${response.statusCode}.'}${response.body}');
+      }
     } else if (response.statusCode == HttpStatus.unauthorized) {
       throw IrkktNotAuth();
-    } else
-      throw Exception('Request failed with status: ${response.statusCode}.' +
-          response.body);
+    } else {
+      throw Exception(
+          '${'Request failed with status: ${response.statusCode}.'}${response.body}');
+    }
   }
 
   Future<String> _getId() async {
-    var deviceInfo = DeviceInfoPlugin();
+    final deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) {
       // import 'dart:io'
-      var iosDeviceInfo = await deviceInfo.iosInfo;
+      final iosDeviceInfo = await deviceInfo.iosInfo;
       return iosDeviceInfo.identifierForVendor; // unique ID on iOS
     } else {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
+      final androidDeviceInfo = await deviceInfo.androidInfo;
       return androidDeviceInfo.androidId; // unique ID on Android
     }
   }

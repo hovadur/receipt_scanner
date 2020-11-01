@@ -25,7 +25,7 @@ class BarcodeDetectorPainter extends CustomPainter {
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2.0;
 
-    for (Barcode barcode in barcodeLocations) {
+    for (final Barcode barcode in barcodeLocations) {
       paint.color = Colors.green;
       canvas.drawRect(scaleRect(barcode), paint);
     }

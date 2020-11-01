@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 class DrawerViewModel with ChangeNotifier {
   DrawerViewModel(BuildContext context) {
-    var user = UserInteractor().getCurrentUser();
+    final user = UserInteractor().getCurrentUser();
     if (user.id != ' ') {
       _ui = DrawerUI(
           email: user.email,

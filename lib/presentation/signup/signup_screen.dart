@@ -17,7 +17,7 @@ class SignUpScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
                 child: Column(
                   children: [
-                    SizedBox(height: 40),
+                    const SizedBox(height: 40),
                     LoginForm(),
                     ElevatedButton.icon(
                         onPressed: () => context.googleSignIn(),
@@ -25,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
                         label:
                             Text(AppLocalizations.of(context).signInWithGoogle),
                         style: ElevatedButton.styleFrom(
-                            primary: Color(0xfff7f7f7),
+                            primary: const Color(0xfff7f7f7),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18))))
                   ],
@@ -48,7 +48,7 @@ class LoginForm extends StatelessWidget {
             onChanged: (String value) =>
                 context.read<SignUpViewModel>().changeEmail(value, context),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.next,
@@ -61,7 +61,7 @@ class LoginForm extends StatelessWidget {
             onChanged: (String value) =>
                 context.read<SignUpViewModel>().changePassword(value, context),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.done,
@@ -85,7 +85,7 @@ class LoginForm extends StatelessWidget {
                     context.read<SignUpViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),

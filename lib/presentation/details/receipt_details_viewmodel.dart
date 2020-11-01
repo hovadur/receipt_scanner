@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../../database.dart';
 
 class ReceiptDetailsViewModel with ChangeNotifier {
-  Database _db = Database();
+  final Database _db = Database();
   Receipt _receipt;
 
   ReceiptDetailsViewModel(BuildContext context, Receipt receipt) {
@@ -27,7 +27,7 @@ class ReceiptDetailsViewModel with ChangeNotifier {
   Future<int> getIrkktReceipt(BuildContext context) async {
     if (_receipt.items.isEmpty && _receipt.qr.isNotEmpty) {
       try {
-        var receiptKkt = await IrkktRepo().getTicket(_receipt.qr);
+        final receiptKkt = await IrkktRepo().getTicket(_receipt.qr);
         _db.deleteReceipt(_receipt);
         _db.saveReceipt(receiptKkt);
         _receipt = receiptKkt;
@@ -37,13 +37,18 @@ class ReceiptDetailsViewModel with ChangeNotifier {
       } on IrkktNotLogin {
         return 2;
       }
-    } else
+    } else {
       return 0;
+    }
   }
 
   void saveTypeAll(int type) {
-    _receipt.items.forEach((e) => e.type = type);
-    _ui.items.forEach((e) => e.type = type);
+    for (final e in _receipt.items) {
+      e.type = type;
+    }
+    for (final e in _ui.items) {
+      e.type = type;
+    }
     notifyListeners();
     _db.saveReceipt(_receipt);
   }

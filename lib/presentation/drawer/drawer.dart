@@ -32,7 +32,7 @@ class MainDrawer extends StatelessWidget {
                         child: MyReceiptsScreen()));
                   },
                 ),
-                Divider(),
+                const Divider(),
                 ListTile(
                   title: Text(context.watch<DrawerViewModel>().ui.signOutName),
                   onTap: () {

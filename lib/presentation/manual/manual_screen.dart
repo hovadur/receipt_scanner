@@ -19,11 +19,12 @@ class ManualScreen extends StatelessWidget {
           appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
           floatingActionButton: FloatingActionButton.extended(
             heroTag: null,
-            icon: Icon(Icons.approval),
+            icon: const Icon(Icons.approval),
             label: Text(AppLocalizations.of(context).apply),
             onPressed: () {
-              if (context.read<ManualViewModel>().apply())
+              if (context.read<ManualViewModel>().apply()) {
                 AppNavigator.of(context).pop();
+              }
             },
           ),
           body: SafeArea(
@@ -43,7 +44,7 @@ class ManualScreen extends StatelessWidget {
         onChanged: (String value) =>
             context.read<ManualViewModel>().changeDateTime(value),
       ),
-      SizedBox(height: 8),
+      const SizedBox(height: 8),
       TextField(
         keyboardType: TextInputType.number,
         textInputAction: TextInputAction.next,
@@ -54,7 +55,7 @@ class ManualScreen extends StatelessWidget {
         onChanged: (String value) =>
             context.read<ManualViewModel>().changeTotal(value, context),
       ),
-      SizedBox(height: 8),
+      const SizedBox(height: 8),
       Row(children: <Widget>[
         ElevatedButton.icon(
             onPressed: () {
@@ -67,17 +68,16 @@ class ManualScreen extends StatelessWidget {
                   )));
               //context.read<ManualViewModel>().addProduct()
             },
-            icon: Icon(Icons.add),
+            icon: const Icon(Icons.add),
             label: Text(AppLocalizations.of(context).product)),
-        SizedBox(width: 8),
+        const SizedBox(width: 8),
         ElevatedButton.icon(
             onPressed: () => context.read<ManualViewModel>().removeProduct(),
-            icon: Icon(Icons.remove),
+            icon: const Icon(Icons.remove),
             label: Text(AppLocalizations.of(context).product)),
       ]),
-      SizedBox(height: 8),
+      const SizedBox(height: 8),
       ListView.builder(
-          scrollDirection: Axis.vertical,
           shrinkWrap: true,
           itemCount:
               context.select((ManualViewModel value) => value.productCount),

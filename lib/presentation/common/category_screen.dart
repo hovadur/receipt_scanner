@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 class CategoryScreen extends StatelessWidget {
   static const String routeName = 'CategoryScreen';
 
-  CategoryScreen({@required this.onPressed});
+  const CategoryScreen({@required this.onPressed});
 
   final ValueChanged<int> onPressed;
 
@@ -22,11 +22,10 @@ class CategoryScreen extends StatelessWidget {
         // ),
         body: SingleChildScrollView(
             child: ListView.builder(
-                scrollDirection: Axis.vertical,
                 shrinkWrap: true,
                 itemCount: categoryMap.length,
                 itemBuilder: (BuildContext context, int index) {
-                  var entries = categoryMap.entries.toList();
+                  final entries = categoryMap.entries.toList();
                   return ListTile(
                     leading:
                         CircleAvatar(child: Icon(entries.elementAt(index).key)),

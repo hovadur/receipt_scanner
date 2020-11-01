@@ -19,7 +19,7 @@ class CameraScreen extends StatelessWidget {
       appBar: AppBar(title: Text(AppLocalizations.of(context).scanning)),
       drawer: MainDrawer(),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.add),
+        icon: const Icon(Icons.add),
         label: Text(AppLocalizations.of(context).manual),
         onPressed: () {
           AppNavigator.of(context).push(MaterialPage(
@@ -38,7 +38,7 @@ class CameraScreen extends StatelessWidget {
       return Center(
         child: Text(
           AppLocalizations.of(context).cameraInit,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.green,
             fontSize: 30.0,
           ),
@@ -71,7 +71,7 @@ class CameraScreen extends StatelessWidget {
       return CustomPaint(
           painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
-      var qr = scanResults[0].rawValue;
+      final qr = scanResults[0].rawValue;
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (AppNavigator.of(context).getLast().name !=
             ReceiptDetailsScreen.routeName) {

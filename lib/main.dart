@@ -8,7 +8,7 @@ import 'domain/interactor/user_interactor.dart';
 import 'domain/navigation/app_navigator.dart';
 import 'l10n/app_localizations.dart';
 
-void main() async {
+Future<void> main() async {
   Fimber.plantTree(DebugTree());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -27,7 +27,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    Page _defaultHome =
+    final Page _defaultHome =
         MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
 
     return MaterialApp(

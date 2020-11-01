@@ -12,7 +12,7 @@ class ManualViewModel with ChangeNotifier {
   }
 
   DateTime _dateTime = DateTime.now();
-  List<ReceiptItem> _products = [];
+  final List<ReceiptItem> _products = [];
   String _totalError;
   int _total = 0;
 
@@ -26,10 +26,10 @@ class ManualViewModel with ChangeNotifier {
 
   String get totalError => _totalError;
 
-  void changeTotal(String value, context) {
+  void changeTotal(String value, BuildContext context) {
     try {
-      String l = Localizations.localeOf(context).languageCode;
-      num total = NumberFormat.decimalPattern(l).parse(value);
+      final String l = Localizations.localeOf(context).languageCode;
+      final num total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;
     } catch (_) {
@@ -39,7 +39,7 @@ class ManualViewModel with ChangeNotifier {
   }
 
   void changeDateTime(String value) {
-    var format = DateFormat('yyyy-MM-dd HH:mm');
+    final format = DateFormat('yyyy-MM-dd HH:mm');
     _dateTime = format.parse(value);
     notifyListeners();
   }
@@ -56,7 +56,7 @@ class ManualViewModel with ChangeNotifier {
 
   bool apply() {
     if (_totalError != null || _total == 0) return false;
-    Receipt receipt =
+    final Receipt receipt =
         Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
     Database().saveReceipt(receipt);
     return true;

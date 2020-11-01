@@ -11,7 +11,7 @@ import 'manual_add_viewmodel.dart';
 class ManualAddScreen extends StatelessWidget {
   static const String routeName = "ManualAddScreen";
 
-  ManualAddScreen({@required this.onPressed});
+  const ManualAddScreen({@required this.onPressed});
 
   final ValueChanged<ReceiptItem> onPressed;
 
@@ -93,7 +93,7 @@ class ManualAddScreen extends StatelessWidget {
                 AppNavigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
               ),
               child: Text(AppLocalizations.of(context).next),
             ),

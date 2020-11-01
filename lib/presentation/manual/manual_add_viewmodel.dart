@@ -28,8 +28,8 @@ class ManualAddViewModel with ChangeNotifier {
 
   void changeQty(String value, BuildContext context) {
     try {
-      String l = Localizations.localeOf(context).languageCode;
-      num qty = NumberFormat.decimalPattern(l).parse(value);
+      final String l = Localizations.localeOf(context).languageCode;
+      final num qty = NumberFormat.decimalPattern(l).parse(value);
       _qty = qty.toDouble();
       _qtyError = null;
     } catch (_) {
@@ -41,8 +41,8 @@ class ManualAddViewModel with ChangeNotifier {
 
   void changeSum(String value, BuildContext context) {
     try {
-      String l = Localizations.localeOf(context).languageCode;
-      num sum = NumberFormat.decimalPattern(l).parse(value);
+      final String l = Localizations.localeOf(context).languageCode;
+      final num sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;
     } catch (_) {

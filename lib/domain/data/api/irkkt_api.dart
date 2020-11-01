@@ -7,7 +7,7 @@ class IrkktApi {
   final _client = Client();
 
   Future<Response> login(String json, String deviceId) async =>
-      await _client.post(host + "mobile/users/lkfl/auth",
+      _client.post("${host}mobile/users/lkfl/auth",
           headers: {
             "Content-Type": "application/json",
             "Device-OS": Platform.operatingSystem,
@@ -16,20 +16,20 @@ class IrkktApi {
           body: json);
 
   Future<Response> getTicketId(String json, String sessionId) async =>
-      await _client.post(host + "ticket",
+      _client.post("${host}ticket",
           headers: {"Content-Type": "application/json", "sessionId": sessionId},
           body: json);
 
   Future<Response> getTicket(
           String id, String sessionId, String deviceId) async =>
-      await _client.get(host + "tickets/" + id, headers: {
+      _client.get("${host}tickets/$id", headers: {
         "Device-OS": Platform.operatingSystem,
         "Device-Id": deviceId,
         "sessionId": sessionId
       });
 
   Future<Response> refresh(String json, String deviceId) async =>
-      await _client.post(host + "mobile/users/refresh", headers: {
+      _client.post("${host}mobile/users/refresh", headers: {
         "Content-Type": "application/json",
         "Device-OS": Platform.operatingSystem,
         "Device-Id": deviceId

@@ -20,7 +20,7 @@ class SignInScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
               child: Column(
                 children: [
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   LoginForm(),
                   ElevatedButton.icon(
                       onPressed: () => context.googleSignIn(),
@@ -28,10 +28,10 @@ class SignInScreen extends StatelessWidget {
                       label:
                           Text(AppLocalizations.of(context).signInWithGoogle),
                       style: ElevatedButton.styleFrom(
-                          primary: Color(0xfff7f7f7),
+                          primary: const Color(0xfff7f7f7),
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(18)))),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -46,7 +46,7 @@ class SignInScreen extends StatelessWidget {
                         },
                         child: Text(
                           AppLocalizations.of(context).signUp,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline),
                         ),
@@ -72,7 +72,7 @@ class LoginForm extends StatelessWidget {
             onChanged: (String value) =>
                 context.read<SignInViewModel>().changeEmail(value, context),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.done,
@@ -95,7 +95,7 @@ class LoginForm extends StatelessWidget {
                     context.read<SignInViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),

@@ -13,7 +13,7 @@ import 'package:provider/provider.dart';
 class ReceiptDetailsScreen extends StatelessWidget {
   static const String routeName = 'ReceiptDetails';
 
-  ReceiptDetailsScreen(this.receipt);
+  const ReceiptDetailsScreen(this.receipt);
 
   final Receipt receipt;
 
@@ -25,7 +25,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             title: Text(AppLocalizations.of(context).details),
             actions: [
               IconButton(
-                  icon: Icon(Icons.delete),
+                  icon: const Icon(Icons.delete),
                   onPressed: () {
                     context.read<ReceiptDetailsViewModel>().deleteReceipt();
                     AppNavigator.of(context).pop();
@@ -51,19 +51,20 @@ class ReceiptDetailsScreen extends StatelessWidget {
             context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
         builder: (context, AsyncSnapshot<int> snapshot) {
           if (snapshot.hasError) {
-            return Text("Something went wrong");
+            return const Text("Something went wrong");
           }
           if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data == 1)
+            if (snapshot.data == 1) {
               return Text(AppLocalizations.of(context).dataReceivedFromFNS);
-            if (snapshot.data == 2)
+            }
+            if (snapshot.data == 2) {
               return RichText(
                 text: TextSpan(
                     text: AppLocalizations.of(context).dontHaveFnsAccount,
                     children: <TextSpan>[
                       TextSpan(
                           text: AppLocalizations.of(context).nalogruAccount,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline),
                           recognizer: TapGestureRecognizer()
@@ -80,12 +81,13 @@ class ReceiptDetailsScreen extends StatelessWidget {
                             }),
                     ]),
               );
+            }
             return Container();
           }
           return Stack(children: [
-            LinearProgressIndicator(),
+            const LinearProgressIndicator(),
             Container(
-                padding: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(8.0),
                 child: Align(
                   child: Text(AppLocalizations.of(context).checkReceiptInFNS),
                 ))
@@ -126,12 +128,11 @@ class ReceiptDetailsScreen extends StatelessWidget {
                 ))),
             child: Text(
               AppLocalizations.of(context).categoryAll,
-              style: TextStyle(
+              style: const TextStyle(
                   color: Colors.blue, decoration: TextDecoration.underline),
             ),
           ),
         ListView.builder(
-            scrollDirection: Axis.vertical,
             shrinkWrap: true,
             itemCount: ui.items.length,
             itemBuilder: (BuildContext context, int index) {
@@ -140,7 +141,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                   child: _buildItem(context, ui.items[index], index));
             }),
-        Divider(),
+        const Divider(),
         ListTile(
           leading: Text(AppLocalizations.of(context).total),
           trailing: Text(ui.totalSum),
@@ -153,7 +154,6 @@ class ReceiptDetailsScreen extends StatelessWidget {
     final entries = context.category().entries.toList();
     return ListTile(
         leading: InkWell(
-          child: CircleAvatar(child: Icon(entries.elementAt(item.type).key)),
           onTap: () => AppNavigator.of(context).push(MaterialPage(
               name: CategoryScreen.routeName,
               child: CategoryScreen(
@@ -162,6 +162,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
               ))),
+          child: CircleAvatar(child: Icon(entries.elementAt(item.type).key)),
         ),
         title: Text(item.quantity),
         subtitle: Text(item.name),

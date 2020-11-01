@@ -29,7 +29,7 @@ class Database {
   }
 
   Future<bool> receiptExists(String qr) async {
-    var doc = await users
+    final doc = await users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
         .where('qr', isEqualTo: qr)
@@ -37,7 +37,7 @@ class Database {
     return doc.docs.isNotEmpty;
   }
 
-  void deleteReceipt(Receipt receipt) async {
+  Future<void> deleteReceipt(Receipt receipt) async {
     await users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
@@ -45,7 +45,7 @@ class Database {
         .delete();
   }
 
-  void saveReceipt(Receipt receipt) async {
+  Future<void> saveReceipt(Receipt receipt) async {
     await users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')

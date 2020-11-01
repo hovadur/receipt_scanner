@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class SignInFnsScreen extends StatelessWidget {
   static const String routeName = "SignInFnsScreen";
 
-  SignInFnsScreen({@required this.onPressed});
+  const SignInFnsScreen({@required this.onPressed});
 
   final Function onPressed;
 
@@ -22,7 +22,7 @@ class SignInFnsScreen extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
               child: Column(
                 children: [
-                  SizedBox(height: 40),
+                  const SizedBox(height: 40),
                   Text(AppLocalizations.of(context).ftsWarning),
                   LoginForm(onPressed: onPressed),
                 ],
@@ -30,7 +30,7 @@ class SignInFnsScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  LoginForm({@required this.onPressed});
+  const LoginForm({@required this.onPressed});
 
   final Function onPressed;
 
@@ -39,7 +39,7 @@ class LoginForm extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(
-            keyboardType: TextInputType.numberWithOptions(),
+            keyboardType: const TextInputType.numberWithOptions(),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 labelText: AppLocalizations.of(context).inn,
@@ -48,7 +48,7 @@ class LoginForm extends StatelessWidget {
             onChanged: (String value) =>
                 context.read<SignInFnsViewModel>().changeEmail(value, context),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.done,
@@ -70,7 +70,7 @@ class LoginForm extends StatelessWidget {
                 onPressed: () => submit(context),
                 style: ElevatedButton.styleFrom(
                   padding:
-                      EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),

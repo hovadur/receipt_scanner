@@ -11,13 +11,13 @@ import 'package:provider/provider.dart';
 
 extension GoogleSignIn on BuildContext {
   void googleSignIn() {
-    this.read<UserInteractor>().signInWithGoogle().then((User user) {
+    read<UserInteractor>().signInWithGoogle().then((User user) {
       if (user != null) {
         AppNavigator.of(this).clearAndPush(
             MaterialPage(name: CameraScreen.routeName, child: CameraScreen()));
       }
     }).catchError((e) {
-      this.showError(e.message);
+      showError(e.message);
       Fimber.e(e.toString());
     }, test: (e) => e is PlatformException);
   }

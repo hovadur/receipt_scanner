@@ -1,10 +1,10 @@
 extension IsValidINN on String {
   bool isValidINN() {
-    final inn = this.trim();
+    final inn = trim();
     if (!_innPattern.hasMatch(inn)) {
       return false;
     }
-    int length = inn.length;
+    final int length = inn.length;
     if (length == 12) {
       return _innStep(inn, 2, 1) && _innStep(inn, 1, 0);
     } else {
@@ -17,7 +17,7 @@ extension IsValidINN on String {
 
   bool _innStep(String inn, int offset, int arrOffset) {
     int sum = 0;
-    int length = inn.length;
+    final int length = inn.length;
     for (int i = 0; i < length - offset; i++) {
       sum += (inn.codeUnitAt(i) - '0'.codeUnitAt(0)) * _checkArr[i + arrOffset];
     }
