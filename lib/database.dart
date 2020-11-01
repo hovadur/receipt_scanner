@@ -1,8 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctr/domain/entity/receipt.dart';
-
-import 'domain/entity/user.dart';
-import 'domain/interactor/user_interactor.dart';
+import 'package:ctr/domain/entity/user.dart';
+import 'package:ctr/domain/interactor/user_interactor.dart';
 
 class Database {
   CollectionReference users = FirebaseFirestore.instance.collection('users');

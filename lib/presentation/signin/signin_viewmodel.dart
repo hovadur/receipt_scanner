@@ -3,7 +3,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
-class SignInViewModel with ChangeNotifier {
+class SignInViewModel extends ChangeNotifier {
   // https://stackoverflow.com/a/32686261/9449426
   final emailCheck = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 

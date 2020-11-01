@@ -5,7 +5,7 @@ import 'package:ctr/presentation/common/date_time_picker.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
 import 'package:flutter/material.dart';
 
-class ManualViewModel with ChangeNotifier {
+class ManualViewModel extends ChangeNotifier {
   ManualViewModel() {
     _dateTime = DateTime.now();
     notifyListeners();

@@ -3,10 +3,9 @@ import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
+import 'package:ctr/presentation/manual/manual_add_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'manual_add_viewmodel.dart';
 
 class ManualAddScreen extends StatelessWidget {
   static const String routeName = 'ManualAddScreen';
@@ -93,7 +92,8 @@ class ManualAddScreen extends StatelessWidget {
                 AppNavigator.of(context).pop();
               },
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
               ),
               child: Text(AppLocalizations.of(context).next),
             ),

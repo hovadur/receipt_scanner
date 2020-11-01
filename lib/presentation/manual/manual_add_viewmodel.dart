@@ -3,7 +3,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ManualAddViewModel with ChangeNotifier {
+class ManualAddViewModel extends ChangeNotifier {
   String _sumError;
   String _qtyError;
   int _type = 1;

@@ -3,7 +3,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/drawer/drawer_ui.dart';
 import 'package:flutter/material.dart';
 
-class DrawerViewModel with ChangeNotifier {
+class DrawerViewModel extends ChangeNotifier {
   DrawerViewModel(BuildContext context) {
     final user = UserInteractor().getCurrentUser();
     if (user.id != ' ') {

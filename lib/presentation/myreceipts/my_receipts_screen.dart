@@ -1,11 +1,10 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
+import 'package:ctr/presentation/mapper/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import '../mapper/my_receipt_ui.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
   static const String routeName = 'MyReceiptsScreen';

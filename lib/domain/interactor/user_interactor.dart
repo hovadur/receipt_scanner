@@ -1,10 +1,9 @@
+import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/user.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../database.dart';
 
 class UserInteractor {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
@@ -24,7 +23,8 @@ class UserInteractor {
     final GoogleSignIn _googleSignIn = GoogleSignIn();
     final GoogleSignInAccount account = await _googleSignIn.signIn();
     if (account != null) {
-      final GoogleSignInAuthentication authentication = await account.authentication;
+      final GoogleSignInAuthentication authentication =
+          await account.authentication;
       final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
         accessToken: authentication.accessToken,
         idToken: authentication.idToken,

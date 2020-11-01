@@ -2,12 +2,11 @@ import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/date_time_picker.dart';
+import 'package:ctr/presentation/manual/manual_add_screen.dart';
+import 'package:ctr/presentation/manual/manual_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
-import 'manual_add_screen.dart';
-import 'manual_viewmodel.dart';
 
 class ManualScreen extends StatelessWidget {
   static const String routeName = 'ManualScreen';
