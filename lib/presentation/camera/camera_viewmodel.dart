@@ -49,8 +49,8 @@ class CameraViewModel extends ChangeNotifier {
       _isDetecting = true;
 
       final BarcodeDetector _barcodeDetector = FirebaseVision.instance
-          .barcodeDetector(
-              const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
+          .barcodeDetector(const BarcodeDetectorOptions(
+              barcodeFormats: BarcodeFormat.qrCode));
       _detect(
         image: image,
         detectInImage: _barcodeDetector.detectInImage,

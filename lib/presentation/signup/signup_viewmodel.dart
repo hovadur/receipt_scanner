@@ -36,11 +36,10 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-
   void changeConfirmPassword(String value, BuildContext context) {
     if (value != _password.value) {
-      _confirmPassword =
-          ValidationItem(value, AppLocalizations.of(context).invalidConfirmPassword);
+      _confirmPassword = ValidationItem(
+          value, AppLocalizations.of(context).invalidConfirmPassword);
     } else {
       _confirmPassword = ValidationItem(value, null);
     }
