@@ -7,7 +7,7 @@ class ManualAddViewModel with ChangeNotifier {
   String _sumError;
   String _qtyError;
   int _type = 1;
-  String _name;
+  String name;
   double _qty;
   int _sum;
 
@@ -16,10 +16,6 @@ class ManualAddViewModel with ChangeNotifier {
   String get qtyError => _qtyError;
 
   int get type => _type;
-
-  void changeName(String value) {
-    _name = value;
-  }
 
   void saveType(int type) {
     _type = type;
@@ -53,6 +49,6 @@ class ManualAddViewModel with ChangeNotifier {
   }
 
   ReceiptItem addProduct(BuildContext context) {
-    return ReceiptItem(_type, _name, 0, _qty, _sum);
+    return ReceiptItem(_type, name, 0, _qty, _sum);
   }
 }

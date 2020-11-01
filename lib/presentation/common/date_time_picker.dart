@@ -235,7 +235,9 @@ class DateTimePicker extends FormField<String> {
               controller != null ? controller.text : (initialValue ?? ''),
           onSaved: onSaved,
           validator: validator,
-          autovalidate: autovalidate,
+          autovalidateMode: autovalidate
+              ? AutovalidateMode.always
+              : AutovalidateMode.disabled,
           enabled: enabled,
           builder: (FormFieldState<String> field) {
             final _DateTimePickerState state = field as _DateTimePickerState;
@@ -874,7 +876,8 @@ class _DateTimePickerState extends FormFieldState<String> {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
             .format(DateTime.tryParse(_sValue));
       } else {
-        final String lsMask = _sTime != '' ? 'MMM dd, yyyy - HH:mm' : 'MMM dd, yyyy';
+        final String lsMask =
+            _sTime != '' ? 'MMM dd, yyyy - HH:mm' : 'MMM dd, yyyy';
         lsFormatedDate =
             DateFormat(lsMask, languageCode).format(DateTime.tryParse(_sValue));
       }

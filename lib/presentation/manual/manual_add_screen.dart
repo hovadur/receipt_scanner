@@ -56,7 +56,7 @@ class ManualAddScreen extends StatelessWidget {
           decoration:
               InputDecoration(labelText: AppLocalizations.of(context).product),
           onChanged: (String value) =>
-              context.read<ManualAddViewModel>().changeName(value),
+              context.read<ManualAddViewModel>().name = value,
         ),
         const SizedBox(width: 8),
         TextField(
