@@ -8,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualAddScreen extends StatelessWidget {
+  const ManualAddScreen({@required this.onPressed, Key key}) : super(key: key);
   static const String routeName = 'ManualAddScreen';
-
-  const ManualAddScreen({@required this.onPressed});
 
   final ValueChanged<ReceiptItem> onPressed;
 
@@ -40,7 +39,7 @@ class ManualAddScreen extends StatelessWidget {
               .elementAt(
                   context.select((ManualAddViewModel value) => value.type))
               .value),
-          onTap: () => AppNavigator.of(context).push(MaterialPage(
+          onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
               name: CategoryScreen.routeName,
               child: CategoryScreen(
                 onPressed: (type) {

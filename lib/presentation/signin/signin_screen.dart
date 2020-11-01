@@ -9,6 +9,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignInScreen extends StatelessWidget {
+  const SignInScreen({Key key}) : super(key: key);
   static const String routeName = 'SignInScreen';
 
   @override
@@ -21,7 +22,7 @@ class SignInScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  LoginForm(),
+                  const LoginForm(),
                   ElevatedButton.icon(
                       onPressed: () => context.googleSignIn(),
                       icon: SvgPicture.asset('assets/icons/google-icon.svg'),
@@ -40,9 +41,10 @@ class SignInScreen extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          AppNavigator.of(context).push(MaterialPage(
-                              name: SignUpScreen.routeName,
-                              child: SignUpScreen()));
+                          AppNavigator.of(context).push(
+                              const MaterialPage<Page>(
+                                  name: SignUpScreen.routeName,
+                                  child: SignUpScreen()));
                         },
                         child: Text(
                           AppLocalizations.of(context).signUp,
@@ -58,6 +60,8 @@ class SignInScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
+  const LoginForm({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -94,8 +98,8 @@ class LoginForm extends StatelessWidget {
                 onPressed: () =>
                     context.read<SignInViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),

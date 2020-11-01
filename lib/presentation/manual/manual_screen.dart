@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualScreen extends StatelessWidget {
+  const ManualScreen({Key key}) : super(key: key);
   static const String routeName = 'ManualScreen';
 
   @override
@@ -58,7 +59,7 @@ class ManualScreen extends StatelessWidget {
       Row(children: <Widget>[
         ElevatedButton.icon(
             onPressed: () {
-              AppNavigator.of(context).push(MaterialPage(
+              AppNavigator.of(context).push(MaterialPage<Page>(
                   name: ManualAddScreen.routeName,
                   child: ManualAddScreen(
                     onPressed: (item) {

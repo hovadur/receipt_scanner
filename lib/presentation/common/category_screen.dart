@@ -3,9 +3,9 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {
-  static const String routeName = 'CategoryScreen';
+  const CategoryScreen({@required this.onPressed, Key key}) : super(key: key);
 
-  const CategoryScreen({@required this.onPressed});
+  static const String routeName = 'CategoryScreen';
 
   final ValueChanged<int> onPressed;
 

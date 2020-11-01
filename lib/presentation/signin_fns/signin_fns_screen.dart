@@ -7,9 +7,8 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SignInFnsScreen extends StatelessWidget {
+  const SignInFnsScreen({@required this.onPressed, Key key}) : super(key: key);
   static const String routeName = 'SignInFnsScreen';
-
-  const SignInFnsScreen({@required this.onPressed});
 
   final Function onPressed;
 
@@ -30,7 +29,7 @@ class SignInFnsScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({@required this.onPressed});
+  const LoginForm({@required this.onPressed, Key key}) : super(key: key);
 
   final Function onPressed;
 
@@ -69,8 +68,8 @@ class LoginForm extends StatelessWidget {
                 autofocus: true,
                 onPressed: () => submit(context),
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),

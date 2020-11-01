@@ -12,17 +12,18 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatelessWidget {
+  const CameraScreen({Key key}) : super(key: key);
   static const String routeName = 'CameraScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).scanning)),
-      drawer: MainDrawer(),
+      drawer: const MainDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
         label: Text(AppLocalizations.of(context).manual),
         onPressed: () {
-          AppNavigator.of(context).push(MaterialPage(
+          AppNavigator.of(context).push(const MaterialPage<Page>(
               name: ManualScreen.routeName, child: ManualScreen()));
         },
       ),
@@ -77,9 +78,9 @@ class CameraScreen extends StatelessWidget {
             ReceiptDetailsScreen.routeName) {
           try {
             final receipt = Receipt.fromQr(qr);
-            AppNavigator.of(context).push(MaterialPage(
+            AppNavigator.of(context).push(MaterialPage<Page>(
                 name: ReceiptDetailsScreen.routeName,
-                child: ReceiptDetailsScreen(receipt)));
+                child: ReceiptDetailsScreen(receipt: receipt)));
           } catch (_) {}
         }
       });

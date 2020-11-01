@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MainDrawer extends StatelessWidget {
+  const MainDrawer({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => DrawerViewModel(context),
@@ -20,14 +22,16 @@ class MainDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(AppLocalizations.of(context).scanning),
                   onTap: () {
-                    AppNavigator.of(context).clearAndPush(MaterialPage(
-                        name: CameraScreen.routeName, child: CameraScreen()));
+                    AppNavigator.of(context).clearAndPush(
+                        const MaterialPage<Page>(
+                            name: CameraScreen.routeName,
+                            child: CameraScreen()));
                   },
                 ),
                 ListTile(
                   title: Text(AppLocalizations.of(context).myReceipts),
                   onTap: () {
-                    AppNavigator.of(context).push(MaterialPage(
+                    AppNavigator.of(context).push(const MaterialPage<Page>(
                         name: MyReceiptsScreen.routeName,
                         child: MyReceiptsScreen()));
                   },
@@ -37,8 +41,10 @@ class MainDrawer extends StatelessWidget {
                   title: Text(context.watch<DrawerViewModel>().ui.signOutName),
                   onTap: () {
                     context.read<UserInteractor>().signOut();
-                    AppNavigator.of(context).clearAndPush(MaterialPage(
-                        name: SignInScreen.routeName, child: SignInScreen()));
+                    AppNavigator.of(context).clearAndPush(
+                        const MaterialPage<Page>(
+                            name: SignInScreen.routeName,
+                            child: SignInScreen()));
                   },
                 ),
               ],

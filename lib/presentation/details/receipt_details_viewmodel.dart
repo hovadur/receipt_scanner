@@ -7,9 +7,6 @@ import 'package:ctr/presentation/mapper/receipt_mapper.dart';
 import 'package:flutter/material.dart';
 
 class ReceiptDetailsViewModel extends ChangeNotifier {
-  final Database _db = Database();
-  Receipt _receipt;
-
   ReceiptDetailsViewModel(BuildContext context, Receipt receipt) {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
@@ -18,6 +15,9 @@ class ReceiptDetailsViewModel extends ChangeNotifier {
       _db.saveReceipt(receipt);
     }
   }
+
+  final Database _db = Database();
+  Receipt _receipt;
 
   MyReceiptUI _ui;
 

@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
+  const MyReceiptsScreen({Key key}) : super(key: key);
   static const String routeName = 'MyReceiptsScreen';
 
   @override
@@ -44,9 +45,9 @@ class MyReceiptsScreen extends StatelessWidget {
           title: Text(receipt.dateTime),
           trailing: Text(receipt.totalSum),
           onTap: () {
-            AppNavigator.of(context).push(MaterialPage(
+            AppNavigator.of(context).push(MaterialPage<Page>(
                 name: ReceiptDetailsScreen.routeName,
-                child: ReceiptDetailsScreen(receipt.receipt)));
+                child: ReceiptDetailsScreen(receipt: receipt.receipt)));
           },
         ),
       ],

@@ -11,9 +11,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ReceiptDetailsScreen extends StatelessWidget {
-  static const String routeName = 'ReceiptDetails';
+  const ReceiptDetailsScreen({this.receipt, Key key}) : super(key: key);
 
-  const ReceiptDetailsScreen(this.receipt);
+  static const String routeName = 'ReceiptDetails';
 
   final Receipt receipt;
 
@@ -69,7 +69,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
                               decoration: TextDecoration.underline),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              AppNavigator.of(context).push(MaterialPage(
+                              AppNavigator.of(context).push(MaterialPage<Page>(
                                   name: SignInFnsScreen.routeName,
                                   child: SignInFnsScreen(
                                     onPressed: () {
@@ -118,7 +118,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
         ),
         if (ui.items.isNotEmpty)
           InkWell(
-            onTap: () => AppNavigator.of(context).push(MaterialPage(
+            onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
                 name: CategoryScreen.routeName,
                 child: CategoryScreen(
                   onPressed: (type) {
@@ -154,7 +154,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
     final entries = context.category().entries.toList();
     return ListTile(
         leading: InkWell(
-          onTap: () => AppNavigator.of(context).push(MaterialPage(
+          onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
               name: CategoryScreen.routeName,
               child: CategoryScreen(
                 onPressed: (type) {

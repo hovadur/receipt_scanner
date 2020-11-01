@@ -13,8 +13,8 @@ extension GoogleSignIn on BuildContext {
   void googleSignIn() {
     read<UserInteractor>().signInWithGoogle().then((User user) {
       if (user != null) {
-        AppNavigator.of(this).clearAndPush(
-            MaterialPage(name: CameraScreen.routeName, child: CameraScreen()));
+        AppNavigator.of(this).clearAndPush(const MaterialPage<Page>(
+            name: CameraScreen.routeName, child: CameraScreen()));
       }
     }).catchError((e) {
       showError(e.message);

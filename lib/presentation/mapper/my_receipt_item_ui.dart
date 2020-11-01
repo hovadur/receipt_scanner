@@ -4,11 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyReceiptItemUI {
-  int type;
-  String name;
-  String quantity;
-  String sum;
-
   MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item) {
     final locale = Localizations.localeOf(context);
     type = item.type;
@@ -18,4 +13,9 @@ class MyReceiptItemUI {
     sum =
         NumberFormat.decimalPattern(locale.languageCode).format(item.sum / 100);
   }
+
+  int type;
+  String name;
+  String quantity;
+  String sum;
 }

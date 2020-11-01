@@ -26,8 +26,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    final Page _defaultHome =
-        MaterialPage(name: CameraScreen.routeName, child: CameraScreen());
+    const Page _defaultHome =
+        MaterialPage<Page>(name: CameraScreen.routeName, child: CameraScreen());
 
     return MaterialApp(
         builder: (BuildContext context, Widget child) {

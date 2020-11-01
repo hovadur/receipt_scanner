@@ -6,6 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
+  const SignUpScreen({Key key}) : super(key: key);
   static const String routeName = 'SignUpScreen';
 
   @override
@@ -18,7 +19,7 @@ class SignUpScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     const SizedBox(height: 40),
-                    LoginForm(),
+                    const LoginForm(),
                     ElevatedButton.icon(
                         onPressed: () => context.googleSignIn(),
                         icon: SvgPicture.asset('assets/icons/google-icon.svg'),
@@ -34,6 +35,8 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
+  const LoginForm({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -84,8 +87,8 @@ class LoginForm extends StatelessWidget {
                 onPressed: () =>
                     context.read<SignUpViewModel>().submit(context),
                 style: ElevatedButton.styleFrom(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
+                  padding: const EdgeInsets.symmetric(
+                      vertical: 16.0, horizontal: 4.0),
                 ),
                 child: Text(AppLocalizations.of(context).next),
               ),
