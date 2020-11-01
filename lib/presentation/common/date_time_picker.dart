@@ -32,7 +32,7 @@ enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 /// If a [controller] is not specified, [initialValue] can be used to give
 /// the automatically generated controller an initial value.
 ///
-/// Remember to [dispose] of the [TextEditingController] when it is no
+/// Remember to dispose of the [TextEditingController] when it is no
 /// longer needed. This will ensure we discard any resources used by the object.
 ///
 /// For a documentation about the various parameters, see [TextField].
@@ -41,10 +41,10 @@ enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 ///
 /// Creates a [DateTimePicker] with an [InputDecoration] and validator function.
 ///
-/// ![If the user enters valid text, the TextField appears normally without any
+/// ![ If the user enters valid text, the TextField appears normally without any
 /// warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
 ///
-/// ![If the user enters invalid text, the error message returned from the
+/// ![ If the user enters invalid text, the error message returned from the
 /// validator function is displayed in dark red underneath the input]
 /// (https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
 ///
@@ -374,7 +374,7 @@ class DateTimePicker extends FormField<String> {
         );
 
   /// The DateTimePicker type:
-  /// [date], [time], [dateTime] or [dateTimeSeparate].
+  /// date, time, dateTime or dateTimeSeparate.
   final DateTimePickerType type;
 
   /// Controls the text being edited.
@@ -393,7 +393,7 @@ class DateTimePicker extends FormField<String> {
   /// For forms that match one of our predefined skeletons, we look up the
   /// corresponding pattern in [locale] (or in the default locale if none is
   /// specified) and use the resulting full format string. This is the
-  /// preferred usage, but if [newPattern] does not match one of the skeletons,
+  /// preferred usage, but if newPattern does not match one of the skeletons,
   /// then it is used as a format directly, but will not be adapted to suit the
   /// locale.
   final String dateMask;
@@ -407,10 +407,10 @@ class DateTimePicker extends FormField<String> {
   ///
   /// The trailing edge of the icon is padded by 16dps.
   ///
-  /// The decoration's container is the area which is filled if [filled] is
-  /// true and bordered per the [border]. It's the area adjacent to
-  /// [decoration.icon] and above the widgets that contain [helperText],
-  /// [errorText], and [counterText].
+  /// The decoration's container is the area which is filled if filled is
+  /// true and bordered per the border. It's the area adjacent to
+  /// decoration.icon and above the widgets that contain helperText,
+  /// errorText, and counterText.
   ///
   /// See [Icon], [ImageIcon].
   final Widget icon;
@@ -435,17 +435,17 @@ class DateTimePicker extends FormField<String> {
 
   /// Text that suggests what sort of date input the field accepts.
   ///
-  /// Displayed on top of the date input [child] (i.e., at the same location on
-  /// the screen where text may be entered in the input [child]) when the input
-  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the
+  /// Displayed on top of the date input child (i.e., at the same location on
+  /// the screen where text may be entered in the input child) when the input
+  /// isEmpty and either (a) labelText is null or (b) the input has the
   /// focus.
   final String dateHintText;
 
   /// Text that suggests what sort of time input the field accepts.
   ///
-  /// Displayed on top of the time input [child] (i.e., at the same location on
-  /// the screen where text may be entered in the input [child]) when the input
-  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the
+  /// Displayed on top of the time input child (i.e., at the same location on
+  /// the screen where text may be entered in the input child) when the input
+  /// isEmpty and either (a) labelText is null or (b) the input has the
   /// focus.
   final String timeHintText;
 
@@ -471,7 +471,7 @@ class DateTimePicker extends FormField<String> {
   final String errorInvalidText;
 
   /// An optional [textDirection] argument can be used to set the text direction
-  /// ([TextDirection.ltr] or [TextDirection.rtl]) for the date picker. It
+  /// (TextDirection.ltr or TextDirection.rtl) for the date picker. It
   /// defaults to the ambient text direction provided by [Directionality]. If
   /// both [locale] and [textDirection] are non-null, [textDirection] overrides
   /// the direction chosen for the [locale].
@@ -481,9 +481,9 @@ class DateTimePicker extends FormField<String> {
   /// picker. It defaults to the ambient locale provided by [Localizations].
   final Locale locale;
 
-  /// The [context], [useRootNavigator] and [routeSettings] arguments are
+  /// The context, [useRootNavigator] and [routeSettings] arguments are
   /// passed to [showDialog], the documentation for which discusses how it is
-  /// used. [context] and [useRootNavigator] must be non-null.
+  /// used. context and [useRootNavigator] must be non-null.
   final bool useRootNavigator;
 
   /// Creates data used to construct routes.
@@ -505,7 +505,7 @@ class DateTimePicker extends FormField<String> {
   /// allow certain days for selection. If provided, only the days that
   /// [selectableDayPredicate] returns true for will be selectable. For example,
   /// this can be used to only allow weekdays for selection. If provided, it
-  /// must return true for [initialDate].
+  /// must return true for initialDate.
   final bool Function(DateTime) selectableDayPredicate;
 
   /// Show a dialog with time unconditionally displayed in 24 hour format.
