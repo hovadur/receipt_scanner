@@ -32,8 +32,7 @@ class CameraViewModel extends ChangeNotifier {
   CameraController get camera => _camera;
 
   Future<void> _initializeCamera() async {
-    final CameraDescription description =
-        await _getCamera(CameraLensDirection.back);
+    final description = await _getCamera(CameraLensDirection.back);
 
     _camera = CameraController(
       description,
@@ -43,14 +42,13 @@ class CameraViewModel extends ChangeNotifier {
     );
     await _camera.initialize();
 
-    _camera.startImageStream((CameraImage image) {
+    await _camera.startImageStream((CameraImage image) {
       if (_isDetecting) return;
 
       _isDetecting = true;
 
-      final BarcodeDetector _barcodeDetector = FirebaseVision.instance
-          .barcodeDetector(const BarcodeDetectorOptions(
-              barcodeFormats: BarcodeFormat.qrCode));
+      final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
+          const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
       _detect(
         image: image,
         detectInImage: _barcodeDetector.detectInImage,
@@ -89,8 +87,8 @@ class CameraViewModel extends ChangeNotifier {
   }
 
   static Uint8List _concatenatePlanes(List<Plane> planes) {
-    final WriteBuffer allBytes = WriteBuffer();
-    for (final Plane plane in planes) {
+    final allBytes = WriteBuffer();
+    for (final plane in planes) {
       allBytes.putUint8List(plane.bytes);
     }
     return allBytes.done().buffer.asUint8List();

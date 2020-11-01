@@ -20,17 +20,15 @@ class UserInteractor {
   }
 
   Future<User> signInWithGoogle() async {
-    final GoogleSignIn _googleSignIn = GoogleSignIn();
-    final GoogleSignInAccount account = await _googleSignIn.signIn();
+    final _googleSignIn = GoogleSignIn();
+    final account = await _googleSignIn.signIn();
     if (account != null) {
-      final GoogleSignInAuthentication authentication =
-          await account.authentication;
+      final authentication = await account.authentication;
       final auth.AuthCredential credential = auth.GoogleAuthProvider.credential(
         accessToken: authentication.accessToken,
         idToken: authentication.idToken,
       );
-      final auth.UserCredential authResult =
-          await _auth.signInWithCredential(credential);
+      final authResult = await _auth.signInWithCredential(credential);
       Fimber.d('User Name: ${authResult.user.displayName}');
       Fimber.d('User Email ${authResult.user.email}');
       final _user = getCurrentUser();
@@ -43,7 +41,7 @@ class UserInteractor {
 
   Future<void> signOut() async {
     await auth.FirebaseAuth.instance.signOut();
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     await prefs.clear();
   }
 }

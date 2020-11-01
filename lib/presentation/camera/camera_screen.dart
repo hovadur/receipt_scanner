@@ -57,14 +57,14 @@ class CameraScreen extends StatelessWidget {
   }
 
   Widget _buildResults(CameraController camera, BuildContext context) {
-    const Text noResultsText = Text('No results!');
+    const noResultsText = Text('No results!');
     final scanResults =
         context.select((CameraViewModel value) => value.scanResults);
     if (scanResults == null || !camera.value.isInitialized) {
       return noResultsText;
     }
 
-    final Size imageSize = Size(
+    final imageSize = Size(
       camera.value.previewSize.height,
       camera.value.previewSize.width,
     );

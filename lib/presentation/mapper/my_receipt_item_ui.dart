@@ -8,8 +8,10 @@ class MyReceiptItemUI {
     final locale = Localizations.localeOf(context);
     type = item.type;
     name = item.name;
-    quantity =
-        '${AppLocalizations.of(context).qty} ${NumberFormat.decimalPattern(locale.languageCode).format(item.quantity)}';
+    final qty = AppLocalizations.of(context).qty;
+    final qtyNum =
+        NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
+    quantity = '$qty $qtyNum';
     sum =
         NumberFormat.decimalPattern(locale.languageCode).format(item.sum / 100);
   }

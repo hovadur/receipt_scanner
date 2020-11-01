@@ -27,7 +27,7 @@ class MyReceiptsScreen extends StatelessWidget {
                 return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final MyReceiptUI receipt = snapshot.data[index];
+                      final receipt = snapshot.data[index];
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),

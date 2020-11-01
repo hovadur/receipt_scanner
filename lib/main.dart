@@ -31,7 +31,7 @@ class _MyAppState extends State<MyApp> {
 
     return MaterialApp(
         builder: (BuildContext context, Widget child) {
-          final MediaQueryData data = MediaQuery.of(context);
+          final data = MediaQuery.of(context);
           return MediaQuery(
               data: data.copyWith(
                   textScaleFactor:

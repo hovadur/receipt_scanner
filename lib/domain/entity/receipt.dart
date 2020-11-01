@@ -36,11 +36,11 @@ class Receipt {
   Receipt.fromQr(String qr) {
     final match = _qrPattern.firstMatch(qr);
     if (match != null && match.groupCount == 6) {
-      final int year = int.parse(match[1].substring(0, 4));
-      final int month = int.parse(match[1].substring(4, 6));
-      final int day = int.parse(match[1].substring(6, 8));
-      final int hour = int.parse(match[1].substring(9, 11));
-      final int minute = int.parse(match[1].substring(11, 13));
+      final year = int.parse(match[1].substring(0, 4));
+      final month = int.parse(match[1].substring(4, 6));
+      final day = int.parse(match[1].substring(6, 8));
+      final hour = int.parse(match[1].substring(9, 11));
+      final minute = int.parse(match[1].substring(11, 13));
       dateTime = DateTime.utc(year, month, day, hour, minute);
       totalSum = int.tryParse(match[2].replaceFirst('.', ''));
       fiscalDriveNumber = match[3];

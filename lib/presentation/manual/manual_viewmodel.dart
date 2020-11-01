@@ -28,8 +28,8 @@ class ManualViewModel extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final String l = Localizations.localeOf(context).languageCode;
-      final num total = NumberFormat.decimalPattern(l).parse(value);
+      final l = Localizations.localeOf(context).languageCode;
+      final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;
     } catch (_) {
@@ -56,7 +56,7 @@ class ManualViewModel extends ChangeNotifier {
 
   bool apply() {
     if (_totalError != null || _total == 0) return false;
-    final Receipt receipt =
+    final receipt =
         Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
     Database().saveReceipt(receipt);
     return true;

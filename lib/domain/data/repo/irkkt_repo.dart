@@ -29,7 +29,7 @@ class IrkktRepo {
     if (response.statusCode == HttpStatus.ok) {
       final responseJson = jsonDecode(response.body);
       final value = AuthResp.fromJson(responseJson as Map<String, dynamic>);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final prefs = await SharedPreferences.getInstance();
       await prefs.setString(sessionIdKey, value.sessionId);
       await prefs.setString(refreshTokenKey, value.refreshToken);
     } else {
@@ -38,7 +38,7 @@ class IrkktRepo {
   }
 
   Future<void> refresh() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     final sessionId = prefs.getString(sessionIdKey);
     final refreshToken = prefs.getString(refreshTokenKey);
     if (sessionId == null && refreshToken == null) {
@@ -51,7 +51,7 @@ class IrkktRepo {
     if (response.statusCode == HttpStatus.ok) {
       final responseJson = jsonDecode(response.body);
       final value = RefreshResp.fromJson(responseJson as Map<String, dynamic>);
-      final SharedPreferences prefs = await SharedPreferences.getInstance();
+      final prefs = await SharedPreferences.getInstance();
       await prefs.setString(sessionIdKey, value.sessionId);
       await prefs.setString(refreshTokenKey, value.refreshToken);
     } else {
@@ -70,29 +70,30 @@ class IrkktRepo {
 
   Future<Receipt> _getTicket(String qr) async {
     final json = jsonEncode({'qr': qr});
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance();
     final sessionId = prefs.getString(sessionIdKey);
     var response = await api.getTicketId(json, sessionId);
     if (response.statusCode == HttpStatus.ok) {
       var responseJson = jsonDecode(response.body);
       final deviceId = await _getId();
-      final TicketIdResp ticketId =
+      final ticketId =
           TicketIdResp.fromJson(responseJson as Map<String, dynamic>);
       response = await api.getTicket(ticketId.id, sessionId, deviceId);
       if (response.statusCode == HttpStatus.ok) {
         responseJson = jsonDecode(response.body);
-        final TicketKktResp ticket =
+        final ticket =
             TicketKktResp.fromJson(responseJson as Map<String, dynamic>);
         return Receipt.fromTicketResp(ticket);
       } else {
         throw Exception(
-            '${'Request failed with status: ${response.statusCode}.'}${response.body}');
+            '${'Request failed with status: ${response.statusCode}.'}'
+            '${response.body}');
       }
     } else if (response.statusCode == HttpStatus.unauthorized) {
       throw IrkktNotAuth();
     } else {
-      throw Exception(
-          '${'Request failed with status: ${response.statusCode}.'}${response.body}');
+      throw Exception('${'Request failed with status: ${response.statusCode}.'}'
+          '${response.body}');
     }
   }
 
