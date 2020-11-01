@@ -32,8 +32,8 @@ enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 /// If a [controller] is not specified, [initialValue] can be used to give
 /// the automatically generated controller an initial value.
 ///
-/// Remember to [dispose] of the [TextEditingController] when it is no longer needed.
-/// This will ensure we discard any resources used by the object.
+/// Remember to [dispose] of the [TextEditingController] when it is no
+/// longer needed. This will ensure we discard any resources used by the object.
 ///
 /// For a documentation about the various parameters, see [TextField].
 ///
@@ -41,9 +41,12 @@ enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 ///
 /// Creates a [DateTimePicker] with an [InputDecoration] and validator function.
 ///
-/// ![If the user enters valid text, the TextField appears normally without any warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
+/// ![If the user enters valid text, the TextField appears normally without any
+/// warnings to the user](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field.png)
 ///
-/// ![If the user enters invalid text, the error message returned from the validator function is displayed in dark red underneath the input](https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
+/// ![If the user enters invalid text, the error message returned from the
+/// validator function is displayed in dark red underneath the input]
+/// (https://flutter.github.io/assets-for-api-docs/assets/material/text_form_field_error.png)
 ///
 /// ```dart
 /// DateTimePicker(
@@ -121,7 +124,8 @@ enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 ///    integration.
 ///  * [InputDecorator], which shows the labels and other visual elements that
 ///    surround the actual text editing widget.
-///  * Learn how to use a [TextEditingController] in one of our [cookbook recipe]s.(https://flutter.dev/docs/cookbook/forms/text-field-changes#2-use-a-texteditingcontroller)
+///  * Learn how to use a [TextEditingController] in one of our
+///  [cookbook recipe]s.(https://flutter.dev/docs/cookbook/forms/text-field-changes#2-use-a-texteditingcontroller)
 class DateTimePicker extends FormField<String> {
   /// Creates a [DateTimePicker] that contains a [TextField].
   ///
@@ -290,10 +294,10 @@ class DateTimePicker extends FormField<String> {
                   );
               }
 
-              loDecoration = decoration ?? loDecoration;
-              loDecoration.applyDefaults(
-                Theme.of(field.context).inputDecorationTheme,
-              );
+              loDecoration = decoration ?? loDecoration
+                ..applyDefaults(
+                  Theme.of(field.context).inputDecorationTheme,
+                );
 
               return TextField(
                 readOnly: true,
@@ -413,8 +417,8 @@ class DateTimePicker extends FormField<String> {
 
   /// Text that describes the date input field.
   ///
-  /// When the date input field is empty and unfocused, the label is displayed on
-  /// top of the input field (i.e., at the same location on the screen where
+  /// When the date input field is empty and unfocused, the label is displayed
+  /// on top of the input field (i.e., at the same location on the screen where
   /// text may be entered in the input field). When the input field receives
   /// focus (or if the field is non-empty), the label moves above (i.e.,
   /// vertically adjacent to) the input field.
@@ -422,8 +426,8 @@ class DateTimePicker extends FormField<String> {
 
   /// Text that describes the time input field.
   ///
-  /// When the time input field is empty and unfocused, the label is displayed on
-  /// top of the input field (i.e., at the same location on the screen where
+  /// When the time input field is empty and unfocused, the label is displayed
+  /// on top of the input field (i.e., at the same location on the screen where
   /// text may be entered in the input field). When the input field receives
   /// focus (or if the field is non-empty), the label moves above (i.e.,
   /// vertically adjacent to) the input field.
@@ -431,16 +435,18 @@ class DateTimePicker extends FormField<String> {
 
   /// Text that suggests what sort of date input the field accepts.
   ///
-  /// Displayed on top of the date input [child] (i.e., at the same location on the
-  /// screen where text may be entered in the input [child]) when the input
-  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the focus.
+  /// Displayed on top of the date input [child] (i.e., at the same location on
+  /// the screen where text may be entered in the input [child]) when the input
+  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the
+  /// focus.
   final String dateHintText;
 
   /// Text that suggests what sort of time input the field accepts.
   ///
-  /// Displayed on top of the time input [child] (i.e., at the same location on the
-  /// screen where text may be entered in the input [child]) when the input
-  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the focus.
+  /// Displayed on top of the time input [child] (i.e., at the same location on
+  /// the screen where text may be entered in the input [child]) when the input
+  /// [isEmpty] and either (a) [labelText] is null or (b) the input has the
+  /// focus.
   final String timeHintText;
 
   /// Optional strings for the [cancelText] to override the default text.
@@ -466,18 +472,18 @@ class DateTimePicker extends FormField<String> {
 
   /// An optional [textDirection] argument can be used to set the text direction
   /// ([TextDirection.ltr] or [TextDirection.rtl]) for the date picker. It
-  /// defaults to the ambient text direction provided by [Directionality]. If both
-  /// [locale] and [textDirection] are non-null, [textDirection] overrides the
-  /// direction chosen for the [locale].
+  /// defaults to the ambient text direction provided by [Directionality]. If
+  /// both [locale] and [textDirection] are non-null, [textDirection] overrides
+  /// the direction chosen for the [locale].
   final TextDirection textDirection;
 
   /// An optional [locale] argument can be used to set the locale for the date
   /// picker. It defaults to the ambient locale provided by [Localizations].
   final Locale locale;
 
-  /// The [context], [useRootNavigator] and [routeSettings] arguments are passed to
-  /// [showDialog], the documentation for which discusses how it is used. [context]
-  /// and [useRootNavigator] must be non-null.
+  /// The [context], [useRootNavigator] and [routeSettings] arguments are
+  /// passed to [showDialog], the documentation for which discusses how it is
+  /// used. [context] and [useRootNavigator] must be non-null.
   final bool useRootNavigator;
 
   /// Creates data used to construct routes.
@@ -495,17 +501,18 @@ class DateTimePicker extends FormField<String> {
   /// must be non-null.
   final DatePickerMode initialDatePickerMode;
 
-  /// An optional [selectableDayPredicate] function can be passed in to only allow
-  /// certain days for selection. If provided, only the days that
+  /// An optional [selectableDayPredicate] function can be passed in to only
+  /// allow certain days for selection. If provided, only the days that
   /// [selectableDayPredicate] returns true for will be selectable. For example,
-  /// this can be used to only allow weekdays for selection. If provided, it must
-  /// return true for [initialDate].
+  /// this can be used to only allow weekdays for selection. If provided, it
+  /// must return true for [initialDate].
   final bool Function(DateTime) selectableDayPredicate;
 
   /// Show a dialog with time unconditionally displayed in 24 hour format.
   final bool use24HourFormat;
 
-  /// The width for time text field when DateTimePickerType is dateTimeSeparated.
+  /// The width for time text field when DateTimePickerType is
+  /// dateTimeSeparated.
   final double timeFieldWidth;
 
   final ValueChanged<String> onChanged;

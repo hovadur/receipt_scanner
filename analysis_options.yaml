@@ -1,0 +1,9 @@
+include: package:very_good_analysis/analysis_options.yaml
+analyzer:
+  exclude:
+    - "lib/l10n/app_localizations.dart"
+    - "lib/l10n/app_localizations_ru.dart"
+    - "lib/l10n/app_localizations_en.dart"
+linter:
+  rules:
+    public_member_api_docs: false
