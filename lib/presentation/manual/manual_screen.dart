@@ -10,7 +10,7 @@ import 'manual_add_screen.dart';
 import 'manual_viewmodel.dart';
 
 class ManualScreen extends StatelessWidget {
-  static const String routeName = "ManualScreen";
+  static const String routeName = 'ManualScreen';
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(

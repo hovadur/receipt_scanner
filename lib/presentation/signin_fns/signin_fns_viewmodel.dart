@@ -43,7 +43,7 @@ class SignInFnsViewModel with ChangeNotifier {
   }
 
   Future<bool> submit(BuildContext context) async {
-    Fimber.d("submit");
+    Fimber.d('submit');
     if (_isValid(context)) {
       try {
         await IrkktRepo().login(_inn.value, _password.value);

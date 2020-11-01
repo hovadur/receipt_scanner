@@ -51,7 +51,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
         builder: (context, AsyncSnapshot<int> snapshot) {
           if (snapshot.hasError) {
-            return const Text("Something went wrong");
+            return const Text('Something went wrong');
           }
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == 1) {

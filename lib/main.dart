@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               ));
         },
-        title: "Checking The Receipt",
+        title: 'Checking The Receipt',
         onGenerateTitle: (context) => AppLocalizations.of(context).appTitle,
         // Add the `localizationsDelegate` and `supportedLocales` lines.
         localizationsDelegates: AppLocalizations.localizationsDelegates,

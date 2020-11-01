@@ -28,8 +28,8 @@ class ReceiptDetailsViewModel with ChangeNotifier {
     if (_receipt.items.isEmpty && _receipt.qr.isNotEmpty) {
       try {
         final receiptKkt = await IrkktRepo().getTicket(_receipt.qr);
-        _db.deleteReceipt(_receipt);
-        _db.saveReceipt(receiptKkt);
+        await _db.deleteReceipt(_receipt);
+        await _db.saveReceipt(receiptKkt);
         _receipt = receiptKkt;
         _ui = ReceiptMapper().map(context, receiptKkt);
         notifyListeners();

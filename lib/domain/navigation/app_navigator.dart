@@ -45,7 +45,7 @@ class AppNavigatorState extends State<AppNavigator> {
 
   bool pop() {
     if (_stack.isNotEmpty) {
-      setState(() => _stack.removeLast());
+      setState(_stack.removeLast);
       return true;
     }
     return false;

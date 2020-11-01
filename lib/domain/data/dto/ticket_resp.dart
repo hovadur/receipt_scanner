@@ -1,16 +1,4 @@
 class TicketKktResp {
-  String id;
-  int status;
-  String kkt;
-  String createdAt;
-  String qr;
-  OperationResp operation;
-  SellerResp seller;
-  List<ProcessResp> process;
-  QueryResp query;
-  TicketResp ticket;
-  SellerResp organization;
-
   TicketKktResp.fromJson(Map<String, dynamic> json)
       : id = json['id'],
         status = json['status'],
@@ -25,46 +13,32 @@ class TicketKktResp {
         query = QueryResp.fromJson(json['query']),
         ticket = TicketResp.fromJson(json['ticket']),
         organization = SellerResp.fromJson(json['organization']);
+  String id;
+  int status;
+  String kkt;
+  String createdAt;
+  String qr;
+  OperationResp operation;
+  SellerResp seller;
+  List<ProcessResp> process;
+  QueryResp query;
+  TicketResp ticket;
+  SellerResp organization;
 }
 
 class TicketResp {
-  DocumentResp document;
-
   TicketResp.fromJson(Map<String, dynamic> json)
       : document = DocumentResp.fromJson(json['document']);
+  DocumentResp document;
 }
 
 class DocumentResp {
-  ReceiptResp receipt;
-
   DocumentResp.fromJson(Map<String, dynamic> json)
       : receipt = ReceiptResp.fromJson(json['receipt']);
+  ReceiptResp receipt;
 }
 
 class ReceiptResp {
-  int dateTime;
-  String addressToCheckFiscalSign;
-  String buyerAddress;
-  int cashTotalSum;
-  int ecashTotalSum;
-  int fiscalDocumentNumber;
-  String fiscalDriveNumber;
-  int fiscalSign;
-  List<ItemsResp> items;
-  String kktRegId;
-  int nds18;
-  int operationType;
-  String operator;
-  int receiptCode;
-  int requestNumber;
-  String retailPlaceAddress;
-  String senderAddress;
-  int shiftNumber;
-  int taxationType;
-  int totalSum;
-  String user;
-  String userInn;
-
   ReceiptResp.fromJson(Map<String, dynamic> json)
       : dateTime = json['dateTime'],
         addressToCheckFiscalSign = json['addressToCheckFiscalSign'],
@@ -90,59 +64,70 @@ class ReceiptResp {
         totalSum = json['totalSum'],
         user = json['user'],
         userInn = json['userInn'];
+  int dateTime;
+  String addressToCheckFiscalSign;
+  String buyerAddress;
+  int cashTotalSum;
+  int ecashTotalSum;
+  int fiscalDocumentNumber;
+  String fiscalDriveNumber;
+  int fiscalSign;
+  List<ItemsResp> items;
+  String kktRegId;
+  int nds18;
+  int operationType;
+  String operator;
+  int receiptCode;
+  int requestNumber;
+  String retailPlaceAddress;
+  String senderAddress;
+  int shiftNumber;
+  int taxationType;
+  int totalSum;
+  String user;
+  String userInn;
 }
 
 class ItemsResp {
-  String name;
-  int price;
-  num quantity;
-  int sum;
-
   ItemsResp.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     price = json['price'];
     quantity = json['quantity'];
     sum = json['sum'];
   }
+  String name;
+  int price;
+  num quantity;
+  int sum;
 }
 
 class OperationResp {
-  String date;
-  int type;
-  int sum;
-
   OperationResp.fromJson(Map<String, dynamic> json)
       : date = json['date'],
         type = json['type'],
         sum = json['sum'];
+  String date;
+  int type;
+  int sum;
 }
 
 class SellerResp {
-  String name;
-  String inn;
-
   SellerResp.fromJson(Map<String, dynamic> json)
       : name = json['name'],
         inn = json['inn'];
+  String name;
+  String inn;
 }
 
 class ProcessResp {
-  String time;
-  int result;
-
   ProcessResp.fromJson(Map<String, dynamic> json)
       : time = json['time'],
         result = json['result'];
+  String time;
+  int result;
 }
 
 class QueryResp {
-  int operationType;
-  int sum;
-  int documentId;
-  String fsId;
-  String fiscalSign;
-  String date;
-
   QueryResp.fromJson(Map<String, dynamic> json)
       : operationType = json['operationType'],
         sum = json['sum'],
@@ -150,4 +135,10 @@ class QueryResp {
         fsId = json['fsId'],
         fiscalSign = json['fiscalSign'],
         date = json['date'];
+  int operationType;
+  int sum;
+  int documentId;
+  String fsId;
+  String fiscalSign;
+  String date;
 }

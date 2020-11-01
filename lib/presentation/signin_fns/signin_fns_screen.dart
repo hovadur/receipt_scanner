@@ -7,7 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SignInFnsScreen extends StatelessWidget {
-  static const String routeName = "SignInFnsScreen";
+  static const String routeName = 'SignInFnsScreen';
 
   const SignInFnsScreen({@required this.onPressed});
 

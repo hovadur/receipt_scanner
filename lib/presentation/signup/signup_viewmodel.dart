@@ -60,7 +60,7 @@ class SignUpViewModel with ChangeNotifier {
 
   void submit(BuildContext context) {
     if (_isValid(context)) {
-      Fimber.d("submit");
+      Fimber.d('submit');
     }
   }
 }

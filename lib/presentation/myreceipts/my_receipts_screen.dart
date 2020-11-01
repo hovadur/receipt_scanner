@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import '../mapper/my_receipt_ui.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
-  static const String routeName = "MyReceiptsScreen";
+  static const String routeName = 'MyReceiptsScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -19,7 +19,7 @@ class MyReceiptsScreen extends StatelessWidget {
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return const Text("Something went wrong");
+                  return const Text('Something went wrong');
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();

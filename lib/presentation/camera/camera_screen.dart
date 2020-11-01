@@ -12,7 +12,7 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatelessWidget {
-  static const String routeName = "CameraScreen";
+  static const String routeName = 'CameraScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(

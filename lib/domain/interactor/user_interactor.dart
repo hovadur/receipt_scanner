@@ -31,8 +31,8 @@ class UserInteractor {
       );
       final auth.UserCredential authResult =
           await _auth.signInWithCredential(credential);
-      Fimber.d("User Name: ${authResult.user.displayName}");
-      Fimber.d("User Email ${authResult.user.email}");
+      Fimber.d('User Name: ${authResult.user.displayName}');
+      Fimber.d('User Email ${authResult.user.email}');
       final _user = getCurrentUser();
       await Database().createUser(_user);
       return _user;
@@ -42,8 +42,8 @@ class UserInteractor {
   }
 
   Future<void> signOut() async {
-    auth.FirebaseAuth.instance.signOut();
+    await auth.FirebaseAuth.instance.signOut();
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    prefs.clear();
+    await prefs.clear();
   }
 }

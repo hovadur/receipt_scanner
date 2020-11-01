@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'manual_add_viewmodel.dart';
 
 class ManualAddScreen extends StatelessWidget {
-  static const String routeName = "ManualAddScreen";
+  static const String routeName = 'ManualAddScreen';
 
   const ManualAddScreen({@required this.onPressed});
 

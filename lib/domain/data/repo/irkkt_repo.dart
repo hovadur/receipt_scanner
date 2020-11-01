@@ -13,17 +13,17 @@ import 'package:device_info/device_info.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class IrkktRepo {
-  static const String sessionIdKey = "sessionId";
-  static const String refreshTokenKey = "refreshTokenKey";
+  static const String sessionIdKey = 'sessionId';
+  static const String refreshTokenKey = 'refreshTokenKey';
 
   //final sessionId =
   //    "5f6a49ff0b851a7cd267a068:64587ce3-b36d-434f-8fa6-5797365e01f4";
-  final secret = "IyvrAbKt9h/8p6a7QPh8gpkXYQ4=";
+  final secret = 'IyvrAbKt9h/8p6a7QPh8gpkXYQ4=';
   final api = IrkktApi();
 
   Future<void> login(String inn, String pass) async {
     final json =
-        jsonEncode({"inn": inn, "password": pass, "client_secret": secret});
+        jsonEncode({'inn': inn, 'password': pass, 'client_secret': secret});
     final deviceId = await _getId();
     final response = await api.login(json, deviceId);
     if (response.statusCode == HttpStatus.ok) {
@@ -45,7 +45,7 @@ class IrkktRepo {
       throw IrkktNotLogin();
     }
     final json =
-        jsonEncode({"refresh_token": refreshToken, "client_secret": secret});
+        jsonEncode({'refresh_token': refreshToken, 'client_secret': secret});
     final deviceId = await _getId();
     final response = await api.refresh(json, deviceId);
     if (response.statusCode == HttpStatus.ok) {
@@ -69,7 +69,7 @@ class IrkktRepo {
   }
 
   Future<Receipt> _getTicket(String qr) async {
-    final json = jsonEncode({"qr": qr});
+    final json = jsonEncode({'qr': qr});
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     final sessionId = prefs.getString(sessionIdKey);
     var response = await api.getTicketId(json, sessionId);

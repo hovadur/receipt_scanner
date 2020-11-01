@@ -6,7 +6,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
-  static const String routeName = "SignUpScreen";
+  static const String routeName = 'SignUpScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -21,7 +21,7 @@ class SignUpScreen extends StatelessWidget {
                     LoginForm(),
                     ElevatedButton.icon(
                         onPressed: () => context.googleSignIn(),
-                        icon: SvgPicture.asset("assets/icons/google-icon.svg"),
+                        icon: SvgPicture.asset('assets/icons/google-icon.svg'),
                         label:
                             Text(AppLocalizations.of(context).signInWithGoogle),
                         style: ElevatedButton.styleFrom(

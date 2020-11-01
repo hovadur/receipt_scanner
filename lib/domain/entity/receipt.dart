@@ -5,40 +5,6 @@ import 'package:flutter/material.dart';
 class Receipt {
   Receipt({this.dateTime, this.totalSum, this.items});
 
-  String id = UniqueKey().toString();
-  int operationType = 1;
-  DateTime dateTime;
-  int totalSum;
-  int fiscalDocumentNumber = 0;
-  String fiscalDriveNumber = '';
-  int fiscalSign = 0;
-  String qr = '';
-  List<ReceiptItem> items = [];
-
-  //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
-  static final qrPattern = RegExp(
-      r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)');
-
-  Receipt.fromQr(String qr) {
-    final match = qrPattern.firstMatch(qr);
-    if (match != null && match.groupCount == 6) {
-      final int year = int.parse(match[1].substring(0, 4));
-      final int month = int.parse(match[1].substring(4, 6));
-      final int day = int.parse(match[1].substring(6, 8));
-      final int hour = int.parse(match[1].substring(9, 11));
-      final int minute = int.parse(match[1].substring(11, 13));
-      dateTime = DateTime.utc(year, month, day, hour, minute);
-      totalSum = int.tryParse(match[2].replaceFirst('.', ''));
-      fiscalDriveNumber = match[3];
-      fiscalDocumentNumber = int.parse(match[4]);
-      fiscalSign = int.parse(match[5]);
-      operationType = int.parse(match[6]);
-      this.qr = qr;
-    } else {
-      throw Exception('invalid format');
-    }
-  }
-
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {
     id = doc['id'];
     operationType = doc['operationType'];
@@ -66,25 +32,44 @@ class Receipt {
         ?.map((e) => e == null ? null : ReceiptItem.fromItemsResp(e))
         ?.toList();
   }
+
+  Receipt.fromQr(String qr) {
+    final match = _qrPattern.firstMatch(qr);
+    if (match != null && match.groupCount == 6) {
+      final int year = int.parse(match[1].substring(0, 4));
+      final int month = int.parse(match[1].substring(4, 6));
+      final int day = int.parse(match[1].substring(6, 8));
+      final int hour = int.parse(match[1].substring(9, 11));
+      final int minute = int.parse(match[1].substring(11, 13));
+      dateTime = DateTime.utc(year, month, day, hour, minute);
+      totalSum = int.tryParse(match[2].replaceFirst('.', ''));
+      fiscalDriveNumber = match[3];
+      fiscalDocumentNumber = int.parse(match[4]);
+      fiscalSign = int.parse(match[5]);
+      operationType = int.parse(match[6]);
+      this.qr = qr;
+    } else {
+      throw Exception('invalid format');
+    }
+  }
+
+  //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
+  static final _qrPattern =
+      RegExp(r't=([\dT]+)&s=([\d\.]+)&fn=(\d+)&i=(\d+)&fp=(\d+)&n=(\d+)');
+
+  String id = UniqueKey().toString();
+  int operationType = 1;
+  DateTime dateTime;
+  int totalSum;
+  int fiscalDocumentNumber = 0;
+  String fiscalDriveNumber = '';
+  int fiscalSign = 0;
+  String qr = '';
+  List<ReceiptItem> items = [];
 }
 
 class ReceiptItem {
   ReceiptItem(this.type, this.name, this.price, this.quantity, this.sum);
-
-  int type = 1;
-  String name;
-  int price;
-  num quantity;
-  int sum;
-
-  Map<String, dynamic> toJson() =>
-      {
-        'type': type,
-        'name': name,
-        'price': price,
-        'quantity': quantity,
-        'sum': sum
-      };
 
   ReceiptItem.fromJson(Map<String, dynamic> doc) {
     type = doc['type'];
@@ -100,4 +85,18 @@ class ReceiptItem {
     quantity = item.quantity;
     sum = item.sum;
   }
+
+  int type = 1;
+  String name;
+  int price;
+  num quantity;
+  int sum;
+
+  Map<String, dynamic> toJson() => {
+        'type': type,
+        'name': name,
+        'price': price,
+        'quantity': quantity,
+        'sum': sum
+      };
 }
