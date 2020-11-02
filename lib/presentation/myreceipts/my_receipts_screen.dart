@@ -23,9 +23,8 @@ class MyReceiptsScreen extends StatelessWidget {
             actions: [
               IconButton(
                   icon: const Icon(Icons.search),
-                  onPressed: () {
-                    showSearch(context: context, delegate: Search());
-                  })
+                  onPressed: () =>
+                      showSearch(context: context, delegate: Search()))
             ],
           ),
           body: StreamBuilder<List<MyReceiptUI>>(
