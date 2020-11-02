@@ -40,7 +40,7 @@ class ManualScreen extends StatelessWidget {
         initialValue: context
             .select((ManualViewModel value) => value.currentDate.toString()),
         firstDate: DateTime.fromMillisecondsSinceEpoch(0),
-        lastDate: context.select((ManualViewModel value) => value.currentDate),
+        lastDate: DateTime.now(),
         onChanged: (String value) =>
             context.read<ManualViewModel>().changeDateTime(value),
       ),

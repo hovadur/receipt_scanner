@@ -566,7 +566,7 @@ class _DateTimePickerState extends FormFieldState<String> {
           _dateLabelController.text =
               DateFormat(widget.dateMask, languageCode).format(_dDate);
         } else {
-          var lsMask = 'MMM d, yyyy';
+          var lsMask = 'yMd';
 
           if (widget.type == DateTimePickerType.dateTime && _sTime != '') {
             lsMask = 'MMM d, yyyy - HH:mm';
@@ -648,7 +648,7 @@ class _DateTimePickerState extends FormFieldState<String> {
               _dateLabelController.text =
                   DateFormat(widget.dateMask, languageCode).format(_dDate);
             } else {
-              var lsMask = 'MMM d, yyyy';
+              var lsMask = 'yMd';
 
               if (widget.type == DateTimePickerType.dateTime && _sTime != '') {
                 lsMask = 'MMM d, yyyy - HH:mm';
@@ -735,7 +735,7 @@ class _DateTimePickerState extends FormFieldState<String> {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
             .format(DateTime.tryParse(_sDate));
       } else {
-        lsFormatedDate = DateFormat('MMM dd, yyyy', languageCode)
+        lsFormatedDate = DateFormat('yMd', languageCode)
             .format(DateTime.tryParse(_sDate));
       }
 
@@ -880,7 +880,7 @@ class _DateTimePickerState extends FormFieldState<String> {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
             .format(DateTime.tryParse(_sValue));
       } else {
-        final lsMask = _sTime != '' ? 'MMM dd, yyyy - HH:mm' : 'MMM dd, yyyy';
+        final lsMask = _sTime != '' ? 'MMM dd, yyyy - HH:mm' : 'yMd';
         lsFormatedDate =
             DateFormat(lsMask, languageCode).format(DateTime.tryParse(_sValue));
       }
