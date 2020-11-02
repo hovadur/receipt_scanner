@@ -21,6 +21,7 @@ class Database {
     return users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
+        .orderBy('dateTime', descending: true)
         .snapshots()
         .map((event) {
       return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
