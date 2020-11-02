@@ -141,8 +141,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             itemCount: ui.items.length,
             itemBuilder: (BuildContext context, int index) {
               return Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                  padding: const EdgeInsets.symmetric(vertical: 4),
                   child: _buildItem(context, ui.items[index], index));
             }),
         const Divider(),
