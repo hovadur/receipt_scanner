@@ -4,11 +4,11 @@ import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
 
 class Database {
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  final _users = FirebaseFirestore.instance.collection('users');
 
   Future<bool> createUser(User user) async {
     try {
-      await users
+      await _users
           .doc(user.id)
           .set({'id': user.id, 'email': user.email, 'name': user.name});
       return true;
@@ -18,7 +18,7 @@ class Database {
   }
 
   Stream<List<Receipt>> getReceipts() {
-    return users
+    return _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
         .orderBy('dateTime', descending: true)
@@ -29,7 +29,7 @@ class Database {
   }
 
   Future<bool> receiptExists(String qr) async {
-    final doc = await users
+    final doc = await _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
         .where('qr', isEqualTo: qr)
@@ -38,7 +38,7 @@ class Database {
   }
 
   Future<void> deleteReceipt(Receipt receipt) async {
-    await users
+    await _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
         .doc(receipt.id)
@@ -46,7 +46,7 @@ class Database {
   }
 
   Future<void> saveReceipt(Receipt receipt) async {
-    await users
+    await _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
         .doc(receipt.id)

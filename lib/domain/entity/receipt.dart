@@ -15,8 +15,7 @@ class Receipt {
         fiscalDriveNumber = doc['fiscalDriveNumber'],
         fiscalSign = doc['fiscalSign'],
         qr = doc['qr'],
-        items = List.castFrom(doc['items'])
-            .toList()
+        items = List.castFrom(doc['items']).toList()
             .map((e) => ReceiptItem.fromJson(e))
             .toList();
 

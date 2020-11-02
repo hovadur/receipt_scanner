@@ -33,7 +33,8 @@ class ReceiptDetailsScreen extends StatelessWidget {
                   })
             ],
           ),
-          body: Column(mainAxisSize: MainAxisSize.min, children: [
+          body: SingleChildScrollView(
+              child: Column(mainAxisSize: MainAxisSize.min, children: [
             Container(
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -46,7 +47,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
               margin: const EdgeInsets.all(16),
               child: _buildIrkktBody(context),
             )
-          ])));
+          ]))));
 
   Widget _buildIrkktBody(BuildContext context) {
     return FutureBuilder<int>(
