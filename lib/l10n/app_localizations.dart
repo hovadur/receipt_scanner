@@ -96,166 +96,328 @@ abstract class AppLocalizations {
     Locale('ru')
   ];
 
-  // Checking The Receipt
+  /// Checking The Receipt
+  ///
+  /// In en, this message translates to:
+  /// **'Checking The Receipt'**
   String get appTitle;
 
-  // Sign In
+  /// Sign In
+  ///
+  /// In en, this message translates to:
+  /// **'Sign In'**
   String get signIn;
 
-  // Sign Out
+  /// Sign Out
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Out'**
   String get signOut;
 
-  // Email
+  /// Email
+  ///
+  /// In en, this message translates to:
+  /// **'Email'**
   String get email;
 
-  // Invalid email
+  /// Invalid email
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid email'**
   String get invalidEmail;
 
-  // Invalid INN
+  /// Invalid INN
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid INN'**
   String get invalidInn;
 
-  // Invalid credentials
+  /// Invalid credentials
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid credentials'**
   String get invalidCredentials;
 
-  // Password
+  /// Password
+  ///
+  /// In en, this message translates to:
+  /// **'Password'**
   String get password;
 
-  // Invalid password
+  /// Invalid password
+  ///
+  /// In en, this message translates to:
+  /// **'Must be > 7 characters'**
   String get invalidPassword;
 
-  // Continue
+  /// Continue
+  ///
+  /// In en, this message translates to:
+  /// **'Continue'**
   String get next;
 
-  // Sign in with Google
+  /// Sign in with Google
+  ///
+  /// In en, this message translates to:
+  /// **'Sign in with Google'**
   String get signInWithGoogle;
 
-  // Don’t have an account?
+  /// Don’t have an account?
+  ///
+  /// In en, this message translates to:
+  /// **'Don’t have an account? '**
   String get dontHaveAccount;
 
-  // Sign Up
+  /// Sign Up
+  ///
+  /// In en, this message translates to:
+  /// **'Sign Up'**
   String get signUp;
 
-  // To get the contents of the check, log in to your 
+  /// To get the contents of the check, log in to your 
+  ///
+  /// In en, this message translates to:
+  /// **'To get the contents of the check, log in to your '**
   String get dontHaveFnsAccount;
 
-  // nalog.ru account
+  /// nalog.ru account
+  ///
+  /// In en, this message translates to:
+  /// **'nalog.ru account'**
   String get nalogruAccount;
 
-  // Confirm password
+  /// Confirm password
+  ///
+  /// In en, this message translates to:
+  /// **'Confirm password'**
   String get confirmPassword;
 
-  // Invalid confirm password
+  /// Invalid confirm password
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid confirm password'**
   String get invalidConfirmPassword;
 
-  // Scanning
+  /// Scanning
+  ///
+  /// In en, this message translates to:
+  /// **'Scanning'**
   String get scanning;
 
-  // Initializing Camera...
+  /// Initializing Camera...
+  ///
+  /// In en, this message translates to:
+  /// **'Initializing Camera...'**
   String get cameraInit;
 
-  // My Receipt
+  /// My Receipt
+  ///
+  /// In en, this message translates to:
+  /// **'My Receipts'**
   String get myReceipts;
 
-  // Not authorized
+  /// Not authorized
+  ///
+  /// In en, this message translates to:
+  /// **'Not authorized'**
   String get notAuthorized;
 
-  // Manual input
+  /// Manual input
+  ///
+  /// In en, this message translates to:
+  /// **'Manual'**
   String get manual;
 
-  // Add Product
+  /// Add Product
+  ///
+  /// In en, this message translates to:
+  /// **'Add Product'**
   String get addProduct;
 
-  // Product
+  /// Product
+  ///
+  /// In en, this message translates to:
+  /// **'Product'**
   String get product;
 
-  // Total
+  /// Total
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
   String get totalAmount;
 
-  // Invalid total
+  /// Invalid total
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid total'**
   String get totalError;
 
-  // Invalid quantity
+  /// Invalid quantity
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid quantity'**
   String get qtyError;
 
-  // Sum
+  /// Sum
+  ///
+  /// In en, this message translates to:
+  /// **'Sum'**
   String get sum;
 
-  // Apply
+  /// Apply
+  ///
+  /// In en, this message translates to:
+  /// **'Apply'**
   String get apply;
 
-  // Warning
+  /// Warning
+  ///
+  /// In en, this message translates to:
+  /// **'Warning'**
   String get warning;
 
-  // Close
+  /// Close
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
   String get close;
 
-  // Categories
+  /// Categories
+  ///
+  /// In en, this message translates to:
+  /// **'Categories'**
   String get categories;
 
-  // Food
+  /// Food
+  ///
+  /// In en, this message translates to:
+  /// **'Food'**
   String get food;
 
-  // Home
+  /// Home
+  ///
+  /// In en, this message translates to:
+  /// **'Home'**
   String get home;
 
-  // Transport
+  /// Transport
+  ///
+  /// In en, this message translates to:
+  /// **'Transport'**
   String get transport;
 
-  // Entertainment
+  /// Entertainment
+  ///
+  /// In en, this message translates to:
+  /// **'Entertainment'**
   String get entertainment;
 
-  // Clothes
+  /// Clothes
+  ///
+  /// In en, this message translates to:
+  /// **'Clothes'**
   String get clothes;
 
-  // Connection
+  /// Connection
+  ///
+  /// In en, this message translates to:
+  /// **'Connection'**
   String get connection;
 
-  // Health
+  /// Health
+  ///
+  /// In en, this message translates to:
+  /// **'Health'**
   String get health;
 
-  // Cosmetics
+  /// Cosmetics
+  ///
+  /// In en, this message translates to:
+  /// **'Cosmetics'**
   String get cosmetics;
 
-  // Details
+  /// Details
+  ///
+  /// In en, this message translates to:
+  /// **'Details'**
   String get details;
 
-  // set a category for everyone
+  /// set a category for everyone
+  ///
+  /// In en, this message translates to:
+  /// **'set a category for everyone'**
   String get categoryAll;
 
-  // qty
+  /// qty
+  ///
+  /// In en, this message translates to:
+  /// **'qty'**
   String get qty;
 
-  // Qty
+  /// Qty
+  ///
+  /// In en, this message translates to:
+  /// **'Qty'**
   String get qtyy;
 
-  // Date
+  /// Date
+  ///
+  /// In en, this message translates to:
+  /// **'Date'**
   String get dateTime;
 
-  // Storage
+  /// Storage
+  ///
+  /// In en, this message translates to:
+  /// **'Storage'**
   String get storage;
 
-  // Document
+  /// Document
+  ///
+  /// In en, this message translates to:
+  /// **'Document'**
   String get document;
 
-  // Document attribute
+  /// Document attribute
+  ///
+  /// In en, this message translates to:
+  /// **'Document attribute'**
   String get documentAttribute;
 
-  // Total
+  /// Total
+  ///
+  /// In en, this message translates to:
+  /// **'Total'**
   String get total;
 
-  // FNS Account
+  /// FNS Account
+  ///
+  /// In en, this message translates to:
+  /// **'FNS Account'**
   String get fnsAccount;
 
-  // INN
+  /// INN
+  ///
+  /// In en, this message translates to:
+  /// **'INN'**
   String get inn;
 
-  // Check receipt in FNS
+  /// Check receipt in FNS
+  ///
+  /// In en, this message translates to:
+  /// **'Check receipt in FNS'**
   String get checkReceiptInFNS;
 
-  // Data received from the FNS
+  /// Data received from the FNS
+  ///
+  /// In en, this message translates to:
+  /// **'Data received from the FNS'**
   String get dataReceivedFromFNS;
 
-  // TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session
+  /// TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session
+  ///
+  /// In en, this message translates to:
+  /// **'TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session'**
   String get ftsWarning;
 }
 
@@ -276,13 +438,13 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
 
 AppLocalizations _lookupAppLocalizations(Locale locale) {
   
-  
-  
-  // Lookup logic when only language code is specified.
-  switch (locale.languageCode) {
-    case 'en': return AppLocalizationsEn();
+
+
+// Lookup logic when only language code is specified.
+switch (locale.languageCode) {
+  case 'en': return AppLocalizationsEn();
     case 'ru': return AppLocalizationsRu();
-  }
+}
 
   assert(false, 'AppLocalizations.delegate failed to load unsupported locale "$locale"');
   return null;

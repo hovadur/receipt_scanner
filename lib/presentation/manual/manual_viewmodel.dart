@@ -1,9 +1,9 @@
 import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/common/date_time_picker.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class ManualViewModel extends ChangeNotifier {
   ManualViewModel() {
@@ -28,7 +28,7 @@ class ManualViewModel extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = Localizations.localeOf(context)?.languageCode;
       final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;

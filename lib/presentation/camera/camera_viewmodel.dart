@@ -11,14 +11,14 @@ class CameraViewModel extends ChangeNotifier {
     try {
       _initializeCamera();
     } catch (e) {
-      Fimber.e(e);
+      Fimber.e(e.toString());
     }
   }
 
   @override
   void dispose() {
     _isMounted = false;
-    if (camera != null) _camera.dispose();
+    _camera?.dispose();
     super.dispose();
   }
 
@@ -40,9 +40,9 @@ class CameraViewModel extends ChangeNotifier {
           ? ResolutionPreset.low
           : ResolutionPreset.high,
     );
-    await _camera.initialize();
+    await _camera?.initialize();
 
-    await _camera.startImageStream((CameraImage image) {
+    await _camera?.startImageStream((CameraImage image) {
       if (_isDetecting) return;
 
       _isDetecting = true;
@@ -74,8 +74,8 @@ class CameraViewModel extends ChangeNotifier {
 
   static Future<List<Barcode>> _detect({
     @required CameraImage image,
-    @required
-        Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
+    @required Future<List<Barcode>> Function(FirebaseVisionImage image)
+        detectInImage,
     @required int imageRotation,
   }) async {
     return detectInImage(

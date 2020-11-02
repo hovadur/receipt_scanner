@@ -7,9 +7,9 @@ class ManualAddViewModel extends ChangeNotifier {
   String _sumError;
   String _qtyError;
   int _type = 1;
-  String name;
-  double _qty;
-  int _sum;
+  String name = '';
+  double _qty = 0;
+  int _sum = 0;
 
   String get sumError => _sumError;
 
@@ -24,12 +24,12 @@ class ManualAddViewModel extends ChangeNotifier {
 
   void changeQty(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = Localizations.localeOf(context)?.languageCode;
       final qty = NumberFormat.decimalPattern(l).parse(value);
       _qty = qty.toDouble();
       _qtyError = null;
     } catch (_) {
-      _qty = null;
+      _qty = 0;
       _qtyError = AppLocalizations.of(context).totalError;
     }
     notifyListeners();
@@ -37,12 +37,12 @@ class ManualAddViewModel extends ChangeNotifier {
 
   void changeSum(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = Localizations.localeOf(context)?.languageCode;
       final sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;
     } catch (_) {
-      _sum = null;
+      _sum = 0;
       _sumError = AppLocalizations.of(context).qtyError;
     }
     notifyListeners();

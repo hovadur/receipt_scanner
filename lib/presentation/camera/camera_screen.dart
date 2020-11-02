@@ -73,7 +73,7 @@ class CameraScreen extends StatelessWidget {
           painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
       final qr = scanResults[0].rawValue;
-      SchedulerBinding.instance.addPostFrameCallback((_) {
+      SchedulerBinding.instance?.addPostFrameCallback((_) {
         if (AppNavigator.of(context).getLast().name !=
             ReceiptDetailsScreen.routeName) {
           try {

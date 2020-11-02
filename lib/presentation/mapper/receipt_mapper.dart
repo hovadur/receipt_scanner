@@ -7,9 +7,9 @@ import 'package:intl/intl.dart';
 class ReceiptMapper {
   MyReceiptUI map(BuildContext context, Receipt value) {
     final locale = Localizations.localeOf(context);
-    final dateTime = DateFormat('MMM dd, yyyy - HH:mm', locale.languageCode)
+    final dateTime = DateFormat('MMM dd, yyyy - HH:mm', locale?.languageCode)
         .format(value.dateTime);
-    final totalSum = NumberFormat.decimalPattern(locale.languageCode)
+    final totalSum = NumberFormat.decimalPattern(locale?.languageCode)
         .format(value.totalSum / 100);
     return MyReceiptUI(
         dateTime: dateTime,

@@ -8,7 +8,7 @@ class AppNavigator extends StatefulWidget {
   }) : super(key: key);
 
   final GlobalKey<NavigatorState> navigatorKey;
-  final List<Page<Object>> initialPages;
+  final List<Page<dynamic>> initialPages;
 
   static AppNavigatorState of(BuildContext context) {
     return context.findAncestorStateOfType<AppNavigatorState>();

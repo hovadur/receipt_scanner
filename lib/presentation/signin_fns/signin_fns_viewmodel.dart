@@ -46,7 +46,7 @@ class SignInFnsViewModel extends ChangeNotifier {
     Fimber.d('submit');
     if (_isValid(context)) {
       try {
-        await IrkktRepo().login(_inn.value, _password.value);
+        await IrkktRepo().login(_inn.value ?? '', _password.value ?? '');
         return true;
       } catch (_) {
         return false;

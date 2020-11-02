@@ -25,13 +25,15 @@ class MyReceiptsScreen extends StatelessWidget {
                   return const LinearProgressIndicator();
                 }
                 return ListView.builder(
-                    itemCount: snapshot.data.length,
+                    itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
                       final receipt = snapshot.data[index];
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
-                          child: _buildCardItem(context, receipt));
+                          child: receipt == null
+                              ? Container()
+                              : _buildCardItem(context, receipt));
                     });
               })));
 

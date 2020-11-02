@@ -3,20 +3,22 @@ import 'package:ctr/domain/data/dto/ticket_resp.dart';
 import 'package:flutter/material.dart';
 
 class Receipt {
-  Receipt({this.dateTime, this.totalSum, this.items});
+  Receipt(
+      {@required this.dateTime, @required this.totalSum, @required this.items});
 
-  Receipt.fromDocumentSnapshot(DocumentSnapshot doc) {
-    id = doc['id'];
-    operationType = doc['operationType'];
-    dateTime = (doc['dateTime'] as Timestamp).toDate();
-    totalSum = doc['totalSum'];
-    fiscalDocumentNumber = doc['fiscalDocumentNumber'];
-    fiscalDriveNumber = doc['fiscalDriveNumber'];
-    fiscalSign = doc['fiscalSign'];
-    qr = doc['qr'];
-    final list = List.castFrom(doc['items']).toList();
-    items = list.map((e) => ReceiptItem.fromJson(e)).toList();
-  }
+  Receipt.fromDocumentSnapshot(DocumentSnapshot doc)
+      : id = doc['id'],
+        operationType = doc['operationType'],
+        dateTime = (doc['dateTime'] as Timestamp).toDate(),
+        totalSum = doc['totalSum'],
+        fiscalDocumentNumber = doc['fiscalDocumentNumber'],
+        fiscalDriveNumber = doc['fiscalDriveNumber'],
+        fiscalSign = doc['fiscalSign'],
+        qr = doc['qr'],
+        items = List.castFrom(doc['items'])
+            .toList()
+            .map((e) => ReceiptItem.fromJson(e))
+            .toList();
 
   Receipt.fromTicketResp(TicketKktResp ticket) {
     final receipt = ticket.ticket.document.receipt;
@@ -28,25 +30,23 @@ class Receipt {
     fiscalDriveNumber = receipt.fiscalDriveNumber;
     fiscalSign = receipt.fiscalSign;
     qr = ticket.qr;
-    items = receipt.items
-        ?.map((e) => e == null ? null : ReceiptItem.fromItemsResp(e))
-        ?.toList();
+    items = receipt.items.map((e) => ReceiptItem.fromItemsResp(e)).toList();
   }
 
   Receipt.fromQr(String qr) {
     final match = _qrPattern.firstMatch(qr);
     if (match != null && match.groupCount == 6) {
-      final year = int.parse(match[1].substring(0, 4));
-      final month = int.parse(match[1].substring(4, 6));
-      final day = int.parse(match[1].substring(6, 8));
-      final hour = int.parse(match[1].substring(9, 11));
-      final minute = int.parse(match[1].substring(11, 13));
+      final year = int.parse((match[1] ?? '1970').substring(0, 4));
+      final month = int.parse((match[1] ?? '01').substring(4, 6));
+      final day = int.parse((match[1] ?? '01').substring(6, 8));
+      final hour = int.parse((match[1] ?? '00').substring(9, 11));
+      final minute = int.parse((match[1] ?? '00').substring(11, 13));
       dateTime = DateTime.utc(year, month, day, hour, minute);
-      totalSum = int.tryParse(match[2].replaceFirst('.', ''));
-      fiscalDriveNumber = match[3];
-      fiscalDocumentNumber = int.parse(match[4]);
-      fiscalSign = int.parse(match[5]);
-      operationType = int.parse(match[6]);
+      totalSum = int.tryParse((match[2] ?? '0').replaceFirst('.', '')) ?? 0;
+      fiscalDriveNumber = match[3] ?? '';
+      fiscalDocumentNumber = int.parse(match[4] ?? '0');
+      fiscalSign = int.parse(match[5] ?? '0');
+      operationType = int.parse(match[6] ?? '0');
       this.qr = qr;
     } else {
       throw Exception('invalid format');
@@ -71,20 +71,18 @@ class Receipt {
 class ReceiptItem {
   ReceiptItem(this.type, this.name, this.price, this.quantity, this.sum);
 
-  ReceiptItem.fromJson(Map<String, dynamic> doc) {
-    type = doc['type'];
-    name = doc['name'];
-    quantity = doc['quantity'];
-    price = doc['price'];
-    sum = doc['sum'];
-  }
+  ReceiptItem.fromJson(Map<String, dynamic> doc)
+      : type = doc['type'],
+        name = doc['name'],
+        quantity = doc['quantity'],
+        price = doc['price'],
+        sum = doc['sum'];
 
-  ReceiptItem.fromItemsResp(ItemsResp item) {
-    name = item.name;
-    price = item.price;
-    quantity = item.quantity;
-    sum = item.sum;
-  }
+  ReceiptItem.fromItemsResp(ItemsResp item)
+      : name = item.name,
+        price = item.price,
+        quantity = item.quantity,
+        sum = item.sum;
 
   int type = 1;
   String name;

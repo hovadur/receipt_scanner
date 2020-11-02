@@ -24,7 +24,7 @@ class SignInViewModel extends ChangeNotifier {
   }
 
   void changePassword(String value, BuildContext context) {
-    if (value == null || (value != null && value.length < 8)) {
+    if (value == null || value.length < 8) {
       _password =
           ValidationItem(value, AppLocalizations.of(context).invalidPassword);
     } else {

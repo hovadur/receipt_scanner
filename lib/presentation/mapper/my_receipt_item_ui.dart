@@ -10,10 +10,10 @@ class MyReceiptItemUI {
     name = item.name;
     final qty = AppLocalizations.of(context).qty;
     final qtyNum =
-        NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
+        NumberFormat.decimalPattern(locale?.languageCode).format(item.quantity);
     quantity = '$qty $qtyNum';
-    sum =
-        NumberFormat.decimalPattern(locale.languageCode).format(item.sum / 100);
+    sum = NumberFormat.decimalPattern(locale?.languageCode)
+        .format(item.sum / 100);
   }
 
   int type;

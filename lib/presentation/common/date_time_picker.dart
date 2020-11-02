@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 
-export 'package:intl/intl.dart';
-
 enum DateTimePickerType { date, time, dateTime, dateTimeSeparate }
 
 /// A [DateTimePicker] that contains a [TextField].
@@ -254,7 +252,7 @@ class DateTimePicker extends FormField<String> {
             }
 
             Widget buildField(DateTimePickerType peType) {
-              Function lfOnTap;
+              GestureTapCallback lfOnTap;
               TextEditingController loCtrl;
               InputDecoration loDecoration;
 
@@ -527,7 +525,7 @@ class _DateTimePickerState extends FormFieldState<String> {
   final TextEditingController _timeLabelController = TextEditingController();
   DateTime _dDate = DateTime.now();
   TimeOfDay _tTime = TimeOfDay.now();
-  String _sValue;
+  String _sValue = '';
   String _sDate = '';
   String _sTime = '';
   String _sPeriod = '';
@@ -545,14 +543,14 @@ class _DateTimePickerState extends FormFieldState<String> {
     if (widget.controller == null) {
       _stateController = TextEditingController(text: widget.initialValue);
     } else {
-      widget.controller.addListener(_handleControllerChanged);
+      widget.controller?.addListener(_handleControllerChanged);
     }
 
     final lsValue = _effectiveController.text.trim();
-    final languageCode = widget.locale.languageCode;
+    final languageCode = widget.locale?.languageCode;
     if (lsValue != null && lsValue != '' && lsValue != 'null') {
       if (widget.type != DateTimePickerType.time) {
-        _dDate = DateTime.tryParse(lsValue);
+        _dDate = DateTime.tryParse(lsValue) ?? DateTime.now();
         _tTime = TimeOfDay.fromDateTime(_dDate);
         _sDate = DateFormat('yyyy-MM-dd', languageCode).format(_dDate);
         _sTime = DateFormat('HH:mm', languageCode).format(_dDate);
@@ -600,18 +598,18 @@ class _DateTimePickerState extends FormFieldState<String> {
   void didUpdateWidget(DateTimePicker oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    final languageCode = widget.locale.languageCode;
+    final languageCode = widget.locale?.languageCode;
     if (widget.controller != oldWidget.controller) {
       oldWidget.controller?.removeListener(_handleControllerChanged);
       widget.controller?.addListener(_handleControllerChanged);
 
       if (oldWidget.controller != null && widget.controller == null) {
         _stateController =
-            TextEditingController.fromValue(oldWidget.controller.value);
+            TextEditingController.fromValue(oldWidget.controller?.value);
       }
 
       if (widget.controller != null) {
-        setValue(widget.controller.text);
+        setValue(widget.controller?.text);
 
         if (oldWidget.controller == null) {
           _stateController = null;
@@ -619,14 +617,15 @@ class _DateTimePickerState extends FormFieldState<String> {
       }
     }
 
-    if (_effectiveController.text != null && _effectiveController.text != '') {
+    if (_effectiveController?.text != null &&
+        _effectiveController?.text != '') {
       final lsValue = _effectiveController.text.trim();
 
       if (lsValue != null && lsValue != '' && lsValue != 'null') {
         if (widget.type != DateTimePickerType.time) {
           final lsOldDate = _sDate;
           final lsOldTime = _sTime;
-          _dDate = DateTime.tryParse(lsValue);
+          _dDate = DateTime.tryParse(lsValue) ?? DateTime.now();
 
           if (_dDate != null) {
             _sDate = DateFormat('yyyy-MM-dd', languageCode).format(_dDate);
@@ -686,20 +685,18 @@ class _DateTimePickerState extends FormFieldState<String> {
     super.reset();
 
     setState(() {
-      _effectiveController.text = widget.initialValue;
+      _effectiveController?.text = widget.initialValue;
     });
   }
 
   void _handleControllerChanged() {
-    if (_effectiveController.text != value) {
-      didChange(_effectiveController.text);
+    if (_effectiveController?.text != value) {
+      didChange(_effectiveController?.text);
     }
   }
 
   void onChangedHandler(String value) {
-    if (widget.onChanged != null) {
-      widget.onChanged(value);
-    }
+    widget.onChanged?.call(value);
 
     didChange(value);
   }
@@ -707,9 +704,9 @@ class _DateTimePickerState extends FormFieldState<String> {
   Future<void> _showDatePickerDialog() async {
     final ldDatePicked = await showDatePicker(
       context: context,
-      initialDate: _dDate ?? DateTime.now(),
-      firstDate: widget.firstDate,
-      lastDate: widget.lastDate,
+      initialDate: _dDate,
+      firstDate: widget.firstDate ?? DateTime.now(),
+      lastDate: widget.lastDate ?? DateTime.now(),
       helpText: widget.calendarTitle,
       cancelText: widget.cancelText,
       confirmText: widget.confirmText,
@@ -726,7 +723,7 @@ class _DateTimePickerState extends FormFieldState<String> {
       routeSettings: widget.routeSettings,
     );
 
-    final languageCode = widget.locale.languageCode;
+    final languageCode = widget.locale?.languageCode;
     if (ldDatePicked != null) {
       _sDate = DateFormat('yyyy-MM-dd', languageCode).format(ldDatePicked);
       _dDate = ldDatePicked;
@@ -748,7 +745,7 @@ class _DateTimePickerState extends FormFieldState<String> {
 
       _sValue = _sValue.trim();
       _dateLabelController.text = lsFormatedDate;
-      _effectiveController.text = _sValue;
+      _effectiveController?.text = _sValue;
 
       if (_sValue != lsOldValue) {
         onChangedHandler(_sValue);
@@ -759,14 +756,14 @@ class _DateTimePickerState extends FormFieldState<String> {
   Future<void> _showTimePickerDialog() async {
     final ltTimePicked = await showTimePicker(
       context: context,
-      initialTime: _tTime ?? TimeOfDay.now(),
+      initialTime: _tTime,
       useRootNavigator: widget.useRootNavigator ?? false,
       routeSettings: widget.routeSettings,
       builder: (BuildContext context, Widget child) {
         return MediaQuery(
           data: MediaQuery.of(context)
               .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
-          child: child,
+          child: child ?? Container(),
         );
       },
     );
@@ -795,7 +792,7 @@ class _DateTimePickerState extends FormFieldState<String> {
       }
 
       _sValue = _sValue.trim();
-      _effectiveController.text = _sValue;
+      _effectiveController?.text = _sValue;
 
       if (_sValue != lsOldValue) {
         onChangedHandler(_sValue);
@@ -808,9 +805,9 @@ class _DateTimePickerState extends FormFieldState<String> {
 
     final ldDatePicked = await showDatePicker(
       context: context,
-      initialDate: _dDate ?? DateTime.now(),
-      firstDate: widget.firstDate,
-      lastDate: widget.lastDate,
+      initialDate: _dDate,
+      firstDate: widget.firstDate ?? DateTime.now(),
+      lastDate: widget.lastDate ?? DateTime.now(),
       helpText: widget.calendarTitle,
       cancelText: widget.cancelText,
       confirmText: widget.confirmText,
@@ -827,21 +824,21 @@ class _DateTimePickerState extends FormFieldState<String> {
       routeSettings: widget.routeSettings,
     );
 
-    final languageCode = widget.locale.languageCode;
+    final languageCode = widget.locale?.languageCode;
     if (ldDatePicked != null) {
       _sDate = DateFormat('yyyy-MM-dd', languageCode).format(ldDatePicked);
       _dDate = ldDatePicked;
 
       final ltTimePicked = await showTimePicker(
         context: context,
-        initialTime: _tTime ?? TimeOfDay.now(),
+        initialTime: _tTime,
         useRootNavigator: widget.useRootNavigator ?? false,
         routeSettings: widget.routeSettings,
         builder: (BuildContext context, Widget child) {
           return MediaQuery(
             data: MediaQuery.of(context)
                 .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
-            child: child,
+            child: child ?? Container(),
           );
         },
       );
@@ -889,7 +886,7 @@ class _DateTimePickerState extends FormFieldState<String> {
       }
 
       _dateLabelController.text = lsFormatedDate;
-      _effectiveController.text = _sValue;
+      _effectiveController?.text = _sValue;
 
       if (_sValue != lsOldValue) {
         onChangedHandler(_sValue);

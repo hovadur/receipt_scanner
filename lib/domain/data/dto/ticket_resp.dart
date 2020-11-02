@@ -8,8 +8,8 @@ class TicketKktResp {
         operation = OperationResp.fromJson(json['operation']),
         seller = SellerResp.fromJson(json['seller']),
         process = (json['process'] as List)
-            ?.map((e) => e == null ? null : ProcessResp.fromJson(e))
-            ?.toList(),
+            .map((e) => ProcessResp.fromJson(e))
+            .toList(),
         query = QueryResp.fromJson(json['query']),
         ticket = TicketResp.fromJson(json['ticket']),
         organization = SellerResp.fromJson(json['organization']);
@@ -48,9 +48,8 @@ class ReceiptResp {
         fiscalDocumentNumber = json['fiscalDocumentNumber'],
         fiscalDriveNumber = json['fiscalDriveNumber'],
         fiscalSign = json['fiscalSign'],
-        items = (json['items'] as List)
-            ?.map((e) => e == null ? null : ItemsResp.fromJson(e))
-            ?.toList(),
+        items =
+            (json['items'] as List).map((e) => ItemsResp.fromJson(e)).toList(),
         kktRegId = json['kktRegId'],
         nds18 = json['nds18'],
         operationType = json['operationType'],
@@ -89,12 +88,11 @@ class ReceiptResp {
 }
 
 class ItemsResp {
-  ItemsResp.fromJson(Map<String, dynamic> json) {
-    name = json['name'];
-    price = json['price'];
-    quantity = json['quantity'];
-    sum = json['sum'];
-  }
+  ItemsResp.fromJson(Map<String, dynamic> json)
+      : name = json['name'],
+        price = json['price'],
+        quantity = json['quantity'],
+        sum = json['sum'];
   String name;
   int price;
   num quantity;

@@ -11,7 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ReceiptDetailsScreen extends StatelessWidget {
-  const ReceiptDetailsScreen({this.receipt, Key key}) : super(key: key);
+  const ReceiptDetailsScreen({@required this.receipt, Key key})
+      : super(key: key);
 
   static const String routeName = 'ReceiptDetails';
 
@@ -36,7 +37,9 @@ class ReceiptDetailsScreen extends StatelessWidget {
             Container(
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                  border: Border.all(color: Theme.of(context).dividerColor)),
+                  border: Border.all(
+                      color: Theme.of(context)?.dividerColor ??
+                          const Color(0xFF000000))),
               child: _buildBody(context),
             ),
             Container(
