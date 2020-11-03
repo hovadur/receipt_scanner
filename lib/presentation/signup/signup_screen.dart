@@ -2,8 +2,8 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signup/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key key}) : super(key: key);
@@ -22,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
                     const LoginForm(),
                     ElevatedButton.icon(
                         onPressed: () => context.googleSignIn(),
-                        icon: SvgPicture.asset('assets/icons/google-icon.svg'),
+                        icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
                         label:
                             Text(AppLocalizations.of(context).signInWithGoogle),
                         style: ElevatedButton.styleFrom(

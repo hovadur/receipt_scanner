@@ -5,8 +5,8 @@ import 'package:ctr/presentation/signin/signin_viewmodel.dart';
 import 'package:ctr/presentation/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
+import 'package:websafe_svg/websafe_svg.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key key}) : super(key: key);
@@ -25,7 +25,7 @@ class SignInScreen extends StatelessWidget {
                   const LoginForm(),
                   ElevatedButton.icon(
                       onPressed: () => context.googleSignIn(),
-                      icon: SvgPicture.asset('assets/icons/google-icon.svg'),
+                      icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
                       label:
                           Text(AppLocalizations.of(context).signInWithGoogle),
                       style: ElevatedButton.styleFrom(
