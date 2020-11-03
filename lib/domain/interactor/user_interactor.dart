@@ -15,8 +15,28 @@ class UserInteractor {
       return User(
           id: _auth.currentUser.uid,
           email: _auth.currentUser.email,
-          name: _auth.currentUser.displayName);
+          name: _auth.currentUser.displayName ?? '');
     }
+  }
+
+  Future<User> _makeAuthResult(auth.UserCredential authResult) async {
+    Fimber.d('User Name: ${authResult.user.displayName}');
+    Fimber.d('User Email ${authResult.user.email}');
+    final _user = getCurrentUser();
+    await Database().createUser(_user);
+    return _user;
+  }
+
+  Future<User> signUp(String email, String pass) async {
+    final authResult = await _auth.createUserWithEmailAndPassword(
+        email: email, password: pass);
+    return await _makeAuthResult(authResult);
+  }
+
+  Future<User> signIn(String email, String pass) async {
+    final authResult =
+        await _auth.signInWithEmailAndPassword(email: email, password: pass);
+    return await _makeAuthResult(authResult);
   }
 
   Future<User> signInWithGoogle() async {
@@ -29,11 +49,7 @@ class UserInteractor {
         idToken: authentication.idToken,
       );
       final authResult = await _auth.signInWithCredential(credential);
-      Fimber.d('User Name: ${authResult.user.displayName}');
-      Fimber.d('User Email ${authResult.user.email}');
-      final _user = getCurrentUser();
-      await Database().createUser(_user);
-      return _user;
+      return await _makeAuthResult(authResult);
     } else {
       return null;
     }

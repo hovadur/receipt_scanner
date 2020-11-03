@@ -6,7 +6,6 @@ import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 extension GoogleSignIn on BuildContext {
@@ -19,7 +18,31 @@ extension GoogleSignIn on BuildContext {
     }).catchError((e) {
       showError(e.message);
       Fimber.e(e.toString());
-    }, test: (e) => e is PlatformException);
+    }, test: (e) => e is Exception);
+  }
+
+  void signIn(String email, String pass) {
+    read<UserInteractor>().signIn(email, pass).then((User user) {
+      if (user != null) {
+        AppNavigator.of(this).clearAndPush(const MaterialPage<Page>(
+            name: CameraScreen.routeName, child: CameraScreen()));
+      }
+    }).catchError((e) {
+      showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
+  }
+
+  void signUp(String email, String pass) {
+    read<UserInteractor>().signUp(email, pass).then((User user) {
+      if (user != null) {
+        AppNavigator.of(this).clearAndPush(const MaterialPage<Page>(
+            name: CameraScreen.routeName, child: CameraScreen()));
+      }
+    }).catchError((e) {
+      showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
   }
 
   void showError(String message) {

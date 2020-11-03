@@ -68,8 +68,7 @@ class LoginForm extends StatelessWidget {
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.done,
-            onSubmitted: (String value) =>
-                context.read<SignUpViewModel>().submit(context),
+            onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
                 labelText: AppLocalizations.of(context).confirmPassword,
                 errorText: context.select(
@@ -84,8 +83,7 @@ class LoginForm extends StatelessWidget {
               padding: const EdgeInsets.symmetric(vertical: 16),
               child: ElevatedButton(
                 autofocus: true,
-                onPressed: () =>
-                    context.read<SignUpViewModel>().submit(context),
+                onPressed: () => submit(context),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
@@ -96,4 +94,8 @@ class LoginForm extends StatelessWidget {
           )
         ],
       );
+
+  void submit(BuildContext context) {
+    context.read<SignUpViewModel>().submit(context);
+  }
 }
