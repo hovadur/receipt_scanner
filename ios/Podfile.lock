@@ -27,6 +27,9 @@ PODS:
   - Firebase/MLVision (6.33.0):
     - Firebase/CoreOnly
     - FirebaseMLVision (~> 0.21.0)
+  - Firebase/MLVisionBarcodeModel (6.33.0):
+    - Firebase/CoreOnly
+    - FirebaseMLVisionBarcodeModel (~> 0.21.0)
   - firebase_auth (0.18.2):
     - Firebase/Auth (~> 6.33.0)
     - Firebase/CoreOnly (~> 6.33.0)
@@ -86,6 +89,8 @@ PODS:
     - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
     - GTMSessionFetcher/Core (~> 1.1)
     - Protobuf (~> 3.12)
+  - FirebaseMLVisionBarcodeModel (0.21.0):
+    - FirebaseMLVision (~> 0.21)
   - Flutter (1.0.0)
   - google_sign_in (0.0.1):
     - Flutter
@@ -160,6 +165,7 @@ DEPENDENCIES:
   - camera (from `.symlinks/plugins/camera/ios`)
   - cloud_firestore (from `.symlinks/plugins/cloud_firestore/ios`)
   - device_info (from `.symlinks/plugins/device_info/ios`)
+  - Firebase/MLVisionBarcodeModel
   - firebase_auth (from `.symlinks/plugins/firebase_auth/ios`)
   - firebase_core (from `.symlinks/plugins/firebase_core/ios`)
   - firebase_ml_vision (from `.symlinks/plugins/firebase_ml_vision/ios`)
@@ -179,6 +185,7 @@ SPEC REPOS:
     - FirebaseInstallations
     - FirebaseMLCommon
     - FirebaseMLVision
+    - FirebaseMLVisionBarcodeModel
     - GoogleAPIClientForREST
     - GoogleAppMeasurement
     - GoogleDataTransport
@@ -236,6 +243,7 @@ SPEC CHECKSUMS:
   FirebaseInstallations: 466c7b4d1f58fe16707693091da253726a731ed2
   FirebaseMLCommon: d218d75dd1c6c4e447f731ac22da56b88cb79431
   FirebaseMLVision: 68dd092b4c52a7ac163ec0d4f541d5711fc9fec6
+  FirebaseMLVisionBarcodeModel: 394cd61c52dc03558088caf82b0dade8028f57d5
   Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
   google_sign_in: 6bd214b9c154f881422f5fe27b66aaa7bbd580cc
   GoogleAPIClientForREST: 4bb409633efcc2e1b3f945afe7e35039b5a61db2
@@ -251,6 +259,6 @@ SPEC CHECKSUMS:
   Protobuf: 3dac39b34a08151c6d949560efe3f86134a3f748
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
 
-PODFILE CHECKSUM: 06d70af40ddef7f291dac8e054f4fd715f74dd9a
+PODFILE CHECKSUM: 8c297191cbec3eda6393a5078779ea7b4c8070e7
 
 COCOAPODS: 1.10.0
