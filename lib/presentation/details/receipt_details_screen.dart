@@ -65,6 +65,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
               return RichText(
                 text: TextSpan(
                     text: AppLocalizations.of(context).dontHaveFnsAccount,
+                    style: TextStyle(color: Theme.of(context).errorColor),
                     children: <TextSpan>[
                       TextSpan(
                           text: AppLocalizations.of(context).nalogruAccount,
