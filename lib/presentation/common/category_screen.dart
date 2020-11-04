@@ -13,13 +13,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final categoryMap = context.category();
     return Scaffold(
-        appBar: AppBar(
-            automaticallyImplyLeading: false,
-            title: Text(AppLocalizations.of(context).categories)),
-        // floatingActionButton: FloatingActionButton(
-        //   onPressed: () {  },
-        //   child: Icon(Icons.add),
-        // ),
+        appBar: AppBar(title: Text(AppLocalizations.of(context).categories)),
         body: SingleChildScrollView(
             child: ListView.builder(
                 shrinkWrap: true,
