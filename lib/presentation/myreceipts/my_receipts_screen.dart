@@ -24,7 +24,7 @@ class MyReceiptsScreen extends StatelessWidget {
               IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () =>
-                      showSearch(context: context, delegate: Search()))
+                      showSearch(context: context, delegate: Search(context)))
             ],
           ),
           body: StreamBuilder<List<MyReceiptUI>>(
@@ -42,7 +42,7 @@ class MyReceiptsScreen extends StatelessWidget {
                       final receipt = snapshot.data[index];
                       return Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 4),
+                              horizontal: 8, vertical: 4),
                           child: receipt == null
                               ? Container()
                               : _buildCardItem(context, receipt));
@@ -70,8 +70,10 @@ class MyReceiptsScreen extends StatelessWidget {
 }
 
 class Search extends SearchDelegate {
-  Search()
-      : super(searchFieldLabel: 'Search...', keyboardType: TextInputType.text);
+  Search(BuildContext context)
+      : super(
+            searchFieldLabel: AppLocalizations.of(context).search,
+            keyboardType: TextInputType.text);
 
   @override
   ThemeData appBarTheme(BuildContext context) {

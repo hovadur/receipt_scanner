@@ -257,6 +257,9 @@ abstract class AppLocalizations {
 
   // TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session
   String get ftsWarning;
+
+  // Search...
+  String get search;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

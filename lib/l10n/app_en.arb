@@ -161,6 +161,9 @@
   "@dataReceivedFromFNS": {"description": "Data received from the FNS"},
 
   "ftsWarning": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session",
-  "@ftsWarning": {"description": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session"}
+  "@ftsWarning": {"description": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session"},
+
+  "search": "Search...",
+  "@search": {"description": "Search..."}
 
 }
