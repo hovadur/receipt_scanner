@@ -27,8 +27,8 @@ class ManualScreen extends StatelessWidget {
               }
             },
           ),
-          body: SafeArea(
-            minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+          body: SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
             child: _buildBody(context),
           )));
 

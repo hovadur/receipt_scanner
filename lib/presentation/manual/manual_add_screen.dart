@@ -20,8 +20,13 @@ class ManualAddScreen extends StatelessWidget {
           appBar: AppBar(
             title: Text(AppLocalizations.of(context).addProduct),
           ),
-          body: SafeArea(
-              minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+          floatingActionButton: FloatingActionButton.extended(
+            icon: const Icon(Icons.add),
+            label: Text(AppLocalizations.of(context).next),
+            onPressed: () => submit(context),
+          ),
+          body: SingleChildScrollView(
+              padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
               child: _buildColumn(context))));
 
   Widget _buildColumn(BuildContext context) {
@@ -70,7 +75,8 @@ class ManualAddScreen extends StatelessWidget {
         const SizedBox(width: 8),
         TextField(
           keyboardType: TextInputType.number,
-          textInputAction: TextInputAction.next,
+          textInputAction: TextInputAction.done,
+          onSubmitted: (_) => submit(context),
           decoration: InputDecoration(
               labelText: AppLocalizations.of(context).sum,
               errorText:
@@ -78,27 +84,12 @@ class ManualAddScreen extends StatelessWidget {
           onChanged: (String value) =>
               context.read<ManualAddViewModel>().changeSum(value, context),
         ),
-        const SizedBox(width: 8),
-        SizedBox(
-          width: double.infinity,
-          child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16),
-            child: ElevatedButton(
-              autofocus: true,
-              onPressed: () {
-                onPressed(
-                    context.read<ManualAddViewModel>().addProduct(context));
-                AppNavigator.of(context).pop();
-              },
-              style: ElevatedButton.styleFrom(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 16.0, horizontal: 4.0),
-              ),
-              child: Text(AppLocalizations.of(context).next),
-            ),
-          ),
-        ),
       ],
     );
+  }
+
+  void submit(BuildContext context) {
+    onPressed(context.read<ManualAddViewModel>().addProduct(context));
+    AppNavigator.of(context).pop();
   }
 }
