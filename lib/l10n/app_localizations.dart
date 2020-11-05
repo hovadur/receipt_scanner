@@ -260,6 +260,21 @@ abstract class AppLocalizations {
 
   // Search...
   String get search;
+
+  // Delete...
+  String get deleteEllipsis;
+
+  // Delete
+  String get delete;
+
+  // Cancel
+  String get cancel;
+
+  // Delete Confirmation
+  String get deleteConfirmation;
+
+  // Are you sure you want to delete this item?
+  String get sureDelete;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

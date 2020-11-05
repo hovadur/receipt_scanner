@@ -12,6 +12,7 @@ class ReceiptMapper {
     final totalSum = NumberFormat.decimalPattern(locale?.languageCode)
         .format(value.totalSum / 100);
     return MyReceiptUI(
+        id: value.id,
         dateTime: dateTime,
         totalSum: totalSum,
         fn: value.fiscalDriveNumber,

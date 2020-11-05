@@ -23,4 +23,8 @@ class MyReceiptsViewModel extends ChangeNotifier {
                     MyReceiptItemUI.fromReceiptItem(context, item), myReceipt))
                 .toList();
           }).toList());
+
+  void deleteReceipt(MyReceiptUI receiptUI) {
+    _db.deleteReceipt(receiptUI.receipt);
+  }
 }

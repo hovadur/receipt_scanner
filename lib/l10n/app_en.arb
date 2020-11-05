@@ -164,6 +164,21 @@
   "@ftsWarning": {"description": "TIN and password are not saved. Only the session is stored. Sometimes you may need to log into your FTS account again to update the session"},
 
   "search": "Search...",
-  "@search": {"description": "Search..."}
+  "@search": {"description": "Search..."},
+
+  "deleteEllipsis": "Delete...",
+  "@deleteEllipsis": {"description": "Delete..."},
+
+  "delete": "Delete",
+  "@delete": {"description": "Delete"},
+
+  "cancel": "Cancel",
+  "@cancel": {"description": "Cancel"},
+
+  "deleteConfirmation": "Delete Confirmation",
+  "@deleteConfirmation": {"description": "Delete Confirmation"},
+
+  "sureDelete": "Are you sure you want to delete this item?",
+  "@sureDelete": {"description": "Are you sure you want to delete this item?"}
 
 }
