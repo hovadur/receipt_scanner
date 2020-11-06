@@ -44,7 +44,7 @@ class ReceiptResp {
         addressToCheckFiscalSign = json['addressToCheckFiscalSign'],
         buyerAddress = json['buyerAddress'],
         cashTotalSum = json['cashTotalSum'],
-        ecashTotalSum = json['addressToCheckFiscalSign'],
+        ecashTotalSum = json['ecashTotalSum'],
         fiscalDocumentNumber = json['fiscalDocumentNumber'],
         fiscalDriveNumber = json['fiscalDriveNumber'],
         fiscalSign = json['fiscalSign'],
