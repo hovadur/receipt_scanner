@@ -4,7 +4,6 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/date_time_picker.dart';
 import 'package:ctr/presentation/manual/manual_add_screen.dart';
 import 'package:ctr/presentation/manual/manual_viewmodel.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
