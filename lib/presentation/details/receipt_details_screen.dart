@@ -4,6 +4,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
+import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -26,10 +27,11 @@ class ReceiptDetailsScreen extends StatelessWidget {
             title: Text(AppLocalizations.of(context).details),
             actions: [
               IconButton(
-                  icon: const Icon(Icons.delete),
+                  icon: const Icon(Icons.edit),
                   onPressed: () {
-                    context.read<ReceiptDetailsViewModel>().deleteReceipt();
-                    AppNavigator.of(context).pop();
+                    AppNavigator.of(context).push(MaterialPage<Page>(
+                        name: ManualScreen.routeName,
+                        child: ManualScreen(receipt: receipt)));
                   })
             ],
           ),

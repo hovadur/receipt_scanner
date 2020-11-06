@@ -6,17 +6,31 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualViewModel extends ChangeNotifier {
-  ManualViewModel() {
-    _dateTime = DateTime.now();
+  ManualViewModel(BuildContext context, Receipt receipt) {
+    if (receipt != null) {
+      final locale = Localizations.localeOf(context);
+      _dateTime = receipt.dateTime;
+      _products = receipt.items;
+      _total = receipt.totalSum;
+      _totalController.text = NumberFormat.decimalPattern(locale?.languageCode)
+          .format(receipt.totalSum / 100);
+    } else {
+      _dateTime = DateTime.now();
+    }
+    _receipt = receipt;
     notifyListeners();
   }
 
+  final TextEditingController _totalController = TextEditingController();
+  Receipt _receipt;
   DateTime _dateTime = DateTime.now();
-  final List<ReceiptItem> _products = [];
+  List<ReceiptItem> _products = [];
   String _totalError;
   int _total = 0;
 
-  DateTime get currentDate => _dateTime;
+  TextEditingController get totalController => _totalController;
+
+  DateTime get dateTime => _dateTime;
 
   int get productCount => _products.length;
 
@@ -56,9 +70,18 @@ class ManualViewModel extends ChangeNotifier {
 
   bool apply() {
     if (_totalError != null || _total == 0) return false;
-    final receipt =
-        Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
-    Database().saveReceipt(receipt);
+    final db = Database();
+    if (_receipt == null) {
+      final receipt =
+          Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
+      db.saveReceipt(receipt);
+    } else {
+      _receipt
+        ..dateTime = _dateTime
+        ..items = _products
+        ..totalSum = _total;
+      db.saveReceipt(_receipt);
+    }
     return true;
   }
 }

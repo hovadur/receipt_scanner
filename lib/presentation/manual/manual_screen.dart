@@ -1,3 +1,4 @@
+import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
@@ -8,12 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualScreen extends StatelessWidget {
-  const ManualScreen({Key key}) : super(key: key);
+  const ManualScreen({Key key, this.receipt}) : super(key: key);
   static const String routeName = 'ManualScreen';
+
+  final Receipt receipt;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => ManualViewModel(),
+      create: (_) => ManualViewModel(context, receipt),
       builder: (context, _) => Scaffold(
           appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
           floatingActionButton: FloatingActionButton.extended(
@@ -37,7 +40,7 @@ class ManualScreen extends StatelessWidget {
         locale: Localizations.localeOf(context),
         type: DateTimePickerType.dateTimeSeparate,
         initialValue: context
-            .select((ManualViewModel value) => value.currentDate.toString()),
+            .select((ManualViewModel value) => value.dateTime.toString()),
         firstDate: DateTime.fromMillisecondsSinceEpoch(0),
         lastDate: DateTime.now(),
         onChanged: (String value) =>
@@ -45,6 +48,8 @@ class ManualScreen extends StatelessWidget {
       ),
       const SizedBox(height: 8),
       TextField(
+        controller:
+            context.select((ManualViewModel value) => value.totalController),
         keyboardType: const TextInputType.numberWithOptions(decimal: true),
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
@@ -65,7 +70,6 @@ class ManualScreen extends StatelessWidget {
                       context.read<ManualViewModel>().addProduct(item);
                     },
                   )));
-              //context.read<ManualViewModel>().addProduct()
             },
             icon: const Icon(Icons.add),
             label: Text(AppLocalizations.of(context).product)),
@@ -81,9 +85,7 @@ class ManualScreen extends StatelessWidget {
           itemCount:
               context.select((ManualViewModel value) => value.productCount),
           itemBuilder: (BuildContext context, int index) {
-            return Builder(builder: (context) {
-              return _buildItem(context, index);
-            });
+            return Builder(builder: (context) => _buildItem(context, index));
           })
     ]);
   }
