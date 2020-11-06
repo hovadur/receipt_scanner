@@ -46,7 +46,7 @@ class ManualScreen extends StatelessWidget {
       ),
       const SizedBox(height: 8),
       TextField(
-        keyboardType: TextInputType.number,
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
         textInputAction: TextInputAction.next,
         decoration: InputDecoration(
             labelText: AppLocalizations.of(context).totalAmount,

@@ -63,7 +63,7 @@ class ManualAddScreen extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         TextField(
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
               labelText: AppLocalizations.of(context).qtyy,
@@ -74,7 +74,7 @@ class ManualAddScreen extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         TextField(
-          keyboardType: TextInputType.number,
+          keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => submit(context),
           decoration: InputDecoration(
