@@ -64,7 +64,7 @@ class IrkktRepo {
       return await _getTicket(qr);
     } on IrkktNotAuth {
       await refresh();
-      return _getTicket(qr);
+      return await _getTicket(qr);
     }
   }
 
