@@ -29,8 +29,8 @@ class ManualScreen extends StatelessWidget {
               }
             },
           ),
-          body: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+          body: SafeArea(
+            minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
             child: _buildBody(context),
           )));
 
@@ -80,13 +80,14 @@ class ManualScreen extends StatelessWidget {
             label: Text(AppLocalizations.of(context).product)),
       ]),
       const SizedBox(height: 8),
-      ListView.builder(
-          shrinkWrap: true,
-          itemCount:
-              context.select((ManualViewModel value) => value.productCount),
-          itemBuilder: (BuildContext context, int index) {
-            return Builder(builder: (context) => _buildItem(context, index));
-          })
+      Expanded(
+          child: ListView.builder(
+              itemCount:
+                  context.select((ManualViewModel value) => value.productCount),
+              itemBuilder: (BuildContext context, int index) {
+                return Builder(
+                    builder: (context) => _buildItem(context, index));
+              }))
     ]);
   }
 
