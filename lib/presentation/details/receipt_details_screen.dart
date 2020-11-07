@@ -6,6 +6,7 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/mapper/my_receipt_ui.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -103,7 +104,20 @@ class ReceiptDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildBody(BuildContext context) {
-    final ui = context.watch<ReceiptDetailsViewModel>().ui;
+    return StreamBuilder<MyReceiptUI>(
+        stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
+        builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
+          if (snapshot.hasError) {
+            return const Text('Something went wrong');
+          }
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const LinearProgressIndicator();
+          }
+          return _streamBody(context, snapshot.data);
+        });
+  }
+
+  Widget _streamBody(BuildContext context, MyReceiptUI ui) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [

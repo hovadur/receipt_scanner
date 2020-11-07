@@ -21,7 +21,9 @@ class ReceiptDetailsViewModel extends ChangeNotifier {
 
   MyReceiptUI _ui;
 
-  MyReceiptUI get ui => _ui;
+  Stream<MyReceiptUI> getUI(BuildContext context) => _db
+      .getReceipt(_receipt.id)
+      .map((event) => ReceiptMapper().map(context, _receipt));
 
   Future<int> getIrkktReceipt(BuildContext context) async {
     if (_receipt.items.isEmpty && _receipt.qr.isNotEmpty) {

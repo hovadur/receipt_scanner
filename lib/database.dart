@@ -17,16 +17,21 @@ class Database {
     }
   }
 
-  Stream<List<Receipt>> getReceipts() {
-    return _users
-        .doc(UserInteractor().getCurrentUser().id)
-        .collection('receipts')
-        .orderBy('dateTime', descending: true)
-        .snapshots()
-        .map((event) {
-      return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
-    });
-  }
+  Stream<List<Receipt>> getReceipts() => _users
+          .doc(UserInteractor().getCurrentUser().id)
+          .collection('receipts')
+          .orderBy('dateTime', descending: true)
+          .snapshots()
+          .map((event) {
+        return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
+      });
+
+  Stream<Receipt> getReceipt(String receiptId) => _users
+      .doc(UserInteractor().getCurrentUser().id)
+      .collection('receipts')
+      .doc(receiptId)
+      .snapshots()
+      .map((event) => Receipt.fromDocumentSnapshot(event));
 
   Future<bool> receiptExists(String qr) async {
     final doc = await _users
