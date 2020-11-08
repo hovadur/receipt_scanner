@@ -182,6 +182,9 @@
   "@deleteConfirmation": {"description": "Delete Confirmation"},
 
   "sureDelete": "Точно удалить этот элемент?",
-  "@sureDelete": {"description": "Are you sure you want to delete this item?"}
+  "@sureDelete": {"description": "Are you sure you want to delete this item?"},
+
+  "wentWrong": "Что-то пошло не так",
+  "@wentWrong": {"description": "Something went wrong"}
 
 }

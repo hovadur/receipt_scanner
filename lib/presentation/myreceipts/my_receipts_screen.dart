@@ -31,7 +31,7 @@ class MyReceiptsScreen extends StatelessWidget {
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return const Text('Something went wrong');
+                  return Text(AppLocalizations.of(context).wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();

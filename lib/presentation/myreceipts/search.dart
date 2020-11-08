@@ -74,7 +74,7 @@ class Search extends SearchDelegate {
                   context.watch<MyReceiptsViewModel>().search(context, query),
               builder: (context, AsyncSnapshot<List<SearchUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return const Text('Something went wrong');
+                  return Text(AppLocalizations.of(context).wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();

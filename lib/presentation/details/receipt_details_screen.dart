@@ -40,7 +40,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
               stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
               builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
                 if (snapshot.hasError) {
-                  return const Text('Something went wrong');
+                  return Text(AppLocalizations.of(context).wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();
@@ -75,7 +75,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
         builder: (context, AsyncSnapshot<int> snapshot) {
           if (snapshot.hasError) {
-            return const Text('Something went wrong');
+            return Text(AppLocalizations.of(context).wentWrong);
           }
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == 1) {

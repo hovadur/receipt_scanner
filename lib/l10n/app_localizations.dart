@@ -275,6 +275,9 @@ abstract class AppLocalizations {
 
   // Are you sure you want to delete this item?
   String get sureDelete;
+
+  // Something went wrong
+  String get wentWrong;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

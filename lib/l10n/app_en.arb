@@ -179,6 +179,9 @@
   "@deleteConfirmation": {"description": "Delete Confirmation"},
 
   "sureDelete": "Are you sure you want to delete this item?",
-  "@sureDelete": {"description": "Are you sure you want to delete this item?"}
+  "@sureDelete": {"description": "Are you sure you want to delete this item?"},
+
+  "wentWrong": "Something went wrong",
+  "@wentWrong": {"description": "Something went wrong"}
 
 }
