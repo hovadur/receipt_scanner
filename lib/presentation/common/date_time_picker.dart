@@ -735,8 +735,8 @@ class _DateTimePickerState extends FormFieldState<String> {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
             .format(DateTime.tryParse(_sDate));
       } else {
-        lsFormatedDate = DateFormat('yMd', languageCode)
-            .format(DateTime.tryParse(_sDate));
+        lsFormatedDate =
+            DateFormat('yMd', languageCode).format(DateTime.tryParse(_sDate));
       }
 
       if (widget.type == DateTimePickerType.dateTimeSeparate && _sTime != '') {
@@ -763,7 +763,7 @@ class _DateTimePickerState extends FormFieldState<String> {
         return MediaQuery(
           data: MediaQuery.of(context)
               .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
-          child: child ?? Container(),
+          child: child ?? const SizedBox(),
         );
       },
     );
@@ -838,7 +838,7 @@ class _DateTimePickerState extends FormFieldState<String> {
           return MediaQuery(
             data: MediaQuery.of(context)
                 .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
-            child: child ?? Container(),
+            child: child ?? const SizedBox(),
           );
         },
       );

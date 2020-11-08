@@ -40,12 +40,9 @@ class MyReceiptsScreen extends StatelessWidget {
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
                       final receipt = snapshot.data[index];
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 8, vertical: 4),
-                          child: receipt == null
-                              ? Container()
-                              : _buildCardItem(context, receipt));
+                      return receipt == null
+                          ? const SizedBox()
+                          : _buildCardItem(context, receipt);
                     });
               })));
 

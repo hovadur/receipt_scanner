@@ -67,7 +67,7 @@ class Search extends SearchDelegate {
       value: viewModel,
       builder: (context, _) {
         if (query == null || query.trim() == '') {
-          return Container();
+          return const SizedBox();
         } else {
           return StreamBuilder<List<SearchUI>>(
               stream:
@@ -87,7 +87,7 @@ class Search extends SearchDelegate {
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),
                           child: receipt == null
-                              ? Container()
+                              ? const SizedBox()
                               : _buildCardItem(context, receipt));
                     });
               });
