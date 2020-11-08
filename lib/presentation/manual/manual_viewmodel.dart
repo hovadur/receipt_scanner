@@ -21,12 +21,12 @@ class ManualViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  final TextEditingController _totalController = TextEditingController();
   Receipt _receipt;
   DateTime _dateTime = DateTime.now();
   List<ReceiptItem> _products = [];
   String _totalError;
   int _total = 0;
+  final TextEditingController _totalController = TextEditingController();
 
   TextEditingController get totalController => _totalController;
 
@@ -60,6 +60,12 @@ class ManualViewModel extends ChangeNotifier {
 
   void addProduct(ReceiptItem item) {
     _products.add(item);
+    notifyListeners();
+  }
+
+  void changeProduct(ReceiptItem item) {
+    final i = _products.indexOf(item);
+    _products[i] = item;
     notifyListeners();
   }
 

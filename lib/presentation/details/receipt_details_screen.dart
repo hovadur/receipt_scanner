@@ -83,29 +83,10 @@ class ReceiptDetailsScreen extends StatelessWidget {
             }
             if (snapshot.data == 2) {
               return RichText(
-                text: TextSpan(
-                    text: AppLocalizations.of(context).dontHaveFnsAccount,
-                    style: TextStyle(color: Theme.of(context).errorColor),
-                    children: <TextSpan>[
-                      TextSpan(
-                          text: AppLocalizations.of(context).nalogruAccount,
-                          style: const TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              AppNavigator.of(context).push(MaterialPage<Page>(
-                                  name: SignInFnsScreen.routeName,
-                                  child: SignInFnsScreen(
-                                    onPressed: () {
-                                      context
-                                          .read<ReceiptDetailsViewModel>()
-                                          .update();
-                                    },
-                                  )));
-                            }),
-                    ]),
-              );
+                  text: TextSpan(
+                      text: AppLocalizations.of(context).dontHaveFnsAccount,
+                      style: TextStyle(color: Theme.of(context).errorColor),
+                      children: <TextSpan>[_nalogRu(context)]));
             }
             return const SizedBox();
           }
@@ -118,6 +99,23 @@ class ReceiptDetailsScreen extends StatelessWidget {
                 ))
           ]);
         });
+  }
+
+  TextSpan _nalogRu(BuildContext context) {
+    return TextSpan(
+        text: AppLocalizations.of(context).nalogruAccount,
+        style: const TextStyle(
+            color: Colors.blue, decoration: TextDecoration.underline),
+        recognizer: TapGestureRecognizer()
+          ..onTap = () {
+            AppNavigator.of(context).push(MaterialPage<Page>(
+                name: SignInFnsScreen.routeName,
+                child: SignInFnsScreen(
+                  onPressed: () {
+                    context.read<ReceiptDetailsViewModel>().update();
+                  },
+                )));
+          });
   }
 
   Widget _receiptBody(BuildContext context, MyReceiptUI ui) {

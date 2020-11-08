@@ -8,14 +8,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualAddScreen extends StatelessWidget {
-  const ManualAddScreen({@required this.onPressed, Key key}) : super(key: key);
+  const ManualAddScreen({@required this.onPressed, this.item, Key key})
+      : super(key: key);
   static const String routeName = 'ManualAddScreen';
 
   final ValueChanged<ReceiptItem> onPressed;
+  final ReceiptItem item;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => ManualAddViewModel(),
+      create: (_) => ManualAddViewModel(context, item),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
             title: Text(AppLocalizations.of(context).addProduct),
@@ -54,6 +56,8 @@ class ManualAddScreen extends StatelessWidget {
               ))),
         ),
         TextField(
+          controller: context
+              .select((ManualAddViewModel value) => value.nameController),
           keyboardType: TextInputType.streetAddress,
           textInputAction: TextInputAction.next,
           decoration:
@@ -63,6 +67,8 @@ class ManualAddScreen extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         TextField(
+          controller:
+              context.select((ManualAddViewModel value) => value.qtyController),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textInputAction: TextInputAction.next,
           decoration: InputDecoration(
@@ -74,6 +80,8 @@ class ManualAddScreen extends StatelessWidget {
         ),
         const SizedBox(width: 8),
         TextField(
+          controller:
+              context.select((ManualAddViewModel value) => value.sumController),
           keyboardType: const TextInputType.numberWithOptions(decimal: true),
           textInputAction: TextInputAction.done,
           onSubmitted: (_) => submit(context),
@@ -89,7 +97,7 @@ class ManualAddScreen extends StatelessWidget {
   }
 
   void submit(BuildContext context) {
-    onPressed(context.read<ManualAddViewModel>().addProduct(context));
+    onPressed(context.read<ManualAddViewModel>().getProduct(context));
     AppNavigator.of(context).pop();
   }
 }

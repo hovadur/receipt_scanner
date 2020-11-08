@@ -95,6 +95,16 @@ class ManualScreen extends StatelessWidget {
     final entries = context.category().entries.toList();
     final item = context.watch<ManualViewModel>().getProducts(context)[index];
     return ListTile(
+        onTap: () {
+          AppNavigator.of(context).push(MaterialPage<Page>(
+              name: ManualAddScreen.routeName,
+              child: ManualAddScreen(
+                onPressed: (item) {
+                  context.read<ManualViewModel>().changeProduct(item);
+                },
+                item: item.item,
+              )));
+        },
         leading: CircleAvatar(child: Icon(entries.elementAt(item.type).key)),
         title: Text(item.quantity),
         subtitle: Text(item.name),

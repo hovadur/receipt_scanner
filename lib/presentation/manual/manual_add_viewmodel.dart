@@ -1,15 +1,42 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualAddViewModel extends ChangeNotifier {
+  ManualAddViewModel(BuildContext context, ReceiptItem item) {
+    _item = item;
+    if (item != null) {
+      final myItem = MyReceiptItemUI.fromReceiptItem(context, item);
+      _nameController.text = item.name;
+      final locale = Localizations.localeOf(context);
+      _qtyController.text = NumberFormat.decimalPattern(locale?.languageCode)
+          .format(item.quantity);
+      _sumController.text = myItem.sum;
+      _type = item.type;
+      name = item.name;
+      _qty = item.quantity;
+      _sum = item.sum;
+    }
+  }
+
   String _sumError;
   String _qtyError;
   int _type = 1;
   String name = '';
-  double _qty = 0;
+  num _qty = 0;
   int _sum = 0;
+  ReceiptItem _item;
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _qtyController = TextEditingController();
+  final TextEditingController _sumController = TextEditingController();
+
+  TextEditingController get nameController => _nameController;
+
+  TextEditingController get qtyController => _qtyController;
+
+  TextEditingController get sumController => _sumController;
 
   String get sumError => _sumError;
 
@@ -48,7 +75,15 @@ class ManualAddViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  ReceiptItem addProduct(BuildContext context) {
-    return ReceiptItem(_type, name, 0, _qty, _sum);
+  ReceiptItem getProduct(BuildContext context) {
+    if (_item == null) {
+      return ReceiptItem(_type, name, 0, _qty, _sum);
+    } else {
+      return _item
+        ..type = _type
+        ..name = name
+        ..quantity = _qty
+        ..sum = _sum;
+    }
   }
 }

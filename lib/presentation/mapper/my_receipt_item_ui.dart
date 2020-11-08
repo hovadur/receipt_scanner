@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class MyReceiptItemUI {
-  MyReceiptItemUI.fromReceiptItem(BuildContext context, ReceiptItem item) {
+  MyReceiptItemUI.fromReceiptItem(BuildContext context, this.item) {
     final locale = Localizations.localeOf(context);
     type = item.type;
     name = item.name;
@@ -20,4 +20,5 @@ class MyReceiptItemUI {
   String name;
   String quantity;
   String sum;
+  ReceiptItem item;
 }
