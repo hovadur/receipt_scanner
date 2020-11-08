@@ -130,17 +130,17 @@ class ReceiptDetailsScreen extends StatelessWidget {
           leading: Text(AppLocalizations.of(context).dateTime),
           trailing: Text(ui.dateTime),
         ),
-        if (ui.fn != '')
+        if (ui.fn.isNotEmpty)
           ListTile(
             leading: Text(AppLocalizations.of(context).storage),
             trailing: Text(ui.fn),
           ),
-        if (ui.fn != '')
+        if (ui.fn.isNotEmpty)
           ListTile(
             leading: Text(AppLocalizations.of(context).document),
             trailing: Text(ui.fd),
           ),
-        if (ui.fn != '')
+        if (ui.fn.isNotEmpty)
           ListTile(
             leading: Text(AppLocalizations.of(context).documentAttribute),
             trailing: Text(ui.fpd),
