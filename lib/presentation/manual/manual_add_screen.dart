@@ -27,73 +27,72 @@ class ManualAddScreen extends StatelessWidget {
             label: Text(AppLocalizations.of(context).next),
             onPressed: () => submit(context),
           ),
-          body: SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-              child: _buildColumn(context))));
+          body: SingleChildScrollView(child: _buildColumn(context))));
 
   Widget _buildColumn(BuildContext context) {
     final entries = context.category().entries.toList();
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: <Widget>[
-        ListTile(
-          leading: CircleAvatar(
-              child: Icon(entries
-                  .elementAt(
-                      context.select((ManualAddViewModel value) => value.type))
-                  .key)),
-          title: Text(entries
-              .elementAt(
-                  context.select((ManualAddViewModel value) => value.type))
-              .value),
-          onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
-              name: CategoryScreen.routeName,
-              child: CategoryScreen(
-                onPressed: (type) {
-                  context.read<ManualAddViewModel>().saveType(type);
-                  Navigator.of(context).pop();
-                },
-              ))),
-        ),
-        TextField(
-          controller: context
-              .select((ManualAddViewModel value) => value.nameController),
-          keyboardType: TextInputType.streetAddress,
-          textInputAction: TextInputAction.next,
-          decoration:
-              InputDecoration(labelText: AppLocalizations.of(context).product),
-          onChanged: (String value) =>
-              context.read<ManualAddViewModel>().name = value,
-        ),
-        const SizedBox(width: 8),
-        TextField(
-          controller:
-              context.select((ManualAddViewModel value) => value.qtyController),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          textInputAction: TextInputAction.next,
-          decoration: InputDecoration(
-              labelText: AppLocalizations.of(context).qtyy,
-              errorText:
-                  context.select((ManualAddViewModel value) => value.qtyError)),
-          onChanged: (String value) =>
-              context.read<ManualAddViewModel>().changeQty(value, context),
-        ),
-        const SizedBox(width: 8),
-        TextField(
-          controller:
-              context.select((ManualAddViewModel value) => value.sumController),
-          keyboardType: const TextInputType.numberWithOptions(decimal: true),
-          textInputAction: TextInputAction.done,
-          onSubmitted: (_) => submit(context),
-          decoration: InputDecoration(
-              labelText: AppLocalizations.of(context).sum,
-              errorText:
-                  context.select((ManualAddViewModel value) => value.sumError)),
-          onChanged: (String value) =>
-              context.read<ManualAddViewModel>().changeSum(value, context),
-        ),
-      ],
-    );
+    return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+      const SizedBox(height: 16),
+      ListTile(
+        leading: CircleAvatar(
+            child: Icon(entries
+                .elementAt(
+                    context.select((ManualAddViewModel value) => value.type))
+                .key)),
+        title: Text(entries
+            .elementAt(context.select((ManualAddViewModel value) => value.type))
+            .value),
+        onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
+            name: CategoryScreen.routeName,
+            child: CategoryScreen(
+              onPressed: (type) {
+                context.read<ManualAddViewModel>().saveType(type);
+                Navigator.of(context).pop();
+              },
+            ))),
+      ),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(children: [
+            TextField(
+              controller: context
+                  .select((ManualAddViewModel value) => value.nameController),
+              keyboardType: TextInputType.streetAddress,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).product),
+              onChanged: (String value) =>
+                  context.read<ManualAddViewModel>().name = value,
+            ),
+            TextField(
+              controller: context
+                  .select((ManualAddViewModel value) => value.qtyController),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).qtyy,
+                  errorText: context
+                      .select((ManualAddViewModel value) => value.qtyError)),
+              onChanged: (String value) =>
+                  context.read<ManualAddViewModel>().changeQty(value, context),
+            ),
+            TextField(
+              controller: context
+                  .select((ManualAddViewModel value) => value.sumController),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.done,
+              onSubmitted: (_) => submit(context),
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).sum,
+                  errorText: context
+                      .select((ManualAddViewModel value) => value.sumError)),
+              onChanged: (String value) =>
+                  context.read<ManualAddViewModel>().changeSum(value, context),
+            ),
+          ]))
+    ]);
   }
 
   void submit(BuildContext context) {

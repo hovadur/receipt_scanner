@@ -121,8 +121,6 @@ class ReceiptDetailsScreen extends StatelessWidget {
   Widget _receiptBody(BuildContext context, MyReceiptUI ui) {
     return Column(
       mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
           leading: Text(AppLocalizations.of(context).dateTime),

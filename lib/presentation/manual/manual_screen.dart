@@ -18,68 +18,71 @@ class ManualScreen extends StatelessWidget {
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => ManualViewModel(context, receipt),
       builder: (context, _) => Scaffold(
-          appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
-          floatingActionButton: FloatingActionButton.extended(
-            heroTag: null,
-            icon: const Icon(Icons.approval),
-            label: Text(AppLocalizations.of(context).apply),
-            onPressed: () {
-              if (context.read<ManualViewModel>().apply()) {
-                AppNavigator.of(context).pop();
-              }
-            },
-          ),
-          body: SafeArea(
-            minimum: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-            child: _buildBody(context),
-          )));
+            appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
+            floatingActionButton: FloatingActionButton.extended(
+              heroTag: null,
+              icon: const Icon(Icons.approval),
+              label: Text(AppLocalizations.of(context).apply),
+              onPressed: () {
+                if (context.read<ManualViewModel>().apply()) {
+                  AppNavigator.of(context).pop();
+                }
+              },
+            ),
+            body: _buildBody(context),
+          ));
 
   Widget _buildBody(BuildContext context) {
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
-      DateTimePicker(
-        locale: Localizations.localeOf(context),
-        type: DateTimePickerType.dateTimeSeparate,
-        initialValue: context
-            .select((ManualViewModel value) => value.dateTime.toString()),
-        firstDate: DateTime.fromMillisecondsSinceEpoch(0),
-        lastDate: DateTime.now(),
-        onChanged: (String value) =>
-            context.read<ManualViewModel>().changeDateTime(value),
-      ),
-      const SizedBox(height: 8),
-      TextField(
-        controller:
-            context.select((ManualViewModel value) => value.totalController),
-        keyboardType: const TextInputType.numberWithOptions(decimal: true),
-        textInputAction: TextInputAction.next,
-        decoration: InputDecoration(
-            labelText: AppLocalizations.of(context).totalAmount,
-            errorText:
-                context.select((ManualViewModel value) => value.totalError)),
-        onChanged: (String value) =>
-            context.read<ManualViewModel>().changeTotal(value, context),
-      ),
-      const SizedBox(height: 8),
-      Row(children: <Widget>[
-        ElevatedButton.icon(
-            onPressed: () {
-              AppNavigator.of(context).push(MaterialPage<Page>(
-                  name: ManualAddScreen.routeName,
-                  child: ManualAddScreen(
-                    onPressed: (item) {
-                      context.read<ManualViewModel>().addProduct(item);
-                    },
-                  )));
-            },
-            icon: const Icon(Icons.add),
-            label: Text(AppLocalizations.of(context).product)),
-        const SizedBox(width: 8),
-        ElevatedButton.icon(
-            onPressed: () => context.read<ManualViewModel>().removeProduct(),
-            icon: const Icon(Icons.remove),
-            label: Text(AppLocalizations.of(context).product)),
-      ]),
-      const SizedBox(height: 8),
+      Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: Column(children: [
+            DateTimePicker(
+              locale: Localizations.localeOf(context),
+              type: DateTimePickerType.dateTimeSeparate,
+              initialValue: context
+                  .select((ManualViewModel value) => value.dateTime.toString()),
+              firstDate: DateTime.fromMillisecondsSinceEpoch(0),
+              lastDate: DateTime.now(),
+              onChanged: (String value) =>
+                  context.read<ManualViewModel>().changeDateTime(value),
+            ),
+            const SizedBox(height: 8),
+            TextField(
+              controller: context
+                  .select((ManualViewModel value) => value.totalController),
+              keyboardType:
+                  const TextInputType.numberWithOptions(decimal: true),
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(
+                  labelText: AppLocalizations.of(context).totalAmount,
+                  errorText: context
+                      .select((ManualViewModel value) => value.totalError)),
+              onChanged: (String value) =>
+                  context.read<ManualViewModel>().changeTotal(value, context),
+            ),
+            const SizedBox(height: 8),
+            Row(children: <Widget>[
+              ElevatedButton.icon(
+                  onPressed: () {
+                    AppNavigator.of(context).push(MaterialPage<Page>(
+                        name: ManualAddScreen.routeName,
+                        child: ManualAddScreen(
+                          onPressed: (item) {
+                            context.read<ManualViewModel>().addProduct(item);
+                          },
+                        )));
+                  },
+                  icon: const Icon(Icons.add),
+                  label: Text(AppLocalizations.of(context).product)),
+              const SizedBox(width: 8),
+              ElevatedButton.icon(
+                  onPressed: () =>
+                      context.read<ManualViewModel>().removeProduct(),
+                  icon: const Icon(Icons.remove),
+                  label: Text(AppLocalizations.of(context).product)),
+            ])
+          ])),
       Expanded(
           child: ListView.builder(
               itemCount:
