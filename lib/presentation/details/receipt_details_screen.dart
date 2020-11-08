@@ -36,21 +36,38 @@ class ReceiptDetailsScreen extends StatelessWidget {
                   })
             ],
           ),
-          body: SingleChildScrollView(
-              child: Column(mainAxisSize: MainAxisSize.min, children: [
-            Container(
-              margin: const EdgeInsets.all(16),
-              decoration: BoxDecoration(
-                  border: Border.all(
-                      color: Theme.of(context)?.dividerColor ??
-                          const Color(0xFF000000))),
-              child: _buildBody(context),
+          body: StreamBuilder<MyReceiptUI>(
+              stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
+              builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
+                if (snapshot.hasError) {
+                  return const Text('Something went wrong');
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const LinearProgressIndicator();
+                }
+                return _streamBody(context, snapshot.data);
+              })));
+
+  Widget _streamBody(BuildContext context, MyReceiptUI ui) {
+    return Column(
+      children: <Widget>[
+        Expanded(
+          child: _receiptBody(context, ui),
+        ),
+        Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Divider(),
+            ListTile(
+              leading: Text(AppLocalizations.of(context).total),
+              trailing: Text(ui.totalSum),
             ),
-            Container(
-              margin: const EdgeInsets.all(16),
-              child: _buildIrkktBody(context),
-            )
-          ]))));
+            _buildIrkktBody(context),
+          ],
+        )
+      ],
+    );
+  }
 
   Widget _buildIrkktBody(BuildContext context) {
     return FutureBuilder<int>(
@@ -90,7 +107,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
                     ]),
               );
             }
-            return Container();
+            return SizedBox();
           }
           return Stack(children: [
             const LinearProgressIndicator(),
@@ -103,69 +120,39 @@ class ReceiptDetailsScreen extends StatelessWidget {
         });
   }
 
-  Widget _buildBody(BuildContext context) {
-    return StreamBuilder<MyReceiptUI>(
-        stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
-        builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
-          if (snapshot.hasError) {
-            return const Text('Something went wrong');
-          }
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const LinearProgressIndicator();
-          }
-          return _streamBody(context, snapshot.data);
-        });
-  }
-
-  Widget _streamBody(BuildContext context, MyReceiptUI ui) {
+  Widget _receiptBody(BuildContext context, MyReceiptUI ui) {
     return Column(
       mainAxisSize: MainAxisSize.min,
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
           leading: Text(AppLocalizations.of(context).dateTime),
           trailing: Text(ui.dateTime),
         ),
-        ListTile(
-          leading: Text(AppLocalizations.of(context).storage),
-          trailing: Text(ui.fn),
-        ),
-        ListTile(
-          leading: Text(AppLocalizations.of(context).document),
-          trailing: Text(ui.fd),
-        ),
-        ListTile(
-          leading: Text(AppLocalizations.of(context).documentAttribute),
-          trailing: Text(ui.fpd),
-        ),
-        if (ui.items.isNotEmpty)
-          InkWell(
-            onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
-                name: CategoryScreen.routeName,
-                child: CategoryScreen(
-                  onPressed: (type) {
-                    context.read<ReceiptDetailsViewModel>().saveTypeAll(type);
-                    Navigator.of(context).pop();
-                  },
-                ))),
-            child: Text(
-              AppLocalizations.of(context).categoryAll,
-              style: const TextStyle(
-                  color: Colors.blue, decoration: TextDecoration.underline),
-            ),
+        if (ui.fn != '')
+          ListTile(
+            leading: Text(AppLocalizations.of(context).storage),
+            trailing: Text(ui.fn),
           ),
-        ListView.builder(
-            shrinkWrap: true,
-            itemCount: ui.items.length,
-            itemBuilder: (BuildContext context, int index) {
-              return Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 4),
-                  child: _buildItem(context, ui.items[index], index));
-            }),
-        const Divider(),
-        ListTile(
-          leading: Text(AppLocalizations.of(context).total),
-          trailing: Text(ui.totalSum),
-        ),
+        if (ui.fn != '')
+          ListTile(
+            leading: Text(AppLocalizations.of(context).document),
+            trailing: Text(ui.fd),
+          ),
+        if (ui.fn != '')
+          ListTile(
+            leading: Text(AppLocalizations.of(context).documentAttribute),
+            trailing: Text(ui.fpd),
+          ),
+        Expanded(
+            child: ListView.builder(
+                itemCount: ui.items.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: _buildItem(context, ui.items[index], index));
+                })),
       ],
     );
   }
