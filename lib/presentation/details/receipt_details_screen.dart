@@ -107,7 +107,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
                     ]),
               );
             }
-            return SizedBox();
+            return const SizedBox();
           }
           return Stack(children: [
             const LinearProgressIndicator(),
