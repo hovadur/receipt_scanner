@@ -24,59 +24,54 @@ class BudgetAddScreen extends StatelessWidget {
   Widget _buildColumn(BuildContext context) {
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            mainAxisSize: MainAxisSize.max,
-            children: [
-              Column(
-                  mainAxisSize: MainAxisSize.min,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const SizedBox(height: 32),
-                    Text(AppLocalizations.of(context).createNewBudget),
-                    const SizedBox(height: 32),
-                    Text(AppLocalizations.of(context).comeUpBudget),
-                    Text(AppLocalizations.of(context).forExampleBudget),
-                    const SizedBox(height: 32),
-                    TextField(
-                      controller: context.select(
-                          (BudgetAddViewModel value) => value.nameController),
-                      keyboardType: TextInputType.streetAddress,
-                      textInputAction: TextInputAction.next,
-                      decoration: InputDecoration(
-                          labelText: AppLocalizations.of(context).budgetName),
-                      onChanged: (String value) =>
-                          context.read<BudgetAddViewModel>().name = value,
+        child: Column(mainAxisSize: MainAxisSize.min, children: [
+          const SizedBox(height: 32),
+          Text(AppLocalizations.of(context).createNewBudget,
+              textAlign: TextAlign.center),
+          const SizedBox(height: 32),
+          Text(AppLocalizations.of(context).comeUpBudget,
+              textAlign: TextAlign.center),
+          Text(AppLocalizations.of(context).forExampleBudget,
+              textAlign: TextAlign.center),
+          const SizedBox(height: 8),
+          TextField(
+            controller: context
+                .select((BudgetAddViewModel value) => value.nameController),
+            keyboardType: TextInputType.streetAddress,
+            textInputAction: TextInputAction.next,
+            decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).budgetName),
+            onChanged: (String value) =>
+                context.read<BudgetAddViewModel>().name = value,
+          ),
+          const SizedBox(height: 8),
+          TextField(
+            controller: context
+                .select((BudgetAddViewModel value) => value.sumController),
+            keyboardType: const TextInputType.numberWithOptions(decimal: true),
+            textInputAction: TextInputAction.done,
+            onSubmitted: (_) => apply(context),
+            decoration: InputDecoration(
+                labelText: AppLocalizations.of(context).startingBalance,
+                errorText: context
+                    .select((BudgetAddViewModel value) => value.sumError)),
+            onChanged: (String value) =>
+                context.read<BudgetAddViewModel>().changeSum(value, context),
+          ),
+          SizedBox(
+              width: double.infinity,
+              child: Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  child: ElevatedButton(
+                    autofocus: true,
+                    onPressed: () => apply(context),
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 16.0, horizontal: 4.0),
                     ),
-                    const SizedBox(height: 16),
-                    TextField(
-                      controller: context.select(
-                          (BudgetAddViewModel value) => value.sumController),
-                      keyboardType:
-                          const TextInputType.numberWithOptions(decimal: true),
-                      textInputAction: TextInputAction.done,
-                      onSubmitted: (_) => apply(context),
-                      decoration: InputDecoration(
-                          labelText:
-                              AppLocalizations.of(context).startingBalance,
-                          errorText: context.select(
-                              (BudgetAddViewModel value) => value.sumError)),
-                      onChanged: (String value) => context
-                          .read<BudgetAddViewModel>()
-                          .changeSum(value, context),
-                    ),
-                    const SizedBox(height: 16),
-                  ]),
-              ElevatedButton(
-                autofocus: true,
-                onPressed: () => apply(context),
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                      vertical: 16.0, horizontal: 4.0),
-                ),
-                child: Text(AppLocalizations.of(context).apply),
-              ),
-            ]));
+                    child: Text(AppLocalizations.of(context).apply),
+                  ))),
+        ]));
   }
 
   void apply(BuildContext context) async {
