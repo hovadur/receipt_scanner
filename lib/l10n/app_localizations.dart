@@ -124,7 +124,7 @@ abstract class AppLocalizations {
   String get invalidPassword;
 
   // Continue
-  String get next;
+  String get cont;
 
   // Sign in with Google
   String get signInWithGoogle;

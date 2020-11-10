@@ -71,7 +71,7 @@ class LoginForm extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(AppLocalizations.of(context).next),
+                child: Text(AppLocalizations.of(context).cont),
               ),
             ),
           )

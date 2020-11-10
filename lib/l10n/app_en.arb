@@ -28,8 +28,8 @@
   "invalidPassword": "Must be > 7 characters",
   "@invalidPassword": {"description": "Invalid password"},
 
-  "next": "Continue",
-  "@next": {"description": "Continue"},
+  "cont": "Continue",
+  "@cont": {"description": "Continue"},
 
   "signInWithGoogle": "Sign in with Google",
   "@signInWithGoogle": {"description": "Sign in with Google"},

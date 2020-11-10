@@ -24,7 +24,7 @@ class ManualAddScreen extends StatelessWidget {
           ),
           floatingActionButton: FloatingActionButton.extended(
             icon: const Icon(Icons.add),
-            label: Text(AppLocalizations.of(context).next),
+            label: Text(AppLocalizations.of(context).cont),
             onPressed: () => submit(context),
           ),
           body: SingleChildScrollView(child: _buildColumn(context))));
