@@ -180,6 +180,9 @@ abstract class AppLocalizations {
   // Sum
   String get sum;
 
+  // Invalid sum
+  String get sumError;
+
   // Apply
   String get apply;
 
@@ -278,6 +281,33 @@ abstract class AppLocalizations {
 
   // Something went wrong
   String get wentWrong;
+
+  // Budgets
+  String get budgets;
+
+  // Personal
+  String get personal;
+
+  // Cannot be deleted
+  String get cantBeDeleted;
+
+  // Add Budget
+  String get addBudget;
+
+  // Create a new budget
+  String get createNewBudget;
+
+  // Come up with a name for your budget.
+  String get comeUpBudget;
+
+  // For example 'Family'.
+  String get forExampleBudget;
+
+  // Budget name
+  String get budgetName;
+
+  // Starting balance
+  String get startingBalance;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

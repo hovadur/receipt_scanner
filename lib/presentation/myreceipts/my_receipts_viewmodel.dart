@@ -1,6 +1,6 @@
 import 'package:ctr/database.dart';
-import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
-import 'package:ctr/presentation/mapper/my_receipt_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/mapper/receipt_mapper.dart';
 import 'package:ctr/presentation/myreceipts/search_ui.dart';
 import 'package:flutter/material.dart';

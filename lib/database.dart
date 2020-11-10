@@ -3,6 +3,8 @@ import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
 
+import 'domain/entity/budget.dart';
+
 class Database {
   final _users = FirebaseFirestore.instance.collection('users');
 
@@ -11,9 +13,45 @@ class Database {
       await _users
           .doc(user.id)
           .set({'id': user.id, 'email': user.email, 'name': user.name});
+      await _users
+          .doc(UserInteractor().getCurrentUser().id)
+          .collection('budgets')
+          .doc('0')
+          .set({'id': '0', 'name': 'Personal', 'sum': 0});
       return true;
     } catch (e) {
       return false;
+    }
+  }
+
+  Stream<List<Budget>> getBudgets() => _users
+          .doc(UserInteractor().getCurrentUser().id)
+          .collection('budgets')
+          .snapshots()
+          .map((event) {
+        return event.docs.map((e) => Budget.fromDocumentSnapshot(e)).toList();
+      });
+
+  Future<void> deleteBudget(Budget value) async {
+    await _users
+        .doc(UserInteractor().getCurrentUser().id)
+        .collection('budgets')
+        .doc(value.id)
+        .delete();
+  }
+
+  Future<void> saveBudget(Budget value) async {
+    if (value.id == '') {
+      await _users
+          .doc(UserInteractor().getCurrentUser().id)
+          .collection('budgets')
+          .add({'name': value.name, 'sum': value.sum});
+    } else {
+      await _users
+          .doc(UserInteractor().getCurrentUser().id)
+          .collection('budgets')
+          .doc(value.id)
+          .set({'name': value.name, 'sum': value.sum});
     }
   }
 
@@ -42,29 +80,29 @@ class Database {
     return doc.docs.isNotEmpty;
   }
 
-  Future<void> deleteReceipt(Receipt receipt) async {
+  Future<void> deleteReceipt(Receipt value) async {
     await _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
-        .doc(receipt.id)
+        .doc(value.id)
         .delete();
   }
 
-  Future<void> saveReceipt(Receipt receipt) async {
+  Future<void> saveReceipt(Receipt value) async {
     await _users
         .doc(UserInteractor().getCurrentUser().id)
         .collection('receipts')
-        .doc(receipt.id)
+        .doc(value.id)
         .set({
-      'id': receipt.id,
-      'operationType': receipt.operationType,
-      'dateTime': receipt.dateTime,
-      'totalSum': receipt.totalSum,
-      'fiscalDocumentNumber': receipt.fiscalDocumentNumber,
-      'fiscalDriveNumber': receipt.fiscalDriveNumber,
-      'fiscalSign': receipt.fiscalSign,
-      'qr': receipt.qr,
-      'items': receipt.items.map((e) => e.toJson()).toList()
+      'id': value.id,
+      'operationType': value.operationType,
+      'dateTime': value.dateTime,
+      'totalSum': value.totalSum,
+      'fiscalDocumentNumber': value.fiscalDocumentNumber,
+      'fiscalDriveNumber': value.fiscalDriveNumber,
+      'fiscalSign': value.fiscalSign,
+      'qr': value.qr,
+      'items': value.items.map((e) => e.toJson()).toList()
     });
   }
 }

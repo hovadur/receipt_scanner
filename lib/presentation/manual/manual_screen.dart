@@ -20,7 +20,6 @@ class ManualScreen extends StatelessWidget {
       builder: (context, _) => Scaffold(
             appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
             floatingActionButton: FloatingActionButton.extended(
-              heroTag: null,
               icon: const Icon(Icons.approval),
               label: Text(AppLocalizations.of(context).apply),
               onPressed: () {

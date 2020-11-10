@@ -2,7 +2,7 @@ import 'package:ctr/database.dart';
 import 'package:ctr/domain/data/error/irkkt_not_login.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/mapper/my_receipt_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/mapper/receipt_mapper.dart';
 import 'package:flutter/material.dart';
 

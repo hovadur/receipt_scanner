@@ -85,6 +85,9 @@
   "sum": "Сумма",
   "@sum": {"description": "Sum"},
 
+  "sumError": "Неверная сумма",
+  "@sumError": {"description": "Invalid sum"},
+
   "apply": "Применить",
   "@apply": {"description": "Apply"},
 
@@ -185,6 +188,33 @@
   "@sureDelete": {"description": "Are you sure you want to delete this item?"},
 
   "wentWrong": "Что-то пошло не так",
-  "@wentWrong": {"description": "Something went wrong"}
+  "@wentWrong": {"description": "Something went wrong"},
+
+  "budgets": "Бюджеты",
+  "@budgets": {"description": "Budgets"},
+
+  "personal": "Личный",
+  "@personal": {"description": "Personal"},
+
+  "cantBeDeleted": "Нельзя удалять",
+  "@cantBeDeleted": {"description": "Cannot be deleted"},
+
+  "addBudget": "Добавить бюджет",
+  "@addBudget": {"description": "Add Budget"},
+
+  "createNewBudget": "Создайте новый бюджет",
+  "@createNewBudget": {"description": "Create a new budget"},
+
+  "comeUpBudget": "Придумайте название вашему бюджету.",
+  "@comeUpBudget": {"description": "Come up with a name for your budget."},
+
+  "forExampleBudget": "Например, 'Семейный'.",
+  "@forExampleBudget": {"description": "For example 'Family'."},
+
+  "budgetName": "Название бюджета",
+  "@budgetName": {"description": "Budget name"},
+
+  "startingBalance": "Стартовый баланс",
+  "@startingBalance": {"description": "Starting balance"}
 
 }

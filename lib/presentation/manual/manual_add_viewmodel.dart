@@ -1,13 +1,16 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/mapper/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualAddViewModel extends ChangeNotifier {
   ManualAddViewModel(BuildContext context, ReceiptItem item) {
     _item = item;
-    if (item != null) {
+    if (item == null) {
+      _qtyController.text = '0';
+      _sumController.text = '0';
+    } else {
       final myItem = MyReceiptItemUI.fromReceiptItem(context, item);
       _nameController.text = item.name;
       final locale = Localizations.localeOf(context);
@@ -70,7 +73,7 @@ class ManualAddViewModel extends ChangeNotifier {
       _sumError = null;
     } catch (_) {
       _sum = 0;
-      _sumError = AppLocalizations.of(context).qtyError;
+      _sumError = AppLocalizations.of(context).sumError;
     }
     notifyListeners();
   }

@@ -1,6 +1,7 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/budgets/budgets_screen.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/drawer/drawer_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
@@ -34,6 +35,16 @@ class MainDrawer extends StatelessWidget {
                     AppNavigator.of(context).push(const MaterialPage<Page>(
                         name: MyReceiptsScreen.routeName,
                         child: MyReceiptsScreen()));
+                  },
+                ),
+                const Divider(),
+                ListTile(
+                  title: Text(AppLocalizations.of(context).budgets),
+                  onTap: () {
+                    AppNavigator.of(context).clearAndPush(
+                        const MaterialPage<Page>(
+                            name: BudgetsScreen.routeName,
+                            child: BudgetsScreen()));
                   },
                 ),
                 const Divider(),
