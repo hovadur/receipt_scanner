@@ -15,59 +15,63 @@ class MainDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => DrawerViewModel(context),
-      builder: (context, _) => Drawer(
-            child: ListView(
-              padding: EdgeInsets.zero,
-              children: <Widget>[
-                _makeHeader(context),
-                ListTile(
-                  title: Text(AppLocalizations.of(context).scanning),
-                  onTap: () {
-                    AppNavigator.of(context).clearAndPush(
-                        const MaterialPage<Page>(
-                            name: CameraScreen.routeName,
-                            child: CameraScreen()));
-                  },
-                ),
-                ListTile(
-                  title: Text(AppLocalizations.of(context).myReceipts),
-                  onTap: () {
-                    AppNavigator.of(context).clearAndPush(
-                        const MaterialPage<Page>(
-                            name: MyReceiptsScreen.routeName,
-                            child: MyReceiptsScreen()));
-                  },
-                ),
-                const Divider(),
-                ListTile(
-                  title: Text(AppLocalizations.of(context).budgets),
-                  onTap: () {
-                    AppNavigator.of(context).clearAndPush(
-                        const MaterialPage<Page>(
-                            name: BudgetsScreen.routeName,
-                            child: BudgetsScreen()));
-                  },
-                ),
-                const Divider(),
-                ListTile(
-                  title: Text(context.watch<DrawerViewModel>().ui.signOutName),
-                  onTap: () {
-                    context.read<UserInteractor>().signOut();
-                    AppNavigator.of(context).clearAndPush(
-                        const MaterialPage<Page>(
-                            name: SignInScreen.routeName,
-                            child: SignInScreen()));
-                  },
-                ),
-              ],
-            ),
-          ));
+      builder: (context, _) => Drawer(child: _listView(context)));
+
+  Widget _listView(BuildContext context) {
+    return ListView(
+      padding: EdgeInsets.zero,
+      children: <Widget>[
+        _makeHeader(context),
+        ListTile(
+          title: Text(AppLocalizations.of(context).scanning),
+          onTap: () {
+            AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+                name: CameraScreen.routeName, child: CameraScreen()));
+          },
+        ),
+        ListTile(
+          title: Text(AppLocalizations.of(context).myReceipts),
+          onTap: () {
+            AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+                name: MyReceiptsScreen.routeName, child: MyReceiptsScreen()));
+          },
+        ),
+        const Divider(),
+        ListTile(
+          title: Text(AppLocalizations.of(context).budgets),
+          onTap: () {
+            AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+                name: BudgetsScreen.routeName, child: BudgetsScreen()));
+          },
+        ),
+        const Divider(),
+        ListTile(
+          title: Text(context.watch<DrawerViewModel>().ui.signOutName),
+          onTap: () {
+            context.read<UserInteractor>().signOut();
+            AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+                name: SignInScreen.routeName, child: SignInScreen()));
+          },
+        ),
+      ],
+    );
+  }
 
   Widget _makeHeader(BuildContext context) {
     if (context.watch<DrawerViewModel>().ui.isSignIn) {
-      return UserAccountsDrawerHeader(
-          accountEmail: Text(context.watch<DrawerViewModel>().ui.email),
-          accountName: Text(context.watch<DrawerViewModel>().ui.displayName));
+      final theme = Theme.of(context);
+      return DrawerHeader(
+          decoration: BoxDecoration(
+            color: Theme.of(context).primaryColor,
+          ),
+          child: Column(children: [
+            DefaultTextStyle(
+                style: theme.primaryTextTheme.bodyText2,
+                child: Text(context.watch<DrawerViewModel>().ui.email)),
+            DefaultTextStyle(
+                style: theme.primaryTextTheme.bodyText1,
+                child: Text(context.watch<DrawerViewModel>().ui.displayName)),
+          ]));
     } else {
       return DrawerHeader(
           child: Text(AppLocalizations.of(context).notAuthorized));
