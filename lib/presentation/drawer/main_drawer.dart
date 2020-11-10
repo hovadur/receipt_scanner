@@ -32,9 +32,10 @@ class MainDrawer extends StatelessWidget {
                 ListTile(
                   title: Text(AppLocalizations.of(context).myReceipts),
                   onTap: () {
-                    AppNavigator.of(context).push(const MaterialPage<Page>(
-                        name: MyReceiptsScreen.routeName,
-                        child: MyReceiptsScreen()));
+                    AppNavigator.of(context).clearAndPush(
+                        const MaterialPage<Page>(
+                            name: MyReceiptsScreen.routeName,
+                            child: MyReceiptsScreen()));
                   },
                 ),
                 const Divider(),

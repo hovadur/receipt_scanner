@@ -2,6 +2,7 @@ import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
+import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/search.dart';
@@ -27,6 +28,7 @@ class MyReceiptsScreen extends StatelessWidget {
                       showSearch(context: context, delegate: Search(context)))
             ],
           ),
+          drawer: const MainDrawer(),
           body: StreamBuilder<List<MyReceiptUI>>(
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
