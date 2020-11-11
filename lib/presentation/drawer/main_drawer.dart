@@ -9,6 +9,8 @@ import 'package:ctr/presentation/signin/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'drawer_dropdown.dart';
+
 class MainDrawer extends StatelessWidget {
   const MainDrawer({Key key}) : super(key: key);
 
@@ -59,22 +61,19 @@ class MainDrawer extends StatelessWidget {
 
   Widget _makeHeader(BuildContext context) {
     if (context.watch<DrawerViewModel>().ui.isSignIn) {
-      final theme = Theme.of(context);
-      return DrawerHeader(
-          decoration: BoxDecoration(
-            color: Theme.of(context).primaryColor,
-          ),
-          child: Column(children: [
-            DefaultTextStyle(
-                style: theme.primaryTextTheme.bodyText2,
-                child: Text(context.watch<DrawerViewModel>().ui.email)),
-            DefaultTextStyle(
-                style: theme.primaryTextTheme.bodyText1,
-                child: Text(context.watch<DrawerViewModel>().ui.displayName)),
-          ]));
+      return SafeArea(
+          child: Center(
+              child: Column(children: [
+        Text(context.watch<DrawerViewModel>().ui.email),
+        Text(context.watch<DrawerViewModel>().ui.displayName),
+        const DrawerDropDown(),
+      ])));
     } else {
-      return DrawerHeader(
-          child: Text(AppLocalizations.of(context).notAuthorized));
+      return SafeArea(
+          child: Center(
+              child: Column(children: [
+        Text(AppLocalizations.of(context).notAuthorized)
+      ])));
     }
   }
 }
