@@ -1,5 +1,5 @@
 import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -19,7 +19,7 @@ class ReceiptMapper {
         fd: value.fiscalDocumentNumber.toString(),
         fpd: value.fiscalSign.toString(),
         items: value.items
-            .map((item) => MyReceiptItemUI.fromReceiptItem(context, item))
+            .map((item) => MySearchItemUI.fromReceiptItem(context, item))
             .toList(),
         receipt: value);
   }

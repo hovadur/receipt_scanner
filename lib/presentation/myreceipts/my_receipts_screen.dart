@@ -3,6 +3,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
+import 'package:ctr/presentation/myreceipts/my_header_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/search.dart';
@@ -10,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../app_module.dart';
+import 'my_item_ui.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
   const MyReceiptsScreen({Key key}) : super(key: key);
@@ -29,9 +31,9 @@ class MyReceiptsScreen extends StatelessWidget {
             ],
           ),
           drawer: const MainDrawer(),
-          body: StreamBuilder<List<MyReceiptUI>>(
+          body: StreamBuilder<List<MyItemUI>>(
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
-              builder: (context, AsyncSnapshot<List<MyReceiptUI>> snapshot) {
+              builder: (context, AsyncSnapshot<List<MyItemUI>> snapshot) {
                 if (snapshot.hasError) {
                   return Text(AppLocalizations.of(context).wentWrong);
                 }
@@ -48,24 +50,31 @@ class MyReceiptsScreen extends StatelessWidget {
                     });
               })));
 
-  Widget _buildCardItem(BuildContext context, MyReceiptUI value) {
-    return DismissibleCard(
-      id: value.id,
-      onDismissed: (DismissDirection direction) {
-        if (direction == DismissDirection.startToEnd) {
-          context.read<MyReceiptsViewModel>().deleteReceipt(value);
-        }
-      },
-      child: ListTile(
-        leading: const CircleAvatar(child: Icon(Icons.fact_check)),
-        title: Text(value.dateTime),
-        trailing: Text(value.totalSum),
-        onTap: () {
-          AppNavigator.of(context).push(MaterialPage<Page>(
-              name: ReceiptDetailsScreen.routeName,
-              child: ReceiptDetailsScreen(receipt: value.receipt)));
+  Widget _buildCardItem(BuildContext context, MyItemUI value) {
+    if (value is MyReceiptUI) {
+      return DismissibleCard(
+        id: value.id,
+        onDismissed: (DismissDirection direction) {
+          if (direction == DismissDirection.startToEnd) {
+            context.read<MyReceiptsViewModel>().deleteReceipt(value);
+          }
         },
-      ),
-    );
+        child: ListTile(
+          leading: const CircleAvatar(child: Icon(Icons.fact_check)),
+          title: Text(value.dateTime),
+          trailing: Text(value.totalSum),
+          onTap: () {
+            AppNavigator.of(context).push(MaterialPage<Page>(
+                name: ReceiptDetailsScreen.routeName,
+                child: ReceiptDetailsScreen(receipt: value.receipt)));
+          },
+        ),
+      );
+    } else if (value is MyHeaderUI) {
+      return ListTile(
+        title: Center(child:Text(value.getDateTime(context))),
+        trailing: Text(value.getSum(context)),
+      );
+    }
   }
 }

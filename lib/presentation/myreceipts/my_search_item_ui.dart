@@ -3,8 +3,8 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class MyReceiptItemUI {
-  MyReceiptItemUI.fromReceiptItem(BuildContext context, this.item) {
+class MySearchItemUI {
+  MySearchItemUI.fromReceiptItem(BuildContext context, this.item) {
     final locale = Localizations.localeOf(context);
     type = item.type;
     name = item.name;

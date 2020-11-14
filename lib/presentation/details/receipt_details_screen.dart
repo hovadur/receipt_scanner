@@ -5,7 +5,7 @@ import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -153,7 +153,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
     );
   }
 
-  Widget _buildItem(BuildContext context, MyReceiptItemUI item, int index) {
+  Widget _buildItem(BuildContext context, MySearchItemUI item, int index) {
     final entries = context.category().entries.toList();
     return ListTile(
         leading: InkWell(

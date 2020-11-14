@@ -1,7 +1,7 @@
 import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -34,8 +34,8 @@ class ManualViewModel extends ChangeNotifier {
 
   int get productCount => _products.length;
 
-  List<MyReceiptItemUI> getProducts(BuildContext context) => _products
-      .map((item) => MyReceiptItemUI.fromReceiptItem(context, item))
+  List<MySearchItemUI> getProducts(BuildContext context) => _products
+      .map((item) => MySearchItemUI.fromReceiptItem(context, item))
       .toList();
 
   String get totalError => _totalError;

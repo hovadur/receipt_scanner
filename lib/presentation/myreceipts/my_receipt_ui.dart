@@ -1,7 +1,8 @@
 import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 
-class MyReceiptUI {
+class MyReceiptUI extends MyItemUI {
   MyReceiptUI(
       {this.id,
       this.dateTime,
@@ -18,6 +19,6 @@ class MyReceiptUI {
   String fn;
   String fd;
   String fpd;
-  List<MyReceiptItemUI> items;
+  List<MySearchItemUI> items;
   Receipt receipt;
 }
