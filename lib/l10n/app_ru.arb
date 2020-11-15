@@ -67,6 +67,9 @@
   "manual": "Ручной ввод",
   "@manual": {"description": "Manual input"},
 
+  "fromFile": "Из файла",
+  "@fromFile": {"description": "From file"},
+
   "addProduct": "Добавить товар",
   "@addProduct": {"description": "Add Product"},
 
@@ -215,6 +218,21 @@
   "@budgetName": {"description": "Budget name"},
 
   "startingBalance": "Стартовый баланс",
-  "@startingBalance": {"description": "Starting balance"}
+  "@startingBalance": {"description": "Starting balance"},
+
+  "emailCheque": "Если получен электронный чек, то сделайте скриншот того места, где QR-код, и загрузите файл",
+  "@emailCheque": {"description": "If you receive an electronic check, then take a screenshot of the place where the QR code is and upload the file"},
+
+  "uploadFile": "Загрузить файл",
+  "@uploadFile": {"description": "Upload file"},
+
+  "processFile": "Обработать файл",
+  "@processFile": {"description": "Process file"},
+
+  "noFile": "Нет файла",
+  "@noFile": {"description": "No file"},
+
+  "invalidBarcode": "Неверный штрихкод",
+  "@invalidBarcode": {"description": "Invalid barcode"}
 
 }

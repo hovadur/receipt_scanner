@@ -30,7 +30,7 @@ class DismissibleCard extends StatelessWidget {
               ),
             )),
         confirmDismiss: (DismissDirection direction) async {
-          if (await confirmDismiss(direction)) {
+          if (confirmDismiss != null && await confirmDismiss(direction)) {
             return await showDialog(
               context: context,
               builder: (BuildContext context) {

@@ -67,6 +67,9 @@
   "manual": "Manual",
   "@manual": {"description": "Manual input"},
 
+  "fromFile": "From file",
+  "@fromFile": {"description": "From file"},
+
   "addProduct": "Add Product",
   "@addProduct": {"description": "Add Product"},
 
@@ -212,6 +215,21 @@
   "@budgetName": {"description": "Budget name"},
 
   "startingBalance": "Starting balance",
-  "@startingBalance": {"description": "Starting balance"}
+  "@startingBalance": {"description": "Starting balance"},
+
+  "emailCheque": "If you receive an electronic check, then take a screenshot of the place where the QR code is and upload the file",
+  "@emailCheque": {"description": "If you receive an electronic check, then take a screenshot of the place where the QR code is and upload the file"},
+
+  "uploadFile": "Upload file",
+  "@uploadFile": {"description": "Upload file"},
+
+  "processFile": "Process file",
+  "@processFile": {"description": "Process file"},
+
+  "noFile": "No file",
+  "@noFile": {"description": "No file"},
+
+  "invalidBarcode": "Invalid barcode",
+  "@invalidBarcode": {"description": "Invalid barcode"}
 
 }

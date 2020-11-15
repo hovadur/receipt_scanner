@@ -5,8 +5,8 @@ import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
-import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -82,11 +82,13 @@ class ReceiptDetailsScreen extends StatelessWidget {
               return Text(AppLocalizations.of(context).dataReceivedFromFNS);
             }
             if (snapshot.data == 2) {
-              return RichText(
-                  text: TextSpan(
-                      text: AppLocalizations.of(context).dontHaveFnsAccount,
-                      style: TextStyle(color: Theme.of(context).errorColor),
-                      children: <TextSpan>[_nalogRu(context)]));
+              return Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                      text: TextSpan(
+                          text: AppLocalizations.of(context).dontHaveFnsAccount,
+                          style: TextStyle(color: Theme.of(context).errorColor),
+                          children: <TextSpan>[_nalogRu(context)])));
             }
             return const SizedBox();
           }

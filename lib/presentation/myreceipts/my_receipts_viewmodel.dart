@@ -48,5 +48,6 @@ class MyReceiptsViewModel extends ChangeNotifier {
 
   void deleteReceipt(MyReceiptUI receiptUI) {
     _db.deleteReceipt(receiptUI.receipt);
+    notifyListeners();
   }
 }

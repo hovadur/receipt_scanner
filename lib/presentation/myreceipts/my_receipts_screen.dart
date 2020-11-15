@@ -54,6 +54,7 @@ class MyReceiptsScreen extends StatelessWidget {
     if (value is MyReceiptUI) {
       return DismissibleCard(
         id: value.id,
+        confirmDismiss: (_) async => true,
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.startToEnd) {
             context.read<MyReceiptsViewModel>().deleteReceipt(value);
@@ -72,7 +73,7 @@ class MyReceiptsScreen extends StatelessWidget {
       );
     } else if (value is MyHeaderUI) {
       return ListTile(
-        title: Center(child:Text(value.getDateTime(context))),
+        title: Center(child: Text(value.getDateTime(context))),
         trailing: Text(value.getSum(context)),
       );
     }

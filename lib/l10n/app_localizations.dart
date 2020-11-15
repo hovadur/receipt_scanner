@@ -162,6 +162,9 @@ abstract class AppLocalizations {
   // Manual input
   String get manual;
 
+  // From file
+  String get fromFile;
+
   // Add Product
   String get addProduct;
 
@@ -308,6 +311,21 @@ abstract class AppLocalizations {
 
   // Starting balance
   String get startingBalance;
+
+  // If you receive an electronic check, then take a screenshot of the place where the QR code is and upload the file
+  String get emailCheque;
+
+  // Upload file
+  String get uploadFile;
+
+  // Process file
+  String get processFile;
+
+  // No file
+  String get noFile;
+
+  // Invalid barcode
+  String get invalidBarcode;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

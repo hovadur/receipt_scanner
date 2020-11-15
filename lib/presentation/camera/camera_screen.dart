@@ -6,6 +6,7 @@ import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_viewmodel.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
+import 'package:ctr/presentation/fromFile/from_file_screen.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -19,14 +20,28 @@ class CameraScreen extends StatelessWidget {
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(AppLocalizations.of(context).scanning)),
       drawer: const MainDrawer(),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: const Icon(Icons.add),
-        label: Text(AppLocalizations.of(context).manual),
-        onPressed: () {
-          AppNavigator.of(context).push(const MaterialPage<Page>(
-              name: ManualScreen.routeName, child: ManualScreen()));
-        },
-      ),
+      floatingActionButton:
+          Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+        FloatingActionButton.extended(
+          heroTag: null,
+          icon: const Icon(Icons.add),
+          label: Text(AppLocalizations.of(context).manual),
+          onPressed: () {
+            AppNavigator.of(context).push(const MaterialPage<Page>(
+                name: ManualScreen.routeName, child: ManualScreen()));
+          },
+        ),
+        const SizedBox(height: 8),
+        FloatingActionButton.extended(
+          heroTag: null,
+          icon: const Icon(Icons.add),
+          label: Text(AppLocalizations.of(context).fromFile),
+          onPressed: () {
+            AppNavigator.of(context).push(const MaterialPage<Page>(
+                name: FromFileScreen.routeName, child: FromFileScreen()));
+          },
+        )
+      ]),
       body: ChangeNotifierProvider(
           create: (_) => CameraViewModel(),
           builder: (context, _) => Container(

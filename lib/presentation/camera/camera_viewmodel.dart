@@ -18,10 +18,14 @@ class CameraViewModel extends ChangeNotifier {
   @override
   void dispose() {
     _isMounted = false;
-    _camera?.dispose();
+    _camera?.dispose()?.then((_) {
+      _barcodeDetector.close();
+    });
     super.dispose();
   }
 
+  final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
+      const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
   CameraController _camera;
   bool _isDetecting = false;
   bool _isMounted = true;
@@ -47,8 +51,6 @@ class CameraViewModel extends ChangeNotifier {
 
       _isDetecting = true;
 
-      final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
-          const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
       _detect(
         image: image,
         detectInImage: _barcodeDetector.detectInImage,
@@ -74,8 +76,8 @@ class CameraViewModel extends ChangeNotifier {
 
   static Future<List<Barcode>> _detect({
     @required CameraImage image,
-    @required Future<List<Barcode>> Function(FirebaseVisionImage image)
-        detectInImage,
+    @required
+        Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
     @required int imageRotation,
   }) async {
     return detectInImage(
