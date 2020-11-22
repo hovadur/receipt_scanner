@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/entity/user.dart';

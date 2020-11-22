@@ -1,5 +1,5 @@
 class User {
-  User({this.id, this.email, this.name});
+  User({required this.id, required this.email, required this.name});
   String id;
   String email;
   String name;

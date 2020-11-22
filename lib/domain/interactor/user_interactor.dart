@@ -39,7 +39,7 @@ class UserInteractor {
     return await _makeAuthResult(authResult);
   }
 
-  Future<User> signInWithGoogle() async {
+  Future<User?> signInWithGoogle() async {
     final _googleSignIn = GoogleSignIn();
     final account = await _googleSignIn.signIn();
     if (account != null) {

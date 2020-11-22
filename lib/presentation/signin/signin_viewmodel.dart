@@ -1,5 +1,4 @@
 import 'package:ctr/domain/data/validation_item.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
@@ -11,23 +10,22 @@ class SignInViewModel extends ChangeNotifier {
   ValidationItem _email = ValidationItem(null, null);
   ValidationItem _password = ValidationItem(null, null);
 
-  String get emailError => _email.error;
+  String? get emailError => _email.error;
 
-  String get passwordError => _password.error;
+  String? get passwordError => _password.error;
 
-  void changeEmail(String value, BuildContext context) {
+  void changeEmail(String? value, BuildContext context) {
     if (value != null && emailCheck.hasMatch(value)) {
       _email = ValidationItem(value, null);
     } else {
-      _email = ValidationItem(value, AppLocalizations.of(context).invalidEmail);
+      _email = ValidationItem(value, context.translate().invalidEmail);
     }
     notifyListeners();
   }
 
-  void changePassword(String value, BuildContext context) {
+  void changePassword(String? value, BuildContext context) {
     if (value == null || value.length < 8) {
-      _password =
-          ValidationItem(value, AppLocalizations.of(context).invalidPassword);
+      _password = ValidationItem(value, context.translate().invalidPassword);
     } else {
       _password = ValidationItem(value, null);
     }
@@ -47,7 +45,11 @@ class SignInViewModel extends ChangeNotifier {
   void submit(BuildContext context) {
     if (_isValid(context)) {
       Fimber.d('submit');
-      context.signIn(_email.value, _password.value);
+      final email = _email.value;
+      final password = _password.value;
+      if (email != null && password != null) {
+        context.signIn(email, password);
+      }
     }
   }
 }

@@ -1,9 +1,8 @@
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({@required this.onPressed, Key key}) : super(key: key);
+  const CategoryScreen({required this.onPressed, Key? key}) : super(key: key);
 
   static const String routeName = 'CategoryScreen';
 
@@ -13,7 +12,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final categoryMap = context.category();
     return Scaffold(
-        appBar: AppBar(title: Text(AppLocalizations.of(context).categories)),
+        appBar: AppBar(title: Text(context.translate().categories)),
         body: SingleChildScrollView(
             child: ListView.builder(
                 shrinkWrap: true,

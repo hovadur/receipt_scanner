@@ -1,6 +1,5 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/date_time_picker.dart';
 import 'package:ctr/presentation/manual/manual_add_screen.dart';
@@ -9,19 +8,19 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualScreen extends StatelessWidget {
-  const ManualScreen({Key key, this.receipt}) : super(key: key);
+  const ManualScreen({Key? key, this.receipt}) : super(key: key);
   static const String routeName = 'ManualScreen';
 
-  final Receipt receipt;
+  final Receipt? receipt;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => ManualViewModel(context, receipt),
       builder: (context, _) => Scaffold(
-            appBar: AppBar(title: Text(AppLocalizations.of(context).manual)),
+            appBar: AppBar(title: Text(context.translate().manual)),
             floatingActionButton: FloatingActionButton.extended(
               icon: const Icon(Icons.approval),
-              label: Text(AppLocalizations.of(context).apply),
+              label: Text(context.translate().apply),
               onPressed: () {
                 if (context.read<ManualViewModel>().apply()) {
                   AppNavigator.of(context).pop();
@@ -54,7 +53,7 @@ class ManualScreen extends StatelessWidget {
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).totalAmount,
+                  labelText: context.translate().totalAmount,
                   errorText: context
                       .select((ManualViewModel value) => value.totalError)),
               onChanged: (String value) =>
@@ -73,13 +72,13 @@ class ManualScreen extends StatelessWidget {
                         )));
                   },
                   icon: const Icon(Icons.add),
-                  label: Text(AppLocalizations.of(context).product)),
+                  label: Text(context.translate().product)),
               const SizedBox(width: 8),
               ElevatedButton.icon(
                   onPressed: () =>
                       context.read<ManualViewModel>().removeProduct(),
                   icon: const Icon(Icons.remove),
-                  label: Text(AppLocalizations.of(context).product)),
+                  label: Text(context.translate().product)),
             ])
           ])),
       Expanded(

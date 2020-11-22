@@ -135,11 +135,11 @@ class DateTimePicker extends FormField<String> {
   /// For documentation about the various parameters, see the [TextField] class
   /// and [new TextField], the constructor.
   DateTimePicker({
-    Key key,
+    Key? key,
     this.type = DateTimePickerType.date,
     this.controller,
-    this.firstDate,
-    this.lastDate,
+    required this.firstDate,
+    required this.lastDate,
     this.dateMask,
     this.icon,
     this.dateLabelText,
@@ -162,46 +162,46 @@ class DateTimePicker extends FormField<String> {
     this.routeSettings,
     this.use24HourFormat = true,
     this.timeFieldWidth,
-    String initialValue,
-    FocusNode focusNode,
-    InputDecoration decoration,
+    String? initialValue,
+    FocusNode? focusNode,
+    InputDecoration? decoration,
     //TextInputType keyboardType,
     TextCapitalization textCapitalization = TextCapitalization.none,
-    TextInputAction textInputAction,
-    TextStyle style,
-    StrutStyle strutStyle,
+    TextInputAction? textInputAction,
+    TextStyle? style,
+    StrutStyle? strutStyle,
     TextAlign textAlign = TextAlign.start,
-    TextAlignVertical textAlignVertical,
+    TextAlignVertical? textAlignVertical,
     bool autofocus = false,
     bool readOnly = false,
-    ToolbarOptions toolbarOptions,
-    bool showCursor,
+    ToolbarOptions? toolbarOptions,
+    bool showCursor = false,
     bool obscureText = false,
     bool autocorrect = true,
-    SmartDashesType smartDashesType,
-    SmartQuotesType smartQuotesType,
+    SmartDashesType? smartDashesType,
+    SmartQuotesType? smartQuotesType,
     bool enableSuggestions = true,
     bool autovalidate = false,
     bool maxLengthEnforced = true,
     int maxLines = 1,
-    int minLines,
+    int? minLines,
     bool expands = false,
-    int maxLength,
+    int? maxLength,
     this.onChanged,
-    VoidCallback onEditingComplete,
-    ValueChanged<String> onFieldSubmitted,
-    FormFieldSetter<String> onSaved,
-    FormFieldValidator<String> validator,
-    List<TextInputFormatter> inputFormatters,
+    VoidCallback? onEditingComplete,
+    ValueChanged<String>? onFieldSubmitted,
+    FormFieldSetter<String>? onSaved,
+    FormFieldValidator<String>? validator,
+    List<TextInputFormatter>? inputFormatters,
     bool enabled = true,
     double cursorWidth = 2.0,
-    Radius cursorRadius,
-    Color cursorColor,
-    Brightness keyboardAppearance,
+    Radius? cursorRadius,
+    Color? cursorColor,
+    Brightness? keyboardAppearance,
     EdgeInsets scrollPadding = const EdgeInsets.all(20.0),
     bool enableInteractiveSelection = true,
-    InputCounterWidgetBuilder buildCounter,
-    ScrollPhysics scrollPhysics,
+    InputCounterWidgetBuilder? buildCounter,
+    ScrollPhysics? scrollPhysics,
   })  : assert(initialValue == null || controller == null),
         assert(type == DateTimePickerType.time || firstDate != null),
         assert(type == DateTimePickerType.time || lastDate != null),
@@ -351,10 +351,8 @@ class DateTimePicker extends FormField<String> {
             switch (type) {
               case DateTimePickerType.time:
                 return buildField(DateTimePickerType.time);
-                break;
               case DateTimePickerType.dateTime:
                 return buildField(DateTimePickerType.dateTime);
-                break;
               case DateTimePickerType.dateTimeSeparate:
                 return Row(children: <Widget>[
                   Expanded(child: buildField(DateTimePickerType.date)),
@@ -364,7 +362,6 @@ class DateTimePicker extends FormField<String> {
                     child: buildField(DateTimePickerType.time),
                   )
                 ]);
-                break;
               default:
                 return buildField(DateTimePickerType.date);
             }
@@ -380,7 +377,7 @@ class DateTimePicker extends FormField<String> {
   /// If null, this widget will create its own [TextEditingController] and
   /// initialize its [TextEditingController.text] with [initialValue].
   /// The value need to be a DateTime String or null
-  final TextEditingController controller;
+  final TextEditingController? controller;
 
   /// The earliest allowable [DateTime] that the user can select.
   final DateTime firstDate;
@@ -394,7 +391,7 @@ class DateTimePicker extends FormField<String> {
   /// preferred usage, but if newPattern does not match one of the skeletons,
   /// then it is used as a format directly, but will not be adapted to suit the
   /// locale.
-  final String dateMask;
+  final String? dateMask;
 
   /// An icon to show before the input field and outside of the decoration's
   /// container.
@@ -411,7 +408,7 @@ class DateTimePicker extends FormField<String> {
   /// errorText, and counterText.
   ///
   /// See [Icon], [ImageIcon].
-  final Widget icon;
+  final Widget? icon;
 
   /// Text that describes the date input field.
   ///
@@ -420,7 +417,7 @@ class DateTimePicker extends FormField<String> {
   /// text may be entered in the input field). When the input field receives
   /// focus (or if the field is non-empty), the label moves above (i.e.,
   /// vertically adjacent to) the input field.
-  final String dateLabelText;
+  final String? dateLabelText;
 
   /// Text that describes the time input field.
   ///
@@ -429,7 +426,7 @@ class DateTimePicker extends FormField<String> {
   /// text may be entered in the input field). When the input field receives
   /// focus (or if the field is non-empty), the label moves above (i.e.,
   /// vertically adjacent to) the input field.
-  final String timeLabelText;
+  final String? timeLabelText;
 
   /// Text that suggests what sort of date input the field accepts.
   ///
@@ -437,7 +434,7 @@ class DateTimePicker extends FormField<String> {
   /// the screen where text may be entered in the input child) when the input
   /// isEmpty and either (a) labelText is null or (b) the input has the
   /// focus.
-  final String dateHintText;
+  final String? dateHintText;
 
   /// Text that suggests what sort of time input the field accepts.
   ///
@@ -445,82 +442,82 @@ class DateTimePicker extends FormField<String> {
   /// the screen where text may be entered in the input child) when the input
   /// isEmpty and either (a) labelText is null or (b) the input has the
   /// focus.
-  final String timeHintText;
+  final String? timeHintText;
 
   /// Optional strings for the [cancelText] to override the default text.
-  final String calendarTitle;
+  final String? calendarTitle;
 
   /// Optional strings for the [cancelText] to override the default text.
-  final String cancelText;
+  final String? cancelText;
 
   /// Optional strings for the [confirmText] to override the default text.
-  final String confirmText;
+  final String? confirmText;
 
   /// Optional strings for the [fieldLabelText] to override the default text.
-  final String fieldLabelText;
+  final String? fieldLabelText;
 
   /// Optional strings for the [fieldHintText] to override the default text.
-  final String fieldHintText;
+  final String? fieldHintText;
 
   /// Optional strings for the [errorFormatText] to override the default text.
-  final String errorFormatText;
+  final String? errorFormatText;
 
   /// Optional strings for the [errorInvalidText] to override the default text.
-  final String errorInvalidText;
+  final String? errorInvalidText;
 
   /// An optional [textDirection] argument can be used to set the text direction
   /// (TextDirection.ltr or TextDirection.rtl) for the date picker. It
   /// defaults to the ambient text direction provided by [Directionality]. If
   /// both [locale] and [textDirection] are non-null, [textDirection] overrides
   /// the direction chosen for the [locale].
-  final TextDirection textDirection;
+  final TextDirection? textDirection;
 
   /// An optional [locale] argument can be used to set the locale for the date
   /// picker. It defaults to the ambient locale provided by [Localizations].
-  final Locale locale;
+  final Locale? locale;
 
   /// The context, [useRootNavigator] and [routeSettings] arguments are
   /// passed to [showDialog], the documentation for which discusses how it is
   /// used. context and [useRootNavigator] must be non-null.
-  final bool useRootNavigator;
+  final bool? useRootNavigator;
 
   /// Creates data used to construct routes.
-  final RouteSettings routeSettings;
+  final RouteSettings? routeSettings;
 
   /// An optional [initialEntryMode] argument can be used to display the date
   /// picker in the [DatePickerEntryMode.calendar] (a calendar month grid)
   /// or [DatePickerEntryMode.input] (a text input field) mode.
   /// It defaults to [DatePickerEntryMode.calendar] and must be non-null.
-  final DatePickerEntryMode initialEntryMode;
+  final DatePickerEntryMode? initialEntryMode;
 
   /// An optional [initialDatePickerMode] argument can be used to have the
   /// calendar date picker initially appear in the [DatePickerMode.year] or
   /// [DatePickerMode.day] mode. It defaults to [DatePickerMode.day], and
   /// must be non-null.
-  final DatePickerMode initialDatePickerMode;
+  final DatePickerMode? initialDatePickerMode;
 
   /// An optional [selectableDayPredicate] function can be passed in to only
   /// allow certain days for selection. If provided, only the days that
   /// [selectableDayPredicate] returns true for will be selectable. For example,
   /// this can be used to only allow weekdays for selection. If provided, it
   /// must return true for initialDate.
-  final bool Function(DateTime) selectableDayPredicate;
+  final bool Function(DateTime)? selectableDayPredicate;
 
   /// Show a dialog with time unconditionally displayed in 24 hour format.
   final bool use24HourFormat;
 
   /// The width for time text field when DateTimePickerType is
   /// dateTimeSeparated.
-  final double timeFieldWidth;
+  final double? timeFieldWidth;
 
-  final ValueChanged<String> onChanged;
+  final ValueChanged<String>? onChanged;
 
   @override
   _DateTimePickerState createState() => _DateTimePickerState();
 }
 
 class _DateTimePickerState extends FormFieldState<String> {
-  TextEditingController _stateController;
+  TextEditingController? _stateController;
   final TextEditingController _dateLabelController = TextEditingController();
   final TextEditingController _timeLabelController = TextEditingController();
   DateTime _dDate = DateTime.now();
@@ -533,7 +530,7 @@ class _DateTimePickerState extends FormFieldState<String> {
   @override
   DateTimePicker get widget => super.widget as DateTimePicker;
 
-  TextEditingController get _effectiveController =>
+  TextEditingController? get _effectiveController =>
       widget.controller ?? _stateController;
 
   @override
@@ -546,7 +543,7 @@ class _DateTimePickerState extends FormFieldState<String> {
       widget.controller?.addListener(_handleControllerChanged);
     }
 
-    final lsValue = _effectiveController.text.trim();
+    final lsValue = _effectiveController?.text.trim();
     final languageCode = widget.locale?.languageCode;
     if (lsValue != null && lsValue != '' && lsValue != 'null') {
       if (widget.type != DateTimePickerType.time) {
@@ -619,7 +616,7 @@ class _DateTimePickerState extends FormFieldState<String> {
 
     if (_effectiveController?.text != null &&
         _effectiveController?.text != '') {
-      final lsValue = _effectiveController.text.trim();
+      final lsValue = _effectiveController?.text.trim();
 
       if (lsValue != null && lsValue != '' && lsValue != 'null') {
         if (widget.type != DateTimePickerType.time) {
@@ -705,8 +702,8 @@ class _DateTimePickerState extends FormFieldState<String> {
     final ldDatePicked = await showDatePicker(
       context: context,
       initialDate: _dDate,
-      firstDate: widget.firstDate ?? DateTime.now(),
-      lastDate: widget.lastDate ?? DateTime.now(),
+      firstDate: widget.firstDate,
+      lastDate: widget.lastDate,
       helpText: widget.calendarTitle,
       cancelText: widget.cancelText,
       confirmText: widget.confirmText,
@@ -733,10 +730,10 @@ class _DateTimePickerState extends FormFieldState<String> {
 
       if (widget.dateMask != null && widget.dateMask != '') {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
-            .format(DateTime.tryParse(_sDate));
+            .format(DateTime.tryParse(_sDate)!);
       } else {
         lsFormatedDate =
-            DateFormat('yMd', languageCode).format(DateTime.tryParse(_sDate));
+            DateFormat('yMd', languageCode).format(DateTime.tryParse(_sDate)!);
       }
 
       if (widget.type == DateTimePickerType.dateTimeSeparate && _sTime != '') {
@@ -759,7 +756,7 @@ class _DateTimePickerState extends FormFieldState<String> {
       initialTime: _tTime,
       useRootNavigator: widget.useRootNavigator ?? false,
       routeSettings: widget.routeSettings,
-      builder: (BuildContext context, Widget child) {
+      builder: (BuildContext context, Widget? child) {
         return MediaQuery(
           data: MediaQuery.of(context)
               .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
@@ -806,8 +803,8 @@ class _DateTimePickerState extends FormFieldState<String> {
     final ldDatePicked = await showDatePicker(
       context: context,
       initialDate: _dDate,
-      firstDate: widget.firstDate ?? DateTime.now(),
-      lastDate: widget.lastDate ?? DateTime.now(),
+      firstDate: widget.firstDate,
+      lastDate: widget.lastDate,
       helpText: widget.calendarTitle,
       cancelText: widget.cancelText,
       confirmText: widget.confirmText,
@@ -834,7 +831,7 @@ class _DateTimePickerState extends FormFieldState<String> {
         initialTime: _tTime,
         useRootNavigator: widget.useRootNavigator ?? false,
         routeSettings: widget.routeSettings,
-        builder: (BuildContext context, Widget child) {
+        builder: (BuildContext context, Widget? child) {
           return MediaQuery(
             data: MediaQuery.of(context)
                 .copyWith(alwaysUse24HourFormat: widget.use24HourFormat),
@@ -878,11 +875,11 @@ class _DateTimePickerState extends FormFieldState<String> {
 
       if (widget.dateMask != null && widget.dateMask != '') {
         lsFormatedDate = DateFormat(widget.dateMask, languageCode)
-            .format(DateTime.tryParse(_sValue));
+            .format(DateTime.tryParse(_sValue)!);
       } else {
         final lsMask = _sTime != '' ? 'MMM dd, yyyy - HH:mm' : 'yMd';
-        lsFormatedDate =
-            DateFormat(lsMask, languageCode).format(DateTime.tryParse(_sValue));
+        lsFormatedDate = DateFormat(lsMask, languageCode)
+            .format(DateTime.tryParse(_sValue)!);
       }
 
       _dateLabelController.text = lsFormatedDate;

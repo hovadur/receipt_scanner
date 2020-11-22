@@ -13,7 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ReceiptDetailsScreen extends StatelessWidget {
-  const ReceiptDetailsScreen({@required this.receipt, Key key})
+  const ReceiptDetailsScreen({required this.receipt, Key? key})
       : super(key: key);
 
   static const String routeName = 'ReceiptDetails';
@@ -25,7 +25,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
       create: (_) => ReceiptDetailsViewModel(context, receipt),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).details),
+            title: Text(context.translate().details),
             actions: [
               IconButton(
                   icon: const Icon(Icons.edit),
@@ -39,13 +39,14 @@ class ReceiptDetailsScreen extends StatelessWidget {
           body: StreamBuilder<MyReceiptUI>(
               stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
               builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
-                if (snapshot.hasError) {
-                  return Text(AppLocalizations.of(context).wentWrong);
+                final ui = snapshot.data;
+                if (snapshot.hasError || ui == null) {
+                  return Text(context.translate().wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();
                 }
-                return _streamBody(context, snapshot.data);
+                return _streamBody(context, ui);
               })));
 
   Widget _streamBody(BuildContext context, MyReceiptUI ui) {
@@ -59,7 +60,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
           children: [
             const Divider(),
             ListTile(
-              leading: Text(AppLocalizations.of(context).total),
+              leading: Text(context.translate().total),
               trailing: Text(ui.totalSum),
             ),
             _buildIrkktBody(context),
@@ -75,18 +76,20 @@ class ReceiptDetailsScreen extends StatelessWidget {
             context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
         builder: (context, AsyncSnapshot<int> snapshot) {
           if (snapshot.hasError) {
-            return Text(AppLocalizations.of(context).wentWrong);
+            return Text(context.translate().wentWrong);
           }
           if (snapshot.connectionState == ConnectionState.done) {
             if (snapshot.data == 1) {
-              return Text(AppLocalizations.of(context).dataReceivedFromFNS);
+              return Text(context.translate().dataReceivedFromFNS);
             }
             if (snapshot.data == 2) {
               return Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: RichText(
                       text: TextSpan(
-                          text: AppLocalizations.of(context).dontHaveFnsAccount,
+                          text: AppLocalizations.of(context)
+                                  ?.dontHaveFnsAccount ??
+                              '',
                           style: TextStyle(color: Theme.of(context).errorColor),
                           children: <TextSpan>[_nalogRu(context)])));
             }
@@ -97,7 +100,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             Container(
                 padding: const EdgeInsets.all(8.0),
                 child: Align(
-                  child: Text(AppLocalizations.of(context).checkReceiptInFNS),
+                  child: Text(context.translate().checkReceiptInFNS),
                 ))
           ]);
         });
@@ -105,7 +108,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
 
   TextSpan _nalogRu(BuildContext context) {
     return TextSpan(
-        text: AppLocalizations.of(context).nalogruAccount,
+        text: context.translate().nalogruAccount,
         style: const TextStyle(
             color: Colors.blue, decoration: TextDecoration.underline),
         recognizer: TapGestureRecognizer()
@@ -125,22 +128,22 @@ class ReceiptDetailsScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          leading: Text(AppLocalizations.of(context).dateTime),
+          leading: Text(context.translate().dateTime),
           trailing: Text(ui.dateTime),
         ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(AppLocalizations.of(context).storage),
+            leading: Text(context.translate().storage),
             trailing: Text(ui.fn),
           ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(AppLocalizations.of(context).document),
+            leading: Text(context.translate().document),
             trailing: Text(ui.fd),
           ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(AppLocalizations.of(context).documentAttribute),
+            leading: Text(context.translate().documentAttribute),
             trailing: Text(ui.fpd),
           ),
         Expanded(

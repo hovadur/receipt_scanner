@@ -1,12 +1,12 @@
 import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualViewModel extends ChangeNotifier {
-  ManualViewModel(BuildContext context, Receipt receipt) {
+  ManualViewModel(BuildContext context, Receipt? receipt) {
     if (receipt != null) {
       final locale = Localizations.localeOf(context);
       _dateTime = receipt.dateTime;
@@ -21,10 +21,10 @@ class ManualViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  Receipt _receipt;
+  Receipt? _receipt;
   DateTime _dateTime = DateTime.now();
   List<ReceiptItem> _products = [];
-  String _totalError;
+  String? _totalError;
   int _total = 0;
   final TextEditingController _totalController = TextEditingController();
 
@@ -38,7 +38,7 @@ class ManualViewModel extends ChangeNotifier {
       .map((item) => MySearchItemUI.fromReceiptItem(context, item))
       .toList();
 
-  String get totalError => _totalError;
+  String? get totalError => _totalError;
 
   void changeTotal(String value, BuildContext context) {
     try {
@@ -47,7 +47,7 @@ class ManualViewModel extends ChangeNotifier {
       _total = (total * 100).toInt();
       _totalError = null;
     } catch (_) {
-      _totalError = AppLocalizations.of(context).totalError;
+      _totalError = context.translate().totalError;
     }
     notifyListeners();
   }
@@ -77,16 +77,17 @@ class ManualViewModel extends ChangeNotifier {
   bool apply() {
     if (_totalError != null || _total == 0) return false;
     final db = Database();
-    if (_receipt == null) {
+    final receipt = _receipt;
+    if (receipt == null) {
       final receipt =
           Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
       db.saveReceipt(receipt);
     } else {
-      _receipt
+      receipt
         ..dateTime = _dateTime
         ..items = _products
         ..totalSum = _total;
-      db.saveReceipt(_receipt);
+      db.saveReceipt(receipt);
     }
     return true;
   }

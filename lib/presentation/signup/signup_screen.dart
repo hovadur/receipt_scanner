@@ -1,4 +1,3 @@
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signup/signup_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +5,12 @@ import 'package:provider/provider.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class SignUpScreen extends StatelessWidget {
-  const SignUpScreen({Key key}) : super(key: key);
+  const SignUpScreen({Key? key}) : super(key: key);
   static const String routeName = 'SignUpScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).signUp)),
+      appBar: AppBar(title: Text(context.translate().signUp)),
       body: ChangeNotifierProvider(
           create: (_) => SignUpViewModel(),
           builder: (context, _) => SingleChildScrollView(
@@ -23,8 +22,7 @@ class SignUpScreen extends StatelessWidget {
                     ElevatedButton.icon(
                         onPressed: () => context.googleSignIn(),
                         icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
-                        label:
-                            Text(AppLocalizations.of(context).signInWithGoogle),
+                        label: Text(context.translate().signInWithGoogle),
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xfff7f7f7),
                             shape: RoundedRectangleBorder(
@@ -35,7 +33,7 @@ class SignUpScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({Key key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -45,7 +43,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).email,
+                labelText: context.translate().email,
                 errorText: context
                     .select((SignUpViewModel value) => value.emailError)),
             onChanged: (String value) =>
@@ -58,7 +56,7 @@ class LoginForm extends StatelessWidget {
             onSubmitted: (String value) =>
                 context.read<SignUpViewModel>().submit(context),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).password,
+                labelText: context.translate().password,
                 errorText: context
                     .select((SignUpViewModel value) => value.passwordError)),
             onChanged: (String value) =>
@@ -70,7 +68,7 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).confirmPassword,
+                labelText: context.translate().confirmPassword,
                 errorText: context.select(
                     (SignUpViewModel value) => value.confirmPasswordError)),
             onChanged: (String value) => context
@@ -88,7 +86,7 @@ class LoginForm extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(AppLocalizations.of(context).cont),
+                child: Text(context.translate().cont),
               ),
             ),
           )

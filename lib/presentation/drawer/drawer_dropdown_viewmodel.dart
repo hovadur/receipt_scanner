@@ -7,9 +7,9 @@ import '../../database.dart';
 
 class DrawerDropDownViewModel extends ChangeNotifier {
   final Database _db = Database();
-  BudgetUI _currentBudget;
+  BudgetUI? _currentBudget;
 
-  BudgetUI get currentBudget => _currentBudget;
+  BudgetUI? get currentBudget => _currentBudget;
 
   Stream<List<BudgetUI>> getBudgets(BuildContext context) =>
       _db.getBudgets().asyncMap((budgets) async {

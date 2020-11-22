@@ -2,8 +2,8 @@ import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/barcode_detector_painter.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_viewmodel.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:ctr/presentation/fromFile/from_file_screen.dart';
@@ -13,19 +13,19 @@ import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 
 class CameraScreen extends StatelessWidget {
-  const CameraScreen({Key key}) : super(key: key);
+  const CameraScreen({Key? key}) : super(key: key);
   static const String routeName = 'CameraScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).scanning)),
+      appBar: AppBar(title: Text(context.translate().scanning)),
       drawer: const MainDrawer(),
       floatingActionButton:
           Column(mainAxisAlignment: MainAxisAlignment.end, children: [
         FloatingActionButton.extended(
           heroTag: null,
           icon: const Icon(Icons.add),
-          label: Text(AppLocalizations.of(context).manual),
+          label: Text(context.translate().manual),
           onPressed: () {
             AppNavigator.of(context).push(const MaterialPage<Page>(
                 name: ManualScreen.routeName, child: ManualScreen()));
@@ -35,7 +35,7 @@ class CameraScreen extends StatelessWidget {
         FloatingActionButton.extended(
           heroTag: null,
           icon: const Icon(Icons.add),
-          label: Text(AppLocalizations.of(context).fromFile),
+          label: Text(context.translate().fromFile),
           onPressed: () {
             AppNavigator.of(context).push(const MaterialPage<Page>(
                 name: FromFileScreen.routeName, child: FromFileScreen()));
@@ -53,7 +53,7 @@ class CameraScreen extends StatelessWidget {
     if (camera == null) {
       return Center(
         child: Text(
-          AppLocalizations.of(context).cameraInit,
+          context.translate().cameraInit,
           style: const TextStyle(
             color: Colors.green,
             fontSize: 30.0,

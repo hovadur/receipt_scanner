@@ -1,5 +1,4 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signin/signin_viewmodel.dart';
 import 'package:ctr/presentation/signup/signup_screen.dart';
@@ -9,12 +8,12 @@ import 'package:provider/provider.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class SignInScreen extends StatelessWidget {
-  const SignInScreen({Key key}) : super(key: key);
+  const SignInScreen({Key? key}) : super(key: key);
   static const String routeName = 'SignInScreen';
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).signIn)),
+      appBar: AppBar(title: Text(context.translate().signIn)),
       body: ChangeNotifierProvider(
           create: (_) => SignInViewModel(),
           builder: (context, _) => SingleChildScrollView(
@@ -26,8 +25,7 @@ class SignInScreen extends StatelessWidget {
                   ElevatedButton.icon(
                       onPressed: () => context.googleSignIn(),
                       icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
-                      label:
-                          Text(AppLocalizations.of(context).signInWithGoogle),
+                      label: Text(context.translate().signInWithGoogle),
                       style: ElevatedButton.styleFrom(
                           primary: const Color(0xfff7f7f7),
                           shape: RoundedRectangleBorder(
@@ -37,7 +35,7 @@ class SignInScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text(
-                        AppLocalizations.of(context).dontHaveAccount,
+                        context.translate().dontHaveAccount,
                       ),
                       InkWell(
                         onTap: () {
@@ -47,7 +45,7 @@ class SignInScreen extends StatelessWidget {
                                   child: SignUpScreen()));
                         },
                         child: Text(
-                          AppLocalizations.of(context).signUp,
+                          context.translate().signUp,
                           style: const TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline),
@@ -60,7 +58,7 @@ class SignInScreen extends StatelessWidget {
 }
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({Key key}) : super(key: key);
+  const LoginForm({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => Column(
@@ -70,7 +68,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).email,
+                labelText: context.translate().email,
                 errorText: context
                     .select((SignInViewModel value) => value.emailError)),
             onChanged: (String value) =>
@@ -82,7 +80,7 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).password,
+                labelText: context.translate().password,
                 errorText: context
                     .select((SignInViewModel value) => value.passwordError)),
             onChanged: (String value) =>
@@ -99,7 +97,7 @@ class LoginForm extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(AppLocalizations.of(context).cont),
+                child: Text(context.translate().cont),
               ),
             ),
           )

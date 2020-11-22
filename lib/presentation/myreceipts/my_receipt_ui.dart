@@ -4,14 +4,14 @@ import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 
 class MyReceiptUI extends MyItemUI {
   MyReceiptUI(
-      {this.id,
-      this.dateTime,
-      this.totalSum,
-      this.fn,
-      this.fd,
-      this.fpd,
-      this.items,
-      this.receipt});
+      {required this.id,
+      required this.dateTime,
+      required this.totalSum,
+      required this.fn,
+      required this.fd,
+      required this.fpd,
+      required this.items,
+      required this.receipt});
 
   String id;
   String dateTime;

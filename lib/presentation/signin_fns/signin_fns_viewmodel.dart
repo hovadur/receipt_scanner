@@ -1,7 +1,7 @@
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/data/validation_item.dart';
 import 'package:ctr/domain/string_ext.dart';
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
@@ -9,23 +9,22 @@ class SignInFnsViewModel extends ChangeNotifier {
   ValidationItem _inn = ValidationItem(null, null);
   ValidationItem _password = ValidationItem(null, null);
 
-  String get innError => _inn.error;
+  String? get innError => _inn.error;
 
-  String get passwordError => _password.error;
+  String? get passwordError => _password.error;
 
-  void changeEmail(String value, BuildContext context) {
+  void changeEmail(String? value, BuildContext context) {
     if (value != null && value.isValidINN()) {
       _inn = ValidationItem(value, null);
     } else {
-      _inn = ValidationItem(value, AppLocalizations.of(context).invalidInn);
+      _inn = ValidationItem(value, context.translate().invalidInn);
     }
     notifyListeners();
   }
 
-  void changePassword(String value, BuildContext context) {
+  void changePassword(String? value, BuildContext context) {
     if (value == null || value.isEmpty) {
-      _password =
-          ValidationItem(value, AppLocalizations.of(context).invalidPassword);
+      _password = ValidationItem(value, context.translate().invalidPassword);
     } else {
       _password = ValidationItem(value, null);
     }

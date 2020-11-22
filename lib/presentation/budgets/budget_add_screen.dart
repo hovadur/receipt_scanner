@@ -1,23 +1,23 @@
 import 'package:ctr/domain/entity/budget.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'budget_add_viewmodel.dart';
 
 class BudgetAddScreen extends StatelessWidget {
-  const BudgetAddScreen({this.item, Key key}) : super(key: key);
+  const BudgetAddScreen({this.item, Key? key}) : super(key: key);
   static const String routeName = 'BudgetAddScreen';
 
-  final Budget item;
+  final Budget? item;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => BudgetAddViewModel(context, item),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).addBudget),
+            title: Text(context.translate().addBudget),
           ),
           body: SingleChildScrollView(child: _buildColumn(context))));
 
@@ -26,12 +26,11 @@ class BudgetAddScreen extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           const SizedBox(height: 32),
-          Text(AppLocalizations.of(context).createNewBudget,
+          Text(context.translate().createNewBudget,
               textAlign: TextAlign.center),
           const SizedBox(height: 32),
-          Text(AppLocalizations.of(context).comeUpBudget,
-              textAlign: TextAlign.center),
-          Text(AppLocalizations.of(context).forExampleBudget,
+          Text(context.translate().comeUpBudget, textAlign: TextAlign.center),
+          Text(context.translate().forExampleBudget,
               textAlign: TextAlign.center),
           const SizedBox(height: 8),
           TextField(
@@ -39,8 +38,8 @@ class BudgetAddScreen extends StatelessWidget {
                 .select((BudgetAddViewModel value) => value.nameController),
             keyboardType: TextInputType.streetAddress,
             textInputAction: TextInputAction.next,
-            decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).budgetName),
+            decoration:
+                InputDecoration(labelText: context.translate().budgetName),
             onChanged: (String value) =>
                 context.read<BudgetAddViewModel>().name = value,
           ),
@@ -52,7 +51,7 @@ class BudgetAddScreen extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (_) => apply(context),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).startingBalance,
+                labelText: context.translate().startingBalance,
                 errorText: context
                     .select((BudgetAddViewModel value) => value.sumError)),
             onChanged: (String value) =>
@@ -69,7 +68,7 @@ class BudgetAddScreen extends StatelessWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 4.0),
                     ),
-                    child: Text(AppLocalizations.of(context).apply),
+                    child: Text(context.translate().apply),
                   ))),
         ]));
   }

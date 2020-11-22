@@ -2,8 +2,8 @@ import 'package:ctr/database.dart';
 import 'package:ctr/domain/data/error/irkkt_not_login.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/mapper/receipt_mapper.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:flutter/material.dart';
 
 class ReceiptDetailsViewModel extends ChangeNotifier {
@@ -17,9 +17,9 @@ class ReceiptDetailsViewModel extends ChangeNotifier {
   }
 
   final Database _db = Database();
-  Receipt _receipt;
+  late Receipt _receipt;
 
-  MyReceiptUI _ui;
+  late MyReceiptUI _ui;
 
   Stream<MyReceiptUI> getUI(BuildContext context) => _db
       .getReceipt(_receipt.id)

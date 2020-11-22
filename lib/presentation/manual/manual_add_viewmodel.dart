@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualAddViewModel extends ChangeNotifier {
-  ManualAddViewModel(BuildContext context, ReceiptItem item) {
+  ManualAddViewModel(BuildContext context, ReceiptItem? item) {
     _item = item;
     if (item == null) {
       _qtyController.text = '0';
@@ -24,13 +24,13 @@ class ManualAddViewModel extends ChangeNotifier {
     }
   }
 
-  String _sumError;
-  String _qtyError;
+  String? _sumError;
+  String? _qtyError;
   int _type = 1;
   String name = '';
   num _qty = 0;
   int _sum = 0;
-  ReceiptItem _item;
+  ReceiptItem? _item;
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _qtyController = TextEditingController();
   final TextEditingController _sumController = TextEditingController();
@@ -41,9 +41,9 @@ class ManualAddViewModel extends ChangeNotifier {
 
   TextEditingController get sumController => _sumController;
 
-  String get sumError => _sumError;
+  String? get sumError => _sumError;
 
-  String get qtyError => _qtyError;
+  String? get qtyError => _qtyError;
 
   int get type => _type;
 
@@ -60,7 +60,7 @@ class ManualAddViewModel extends ChangeNotifier {
       _qtyError = null;
     } catch (_) {
       _qty = 0;
-      _qtyError = AppLocalizations.of(context).totalError;
+      _qtyError = AppLocalizations.of(context)?.totalError??'';
     }
     notifyListeners();
   }
@@ -73,16 +73,17 @@ class ManualAddViewModel extends ChangeNotifier {
       _sumError = null;
     } catch (_) {
       _sum = 0;
-      _sumError = AppLocalizations.of(context).sumError;
+      _sumError = AppLocalizations.of(context)?.sumError??'';
     }
     notifyListeners();
   }
 
   ReceiptItem getProduct(BuildContext context) {
-    if (_item == null) {
+    final item = _item;
+    if (item == null) {
       return ReceiptItem(_type, name, 0, _qty, _sum);
     } else {
-      return _item
+      return item
         ..type = _type
         ..name = name
         ..quantity = _qty

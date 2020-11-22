@@ -1,5 +1,5 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/drawer/drawer_ui.dart';
 import 'package:flutter/material.dart';
 
@@ -10,10 +10,10 @@ class DrawerViewModel extends ChangeNotifier {
       _ui = DrawerUI(
           email: user.email,
           displayName: user.name,
-          signOutName: AppLocalizations.of(context).signOut,
+          signOutName: context.translate().signOut,
           isSignIn: true);
     } else {
-      _ui.signOutName = AppLocalizations.of(context).signIn;
+      _ui.signOutName = context.translate().signIn;
     }
     notifyListeners();
   }

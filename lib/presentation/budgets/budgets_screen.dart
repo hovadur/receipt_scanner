@@ -1,6 +1,6 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/budgets/budgets_viewmodel.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:flutter/material.dart';
@@ -10,7 +10,7 @@ import 'budget_add_screen.dart';
 import 'budgets_ui.dart';
 
 class BudgetsScreen extends StatelessWidget {
-  const BudgetsScreen({Key key}) : super(key: key);
+  const BudgetsScreen({Key? key}) : super(key: key);
   static const String routeName = 'BudgetsScreen';
 
   @override
@@ -18,12 +18,12 @@ class BudgetsScreen extends StatelessWidget {
       create: (_) => BudgetsViewModel(),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).budgets),
+            title: Text(context.translate().budgets),
           ),
           drawer: const MainDrawer(),
           floatingActionButton: FloatingActionButton.extended(
             icon: const Icon(Icons.add),
-            label: Text(AppLocalizations.of(context).addBudget),
+            label: Text(context.translate().addBudget),
             onPressed: () {
               AppNavigator.of(context).push(const MaterialPage<Page>(
                   name: BudgetAddScreen.routeName, child: BudgetAddScreen()));
@@ -33,7 +33,7 @@ class BudgetsScreen extends StatelessWidget {
               stream: context.watch<BudgetsViewModel>().getBudgets(context),
               builder: (context, AsyncSnapshot<List<BudgetUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return Text(AppLocalizations.of(context).wentWrong);
+                  return Text(context.translate().wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();
@@ -41,7 +41,7 @@ class BudgetsScreen extends StatelessWidget {
                 return ListView.builder(
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final value = snapshot.data[index];
+                      final value = snapshot.data?[index];
                       return value == null
                           ? const SizedBox()
                           : _buildCardItem(context, value);
@@ -53,8 +53,8 @@ class BudgetsScreen extends StatelessWidget {
       id: value.id,
       confirmDismiss: (_) async {
         if (value.id == '0') {
-          final snackBar = SnackBar(
-              content: Text(AppLocalizations.of(context).cantBeDeleted));
+          final snackBar =
+              SnackBar(content: Text(context.translate().cantBeDeleted));
           Scaffold.of(context).showSnackBar(snackBar);
           return false;
         } else {

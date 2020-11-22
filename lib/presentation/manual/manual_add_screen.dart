@@ -1,6 +1,5 @@
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/manual/manual_add_viewmodel.dart';
@@ -8,23 +7,23 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ManualAddScreen extends StatelessWidget {
-  const ManualAddScreen({@required this.onPressed, this.item, Key key})
+  const ManualAddScreen({required this.onPressed, this.item, Key? key})
       : super(key: key);
   static const String routeName = 'ManualAddScreen';
 
   final ValueChanged<ReceiptItem> onPressed;
-  final ReceiptItem item;
+  final ReceiptItem? item;
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (_) => ManualAddViewModel(context, item),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).addProduct),
+            title: Text(context.translate().addProduct),
           ),
           floatingActionButton: FloatingActionButton.extended(
             icon: const Icon(Icons.add),
-            label: Text(AppLocalizations.of(context).cont),
+            label: Text(context.translate().cont),
             onPressed: () => submit(context),
           ),
           body: SingleChildScrollView(child: _buildColumn(context))));
@@ -59,8 +58,8 @@ class ManualAddScreen extends StatelessWidget {
                   .select((ManualAddViewModel value) => value.nameController),
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
-              decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).product),
+              decoration:
+                  InputDecoration(labelText: context.translate().product),
               onChanged: (String value) =>
                   context.read<ManualAddViewModel>().name = value,
             ),
@@ -71,7 +70,7 @@ class ManualAddScreen extends StatelessWidget {
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).qtyy,
+                  labelText: context.translate().qtyy,
                   errorText: context
                       .select((ManualAddViewModel value) => value.qtyError)),
               onChanged: (String value) =>
@@ -85,7 +84,7 @@ class ManualAddScreen extends StatelessWidget {
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => submit(context),
               decoration: InputDecoration(
-                  labelText: AppLocalizations.of(context).sum,
+                  labelText: context.translate().sum,
                   errorText: context
                       .select((ManualAddViewModel value) => value.sumError)),
               onChanged: (String value) =>

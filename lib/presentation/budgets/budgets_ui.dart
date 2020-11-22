@@ -1,7 +1,11 @@
 import 'package:ctr/domain/entity/budget.dart';
 
 class BudgetUI {
-  BudgetUI({this.id, this.name, this.sum, this.budget});
+  BudgetUI(
+      {required this.id,
+      required this.name,
+      required this.sum,
+      required this.budget});
 
   String id;
   String name;

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 
 class AppNavigator extends StatefulWidget {
   const AppNavigator({
-    Key key,
-    @required this.navigatorKey,
-    @required this.initialPages,
+    Key? key,
+    required this.navigatorKey,
+    required this.initialPages,
   }) : super(key: key);
 
   final GlobalKey<NavigatorState> navigatorKey;
   final List<Page<dynamic>> initialPages;
 
   static AppNavigatorState of(BuildContext context) {
-    return context.findAncestorStateOfType<AppNavigatorState>();
+    return context.findAncestorStateOfType<AppNavigatorState>()!;
   }
 
   @override

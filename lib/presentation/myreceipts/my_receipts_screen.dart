@@ -1,5 +1,5 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
@@ -14,7 +14,7 @@ import '../../app_module.dart';
 import 'my_item_ui.dart';
 
 class MyReceiptsScreen extends StatelessWidget {
-  const MyReceiptsScreen({Key key}) : super(key: key);
+  const MyReceiptsScreen({Key? key}) : super(key: key);
   static const String routeName = 'MyReceiptsScreen';
 
   @override
@@ -22,7 +22,7 @@ class MyReceiptsScreen extends StatelessWidget {
       create: (_) => viewModel = MyReceiptsViewModel(),
       builder: (context, _) => Scaffold(
           appBar: AppBar(
-            title: Text(AppLocalizations.of(context).myReceipts),
+            title: Text(context.translate().myReceipts),
             actions: [
               IconButton(
                   icon: const Icon(Icons.search),
@@ -35,7 +35,7 @@ class MyReceiptsScreen extends StatelessWidget {
               stream: context.watch<MyReceiptsViewModel>().receipts(context),
               builder: (context, AsyncSnapshot<List<MyItemUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return Text(AppLocalizations.of(context).wentWrong);
+                  return Text(context.translate().wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();
@@ -43,7 +43,7 @@ class MyReceiptsScreen extends StatelessWidget {
                 return ListView.builder(
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final value = snapshot.data[index];
+                      final value = snapshot.data?[index];
                       return value == null
                           ? const SizedBox()
                           : _buildCardItem(context, value);
@@ -76,6 +76,7 @@ class MyReceiptsScreen extends StatelessWidget {
         title: Center(child: Text(value.getDateTime(context))),
         trailing: Text(value.getSum(context)),
       );
-    }
+    } else
+      return const SizedBox();
   }
 }

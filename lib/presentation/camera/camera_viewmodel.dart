@@ -26,14 +26,14 @@ class CameraViewModel extends ChangeNotifier {
 
   final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
       const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
-  CameraController _camera;
+  CameraController? _camera;
   bool _isDetecting = false;
   bool _isMounted = true;
-  List<Barcode> _scanResults;
+  List<Barcode> _scanResults = [];
 
   List<Barcode> get scanResults => _scanResults;
 
-  CameraController get camera => _camera;
+  CameraController? get camera => _camera;
 
   Future<void> _initializeCamera() async {
     final description = await _getCamera(CameraLensDirection.back);
@@ -75,10 +75,10 @@ class CameraViewModel extends ChangeNotifier {
   }
 
   static Future<List<Barcode>> _detect({
-    @required CameraImage image,
-    @required
+    required CameraImage image,
+    required
         Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
-    @required int imageRotation,
+    required int imageRotation,
   }) async {
     return detectInImage(
       FirebaseVisionImage.fromBytes(

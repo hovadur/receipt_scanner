@@ -1,8 +1,8 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/budgets/budgets_screen.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/drawer/drawer_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
 import 'package:ctr/presentation/signin/signin_screen.dart';
@@ -12,7 +12,7 @@ import 'package:provider/provider.dart';
 import 'drawer_dropdown.dart';
 
 class MainDrawer extends StatelessWidget {
-  const MainDrawer({Key key}) : super(key: key);
+  const MainDrawer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
@@ -25,14 +25,14 @@ class MainDrawer extends StatelessWidget {
       children: <Widget>[
         _makeHeader(context),
         ListTile(
-          title: Text(AppLocalizations.of(context).scanning),
+          title: Text(context.translate().scanning),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: CameraScreen.routeName, child: CameraScreen()));
           },
         ),
         ListTile(
-          title: Text(AppLocalizations.of(context).myReceipts),
+          title: Text(context.translate().myReceipts),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: MyReceiptsScreen.routeName, child: MyReceiptsScreen()));
@@ -40,7 +40,7 @@ class MainDrawer extends StatelessWidget {
         ),
         const Divider(),
         ListTile(
-          title: Text(AppLocalizations.of(context).budgets),
+          title: Text(context.translate().budgets),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: BudgetsScreen.routeName, child: BudgetsScreen()));
@@ -71,9 +71,8 @@ class MainDrawer extends StatelessWidget {
     } else {
       return SafeArea(
           child: Center(
-              child: Column(children: [
-        Text(AppLocalizations.of(context).notAuthorized)
-      ])));
+              child:
+                  Column(children: [Text(context.translate().notAuthorized)])));
     }
   }
 }

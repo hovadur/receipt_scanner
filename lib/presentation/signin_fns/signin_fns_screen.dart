@@ -1,5 +1,4 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_viewmodel.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SignInFnsScreen extends StatelessWidget {
-  const SignInFnsScreen({@required this.onPressed, Key key}) : super(key: key);
+  const SignInFnsScreen({required this.onPressed, Key? key}) : super(key: key);
   static const String routeName = 'SignInFnsScreen';
 
   final Function onPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(AppLocalizations.of(context).fnsAccount)),
+      appBar: AppBar(title: Text(context.translate().fnsAccount)),
       body: ChangeNotifierProvider(
           create: (_) => SignInFnsViewModel(),
           builder: (context, _) => SingleChildScrollView(
@@ -22,14 +21,14 @@ class SignInFnsScreen extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 40),
-                  Text(AppLocalizations.of(context).ftsWarning),
+                  Text(context.translate().ftsWarning),
                   LoginForm(onPressed: onPressed),
                 ],
               ))));
 }
 
 class LoginForm extends StatelessWidget {
-  const LoginForm({@required this.onPressed, Key key}) : super(key: key);
+  const LoginForm({required this.onPressed, Key? key}) : super(key: key);
 
   final Function onPressed;
 
@@ -41,7 +40,7 @@ class LoginForm extends StatelessWidget {
             keyboardType: const TextInputType.numberWithOptions(),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).inn,
+                labelText: context.translate().inn,
                 errorText: context
                     .select((SignInFnsViewModel value) => value.innError)),
             onChanged: (String value) =>
@@ -53,7 +52,7 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: AppLocalizations.of(context).password,
+                labelText: context.translate().password,
                 errorText: context
                     .select((SignInFnsViewModel value) => value.passwordError)),
             onChanged: (String value) => context
@@ -71,7 +70,7 @@ class LoginForm extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(AppLocalizations.of(context).cont),
+                child: Text(context.translate().cont),
               ),
             ),
           )
@@ -84,7 +83,7 @@ class LoginForm extends StatelessWidget {
         onPressed();
         AppNavigator.of(context).pop();
       } else {
-        context.showError(AppLocalizations.of(context).invalidCredentials);
+        context.showError(context.translate().invalidCredentials);
       }
     });
   }

@@ -1,5 +1,4 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/myreceipts/search_ui.dart';
@@ -12,7 +11,7 @@ import 'my_receipts_viewmodel.dart';
 class Search extends SearchDelegate {
   Search(BuildContext context)
       : super(
-            searchFieldLabel: AppLocalizations.of(context).search,
+            searchFieldLabel: context.translate().search,
             keyboardType: TextInputType.text);
 
   @override
@@ -21,14 +20,14 @@ class Search extends SearchDelegate {
     return theme.copyWith(
         inputDecorationTheme: InputDecorationTheme(
             hintStyle:
-                TextStyle(color: theme.primaryTextTheme.subtitle1.color)),
+                TextStyle(color: theme.primaryTextTheme.subtitle1?.color)),
         primaryColor: theme.primaryColor,
         primaryIconTheme: theme.primaryIconTheme,
         primaryColorBrightness: theme.primaryColorBrightness,
         primaryTextTheme: theme.primaryTextTheme,
         textTheme: theme.textTheme.copyWith(
             subtitle1: theme.textTheme.subtitle1
-                .copyWith(color: theme.primaryTextTheme.subtitle1.color)));
+                ?.copyWith(color: theme.primaryTextTheme.subtitle1?.color)));
   }
 
   @override
@@ -74,7 +73,7 @@ class Search extends SearchDelegate {
                   context.watch<MyReceiptsViewModel>().search(context, query),
               builder: (context, AsyncSnapshot<List<SearchUI>> snapshot) {
                 if (snapshot.hasError) {
-                  return Text(AppLocalizations.of(context).wentWrong);
+                  return Text(context.translate().wentWrong);
                 }
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const LinearProgressIndicator();
@@ -82,7 +81,7 @@ class Search extends SearchDelegate {
                 return ListView.builder(
                     itemCount: snapshot.data?.length,
                     itemBuilder: (BuildContext context, int index) {
-                      final receipt = snapshot.data[index];
+                      final receipt = snapshot.data?[index];
                       return Padding(
                           padding: const EdgeInsets.symmetric(
                               horizontal: 10, vertical: 4),

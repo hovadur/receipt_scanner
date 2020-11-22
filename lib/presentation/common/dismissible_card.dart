@@ -1,9 +1,13 @@
-import 'package:ctr/l10n/app_localizations.dart';
+import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class DismissibleCard extends StatelessWidget {
-  DismissibleCard({this.id, this.confirmDismiss, this.onDismissed, this.child});
+  DismissibleCard(
+      {required this.id,
+      required this.confirmDismiss,
+      required this.onDismissed,
+      required this.child});
 
   final String id;
   final ConfirmDismissCallback confirmDismiss;
@@ -24,26 +28,26 @@ class DismissibleCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const Icon(Icons.delete, color: Colors.white),
-                  Text(AppLocalizations.of(context).deleteEllipsis,
+                  Text(context.translate().deleteEllipsis,
                       style: const TextStyle(color: Colors.white)),
                 ],
               ),
             )),
         confirmDismiss: (DismissDirection direction) async {
-          if (confirmDismiss != null && await confirmDismiss(direction)) {
+          if (await confirmDismiss(direction) == true) {
             return await showDialog(
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(AppLocalizations.of(context).deleteConfirmation),
-                  content: Text(AppLocalizations.of(context).sureDelete),
+                  title: Text(context.translate().deleteConfirmation),
+                  content: Text(context.translate().sureDelete),
                   actions: <Widget>[
                     FlatButton(
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: Text(AppLocalizations.of(context).delete)),
+                        child: Text(context.translate().delete)),
                     FlatButton(
                       onPressed: () => Navigator.of(context).pop(false),
-                      child: Text(AppLocalizations.of(context).cancel),
+                      child: Text(context.translate().cancel),
                     ),
                   ],
                 );

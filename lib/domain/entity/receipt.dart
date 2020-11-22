@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class Receipt {
   Receipt(
-      {@required this.dateTime, @required this.totalSum, @required this.items});
+      {required this.dateTime, required this.totalSum, required this.items});
 
   Receipt.fromDocumentSnapshot(DocumentSnapshot doc)
       : id = doc['id'],
@@ -58,8 +58,8 @@ class Receipt {
 
   String id = UniqueKey().toString();
   int operationType = 1;
-  DateTime dateTime;
-  int totalSum;
+  DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(0);
+  int totalSum = 0;
   int fiscalDocumentNumber = 0;
   String fiscalDriveNumber = '';
   int fiscalSign = 0;
