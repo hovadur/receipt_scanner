@@ -64,7 +64,7 @@ class MainDrawer extends StatelessWidget {
       return SafeArea(
           child: Center(
               child: Column(children: [
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
         Text(context.watch<DrawerViewModel>().ui.email),
         Text(context.watch<DrawerViewModel>().ui.displayName),
         const DrawerDropDown(),
@@ -72,8 +72,10 @@ class MainDrawer extends StatelessWidget {
     } else {
       return SafeArea(
           child: Center(
-              child:
-                  Column(children: [Text(context.translate().notAuthorized)])));
+              child: Column(children: [
+        const SizedBox(height: 16),
+        Text(context.translate().notAuthorized)
+      ])));
     }
   }
 }
