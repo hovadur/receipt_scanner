@@ -1,10 +1,10 @@
+import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/signin/signin_viewmodel.dart';
 import 'package:ctr/presentation/signup/signup_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:websafe_svg/websafe_svg.dart';
 
 class SignInScreen extends StatelessWidget {
@@ -14,54 +14,50 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(context.translate().signIn)),
-      body: ChangeNotifierProvider(
-          create: (_) => SignInViewModel(),
-          builder: (context, _) => SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-              child: Column(
+      body: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              const LoginForm(),
+              ElevatedButton.icon(
+                  onPressed: () => context.googleSignIn(),
+                  icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
+                  label: Text(context.translate().signInWithGoogle),
+                  style: ElevatedButton.styleFrom(
+                      primary: const Color(0xfff7f7f7),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(18)))),
+              const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const SizedBox(height: 40),
-                  const LoginForm(),
-                  ElevatedButton.icon(
-                      onPressed: () => context.googleSignIn(),
-                      icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
-                      label: Text(context.translate().signInWithGoogle),
-                      style: ElevatedButton.styleFrom(
-                          primary: const Color(0xfff7f7f7),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(18)))),
-                  const SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        context.translate().dontHaveAccount,
-                      ),
-                      InkWell(
-                        onTap: () {
-                          AppNavigator.of(context).push(
-                              const MaterialPage<Page>(
-                                  name: SignUpScreen.routeName,
-                                  child: SignUpScreen()));
-                        },
-                        child: Text(
-                          context.translate().signUp,
-                          style: const TextStyle(
-                              color: Colors.blue,
-                              decoration: TextDecoration.underline),
-                        ),
-                      ),
-                    ],
-                  )
+                  Text(
+                    context.translate().dontHaveAccount,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      AppNavigator.of(context).push(const MaterialPage<Page>(
+                          name: SignUpScreen.routeName, child: SignUpScreen()));
+                    },
+                    child: Text(
+                      context.translate().signUp,
+                      style: const TextStyle(
+                          color: Colors.blue,
+                          decoration: TextDecoration.underline),
+                    ),
+                  ),
                 ],
-              ))));
+              )
+            ],
+          )));
 }
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends ConsumerWidget {
   const LoginForm({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context, ScopedReader watch) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(
@@ -69,10 +65,9 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 labelText: context.translate().email,
-                errorText: context
-                    .select((SignInViewModel value) => value.emailError)),
+                errorText: watch(signInNotifier).emailError),
             onChanged: (String value) =>
-                context.read<SignInViewModel>().changeEmail(value, context),
+                context.read(signInNotifier).changeEmail(value, context),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -81,10 +76,9 @@ class LoginForm extends StatelessWidget {
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
                 labelText: context.translate().password,
-                errorText: context
-                    .select((SignInViewModel value) => value.passwordError)),
+                errorText: watch(signInNotifier).passwordError),
             onChanged: (String value) =>
-                context.read<SignInViewModel>().changePassword(value, context),
+                context.read(signInNotifier).changePassword(value, context),
           ),
           SizedBox(
             width: double.infinity,
@@ -105,6 +99,6 @@ class LoginForm extends StatelessWidget {
       );
 
   void submit(BuildContext context) {
-    context.read<SignInViewModel>().submit(context);
+    context.read(signInNotifier).submit(context);
   }
 }

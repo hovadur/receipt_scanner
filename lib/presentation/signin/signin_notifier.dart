@@ -3,19 +3,16 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
-class SignUpViewModel extends ChangeNotifier {
+class SignInNotifier extends ChangeNotifier {
   // https://stackoverflow.com/a/32686261/9449426
   final emailCheck = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 
   ValidationItem _email = ValidationItem(null, null);
   ValidationItem _password = ValidationItem(null, null);
-  ValidationItem _confirmPassword = ValidationItem(null, null);
 
   String? get emailError => _email.error;
 
   String? get passwordError => _password.error;
-
-  String? get confirmPasswordError => _confirmPassword.error;
 
   void changeEmail(String? value, BuildContext context) {
     if (value != null && emailCheck.hasMatch(value)) {
@@ -27,7 +24,7 @@ class SignUpViewModel extends ChangeNotifier {
   }
 
   void changePassword(String? value, BuildContext context) {
-    if (value == null || (value.length < 8)) {
+    if (value == null || value.length < 8) {
       _password = ValidationItem(value, context.translate().invalidPassword);
     } else {
       _password = ValidationItem(value, null);
@@ -35,20 +32,9 @@ class SignUpViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void changeConfirmPassword(String? value, BuildContext context) {
-    if (value != _password.value) {
-      _confirmPassword =
-          ValidationItem(value, context.translate().invalidConfirmPassword);
-    } else {
-      _confirmPassword = ValidationItem(value, null);
-    }
-    notifyListeners();
-  }
-
   bool _isValid(BuildContext context) {
     changeEmail(_email.value, context);
     changePassword(_password.value, context);
-    changeConfirmPassword(_confirmPassword.value, context);
     if (_email.error == null && _password.error == null) {
       return true;
     } else {
@@ -62,7 +48,7 @@ class SignUpViewModel extends ChangeNotifier {
       final email = _email.value;
       final password = _password.value;
       if (email != null && password != null) {
-        context.signUp(email, password);
+        context.signIn(email, password);
       }
     }
   }
