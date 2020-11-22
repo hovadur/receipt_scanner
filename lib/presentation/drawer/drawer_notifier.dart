@@ -1,11 +1,13 @@
-import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/drawer/drawer_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 
-class DrawerViewModel extends ChangeNotifier {
-  DrawerViewModel(BuildContext context) {
-    final user = UserInteractor().getCurrentUser();
+import '../../app_module.dart';
+
+class DrawerNotifier extends ChangeNotifier {
+  DrawerNotifier(BuildContext context) {
+    final user = context.read(userInteractor).getCurrentUser();
     if (user.id != ' ') {
       _ui = DrawerUI(
           email: user.email,

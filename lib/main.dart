@@ -1,4 +1,3 @@
-import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
@@ -7,7 +6,6 @@ import 'package:fimber/fimber_base.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart' hide Listener, Provider;
-import 'package:provider/provider.dart';
 
 Future<void> main() async {
   Fimber.plantTree(DebugTree());
@@ -39,17 +37,15 @@ class _MyAppState extends State<MyApp> {
             builder: (BuildContext context, Widget? child) {
               final data = MediaQuery.of(context);
               return MediaQuery(
-                  data: data.copyWith(
-                      textScaleFactor: data.textScaleFactor < 1.1
-                          ? 1.1
-                          : data.textScaleFactor),
-                  child: MultiProvider(
-                    providers: [Provider(create: (_) => UserInteractor())],
-                    builder: (context, _) => AppNavigator(
-                      navigatorKey: _navigatorKey,
-                      initialPages: [_defaultHome],
-                    ),
-                  ));
+                data: data.copyWith(
+                    textScaleFactor: data.textScaleFactor < 1.1
+                        ? 1.1
+                        : data.textScaleFactor),
+                child: AppNavigator(
+                  navigatorKey: _navigatorKey,
+                  initialPages: [_defaultHome],
+                ),
+              );
             },
             title: 'Checking The Receipt',
             onGenerateTitle: (context) => context.translate().appTitle,

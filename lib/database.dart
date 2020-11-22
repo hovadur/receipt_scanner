@@ -1,12 +1,13 @@
-
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/entity/user.dart';
-import 'package:ctr/domain/interactor/user_interactor.dart';
+import 'package:flutter_riverpod/all.dart';
 
 import 'domain/entity/budget.dart';
 
 class Database {
+  final _userInteractor = ProviderContainer().read(userInteractor);
   final _users = FirebaseFirestore.instance.collection('users');
 
   Future<bool> createUser(User user) async {
@@ -15,7 +16,7 @@ class Database {
           .doc(user.id)
           .set({'id': user.id, 'email': user.email, 'name': user.name});
       await _users
-          .doc(UserInteractor().getCurrentUser().id)
+          .doc(_userInteractor.getCurrentUser().id)
           .collection('budgets')
           .doc('0')
           .set({'id': '0', 'name': 'Personal', 'sum': 0});
@@ -26,7 +27,7 @@ class Database {
   }
 
   Stream<List<Budget>> getBudgets() => _users
-          .doc(UserInteractor().getCurrentUser().id)
+          .doc(_userInteractor.getCurrentUser().id)
           .collection('budgets')
           .snapshots()
           .map((event) {
@@ -35,7 +36,7 @@ class Database {
 
   Future<void> deleteBudget(Budget value) async {
     await _users
-        .doc(UserInteractor().getCurrentUser().id)
+        .doc(_userInteractor.getCurrentUser().id)
         .collection('budgets')
         .doc(value.id)
         .delete();
@@ -44,12 +45,12 @@ class Database {
   Future<void> saveBudget(Budget value) async {
     if (value.id == '') {
       await _users
-          .doc(UserInteractor().getCurrentUser().id)
+          .doc(_userInteractor.getCurrentUser().id)
           .collection('budgets')
           .add({'name': value.name, 'sum': value.sum});
     } else {
       await _users
-          .doc(UserInteractor().getCurrentUser().id)
+          .doc(_userInteractor.getCurrentUser().id)
           .collection('budgets')
           .doc(value.id)
           .set({'name': value.name, 'sum': value.sum});
@@ -57,7 +58,7 @@ class Database {
   }
 
   Stream<List<Receipt>> getReceipts() => _users
-          .doc(UserInteractor().getCurrentUser().id)
+          .doc(_userInteractor.getCurrentUser().id)
           .collection('receipts')
           .orderBy('dateTime', descending: true)
           .snapshots()
@@ -66,7 +67,7 @@ class Database {
       });
 
   Stream<Receipt> getReceipt(String receiptId) => _users
-      .doc(UserInteractor().getCurrentUser().id)
+      .doc(_userInteractor.getCurrentUser().id)
       .collection('receipts')
       .doc(receiptId)
       .snapshots()
@@ -74,7 +75,7 @@ class Database {
 
   Future<bool> receiptExists(String qr) async {
     final doc = await _users
-        .doc(UserInteractor().getCurrentUser().id)
+        .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
         .where('qr', isEqualTo: qr)
         .get();
@@ -83,7 +84,7 @@ class Database {
 
   Future<void> deleteReceipt(Receipt value) async {
     await _users
-        .doc(UserInteractor().getCurrentUser().id)
+        .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
         .doc(value.id)
         .delete();
@@ -91,7 +92,7 @@ class Database {
 
   Future<void> saveReceipt(Receipt value) async {
     await _users
-        .doc(UserInteractor().getCurrentUser().id)
+        .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
         .doc(value.id)
         .set({

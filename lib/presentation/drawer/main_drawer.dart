@@ -1,29 +1,28 @@
-import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/budgets/budgets_screen.dart';
 import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/drawer/drawer_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
 import 'package:ctr/presentation/signin/signin_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
+import '../../app_module.dart';
 import 'drawer_dropdown.dart';
 
-class MainDrawer extends StatelessWidget {
+class MainDrawer extends ConsumerWidget {
   const MainDrawer({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => DrawerViewModel(context),
-      builder: (context, _) => Drawer(child: _listView(context)));
+  Widget build(BuildContext context, ScopedReader watch) =>
+      Drawer(child: _listView(context, watch));
 
-  Widget _listView(BuildContext context) {
+  Widget _listView(BuildContext context, ScopedReader watch) {
+    final notifier = watch(drawerNotifier(context));
     return ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
-        _makeHeader(context),
+        _makeHeader(context, watch),
         ListTile(
           title: Text(context.translate().scanning),
           onTap: () {
@@ -48,9 +47,9 @@ class MainDrawer extends StatelessWidget {
         ),
         const Divider(),
         ListTile(
-          title: Text(context.watch<DrawerViewModel>().ui.signOutName),
+          title: Text(notifier.ui.signOutName),
           onTap: () {
-            context.read<UserInteractor>().signOut();
+            context.read(userInteractor).signOut();
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: SignInScreen.routeName, child: SignInScreen()));
           },
@@ -59,14 +58,15 @@ class MainDrawer extends StatelessWidget {
     );
   }
 
-  Widget _makeHeader(BuildContext context) {
-    if (context.watch<DrawerViewModel>().ui.isSignIn) {
+  Widget _makeHeader(BuildContext context, ScopedReader watch) {
+    final notifier = watch(drawerNotifier(context));
+    if (notifier.ui.isSignIn) {
       return SafeArea(
           child: Center(
               child: Column(children: [
         const SizedBox(height: 16),
-        Text(context.watch<DrawerViewModel>().ui.email),
-        Text(context.watch<DrawerViewModel>().ui.displayName),
+        Text(notifier.ui.email),
+        Text(notifier.ui.displayName),
         const DrawerDropDown(),
       ])));
     } else {
