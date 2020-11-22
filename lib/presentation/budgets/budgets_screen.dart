@@ -55,7 +55,7 @@ class BudgetsScreen extends StatelessWidget {
         if (value.id == '0') {
           final snackBar =
               SnackBar(content: Text(context.translate().cantBeDeleted));
-          Scaffold.of(context).showSnackBar(snackBar);
+          ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return false;
         } else {
           return true;
