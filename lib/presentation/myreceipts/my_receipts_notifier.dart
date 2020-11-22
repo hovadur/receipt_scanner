@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import 'my_item_ui.dart';
 
-class MyReceiptsViewModel extends ChangeNotifier {
+class MyReceiptsNotifier extends ChangeNotifier {
   final _db = Database();
   final _receiptMapper = ReceiptMapper();
 

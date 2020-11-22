@@ -1,12 +1,12 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
+import 'package:ctr/presentation/myreceipts/search_param.dart';
 import 'package:ctr/presentation/myreceipts/search_ui.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
-import 'my_receipts_viewmodel.dart';
 
 class Search extends SearchDelegate {
   Search(BuildContext context)
@@ -62,34 +62,23 @@ class Search extends SearchDelegate {
     return _buildBody(context);
   }
 
-  Widget _buildBody(BuildContext context) => ChangeNotifierProvider.value(
-      value: viewModel,
-      builder: (context, _) {
+  Widget _buildBody(BuildContext context) =>
+      Consumer(builder: (context, watch, __) {
+        final stream = watch(searchStreamProvider(SearchParam(context, query)));
         if (query == null || query.trim() == '') {
           return const SizedBox();
         } else {
-          return StreamBuilder<List<SearchUI>>(
-              stream:
-                  context.watch<MyReceiptsViewModel>().search(context, query),
-              builder: (context, AsyncSnapshot<List<SearchUI>> snapshot) {
-                if (snapshot.hasError) {
-                  return Text(context.translate().wentWrong);
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LinearProgressIndicator();
-                }
-                return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final receipt = snapshot.data?[index];
-                      return Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10, vertical: 4),
-                          child: receipt == null
-                              ? const SizedBox()
-                              : _buildCardItem(context, receipt));
-                    });
-              });
+          return stream.when(
+              loading: () => const LinearProgressIndicator(),
+              error: (_, __) => Text(context.translate().wentWrong),
+              data: (list) => ListView.builder(
+                  itemCount: list.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    final receipt = list[index];
+                    return receipt == null
+                        ? const SizedBox()
+                        : _buildCardItem(context, receipt);
+                  }));
         }
       });
 

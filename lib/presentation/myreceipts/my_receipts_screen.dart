@@ -5,50 +5,45 @@ import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:ctr/presentation/myreceipts/my_header_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
-import 'package:ctr/presentation/myreceipts/my_receipts_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/search.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
 import 'my_item_ui.dart';
 
-class MyReceiptsScreen extends StatelessWidget {
+class MyReceiptsScreen extends ConsumerWidget {
   const MyReceiptsScreen({Key? key}) : super(key: key);
   static const String routeName = 'MyReceiptsScreen';
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => viewModel = MyReceiptsViewModel(),
-      builder: (context, _) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.translate().myReceipts),
-            actions: [
-              IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () =>
-                      showSearch(context: context, delegate: Search(context)))
-            ],
-          ),
-          drawer: const MainDrawer(),
-          body: StreamBuilder<List<MyItemUI>>(
-              stream: context.watch<MyReceiptsViewModel>().receipts(context),
-              builder: (context, AsyncSnapshot<List<MyItemUI>> snapshot) {
-                if (snapshot.hasError) {
-                  return Text(context.translate().wentWrong);
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LinearProgressIndicator();
-                }
-                return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final value = snapshot.data?[index];
-                      return value == null
-                          ? const SizedBox()
-                          : _buildCardItem(context, value);
-                    });
-              })));
+  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+      appBar: AppBar(
+        title: Text(context.translate().myReceipts),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () =>
+                  showSearch(context: context, delegate: Search(context)))
+        ],
+      ),
+      drawer: const MainDrawer(),
+      body: _buildBody(context, watch));
+
+  Widget _buildBody(BuildContext context, ScopedReader watch) {
+    final stream = watch(myReceiptsStreamProvider(context));
+    return stream.when(
+        loading: () => const LinearProgressIndicator(),
+        error: (_, __) => Text(context.translate().wentWrong),
+        data: (list) => ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (BuildContext context, int index) {
+              final value = list[index];
+              return value == null
+                  ? const SizedBox()
+                  : _buildCardItem(context, value);
+            }));
+  }
 
   Widget _buildCardItem(BuildContext context, MyItemUI value) {
     if (value is MyReceiptUI) {
@@ -57,7 +52,7 @@ class MyReceiptsScreen extends StatelessWidget {
         confirmDismiss: (_) async => true,
         onDismissed: (DismissDirection direction) {
           if (direction == DismissDirection.startToEnd) {
-            context.read<MyReceiptsViewModel>().deleteReceipt(value);
+            context.read(myReceiptsNotifier).deleteReceipt(value);
           }
         },
         child: ListTile(
