@@ -18,19 +18,23 @@ class MyReceiptsViewModel extends ChangeNotifier {
     var sum = 0;
     final list = <MyItemUI>[];
     await for (final event in _db.getReceipts()) {
-      for (final e in event) {
-        final d = e.dateTime;
-        final diff = DateTime(d.year, d.month, d.day).difference(dd);
-        if (diff.abs().inDays >= 1) {
-          sum = 0;
-          h = MyHeaderUI(e.dateTime, sum);
-          yield list..add(h);
+      if (event.isEmpty)
+        yield list;
+      else {
+        for (final e in event) {
           final d = e.dateTime;
-          dd = DateTime(d.year, d.month, d.day);
+          final diff = DateTime(d.year, d.month, d.day).difference(dd);
+          if (diff.abs().inDays >= 1) {
+            sum = 0;
+            h = MyHeaderUI(e.dateTime, sum);
+            yield list..add(h);
+            final d = e.dateTime;
+            dd = DateTime(d.year, d.month, d.day);
+          }
+          final receipt = _receiptMapper.map(context, e);
+          h.sum += e.totalSum;
+          yield list..add(receipt);
         }
-        final receipt = _receiptMapper.map(context, e);
-        h.sum += e.totalSum;
-        yield list..add(receipt);
       }
     }
   }
