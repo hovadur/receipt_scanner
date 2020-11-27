@@ -5,7 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../database.dart';
 
-class DrawerDropDownViewModel extends ChangeNotifier {
+class DrawerDropDownNotifier extends ChangeNotifier {
   final Database _db = Database();
   BudgetUI? _currentBudget;
 

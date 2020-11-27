@@ -1,34 +1,28 @@
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
-import 'drawer_dropdown_viewmodel.dart';
+import '../../app_module.dart';
 
-class DrawerDropDown extends StatelessWidget {
+class DrawerDropDown extends ConsumerWidget {
   const DrawerDropDown({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => DrawerDropDownViewModel(),
-      builder: (context, _) => StreamBuilder<List<BudgetUI>>(
-          stream: context.watch<DrawerDropDownViewModel>().getBudgets(context),
-          builder: (context, AsyncSnapshot<List<BudgetUI>> snapshot) {
-            if (snapshot.hasError) {
-              return Text(context.translate().wentWrong);
-            }
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const LinearProgressIndicator();
-            }
-            final value = snapshot.data;
-            return value == null ? const SizedBox() : _build(context, value);
-          }));
+  Widget build(BuildContext context, ScopedReader watch) {
+    final stream = watch(dropDownStreamProvider(context));
+    return stream.when(
+        loading: () => const LinearProgressIndicator(),
+        error: (_, __) => Text(context.translate().wentWrong),
+        data: (value) =>
+            value == null ? const SizedBox() : _build(context, watch, value));
+  }
 
-  Widget _build(BuildContext context, List<BudgetUI> values) {
+  Widget _build(
+      BuildContext context, ScopedReader watch, List<BudgetUI> values) {
     return DropdownButtonHideUnderline(
         child: DropdownButton(
-            value: context
-                .select((DrawerDropDownViewModel value) => value.currentBudget),
+            value: watch(drawerDropDownNotifier).currentBudget,
             isExpanded: true,
             items: values
                 .map((value) => DropdownMenuItem(
@@ -37,7 +31,7 @@ class DrawerDropDown extends StatelessWidget {
             onChanged: (value) {
               if (value != null) {
                 context
-                    .read<DrawerDropDownViewModel>()
+                    .read(drawerDropDownNotifier)
                     .saveCurrentBudget(value as BudgetUI);
               }
             }));

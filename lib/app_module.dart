@@ -1,5 +1,7 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
+import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/camera/camera_notifier.dart';
+import 'package:ctr/presentation/drawer/drawer_dropdown_notifier.dart';
 import 'package:ctr/presentation/drawer/drawer_notifier.dart';
 import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
 import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
@@ -53,4 +55,15 @@ final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
 
 final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((_) {
   return CameraNotifier();
+});
+
+final drawerDropDownNotifier =
+    ChangeNotifierProvider<DrawerDropDownNotifier>((_) {
+  return DrawerDropDownNotifier();
+});
+
+final dropDownStreamProvider = StreamProvider.autoDispose
+    .family<List<BudgetUI>, BuildContext>((ref, context) {
+  final notifier = ref.watch(drawerDropDownNotifier);
+  return notifier.getBudgets(context);
 });
