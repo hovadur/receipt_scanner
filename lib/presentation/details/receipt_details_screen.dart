@@ -1,18 +1,19 @@
+import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/details/receipt_details_viewmodel.dart';
+import 'package:ctr/presentation/details/receipt_details_param.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:ctr/presentation/signin_fns/signin_fns_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
-class ReceiptDetailsScreen extends StatelessWidget {
+class ReceiptDetailsScreen extends ConsumerWidget {
   const ReceiptDetailsScreen({required this.receipt, Key? key})
       : super(key: key);
 
@@ -21,92 +22,82 @@ class ReceiptDetailsScreen extends StatelessWidget {
   final Receipt receipt;
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => ReceiptDetailsViewModel(context, receipt),
-      builder: (context, _) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.translate().details),
-            actions: [
-              IconButton(
-                  icon: const Icon(Icons.edit),
-                  onPressed: () {
-                    AppNavigator.of(context).push(MaterialPage<Page>(
-                        name: ManualScreen.routeName,
-                        child: ManualScreen(receipt: receipt)));
-                  })
-            ],
-          ),
-          body: StreamBuilder<MyReceiptUI>(
-              stream: context.watch<ReceiptDetailsViewModel>().getUI(context),
-              builder: (context, AsyncSnapshot<MyReceiptUI> snapshot) {
-                final ui = snapshot.data;
-                if (snapshot.hasError || ui == null) {
-                  return Text(context.translate().wentWrong);
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LinearProgressIndicator();
-                }
-                return _streamBody(context, ui);
-              })));
+  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+      appBar: AppBar(
+        title: Text(context.translate().details),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.edit),
+              onPressed: () {
+                AppNavigator.of(context).push(MaterialPage<Page>(
+                    name: ManualScreen.routeName,
+                    child: ManualScreen(receipt: receipt)));
+              })
+        ],
+      ),
+      body: _streamBody(context, watch));
 
-  Widget _streamBody(BuildContext context, MyReceiptUI ui) {
-    return Column(
-      children: <Widget>[
-        Expanded(
-          child: _receiptBody(context, ui),
-        ),
-        Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Divider(),
-            ListTile(
-              leading: Text(context.translate().total),
-              trailing: Text(ui.totalSum),
-            ),
-            _buildIrkktBody(context),
-          ],
-        )
-      ],
-    );
+  Widget _streamBody(BuildContext context, ScopedReader watch) {
+    final stream = watch(
+        receiptDetailsUIStreamProvider(ReceiptDetailsParam(context, receipt)));
+    return stream.when(
+        loading: () => const LinearProgressIndicator(),
+        error: (_, __) => Text(context.translate().wentWrong),
+        data: (ui) => Column(
+              children: <Widget>[
+                Expanded(
+                  child: _receiptBody(context, ui),
+                ),
+                Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    const Divider(),
+                    ListTile(
+                      leading: Text(context.translate().total),
+                      trailing: Text(ui.totalSum),
+                    ),
+                    _buildIrkktBody(context, watch),
+                  ],
+                )
+              ],
+            ));
   }
 
-  Widget _buildIrkktBody(BuildContext context) {
-    return FutureBuilder<int>(
-        future:
-            context.watch<ReceiptDetailsViewModel>().getIrkktReceipt(context),
-        builder: (context, AsyncSnapshot<int> snapshot) {
-          if (snapshot.hasError) {
-            return Text(context.translate().wentWrong);
-          }
-          if (snapshot.connectionState == ConnectionState.done) {
-            if (snapshot.data == 1) {
-              return Text(context.translate().dataReceivedFromFNS);
-            }
-            if (snapshot.data == 2) {
-              return Padding(
+  Widget _buildIrkktBody(BuildContext context, ScopedReader watch) {
+    final future = watch(receiptDetailsIrkktFutureProvider(
+        ReceiptDetailsParam(context, receipt)));
+    return future.when(
+        loading: () => Stack(children: [
+              const LinearProgressIndicator(),
+              Container(
                   padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                      text: TextSpan(
-                          text: AppLocalizations.of(context)
-                                  ?.dontHaveFnsAccount ??
-                              '',
-                          style: TextStyle(color: Theme.of(context).errorColor),
-                          children: <TextSpan>[_nalogRu(context)])));
-            }
-            return const SizedBox();
+                  child: Align(
+                    child: Text(context.translate().checkReceiptInFNS),
+                  ))
+            ]),
+        error: (_, __) => Text(context.translate().wentWrong),
+        data: (value) {
+          if (value == 1) {
+            return Text(context.translate().dataReceivedFromFNS);
           }
-          return Stack(children: [
-            const LinearProgressIndicator(),
-            Container(
+          if (value == 2) {
+            return Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Align(
-                  child: Text(context.translate().checkReceiptInFNS),
-                ))
-          ]);
+                child: RichText(
+                    text: TextSpan(
+                        text:
+                            AppLocalizations.of(context)?.dontHaveFnsAccount ??
+                                '',
+                        style: TextStyle(color: Theme.of(context).errorColor),
+                        children: <TextSpan>[_nalogRu(context)])));
+          }
+          return const SizedBox();
         });
   }
 
   TextSpan _nalogRu(BuildContext context) {
+    final notifier =
+        receiptDetailsNotifier(ReceiptDetailsParam(context, receipt));
     return TextSpan(
         text: context.translate().nalogruAccount,
         style: const TextStyle(
@@ -116,9 +107,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
             AppNavigator.of(context).push(MaterialPage<Page>(
                 name: SignInFnsScreen.routeName,
                 child: SignInFnsScreen(
-                  onPressed: () {
-                    context.read<ReceiptDetailsViewModel>().update();
-                  },
+                  onPressed: () => context.read(notifier).update(),
                 )));
           });
   }
@@ -159,6 +148,8 @@ class ReceiptDetailsScreen extends StatelessWidget {
   }
 
   Widget _buildItem(BuildContext context, MySearchItemUI item, int index) {
+    final notifier =
+        receiptDetailsNotifier(ReceiptDetailsParam(context, receipt));
     final entries = context.category().entries.toList();
     return ListTile(
         leading: InkWell(
@@ -166,7 +157,7 @@ class ReceiptDetailsScreen extends StatelessWidget {
               name: CategoryScreen.routeName,
               child: CategoryScreen(
                 onPressed: (type) {
-                  context.read<ReceiptDetailsViewModel>().saveType(index, type);
+                  context.read(notifier).saveType(index, type);
                   Navigator.of(context).pop();
                 },
               ))),

@@ -6,8 +6,8 @@ import 'package:ctr/presentation/mapper/receipt_mapper.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:flutter/material.dart';
 
-class ReceiptDetailsViewModel extends ChangeNotifier {
-  ReceiptDetailsViewModel(BuildContext context, Receipt receipt) {
+class ReceiptDetailsNotifier extends ChangeNotifier {
+  ReceiptDetailsNotifier(BuildContext context, Receipt receipt) {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
     notifyListeners();

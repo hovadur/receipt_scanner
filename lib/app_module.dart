@@ -1,10 +1,13 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/camera/camera_notifier.dart';
+import 'package:ctr/presentation/details/receipt_details_notifier.dart';
+import 'package:ctr/presentation/details/receipt_details_param.dart';
 import 'package:ctr/presentation/drawer/drawer_dropdown_notifier.dart';
 import 'package:ctr/presentation/drawer/drawer_notifier.dart';
 import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
 import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
+import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_notifier.dart';
 import 'package:ctr/presentation/myreceipts/search_param.dart';
 import 'package:ctr/presentation/myreceipts/search_ui.dart';
@@ -66,4 +69,22 @@ final dropDownStreamProvider = StreamProvider.autoDispose
     .family<List<BudgetUI>, BuildContext>((ref, context) {
   final notifier = ref.watch(drawerDropDownNotifier);
   return notifier.getBudgets(context);
+});
+
+final receiptDetailsNotifier =
+    ChangeNotifierProvider.family<ReceiptDetailsNotifier, ReceiptDetailsParam>(
+        (_, param) {
+  return ReceiptDetailsNotifier(param.context, param.receipt);
+});
+
+final receiptDetailsUIStreamProvider = StreamProvider.autoDispose
+    .family<MyReceiptUI, ReceiptDetailsParam>((ref, param) {
+  final notifier = ref.watch(receiptDetailsNotifier(param));
+  return notifier.getUI(param.context);
+});
+
+final receiptDetailsIrkktFutureProvider =
+    FutureProvider.autoDispose.family<int, ReceiptDetailsParam>((ref, param) {
+  final notifier = ref.watch(receiptDetailsNotifier(param));
+  return notifier.getIrkktReceipt(param.context);
 });
