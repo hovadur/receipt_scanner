@@ -5,6 +5,7 @@ import 'package:ctr/presentation/myreceipts/my_receipts_notifier.dart';
 import 'package:ctr/presentation/myreceipts/search_param.dart';
 import 'package:ctr/presentation/myreceipts/search_ui.dart';
 import 'package:ctr/presentation/signin/signin_notifier.dart';
+import 'package:ctr/presentation/signin_fns/signin_fns_notifier.dart';
 import 'package:ctr/presentation/signup/signup_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
@@ -38,4 +39,8 @@ final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((_) {
 final drawerNotifier =
     ChangeNotifierProvider.family<DrawerNotifier, BuildContext>((_, context) {
   return DrawerNotifier(context);
+});
+
+final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((_) {
+  return SignInFnsNotifier();
 });

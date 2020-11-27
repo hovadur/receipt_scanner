@@ -1,9 +1,10 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/signin_fns/signin_fns_viewmodel.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
+
+import '../../app_module.dart';
 
 class SignInFnsScreen extends StatelessWidget {
   const SignInFnsScreen({required this.onPressed, Key? key}) : super(key: key);
@@ -14,26 +15,24 @@ class SignInFnsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: Text(context.translate().fnsAccount)),
-      body: ChangeNotifierProvider(
-          create: (_) => SignInFnsViewModel(),
-          builder: (context, _) => SingleChildScrollView(
-              padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
-              child: Column(
-                children: [
-                  const SizedBox(height: 40),
-                  Text(context.translate().ftsWarning),
-                  LoginForm(onPressed: onPressed),
-                ],
-              ))));
+      body: SingleChildScrollView(
+          padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
+          child: Column(
+            children: [
+              const SizedBox(height: 40),
+              Text(context.translate().ftsWarning),
+              LoginForm(onPressed: onPressed),
+            ],
+          )));
 }
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends ConsumerWidget {
   const LoginForm({required this.onPressed, Key? key}) : super(key: key);
 
   final Function onPressed;
 
   @override
-  Widget build(BuildContext context) => Column(
+  Widget build(BuildContext context, ScopedReader watch) => Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextField(
@@ -41,10 +40,9 @@ class LoginForm extends StatelessWidget {
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
                 labelText: context.translate().inn,
-                errorText: context
-                    .select((SignInFnsViewModel value) => value.innError)),
+                errorText: watch(signInFnsNotifier).innError),
             onChanged: (String value) =>
-                context.read<SignInFnsViewModel>().changeEmail(value, context),
+                context.read(signInFnsNotifier).changeEmail(value, context),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -53,11 +51,9 @@ class LoginForm extends StatelessWidget {
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
                 labelText: context.translate().password,
-                errorText: context
-                    .select((SignInFnsViewModel value) => value.passwordError)),
-            onChanged: (String value) => context
-                .read<SignInFnsViewModel>()
-                .changePassword(value, context),
+                errorText: watch(signInFnsNotifier).passwordError),
+            onChanged: (String value) =>
+                context.read(signInFnsNotifier).changePassword(value, context),
           ),
           SizedBox(
             width: double.infinity,
@@ -78,7 +74,7 @@ class LoginForm extends StatelessWidget {
       );
 
   void submit(BuildContext context) {
-    context.read<SignInFnsViewModel>().submit(context).then((value) {
+    context.read(signInFnsNotifier).submit(context).then((value) {
       if (value) {
         onPressed();
         AppNavigator.of(context).pop();

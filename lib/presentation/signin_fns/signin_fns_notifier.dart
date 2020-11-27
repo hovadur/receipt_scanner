@@ -5,7 +5,7 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
-class SignInFnsViewModel extends ChangeNotifier {
+class SignInFnsNotifier extends ChangeNotifier {
   ValidationItem _inn = ValidationItem(null, null);
   ValidationItem _password = ValidationItem(null, null);
 
