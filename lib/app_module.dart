@@ -1,4 +1,5 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
+import 'package:ctr/presentation/budgets/budgets_notifier.dart';
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/camera/camera_notifier.dart';
 import 'package:ctr/presentation/details/receipt_details_notifier.dart';
@@ -87,4 +88,14 @@ final receiptDetailsIrkktFutureProvider =
     FutureProvider.autoDispose.family<int, ReceiptDetailsParam>((ref, param) {
   final notifier = ref.watch(receiptDetailsNotifier(param));
   return notifier.getIrkktReceipt(param.context);
+});
+
+final budgetsNotifier = ChangeNotifierProvider<BudgetsNotifier>((_) {
+  return BudgetsNotifier();
+});
+
+final budgetsStreamProvider = StreamProvider.autoDispose
+    .family<List<BudgetUI>, BuildContext>((ref, context) {
+  final notifier = ref.watch(drawerDropDownNotifier);
+  return notifier.getBudgets(context);
 });

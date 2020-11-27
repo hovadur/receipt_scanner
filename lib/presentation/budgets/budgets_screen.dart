@@ -1,52 +1,48 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/budgets/budgets_viewmodel.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
+import '../../app_module.dart';
 import 'budget_add_screen.dart';
 import 'budgets_ui.dart';
 
-class BudgetsScreen extends StatelessWidget {
+class BudgetsScreen extends ConsumerWidget {
   const BudgetsScreen({Key? key}) : super(key: key);
   static const String routeName = 'BudgetsScreen';
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => BudgetsViewModel(),
-      builder: (context, _) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.translate().budgets),
-          ),
-          drawer: const MainDrawer(),
-          floatingActionButton: FloatingActionButton.extended(
-            icon: const Icon(Icons.add),
-            label: Text(context.translate().addBudget),
-            onPressed: () {
-              AppNavigator.of(context).push(const MaterialPage<Page>(
-                  name: BudgetAddScreen.routeName, child: BudgetAddScreen()));
-            },
-          ),
-          body: StreamBuilder<List<BudgetUI>>(
-              stream: context.watch<BudgetsViewModel>().getBudgets(context),
-              builder: (context, AsyncSnapshot<List<BudgetUI>> snapshot) {
-                if (snapshot.hasError) {
-                  return Text(context.translate().wentWrong);
-                }
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const LinearProgressIndicator();
-                }
-                return ListView.builder(
-                    itemCount: snapshot.data?.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final value = snapshot.data?[index];
-                      return value == null
-                          ? const SizedBox()
-                          : _buildCardItem(context, value);
-                    });
-              })));
+  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+      appBar: AppBar(
+        title: Text(context.translate().budgets),
+      ),
+      drawer: const MainDrawer(),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.add),
+        label: Text(context.translate().addBudget),
+        onPressed: () {
+          AppNavigator.of(context).push(const MaterialPage<Page>(
+              name: BudgetAddScreen.routeName, child: BudgetAddScreen()));
+        },
+      ),
+      body: _streamBody(context, watch));
+
+  Widget _streamBody(BuildContext context, ScopedReader watch) {
+    final stream = watch(budgetsStreamProvider(context));
+    return stream.when(
+        loading: () => const LinearProgressIndicator(),
+        error: (_, __) => Text(context.translate().wentWrong),
+        data: (list) => ListView.builder(
+            itemCount: list.length,
+            itemBuilder: (BuildContext context, int index) {
+              final value = list[index];
+              return value == null
+                  ? const SizedBox()
+                  : _buildCardItem(context, value);
+            }));
+  }
 
   Widget _buildCardItem(BuildContext context, BudgetUI value) {
     return DismissibleCard(
@@ -63,7 +59,7 @@ class BudgetsScreen extends StatelessWidget {
       },
       onDismissed: (DismissDirection direction) {
         if (direction == DismissDirection.startToEnd) {
-          context.read<BudgetsViewModel>().deleteBudget(value);
+          context.read(budgetsNotifier).deleteBudget(value);
         }
       },
       child: ListTile(
