@@ -2,7 +2,6 @@ import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/barcode_detector_painter.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/camera/camera_viewmodel.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
@@ -10,14 +9,16 @@ import 'package:ctr/presentation/fromFile/from_file_screen.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
-class CameraScreen extends StatelessWidget {
+import '../../app_module.dart';
+
+class CameraScreen extends ConsumerWidget {
   const CameraScreen({Key? key}) : super(key: key);
   static const String routeName = 'CameraScreen';
 
   @override
-  Widget build(BuildContext context) => Scaffold(
+  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
       appBar: AppBar(title: Text(context.translate().scanning)),
       drawer: const MainDrawer(),
       floatingActionButton:
@@ -42,14 +43,12 @@ class CameraScreen extends StatelessWidget {
           },
         )
       ]),
-      body: ChangeNotifierProvider(
-          create: (_) => CameraViewModel(),
-          builder: (context, _) => Container(
-              constraints: const BoxConstraints.expand(),
-              child: _buildPreview(context))));
+      body: Container(
+          constraints: const BoxConstraints.expand(),
+          child: _buildPreview(context, watch)));
 
-  Widget _buildPreview(BuildContext context) {
-    final camera = context.select((CameraViewModel value) => value.camera);
+  Widget _buildPreview(BuildContext context, ScopedReader watch) {
+    final camera = watch(cameraNotifier).camera;
     if (camera == null) {
       return Center(
         child: Text(
@@ -65,17 +64,17 @@ class CameraScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: <Widget>[
           CameraPreview(camera),
-          _buildResults(camera, context),
+          _buildResults(camera, context, watch),
         ],
       );
     }
   }
 
-  Widget _buildResults(CameraController camera, BuildContext context) {
+  Widget _buildResults(
+      CameraController camera, BuildContext context, ScopedReader watch) {
     const noResultsText = Text('No results!');
-    final scanResults =
-        context.select((CameraViewModel value) => value.scanResults);
-    if (scanResults == null || !camera.value.isInitialized) {
+    final scanResults = watch(cameraNotifier).scanResults;
+    if (!camera.value.isInitialized) {
       return noResultsText;
     }
 

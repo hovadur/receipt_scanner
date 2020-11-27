@@ -1,4 +1,5 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
+import 'package:ctr/presentation/camera/camera_notifier.dart';
 import 'package:ctr/presentation/drawer/drawer_notifier.dart';
 import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
 import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
@@ -48,4 +49,8 @@ final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((_) {
 
 final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
   return FromFileNotifier();
+});
+
+final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((_) {
+  return CameraNotifier();
 });
