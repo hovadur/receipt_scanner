@@ -1,5 +1,6 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/presentation/drawer/drawer_notifier.dart';
+import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
 import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_notifier.dart';
 import 'package:ctr/presentation/myreceipts/search_param.dart';
@@ -43,4 +44,8 @@ final drawerNotifier =
 
 final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((_) {
   return SignInFnsNotifier();
+});
+
+final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
+  return FromFileNotifier();
 });

@@ -4,21 +4,19 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/all.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:provider/provider.dart';
 
-import 'from_file_viewmodel.dart';
+import '../../app_module.dart';
 
-class FromFileScreen extends StatelessWidget {
+class FromFileScreen extends ConsumerWidget {
   const FromFileScreen({Key? key}) : super(key: key);
   static const String routeName = 'FromFileScreen';
 
   @override
-  Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(context.translate().fromFile)),
-      body: ChangeNotifierProvider(
-        create: (_) => FromFileViewModel(),
-        builder: (context, _) => Column(
+  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+        appBar: AppBar(title: Text(context.translate().fromFile)),
+        body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
@@ -33,12 +31,12 @@ class FromFileScreen extends StatelessWidget {
                   },
                   child: Text(context.translate().uploadFile)),
               const SizedBox(height: 8),
-              _buildFile(context)
+              _buildFile(context, watch)
             ]),
-      ));
+      );
 
-  Widget _buildFile(BuildContext context) {
-    final path = context.select((FromFileViewModel value) => value.path);
+  Widget _buildFile(BuildContext context, ScopedReader watch) {
+    final path = watch(fromFileNotifier).path;
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -48,7 +46,7 @@ class FromFileScreen extends StatelessWidget {
           if (path != null)
             ElevatedButton(
                 onPressed: () {
-                  context.read<FromFileViewModel>().scanImage().then((qr) {
+                  context.read(fromFileNotifier).scanImage().then((qr) {
                     if (qr == null) {
                       context.showError(context.translate().invalidBarcode);
                     } else {
@@ -70,7 +68,7 @@ class FromFileScreen extends StatelessWidget {
     final _picker = ImagePicker();
     final pickedImage = await _picker.getImage(source: ImageSource.gallery);
     if (pickedImage != null) {
-      context.read<FromFileViewModel>().changeFile(pickedImage.path);
+      context.read(fromFileNotifier).changeFile(pickedImage.path);
     }
   }
 }
