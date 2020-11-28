@@ -37,7 +37,6 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.1+1
   websafe_svg: ^1.1.4 # help us to use SVG in our app
-  provider: ^4.3.2+2
   flutter_riverpod: ^0.12.1
   equatable: ^2.0.0-nullsafety.0
   fimber: ^0.4.4
