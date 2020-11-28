@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/entity/user.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:ctr/domain/interactor/user_interactor.dart';
 
 import 'domain/entity/budget.dart';
 
 class Database {
-  final _userInteractor = ProviderContainer().read(userInteractor);
+  Database(this._userInteractor);
+
+  final UserInteractor _userInteractor;
   final _users = FirebaseFirestore.instance.collection('users');
 
   Future<bool> createUser(User user) async {

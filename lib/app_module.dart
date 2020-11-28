@@ -25,6 +25,7 @@ import 'package:ctr/presentation/signup/signup_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
+import 'database.dart';
 import 'domain/data/repo/irkkt_repo.dart';
 import 'domain/data/repo/settings_repo.dart';
 
@@ -35,8 +36,14 @@ final irkktRepo = Provider<IrkktRepo>((ref) {
   return IrkktRepo(IrkktApi(), s);
 });
 
-final myReceiptsNotifier = ChangeNotifierProvider<MyReceiptsNotifier>((_) {
-  return MyReceiptsNotifier();
+final databaseProvider = Provider<Database>((ref) {
+  final s = ref.watch(userInteractor);
+  return Database(s);
+});
+
+final myReceiptsNotifier = ChangeNotifierProvider<MyReceiptsNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
+  return MyReceiptsNotifier(db);
 });
 
 final myReceiptsStreamProvider = StreamProvider.autoDispose
@@ -57,13 +64,15 @@ final userInteractor = Provider<UserInteractor>((ref) {
 });
 
 final signInNotifier = ChangeNotifierProvider<SignInNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
   final s = ref.watch(userInteractor);
-  return SignInNotifier(s);
+  return SignInNotifier(s, db);
 });
 
 final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
   final s = ref.watch(userInteractor);
-  return SignUpNotifier(s);
+  return SignUpNotifier(s, db);
 });
 
 final drawerNotifier =
@@ -85,8 +94,9 @@ final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((_) {
 });
 
 final drawerDropDownNotifier =
-    ChangeNotifierProvider<DrawerDropDownNotifier>((_) {
-  return DrawerDropDownNotifier();
+    ChangeNotifierProvider<DrawerDropDownNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
+  return DrawerDropDownNotifier(db);
 });
 
 final dropDownStreamProvider = StreamProvider.autoDispose
@@ -99,7 +109,8 @@ final receiptDetailsNotifier =
     ChangeNotifierProvider.family<ReceiptDetailsNotifier, ReceiptDetailsParam>(
         (ref, param) {
   final s = ref.watch(irkktRepo);
-  return ReceiptDetailsNotifier(param.context, param.receipt, s);
+  final db = ref.watch(databaseProvider);
+  return ReceiptDetailsNotifier(param.context, param.receipt, s, db);
 });
 
 final receiptDetailsUIStreamProvider = StreamProvider.autoDispose
@@ -114,8 +125,9 @@ final receiptDetailsIrkktFutureProvider =
   return notifier.getIrkktReceipt(param.context);
 });
 
-final budgetsNotifier = ChangeNotifierProvider<BudgetsNotifier>((_) {
-  return BudgetsNotifier();
+final budgetsNotifier = ChangeNotifierProvider<BudgetsNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
+  return BudgetsNotifier(db);
 });
 
 final budgetsStreamProvider = StreamProvider.autoDispose
@@ -125,8 +137,9 @@ final budgetsStreamProvider = StreamProvider.autoDispose
 });
 
 final manualNotifier =
-    ChangeNotifierProvider.family<ManualNotifier, ManualParam>((_, param) {
-  return ManualNotifier(param.context, param.receipt);
+    ChangeNotifierProvider.family<ManualNotifier, ManualParam>((ref, param) {
+  final db = ref.watch(databaseProvider);
+  return ManualNotifier(param.context, param.receipt, db);
 });
 
 final manualAddNotifier =
@@ -137,6 +150,7 @@ final manualAddNotifier =
 
 final budgetAddNotifier =
     ChangeNotifierProvider.family<BudgetAddNotifier, BudgetAddParam>(
-        (_, param) {
-  return BudgetAddNotifier(param.context, param.budget);
+        (ref, param) {
+  final db = ref.watch(databaseProvider);
+  return BudgetAddNotifier(param.context, param.budget, db);
 });

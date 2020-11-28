@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 class ReceiptDetailsNotifier extends ChangeNotifier {
   ReceiptDetailsNotifier(
-      BuildContext context, Receipt receipt, this._irkktRepo) {
+      BuildContext context, Receipt receipt, this._irkktRepo, this._db) {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
     notifyListeners();
@@ -17,7 +17,7 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
     }
   }
 
-  final Database _db = Database();
+  final Database _db;
   final IrkktRepo _irkktRepo;
   late Receipt _receipt;
 

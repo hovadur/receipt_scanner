@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ManualNotifier extends ChangeNotifier {
-  ManualNotifier(BuildContext context, Receipt? receipt) {
+  ManualNotifier(BuildContext context, Receipt? receipt, this._db) {
     if (receipt != null) {
       final locale = Localizations.localeOf(context);
       _dateTime = receipt.dateTime;
@@ -21,6 +21,7 @@ class ManualNotifier extends ChangeNotifier {
     notifyListeners();
   }
 
+  final Database _db;
   Receipt? _receipt;
   DateTime _dateTime = DateTime.now();
   List<ReceiptItem> _products = [];
@@ -76,18 +77,17 @@ class ManualNotifier extends ChangeNotifier {
 
   bool apply() {
     if (_totalError != null || _total == 0) return false;
-    final db = Database();
     final receipt = _receipt;
     if (receipt == null) {
       final receipt =
           Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
-      db.saveReceipt(receipt);
+      _db.saveReceipt(receipt);
     } else {
       receipt
         ..dateTime = _dateTime
         ..items = _products
         ..totalSum = _total;
-      db.saveReceipt(receipt);
+      _db.saveReceipt(receipt);
     }
     return true;
   }

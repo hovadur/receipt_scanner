@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import '../../database.dart';
 
 class BudgetsNotifier extends ChangeNotifier {
-  final Database _db = Database();
+  BudgetsNotifier(this._db);
+
+  final Database _db;
 
   Stream<List<BudgetUI>> getBudgets(BuildContext context) =>
       _db.getBudgets().map((budgets) => budgets.map((budget) {

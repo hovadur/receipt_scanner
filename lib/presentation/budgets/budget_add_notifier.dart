@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import '../../database.dart';
 
 class BudgetAddNotifier extends ChangeNotifier {
-  BudgetAddNotifier(BuildContext context, Budget? budget) {
+  BudgetAddNotifier(BuildContext context, Budget? budget, this._database) {
     _budget = budget;
     if (budget == null) {
       _sumController.text = '0';
@@ -20,6 +20,7 @@ class BudgetAddNotifier extends ChangeNotifier {
     }
   }
 
+  final Database _database;
   Budget? _budget;
   String? _sumError;
   String name = '';
@@ -47,12 +48,11 @@ class BudgetAddNotifier extends ChangeNotifier {
   }
 
   Future<void> apply() async {
-    final db = Database();
     final budget = _budget;
     if (budget == null) {
-      await db.saveBudget(Budget('', name, _sum));
+      await _database.saveBudget(Budget('', name, _sum));
     } else {
-      await db.saveBudget(budget
+      await _database.saveBudget(budget
         ..name = name
         ..sum = _sum);
     }

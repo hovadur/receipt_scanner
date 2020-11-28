@@ -6,7 +6,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../database.dart';
 
 class DrawerDropDownNotifier extends ChangeNotifier {
-  final Database _db = Database();
+  DrawerDropDownNotifier(this._db);
+
+  final Database _db;
   BudgetUI? _currentBudget;
 
   BudgetUI? get currentBudget => _currentBudget;

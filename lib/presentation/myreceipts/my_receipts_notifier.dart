@@ -9,7 +9,9 @@ import 'package:flutter/material.dart';
 import 'my_item_ui.dart';
 
 class MyReceiptsNotifier extends ChangeNotifier {
-  final _db = Database();
+  MyReceiptsNotifier(this._db);
+
+  final Database _db;
   final _receiptMapper = ReceiptMapper();
 
   Stream<List<MyItemUI>> receipts(BuildContext context) async* {

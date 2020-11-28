@@ -7,9 +7,10 @@ import 'package:flutter/material.dart';
 import '../../database.dart';
 
 class SignInNotifier extends ChangeNotifier {
-  SignInNotifier(this._userInteractor);
+  SignInNotifier(this._userInteractor, this._db);
 
   final UserInteractor _userInteractor;
+  final Database _db;
 
   // https://stackoverflow.com/a/32686261/9449426
   final emailCheck = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
@@ -56,7 +57,7 @@ class SignInNotifier extends ChangeNotifier {
       final password = _password.value;
       if (email != null && password != null) {
         final user = await _userInteractor.signIn(email, password);
-        await Database().createUser(user);
+        await _db.createUser(user);
         //context.signIn(email, password);
       }
     }
@@ -65,7 +66,7 @@ class SignInNotifier extends ChangeNotifier {
   Future<bool> googleSignIn() async {
     final user = await _userInteractor.signInWithGoogle();
     if (user != null) {
-      await Database().createUser(user);
+      await _db.createUser(user);
       return true;
     }
     return false;
