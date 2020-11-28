@@ -1,13 +1,14 @@
+import 'package:ctr/domain/data/repo/settings_repo.dart';
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/mapper/budget_mapper.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../database.dart';
 
 class DrawerDropDownNotifier extends ChangeNotifier {
-  DrawerDropDownNotifier(this._db);
+  DrawerDropDownNotifier(this._settingsRepo, this._db);
 
+  final SettingsRepo _settingsRepo;
   final Database _db;
   BudgetUI? _currentBudget;
 
@@ -15,8 +16,7 @@ class DrawerDropDownNotifier extends ChangeNotifier {
 
   Stream<List<BudgetUI>> getBudgets(BuildContext context) =>
       _db.getBudgets().asyncMap((budgets) async {
-        final prefs = await SharedPreferences.getInstance();
-        final currentId = prefs.getString('currentBudget') ?? '0';
+        final currentId = _settingsRepo.getCurrentBudget();
         return budgets.map((budget) {
           final ui = BudgetMapper().map(context, budget);
           if (budget.id == currentId) {
@@ -27,8 +27,7 @@ class DrawerDropDownNotifier extends ChangeNotifier {
       });
 
   void saveCurrentBudget(BudgetUI budget) async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('currentBudget', budget.id);
+    await _settingsRepo.setCurrentBudget(budget.id);
     notifyListeners();
   }
 }

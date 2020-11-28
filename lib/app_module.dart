@@ -95,8 +95,9 @@ final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((_) {
 
 final drawerDropDownNotifier =
     ChangeNotifierProvider<DrawerDropDownNotifier>((ref) {
+  final s = ref.watch(settingsRepo);
   final db = ref.watch(databaseProvider);
-  return DrawerDropDownNotifier(db);
+  return DrawerDropDownNotifier(s, db);
 });
 
 final dropDownStreamProvider = StreamProvider.autoDispose

@@ -5,6 +5,7 @@ class SettingsRepo {
 
   static const String sessionIdKey = 'sessionId';
   static const String refreshTokenKey = 'refreshTokenKey';
+  static const String currentBudgetKey = 'currentBudget';
   SharedPreferences prefs;
 
   Future<void> setSessionId(String value) async {
@@ -18,6 +19,12 @@ class SettingsRepo {
   }
 
   String getRefreshToken() => prefs.getString(refreshTokenKey) ?? '';
+
+  Future<void> setCurrentBudget(String value) async {
+    await prefs.setString(currentBudgetKey, value);
+  }
+
+  String getCurrentBudget() => prefs.getString(currentBudgetKey) ?? '0';
 
   Future<void> clear() async {
     await prefs.clear();
