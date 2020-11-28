@@ -6,6 +6,9 @@ import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
 class SignInFnsNotifier extends ChangeNotifier {
+  SignInFnsNotifier(this._irkktRepo);
+
+  final IrkktRepo _irkktRepo;
   ValidationItem _inn = ValidationItem(null, null);
   ValidationItem _password = ValidationItem(null, null);
 
@@ -45,7 +48,7 @@ class SignInFnsNotifier extends ChangeNotifier {
     Fimber.d('submit');
     if (_isValid(context)) {
       try {
-        await IrkktRepo().login(_inn.value ?? '', _password.value ?? '');
+        await _irkktRepo.login(_inn.value ?? '', _password.value ?? '');
         return true;
       } catch (_) {
         return false;

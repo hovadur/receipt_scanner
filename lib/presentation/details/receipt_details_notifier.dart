@@ -7,7 +7,8 @@ import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:flutter/material.dart';
 
 class ReceiptDetailsNotifier extends ChangeNotifier {
-  ReceiptDetailsNotifier(BuildContext context, Receipt receipt) {
+  ReceiptDetailsNotifier(
+      BuildContext context, Receipt receipt, this._irkktRepo) {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
     notifyListeners();
@@ -17,6 +18,7 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
   }
 
   final Database _db = Database();
+  final IrkktRepo _irkktRepo;
   late Receipt _receipt;
 
   late MyReceiptUI _ui;
@@ -28,7 +30,7 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
   Future<int> getIrkktReceipt(BuildContext context) async {
     if (_receipt.items.isEmpty && _receipt.qr.isNotEmpty) {
       try {
-        final receiptKkt = await IrkktRepo().getTicket(_receipt.qr);
+        final receiptKkt = await _irkktRepo.getTicket(_receipt.qr);
         await _db.deleteReceipt(_receipt);
         await _db.saveReceipt(receiptKkt);
         _receipt = receiptKkt;

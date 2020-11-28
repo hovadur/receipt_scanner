@@ -1,3 +1,4 @@
+import 'package:ctr/domain/data/api/irkkt_api.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/presentation/budgets/budget_add_notifier.dart';
 import 'package:ctr/presentation/budgets/budget_add_param.dart';
@@ -23,6 +24,16 @@ import 'package:ctr/presentation/signin_fns/signin_fns_notifier.dart';
 import 'package:ctr/presentation/signup/signup_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
+
+import 'domain/data/repo/irkkt_repo.dart';
+import 'domain/data/repo/settings_repo.dart';
+
+final settingsRepo = Provider<SettingsRepo>((_) => throw UnimplementedError());
+
+final irkktRepo = Provider<IrkktRepo>((ref) {
+  final s = ref.watch(settingsRepo);
+  return IrkktRepo(IrkktApi(), s);
+});
 
 final myReceiptsNotifier = ChangeNotifierProvider<MyReceiptsNotifier>((_) {
   return MyReceiptsNotifier();
@@ -55,8 +66,9 @@ final drawerNotifier =
   return DrawerNotifier(context);
 });
 
-final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((_) {
-  return SignInFnsNotifier();
+final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((ref) {
+  final s = ref.watch(irkktRepo);
+  return SignInFnsNotifier(s);
 });
 
 final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
@@ -80,8 +92,9 @@ final dropDownStreamProvider = StreamProvider.autoDispose
 
 final receiptDetailsNotifier =
     ChangeNotifierProvider.family<ReceiptDetailsNotifier, ReceiptDetailsParam>(
-        (_, param) {
-  return ReceiptDetailsNotifier(param.context, param.receipt);
+        (ref, param) {
+  final s = ref.watch(irkktRepo);
+  return ReceiptDetailsNotifier(param.context, param.receipt, s);
 });
 
 final receiptDetailsUIStreamProvider = StreamProvider.autoDispose
