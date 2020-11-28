@@ -81,13 +81,14 @@ class ManualNotifier extends ChangeNotifier {
     if (receipt == null) {
       final receipt =
           Receipt(dateTime: _dateTime, totalSum: _total, items: _products);
-      _db.saveReceipt(receipt);
+      _db.saveReceipt(receipt, isBudget: true);
     } else {
+      _db.deleteReceipt(receipt);
       receipt
         ..dateTime = _dateTime
         ..items = _products
         ..totalSum = _total;
-      _db.saveReceipt(receipt);
+      _db.saveReceipt(receipt, isBudget: true);
     }
     return true;
   }
