@@ -6,8 +6,8 @@ import 'package:intl/intl.dart';
 
 import '../../database.dart';
 
-class BudgetAddViewModel extends ChangeNotifier {
-  BudgetAddViewModel(BuildContext context, Budget? budget) {
+class BudgetAddNotifier extends ChangeNotifier {
+  BudgetAddNotifier(BuildContext context, Budget? budget) {
     _budget = budget;
     if (budget == null) {
       _sumController.text = '0';

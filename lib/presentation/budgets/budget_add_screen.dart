@@ -1,27 +1,30 @@
+import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/budget.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
+import 'package:ctr/presentation/budgets/budget_add_param.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
-import 'budget_add_viewmodel.dart';
+import 'budget_add_notifier.dart';
 
-class BudgetAddScreen extends StatelessWidget {
+class BudgetAddScreen extends ConsumerWidget {
   const BudgetAddScreen({this.item, Key? key}) : super(key: key);
   static const String routeName = 'BudgetAddScreen';
 
   final Budget? item;
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => BudgetAddViewModel(context, item),
-      builder: (context, _) => Scaffold(
-          appBar: AppBar(
-            title: Text(context.translate().addBudget),
-          ),
-          body: SingleChildScrollView(child: _buildColumn(context))));
+  Widget build(BuildContext context, ScopedReader watch) {
+    return Scaffold(
+        appBar: AppBar(
+          title: Text(context.translate().addBudget),
+        ),
+        body: SingleChildScrollView(child: _buildColumn(context, watch)));
+  }
 
-  Widget _buildColumn(BuildContext context) {
+  Widget _buildColumn(BuildContext context, ScopedReader watch) {
+    final notifier = budgetAddNotifier(BudgetAddParam(context, item));
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
@@ -34,28 +37,24 @@ class BudgetAddScreen extends StatelessWidget {
               textAlign: TextAlign.center),
           const SizedBox(height: 8),
           TextField(
-            controller: context
-                .select((BudgetAddViewModel value) => value.nameController),
+            controller: watch(notifier).nameController,
             keyboardType: TextInputType.streetAddress,
             textInputAction: TextInputAction.next,
             decoration:
                 InputDecoration(labelText: context.translate().budgetName),
-            onChanged: (String value) =>
-                context.read<BudgetAddViewModel>().name = value,
+            onChanged: (String value) => context.read(notifier).name = value,
           ),
           const SizedBox(height: 8),
           TextField(
-            controller: context
-                .select((BudgetAddViewModel value) => value.sumController),
+            controller: watch(notifier).sumController,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             textInputAction: TextInputAction.done,
-            onSubmitted: (_) => apply(context),
+            onSubmitted: (_) => apply(context, notifier),
             decoration: InputDecoration(
                 labelText: context.translate().startingBalance,
-                errorText: context
-                    .select((BudgetAddViewModel value) => value.sumError)),
+                errorText: watch(notifier).sumError),
             onChanged: (String value) =>
-                context.read<BudgetAddViewModel>().changeSum(value, context),
+                context.read(notifier).changeSum(value, context),
           ),
           SizedBox(
               width: double.infinity,
@@ -63,7 +62,7 @@ class BudgetAddScreen extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: ElevatedButton(
                     autofocus: true,
-                    onPressed: () => apply(context),
+                    onPressed: () => apply(context, notifier),
                     style: ElevatedButton.styleFrom(
                       padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 4.0),
@@ -73,8 +72,9 @@ class BudgetAddScreen extends StatelessWidget {
         ]));
   }
 
-  void apply(BuildContext context) async {
-    await context.read<BudgetAddViewModel>().apply();
+  void apply(BuildContext context,
+      ChangeNotifierProvider<BudgetAddNotifier> notifier) async {
+    await context.read(notifier).apply();
     AppNavigator.of(context).pop();
   }
 }

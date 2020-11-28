@@ -1,4 +1,6 @@
 import 'package:ctr/domain/interactor/user_interactor.dart';
+import 'package:ctr/presentation/budgets/budget_add_notifier.dart';
+import 'package:ctr/presentation/budgets/budget_add_param.dart';
 import 'package:ctr/presentation/budgets/budgets_notifier.dart';
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/camera/camera_notifier.dart';
@@ -9,8 +11,8 @@ import 'package:ctr/presentation/drawer/drawer_notifier.dart';
 import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
 import 'package:ctr/presentation/manual/manual_add_notifier.dart';
 import 'package:ctr/presentation/manual/manual_add_param.dart';
+import 'package:ctr/presentation/manual/manual_notifier.dart';
 import 'package:ctr/presentation/manual/manual_param.dart';
-import 'package:ctr/presentation/manual/manual_viewmodel.dart';
 import 'package:ctr/presentation/myreceipts/my_item_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:ctr/presentation/myreceipts/my_receipts_notifier.dart';
@@ -113,4 +115,10 @@ final manualAddNotifier =
     ChangeNotifierProvider.family<ManualAddNotifier, ManualAddParam>(
         (_, param) {
   return ManualAddNotifier(param.context, param.item);
+});
+
+final budgetAddNotifier =
+    ChangeNotifierProvider.family<BudgetAddNotifier, BudgetAddParam>(
+        (_, param) {
+  return BudgetAddNotifier(param.context, param.budget);
 });
