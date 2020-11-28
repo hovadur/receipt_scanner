@@ -1,7 +1,6 @@
 import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:ctr/presentation/common/category_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_param.dart';
@@ -85,9 +84,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
                 padding: const EdgeInsets.all(8.0),
                 child: RichText(
                     text: TextSpan(
-                        text:
-                            AppLocalizations.of(context)?.dontHaveFnsAccount ??
-                                '',
+                        text: context.translate().dontHaveFnsAccount,
                         style: TextStyle(color: Theme.of(context).errorColor),
                         children: <TextSpan>[_nalogRu(context)])));
           }

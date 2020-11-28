@@ -5,8 +5,8 @@ import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ManualViewModel extends ChangeNotifier {
-  ManualViewModel(BuildContext context, Receipt? receipt) {
+class ManualNotifier extends ChangeNotifier {
+  ManualNotifier(BuildContext context, Receipt? receipt) {
     if (receipt != null) {
       final locale = Localizations.localeOf(context);
       _dateTime = receipt.dateTime;

@@ -1,36 +1,39 @@
+import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/date_time_picker.dart';
+import 'package:ctr/presentation/manual/ManualParam.dart';
 import 'package:ctr/presentation/manual/manual_add_screen.dart';
-import 'package:ctr/presentation/manual/manual_viewmodel.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_riverpod/all.dart';
 
-class ManualScreen extends StatelessWidget {
+class ManualScreen extends ConsumerWidget {
   const ManualScreen({Key? key, this.receipt}) : super(key: key);
   static const String routeName = 'ManualScreen';
 
   final Receipt? receipt;
 
   @override
-  Widget build(BuildContext context) => ChangeNotifierProvider(
-      create: (_) => ManualViewModel(context, receipt),
-      builder: (context, _) => Scaffold(
-            appBar: AppBar(title: Text(context.translate().manual)),
-            floatingActionButton: FloatingActionButton.extended(
-              icon: const Icon(Icons.approval),
-              label: Text(context.translate().apply),
-              onPressed: () {
-                if (context.read<ManualViewModel>().apply()) {
-                  AppNavigator.of(context).pop();
-                }
-              },
-            ),
-            body: _buildBody(context),
-          ));
+  Widget build(BuildContext context, ScopedReader watch) {
+    final notifier = manualNotifier(ManualParam(context, receipt));
+    return Scaffold(
+      appBar: AppBar(title: Text(context.translate().manual)),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: const Icon(Icons.approval),
+        label: Text(context.translate().apply),
+        onPressed: () {
+          if (context.read(notifier).apply()) {
+            AppNavigator.of(context).pop();
+          }
+        },
+      ),
+      body: _buildBody(context, watch),
+    );
+  }
 
-  Widget _buildBody(BuildContext context) {
+  Widget _buildBody(BuildContext context, ScopedReader watch) {
+    final notifier = manualNotifier(ManualParam(context, receipt));
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -38,26 +41,23 @@ class ManualScreen extends StatelessWidget {
             DateTimePicker(
               locale: Localizations.localeOf(context),
               type: DateTimePickerType.dateTimeSeparate,
-              initialValue: context
-                  .select((ManualViewModel value) => value.dateTime.toString()),
+              initialValue: watch(notifier).dateTime.toString(),
               firstDate: DateTime.fromMillisecondsSinceEpoch(0),
               lastDate: DateTime.now(),
               onChanged: (String value) =>
-                  context.read<ManualViewModel>().changeDateTime(value),
+                  context.read(notifier).changeDateTime(value),
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: context
-                  .select((ManualViewModel value) => value.totalController),
+              controller: watch(notifier).totalController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                   labelText: context.translate().totalAmount,
-                  errorText: context
-                      .select((ManualViewModel value) => value.totalError)),
+                  errorText: watch(notifier).totalError),
               onChanged: (String value) =>
-                  context.read<ManualViewModel>().changeTotal(value, context),
+                  context.read(notifier).changeTotal(value, context),
             ),
             const SizedBox(height: 8),
             Row(children: <Widget>[
@@ -67,7 +67,7 @@ class ManualScreen extends StatelessWidget {
                         name: ManualAddScreen.routeName,
                         child: ManualAddScreen(
                           onPressed: (item) {
-                            context.read<ManualViewModel>().addProduct(item);
+                            context.read(notifier).addProduct(item);
                           },
                         )));
                   },
@@ -75,33 +75,32 @@ class ManualScreen extends StatelessWidget {
                   label: Text(context.translate().product)),
               const SizedBox(width: 8),
               ElevatedButton.icon(
-                  onPressed: () =>
-                      context.read<ManualViewModel>().removeProduct(),
+                  onPressed: () => context.read(notifier).removeProduct(),
                   icon: const Icon(Icons.remove),
                   label: Text(context.translate().product)),
             ])
           ])),
       Expanded(
           child: ListView.builder(
-              itemCount:
-                  context.select((ManualViewModel value) => value.productCount),
+              itemCount: watch(notifier).productCount,
               itemBuilder: (BuildContext context, int index) {
                 return Builder(
-                    builder: (context) => _buildItem(context, index));
+                    builder: (context) => _buildItem(context, index, watch));
               }))
     ]);
   }
 
-  Widget _buildItem(BuildContext context, int index) {
+  Widget _buildItem(BuildContext context, int index, ScopedReader watch) {
+    final notifier = manualNotifier(ManualParam(context, receipt));
     final entries = context.category().entries.toList();
-    final item = context.watch<ManualViewModel>().getProducts(context)[index];
+    final item = watch(notifier).getProducts(context)[index];
     return ListTile(
         onTap: () {
           AppNavigator.of(context).push(MaterialPage<Page>(
               name: ManualAddScreen.routeName,
               child: ManualAddScreen(
                 onPressed: (item) {
-                  context.read<ManualViewModel>().changeProduct(item);
+                  context.read(notifier).changeProduct(item);
                 },
                 item: item.item,
               )));
