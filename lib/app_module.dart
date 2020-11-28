@@ -53,12 +53,14 @@ final searchStreamProvider = StreamProvider.autoDispose
 
 final userInteractor = Provider<UserInteractor>((_) => UserInteractor());
 
-final signInNotifier = ChangeNotifierProvider<SignInNotifier>((_) {
-  return SignInNotifier();
+final signInNotifier = ChangeNotifierProvider<SignInNotifier>((ref) {
+  final s = ref.watch(userInteractor);
+  return SignInNotifier(s);
 });
 
-final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((_) {
-  return SignUpNotifier();
+final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((ref) {
+  final s = ref.watch(userInteractor);
+  return SignUpNotifier(s);
 });
 
 final drawerNotifier =

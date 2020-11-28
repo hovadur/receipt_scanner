@@ -1,4 +1,7 @@
+import 'package:ctr/domain/navigation/app_navigator.dart';
+import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:websafe_svg/websafe_svg.dart';
@@ -19,7 +22,7 @@ class SignUpScreen extends StatelessWidget {
             const SizedBox(height: 40),
             const LoginForm(),
             ElevatedButton.icon(
-                onPressed: () => context.googleSignIn(),
+                onPressed: () => googleSignIn(context),
                 icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
                 label: Text(context.translate().signInWithGoogle),
                 style: ElevatedButton.styleFrom(
@@ -29,6 +32,18 @@ class SignUpScreen extends StatelessWidget {
           ],
         ),
       ));
+
+  void googleSignIn(BuildContext context) {
+    context.read(signUpNotifier).googleSignIn().then((value) {
+      if (value) {
+        AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+            name: CameraScreen.routeName, child: CameraScreen()));
+      }
+    }).catchError((e) {
+      context.showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
+  }
 }
 
 class LoginForm extends ConsumerWidget {
@@ -51,8 +66,6 @@ class LoginForm extends ConsumerWidget {
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.next,
-            onSubmitted: (String value) =>
-                context.read(signUpNotifier).submit(context),
             decoration: InputDecoration(
                 labelText: context.translate().password,
                 errorText: watch(signUpNotifier).passwordError),
@@ -90,6 +103,12 @@ class LoginForm extends ConsumerWidget {
       );
 
   void submit(BuildContext context) {
-    context.read(signUpNotifier).submit(context);
+    context.read(signUpNotifier).submit(context).then((_) {
+      AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+          name: CameraScreen.routeName, child: CameraScreen()));
+    }).catchError((e) {
+      context.showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
   }
 }

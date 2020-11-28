@@ -1,7 +1,9 @@
 import 'package:ctr/app_module.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
+import 'package:ctr/presentation/camera/camera_screen.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/signup/signup_screen.dart';
+import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
@@ -21,7 +23,7 @@ class SignInScreen extends StatelessWidget {
               const SizedBox(height: 40),
               const LoginForm(),
               ElevatedButton.icon(
-                  onPressed: () => context.googleSignIn(),
+                  onPressed: () => googleSignIn(context),
                   icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
                   label: Text(context.translate().signInWithGoogle),
                   style: ElevatedButton.styleFrom(
@@ -51,6 +53,18 @@ class SignInScreen extends StatelessWidget {
               )
             ],
           )));
+
+  void googleSignIn(BuildContext context) {
+    context.read(signInNotifier).googleSignIn().then((value) {
+      if (value) {
+        AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+            name: CameraScreen.routeName, child: CameraScreen()));
+      }
+    }).catchError((e) {
+      context.showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
+  }
 }
 
 class LoginForm extends ConsumerWidget {
@@ -99,6 +113,12 @@ class LoginForm extends ConsumerWidget {
       );
 
   void submit(BuildContext context) {
-    context.read(signInNotifier).submit(context);
+    context.read(signInNotifier).submit(context).then((_) {
+      AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
+          name: CameraScreen.routeName, child: CameraScreen()));
+    }).catchError((e) {
+      context.showError(e.message);
+      Fimber.e(e.toString());
+    }, test: (e) => e is Exception);
   }
 }

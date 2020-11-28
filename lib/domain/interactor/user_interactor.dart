@@ -1,4 +1,3 @@
-import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/user.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
@@ -23,7 +22,6 @@ class UserInteractor {
     Fimber.d('User Name: ${authResult.user.displayName}');
     Fimber.d('User Email ${authResult.user.email}');
     final _user = getCurrentUser();
-    await Database().createUser(_user);
     return _user;
   }
 

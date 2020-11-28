@@ -1,9 +1,16 @@
 import 'package:ctr/domain/data/validation_item.dart';
+import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
+import '../../database.dart';
+
 class SignInNotifier extends ChangeNotifier {
+  SignInNotifier(this._userInteractor);
+
+  final UserInteractor _userInteractor;
+
   // https://stackoverflow.com/a/32686261/9449426
   final emailCheck = RegExp(r'^[^\s@]+@[^\s@]+\.[^\s@]+$');
 
@@ -42,14 +49,25 @@ class SignInNotifier extends ChangeNotifier {
     }
   }
 
-  void submit(BuildContext context) {
+  Future<void> submit(BuildContext context) async {
     if (_isValid(context)) {
       Fimber.d('submit');
       final email = _email.value;
       final password = _password.value;
       if (email != null && password != null) {
-        context.signIn(email, password);
+        final user = await _userInteractor.signIn(email, password);
+        await Database().createUser(user);
+        //context.signIn(email, password);
       }
     }
+  }
+
+  Future<bool> googleSignIn() async {
+    final user = await _userInteractor.signInWithGoogle();
+    if (user != null) {
+      await Database().createUser(user);
+      return true;
+    }
+    return false;
   }
 }
