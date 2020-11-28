@@ -3,7 +3,7 @@ import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/date_time_picker.dart';
-import 'package:ctr/presentation/manual/ManualParam.dart';
+import 'package:ctr/presentation/manual/manual_param.dart';
 import 'package:ctr/presentation/manual/manual_add_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';

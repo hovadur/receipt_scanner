@@ -4,8 +4,8 @@ import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class ManualAddViewModel extends ChangeNotifier {
-  ManualAddViewModel(BuildContext context, ReceiptItem? item) {
+class ManualAddNotifier extends ChangeNotifier {
+  ManualAddNotifier(BuildContext context, ReceiptItem? item) {
     _item = item;
     if (item == null) {
       _qtyController.text = '0';
