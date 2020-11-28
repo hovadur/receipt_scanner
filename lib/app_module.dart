@@ -51,7 +51,10 @@ final searchStreamProvider = StreamProvider.autoDispose
   return notifier.search(param.context, param.filter);
 });
 
-final userInteractor = Provider<UserInteractor>((_) => UserInteractor());
+final userInteractor = Provider<UserInteractor>((ref) {
+  final s = ref.watch(settingsRepo);
+  return UserInteractor(s);
+});
 
 final signInNotifier = ChangeNotifierProvider<SignInNotifier>((ref) {
   final s = ref.watch(userInteractor);

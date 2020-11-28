@@ -18,4 +18,8 @@ class SettingsRepo {
   }
 
   String getRefreshToken() => prefs.getString(refreshTokenKey) ?? '';
+
+  Future<void> clear() async {
+    await prefs.clear();
+  }
 }

@@ -1,10 +1,13 @@
+import 'package:ctr/domain/data/repo/settings_repo.dart';
 import 'package:ctr/domain/entity/user.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserInteractor {
+  UserInteractor(this._settingsRepo);
+
+  final SettingsRepo _settingsRepo;
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
   User getCurrentUser() {
@@ -55,7 +58,6 @@ class UserInteractor {
 
   Future<void> signOut() async {
     await auth.FirebaseAuth.instance.signOut();
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.clear();
+    await _settingsRepo.clear();
   }
 }
