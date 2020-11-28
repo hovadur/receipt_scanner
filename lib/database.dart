@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:ctr/domain/data/repo/settings_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/entity/user.dart';
 import 'package:ctr/domain/interactor/user_interactor.dart';
@@ -6,8 +7,9 @@ import 'package:ctr/domain/interactor/user_interactor.dart';
 import 'domain/entity/budget.dart';
 
 class Database {
-  Database(this._userInteractor);
+  Database(this._settingsRepo, this._userInteractor);
 
+  final SettingsRepo _settingsRepo;
   final UserInteractor _userInteractor;
   final _users = FirebaseFirestore.instance.collection('users');
 
@@ -34,6 +36,15 @@ class Database {
           .map((event) {
         return event.docs.map((e) => Budget.fromDocumentSnapshot(e)).toList();
       });
+
+  Future<Budget> getCurrentBudget() async {
+    final doc = await _users
+        .doc(_userInteractor.getCurrentUser().id)
+        .collection('budgets')
+        .doc(_settingsRepo.getCurrentBudget())
+        .get();
+    return Budget.fromDocumentSnapshot(doc);
+  }
 
   Future<void> deleteBudget(Budget value) async {
     await _users
@@ -62,6 +73,7 @@ class Database {
           .doc(_userInteractor.getCurrentUser().id)
           .collection('receipts')
           .orderBy('dateTime', descending: true)
+          .where('budget', isEqualTo: _settingsRepo.getCurrentBudget())
           .snapshots()
           .map((event) {
         return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
@@ -89,9 +101,12 @@ class Database {
         .collection('receipts')
         .doc(value.id)
         .delete();
+    final budget = await getCurrentBudget();
+    budget.sum += value.totalSum;
+    await saveBudget(budget);
   }
 
-  Future<void> saveReceipt(Receipt value) async {
+  Future<void> saveReceipt(Receipt value, {bool isBudget = false}) async {
     await _users
         .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
@@ -105,7 +120,13 @@ class Database {
       'fiscalDriveNumber': value.fiscalDriveNumber,
       'fiscalSign': value.fiscalSign,
       'qr': value.qr,
+      'budget': _settingsRepo.getCurrentBudget(),
       'items': value.items.map((e) => e.toJson()).toList()
     });
+    if (isBudget) {
+      final budget = await getCurrentBudget();
+      budget.sum -= value.totalSum;
+      await saveBudget(budget);
+    }
   }
 }

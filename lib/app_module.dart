@@ -37,8 +37,9 @@ final irkktRepo = Provider<IrkktRepo>((ref) {
 });
 
 final databaseProvider = Provider<Database>((ref) {
-  final s = ref.watch(userInteractor);
-  return Database(s);
+  final s = ref.watch(settingsRepo);
+  final u = ref.watch(userInteractor);
+  return Database(s, u);
 });
 
 final myReceiptsNotifier = ChangeNotifierProvider<MyReceiptsNotifier>((ref) {

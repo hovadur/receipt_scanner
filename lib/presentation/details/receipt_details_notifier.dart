@@ -13,7 +13,7 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
     _ui = ReceiptMapper().map(context, receipt);
     notifyListeners();
     if (receipt.items.isEmpty && receipt.qr.isNotEmpty) {
-      _db.saveReceipt(receipt);
+      _db.saveReceipt(receipt, isBudget: true);
     }
   }
 

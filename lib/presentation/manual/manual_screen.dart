@@ -93,7 +93,7 @@ class ManualScreen extends ConsumerWidget {
   Widget _buildItem(BuildContext context, int index, ScopedReader watch) {
     final notifier = manualNotifier(ManualParam(context, receipt));
     final entries = context.category().entries.toList();
-    final item = watch(notifier).getProducts(context)[index];
+    final item = context.read(notifier).getProducts(context)[index];
     return ListTile(
         onTap: () {
           AppNavigator.of(context).push(MaterialPage<Page>(
