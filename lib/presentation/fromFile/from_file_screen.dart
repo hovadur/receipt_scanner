@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
@@ -41,7 +43,8 @@ class FromFileScreen extends ConsumerWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           if (path == null) Text(context.translate().noFile),
-          if (path != null) Text(path, textAlign: TextAlign.center),
+          if (path != null)
+            Image.file(File(path), fit: BoxFit.cover, width: 100),
           const SizedBox(height: 8),
           if (path != null)
             ElevatedButton(
