@@ -107,9 +107,8 @@ final dropDownStreamProvider = StreamProvider.autoDispose
   return notifier.getBudgets(context);
 });
 
-final receiptDetailsNotifier =
-    ChangeNotifierProvider.family<ReceiptDetailsNotifier, ReceiptDetailsParam>(
-        (ref, param) {
+final receiptDetailsNotifier = ChangeNotifierProvider.autoDispose
+    .family<ReceiptDetailsNotifier, ReceiptDetailsParam>((ref, param) {
   final s = ref.watch(irkktRepo);
   final db = ref.watch(databaseProvider);
   return ReceiptDetailsNotifier(param.context, param.receipt, s, db);

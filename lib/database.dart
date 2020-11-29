@@ -86,13 +86,13 @@ class Database {
       .snapshots()
       .map((event) => Receipt.fromDocumentSnapshot(event));
 
-  Future<bool> receiptExists(String qr) async {
+  Future<bool> receiptExists(String id) async {
     final doc = await _users
         .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
-        .where('qr', isEqualTo: qr)
+        .doc(id)
         .get();
-    return doc.docs.isNotEmpty;
+    return doc.exists;
   }
 
   Future<void> deleteReceipt(Receipt value) async {

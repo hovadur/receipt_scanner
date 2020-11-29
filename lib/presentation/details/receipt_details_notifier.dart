@@ -32,7 +32,11 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
       try {
         final receiptKkt = await _irkktRepo.getTicket(_receipt.qr);
         await _db.deleteReceipt(_receipt);
-        await _db.saveReceipt(receiptKkt, isBudget: true);
+        if (await _db.receiptExists(receiptKkt.id)) {
+          await _db.saveReceipt(receiptKkt);
+        } else {
+          await _db.saveReceipt(receiptKkt, isBudget: true);
+        }
         _receipt = receiptKkt;
         _ui = ReceiptMapper().map(context, receiptKkt);
         notifyListeners();
