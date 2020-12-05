@@ -10,6 +10,7 @@ import 'package:ctr/presentation/details/receipt_details_param.dart';
 import 'package:ctr/presentation/drawer/drawer_dropdown_notifier.dart';
 import 'package:ctr/presentation/drawer/drawer_notifier.dart';
 import 'package:ctr/presentation/fromFile/from_file_notifier.dart';
+import 'package:ctr/presentation/fromParam/from_param_notifier.dart';
 import 'package:ctr/presentation/manual/manual_add_notifier.dart';
 import 'package:ctr/presentation/manual/manual_add_param.dart';
 import 'package:ctr/presentation/manual/manual_notifier.dart';
@@ -154,4 +155,8 @@ final budgetAddNotifier =
         (ref, param) {
   final db = ref.watch(databaseProvider);
   return BudgetAddNotifier(param.context, param.budget, db);
+});
+
+final fromParamNotifier = ChangeNotifierProvider<FromParamNotifier>((_) {
+  return FromParamNotifier();
 });

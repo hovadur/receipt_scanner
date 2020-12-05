@@ -233,6 +233,12 @@
   "@noFile": {"description": "No file"},
 
   "invalidBarcode": "Неверный штрихкод",
-  "@invalidBarcode": {"description": "Invalid barcode"}
+  "@invalidBarcode": {"description": "Invalid barcode"},
+
+  "fromParam": "Из параметров",
+  "@fromParam": {"description": "From barcode parameters"},
+
+  "invalidData": "Неверные данные",
+  "@invalidData": {"description": "Invalid data"}
 
 }

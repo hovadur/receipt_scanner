@@ -230,6 +230,12 @@
   "@noFile": {"description": "No file"},
 
   "invalidBarcode": "Invalid barcode",
-  "@invalidBarcode": {"description": "Invalid barcode"}
+  "@invalidBarcode": {"description": "Invalid barcode"},
+
+  "fromParam": "From parameters",
+  "@fromParam": {"description": "From barcode parameters"},
+
+  "invalidData": "Invalid data",
+  "@invalidData": {"description": "Invalid data"}
 
 }

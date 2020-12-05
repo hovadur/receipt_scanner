@@ -6,6 +6,7 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:ctr/presentation/fromFile/from_file_screen.dart';
+import 'package:ctr/presentation/fromParam/from_param_screen.dart';
 import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -26,6 +27,16 @@ class CameraScreen extends ConsumerWidget {
         FloatingActionButton.extended(
           heroTag: null,
           icon: const Icon(Icons.add),
+          label: Text(context.translate().fromFile),
+          onPressed: () {
+            AppNavigator.of(context).push(const MaterialPage<Page>(
+                name: FromFileScreen.routeName, child: FromFileScreen()));
+          },
+        ),
+        const SizedBox(height: 8),
+        FloatingActionButton.extended(
+          heroTag: null,
+          icon: const Icon(Icons.add),
           label: Text(context.translate().manual),
           onPressed: () {
             AppNavigator.of(context).push(const MaterialPage<Page>(
@@ -36,12 +47,12 @@ class CameraScreen extends ConsumerWidget {
         FloatingActionButton.extended(
           heroTag: null,
           icon: const Icon(Icons.add),
-          label: Text(context.translate().fromFile),
+          label: Text(context.translate().fromParam),
           onPressed: () {
             AppNavigator.of(context).push(const MaterialPage<Page>(
-                name: FromFileScreen.routeName, child: FromFileScreen()));
+                name: FromParamScreen.routeName, child: FromParamScreen()));
           },
-        )
+        ),
       ]),
       body: Container(
           constraints: const BoxConstraints.expand(),

@@ -557,6 +557,18 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid barcode'**
   String get invalidBarcode;
+
+  /// From barcode parameters
+  ///
+  /// In en, this message translates to:
+  /// **'From parameters'**
+  String get fromParam;
+
+  /// Invalid data
+  ///
+  /// In en, this message translates to:
+  /// **'Invalid data'**
+  String get invalidData;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
