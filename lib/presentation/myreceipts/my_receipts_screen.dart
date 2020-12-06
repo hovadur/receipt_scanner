@@ -56,7 +56,9 @@ class MyReceiptsScreen extends ConsumerWidget {
           }
         },
         child: ListTile(
-          leading: const CircleAvatar(child: Icon(Icons.fact_check)),
+          leading: value.items.isEmpty
+              ? const CircleAvatar(child: Icon(Icons.approval))
+              : const CircleAvatar(child: Icon(Icons.fact_check)),
           title: Text(value.dateTime),
           trailing: Text(value.totalSum),
           onTap: () {
