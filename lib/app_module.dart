@@ -91,8 +91,9 @@ final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
   return FromFileNotifier();
 });
 
-final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((_) {
-  return CameraNotifier();
+final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
+  return CameraNotifier(db);
 });
 
 final drawerDropDownNotifier =
@@ -157,6 +158,7 @@ final budgetAddNotifier =
   return BudgetAddNotifier(param.context, param.budget, db);
 });
 
-final fromParamNotifier = ChangeNotifierProvider<FromParamNotifier>((_) {
-  return FromParamNotifier();
+final fromParamNotifier = ChangeNotifierProvider<FromParamNotifier>((ref) {
+  final db = ref.watch(databaseProvider);
+  return FromParamNotifier(db);
 });

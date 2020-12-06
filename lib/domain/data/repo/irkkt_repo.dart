@@ -8,6 +8,7 @@ import 'package:ctr/domain/data/dto/ticket_id_resp.dart';
 import 'package:ctr/domain/data/dto/ticket_resp.dart';
 import 'package:ctr/domain/data/error/irkkt_not_auth.dart';
 import 'package:ctr/domain/data/error/irkkt_not_login.dart';
+import 'package:ctr/domain/data/error/irkkt_too_many_requests.dart';
 import 'package:ctr/domain/data/repo/settings_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:device_info/device_info.dart';
@@ -85,6 +86,8 @@ class IrkktRepo {
       }
     } else if (response.statusCode == HttpStatus.unauthorized) {
       throw IrkktNotAuth();
+    } else if (response.statusCode == HttpStatus.tooManyRequests) {
+      throw IrkktTooManyRequests();
     } else {
       throw Exception('${'Request failed with status: ${response.statusCode}.'}'
           '${response.body}');

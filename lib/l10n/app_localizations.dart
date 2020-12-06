@@ -569,6 +569,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Invalid data'**
   String get invalidData;
+
+  /// Too many requests
+  ///
+  /// In en, this message translates to:
+  /// **'Too many requests to FNS'**
+  String get tooManyRequests;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

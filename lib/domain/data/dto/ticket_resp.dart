@@ -6,13 +6,19 @@ class TicketKktResp {
         createdAt = json['createdAt'],
         qr = json['qr'],
         operation = OperationResp.fromJson(json['operation']),
-        seller = SellerResp.fromJson(json['seller']),
+        seller = json.containsKey('seller')
+            ? SellerResp.fromJson(json['seller'])
+            : SellerResp(),
         process = (json['process'] as List)
             .map((e) => ProcessResp.fromJson(e))
             .toList(),
         query = QueryResp.fromJson(json['query']),
-        ticket = TicketResp.fromJson(json['ticket']),
-        organization = SellerResp.fromJson(json['organization']);
+        ticket = json.containsKey('ticket')
+            ? TicketResp.fromJson(json['ticket'])
+            : TicketResp(DocumentResp()),
+        organization = json.containsKey('organization')
+            ? SellerResp.fromJson(json['organization'])
+            : SellerResp();
   String id;
   int status;
   String kkt;
@@ -27,15 +33,19 @@ class TicketKktResp {
 }
 
 class TicketResp {
+  TicketResp(this.document);
+
   TicketResp.fromJson(Map<String, dynamic> json)
       : document = DocumentResp.fromJson(json['document']);
   DocumentResp document;
 }
 
 class DocumentResp {
+  DocumentResp({this.receipt});
+
   DocumentResp.fromJson(Map<String, dynamic> json)
       : receipt = ReceiptResp.fromJson(json['receipt']);
-  ReceiptResp receipt;
+  ReceiptResp? receipt;
 }
 
 class ReceiptResp {
@@ -110,9 +120,14 @@ class OperationResp {
 }
 
 class SellerResp {
-  SellerResp.fromJson(Map<String, dynamic> json)
-      : name = json['name'],
-        inn = json['inn'];
+  SellerResp({this.name = '', this.inn = ''});
+
+  static SellerResp fromJson(Map<String, dynamic> json) {
+    final name = json.containsKey('name') ? json['name'] : '';
+    final inn = json.containsKey('inn') ? json['inn'] : '';
+    return SellerResp(name: name, inn: inn);
+  }
+
   String name;
   String inn;
 }

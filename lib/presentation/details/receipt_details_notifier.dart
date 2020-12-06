@@ -1,5 +1,6 @@
 import 'package:ctr/database.dart';
 import 'package:ctr/domain/data/error/irkkt_not_login.dart';
+import 'package:ctr/domain/data/error/irkkt_too_many_requests.dart';
 import 'package:ctr/domain/data/repo/irkkt_repo.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/presentation/mapper/receipt_mapper.dart';
@@ -11,10 +12,6 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
       BuildContext context, Receipt receipt, this._irkktRepo, this._db) {
     _receipt = receipt;
     _ui = ReceiptMapper().map(context, receipt);
-    notifyListeners();
-    if (receipt.items.isEmpty && receipt.qr.isNotEmpty) {
-      _db.saveReceipt(receipt, isBudget: true);
-    }
   }
 
   final Database _db;
@@ -43,6 +40,8 @@ class ReceiptDetailsNotifier extends ChangeNotifier {
         return 1;
       } on IrkktNotLogin {
         return 2;
+      } on IrkktTooManyRequests {
+        return 3;
       }
     } else {
       return 0;

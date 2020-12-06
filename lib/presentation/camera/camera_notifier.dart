@@ -1,19 +1,23 @@
 import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
+import 'package:ctr/database.dart';
+import 'package:ctr/domain/entity/receipt.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class CameraNotifier extends ChangeNotifier {
-  CameraNotifier() {
+  CameraNotifier(this._db) {
     try {
       _initializeCamera();
     } catch (e) {
       Fimber.e(e.toString());
     }
   }
+
+  final Database _db;
 
   @override
   void dispose() {
@@ -22,6 +26,15 @@ class CameraNotifier extends ChangeNotifier {
       _barcodeDetector.close();
     });
     super.dispose();
+  }
+
+  Receipt? apply(String qr) {
+    try {
+      final receipt = Receipt.fromQr(qr);
+      _db.saveReceipt(receipt, isBudget: true);
+      return receipt;
+    } catch (_) {}
+    return null;
   }
 
   final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
@@ -76,8 +89,8 @@ class CameraNotifier extends ChangeNotifier {
 
   static Future<List<Barcode>> _detect({
     required CameraImage image,
-    required
-        Future<List<Barcode>> Function(FirebaseVisionImage image) detectInImage,
+    required Future<List<Barcode>> Function(FirebaseVisionImage image)
+        detectInImage,
     required int imageRotation,
   }) async {
     return detectInImage(

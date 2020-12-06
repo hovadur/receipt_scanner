@@ -1,9 +1,13 @@
+import 'package:ctr/database.dart';
 import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class FromParamNotifier extends ChangeNotifier {
+  FromParamNotifier(this._db);
+
+  final Database _db;
   DateTime _dateTime = DateTime.now();
   String? _totalError;
   int _total = 0;
@@ -36,16 +40,18 @@ class FromParamNotifier extends ChangeNotifier {
   //t=20200727T1117&s=4850.00&fn=9287440300634471&i=13571&fp=3730902192&n=1
   Receipt? apply() {
     try {
-      final month = _dateTime.month.toString().padLeft(2);
-      final day = _dateTime.day.toString().padLeft(2);
-      final hour = _dateTime.hour.toString().padLeft(2);
-      final minute = _dateTime.minute.toString().padLeft(2);
+      final month = _dateTime.month.toString().padLeft(2, '0');
+      final day = _dateTime.day.toString().padLeft(2, '0');
+      final hour = _dateTime.hour.toString().padLeft(2, '0');
+      final minute = _dateTime.minute.toString().padLeft(2, '0');
       final total = _total.toString();
       final totalFirst = total.substring(0, total.length - 2);
       final totalEnd = total.substring(total.length - 2, total.length);
       final s =
           't=${_dateTime.year}$month${day}T$hour$minute&s=$totalFirst.$totalEnd&fn=$fn&i=$fd&fp=$fpd&n=1';
-      return Receipt.fromQr(s);
+      final receipt = Receipt.fromQr(s);
+      _db.saveReceipt(receipt, isBudget: true);
+      return receipt;
     } catch (_) {}
     return null;
   }

@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:ctr/domain/data/barcode_detector_painter.dart';
-import 'package:ctr/domain/entity/receipt.dart';
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
@@ -101,12 +100,12 @@ class CameraScreen extends ConsumerWidget {
       SchedulerBinding.instance?.addPostFrameCallback((_) {
         if (AppNavigator.of(context).getLast().name !=
             ReceiptDetailsScreen.routeName) {
-          try {
-            final receipt = Receipt.fromQr(qr);
+          final receipt = context.read(cameraNotifier).apply(qr);
+          if (receipt != null) {
             AppNavigator.of(context).push(MaterialPage<Page>(
                 name: ReceiptDetailsScreen.routeName,
                 child: ReceiptDetailsScreen(receipt: receipt)));
-          } catch (_) {}
+          }
         }
       });
       return Text(qr);

@@ -236,6 +236,9 @@
   "@fromParam": {"description": "From barcode parameters"},
 
   "invalidData": "Invalid data",
-  "@invalidData": {"description": "Invalid data"}
+  "@invalidData": {"description": "Invalid data"},
+
+  "tooManyRequests": "Too many requests to FNS",
+  "@tooManyRequests": {"description": "Too many requests"}
 
 }

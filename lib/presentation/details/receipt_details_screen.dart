@@ -79,6 +79,9 @@ class ReceiptDetailsScreen extends ConsumerWidget {
           if (value == 1) {
             return Text(context.translate().dataReceivedFromFNS);
           }
+          if (value == 3) {
+            return Text(context.translate().tooManyRequests);
+          }
           if (value == 2) {
             return Padding(
                 padding: const EdgeInsets.all(8.0),

@@ -682,7 +682,7 @@ class _DateTimePickerState extends FormFieldState<String> {
     super.reset();
 
     setState(() {
-      _effectiveController?.text = widget.initialValue;
+      _effectiveController?.text = widget.initialValue ?? '';
     });
   }
 

@@ -20,16 +20,18 @@ class Receipt {
             .toList();
 
   Receipt.fromTicketResp(TicketKktResp ticket) {
-    final receipt = ticket.ticket.document.receipt;
     id = ticket.id;
-    operationType = receipt.operationType;
-    dateTime = DateTime.fromMillisecondsSinceEpoch(receipt.dateTime * 1000);
-    totalSum = receipt.totalSum;
-    fiscalDocumentNumber = receipt.fiscalDocumentNumber;
-    fiscalDriveNumber = receipt.fiscalDriveNumber;
-    fiscalSign = receipt.fiscalSign;
     qr = ticket.qr;
-    items = receipt.items.map((e) => ReceiptItem.fromItemsResp(e)).toList();
+    final receipt = ticket.ticket.document.receipt;
+    if (receipt != null) {
+      operationType = receipt.operationType;
+      dateTime = DateTime.fromMillisecondsSinceEpoch(receipt.dateTime * 1000);
+      totalSum = receipt.totalSum;
+      fiscalDocumentNumber = receipt.fiscalDocumentNumber;
+      fiscalDriveNumber = receipt.fiscalDriveNumber;
+      fiscalSign = receipt.fiscalSign;
+      items = receipt.items.map((e) => ReceiptItem.fromItemsResp(e)).toList();
+    }
   }
 
   Receipt.fromQr(String qr) {
