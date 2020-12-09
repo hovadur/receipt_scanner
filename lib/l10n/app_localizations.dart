@@ -372,10 +372,10 @@ abstract class AppLocalizations {
   /// **'Qty'**
   String get qtyy;
 
-  /// Date
+  /// Purchase date
   ///
   /// In en, this message translates to:
-  /// **'Date'**
+  /// **'Purchase date'**
   String get dateTime;
 
   /// Storage
@@ -575,6 +575,54 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Too many requests to FNS'**
   String get tooManyRequests;
+
+  /// Copying
+  ///
+  /// In en, this message translates to:
+  /// **'Copying'**
+  String get copying;
+
+  /// Date
+  ///
+  /// In en, this message translates to:
+  /// **'Дата'**
+  String get date;
+
+  /// For all the time
+  ///
+  /// In en, this message translates to:
+  /// **'For all the time'**
+  String get forAllTheTime;
+
+  /// For the current month
+  ///
+  /// In en, this message translates to:
+  /// **'For the current month'**
+  String get forTheCurrentMonth;
+
+  /// For the previous month
+  ///
+  /// In en, this message translates to:
+  /// **'For the previous month'**
+  String get forThePreviousMonth;
+
+  /// For the last week
+  ///
+  /// In en, this message translates to:
+  /// **'For the last week'**
+  String get forTheLastWeek;
+
+  /// For the last 3 days
+  ///
+  /// In en, this message translates to:
+  /// **'For the last 3 days'**
+  String get forTheLast3Days;
+
+  /// Select date
+  ///
+  /// In en, this message translates to:
+  /// **'Select date'**
+  String get selectDate;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

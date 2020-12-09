@@ -1,6 +1,7 @@
 import 'package:ctr/domain/navigation/app_navigator.dart';
 import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:ctr/presentation/common/dismissible_card.dart';
+import 'package:ctr/presentation/copying/copying_screen.dart';
 import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:ctr/presentation/myreceipts/my_header_ui.dart';
@@ -24,7 +25,12 @@ class MyReceiptsScreen extends ConsumerWidget {
           IconButton(
               icon: const Icon(Icons.search),
               onPressed: () =>
-                  showSearch(context: context, delegate: Search(context)))
+                  showSearch(context: context, delegate: Search(context))),
+          IconButton(
+              icon: const Icon(Icons.file_copy),
+              onPressed: () => AppNavigator.of(context).push(
+                  const MaterialPage<Page>(
+                      name: CopyingScreen.routeName, child: CopyingScreen())))
         ],
       ),
       drawer: const MainDrawer(),

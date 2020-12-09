@@ -140,7 +140,7 @@
   "@qtyy": {"description": "Qty"},
 
   "dateTime": "Дата покупки",
-  "@dateTime": {"description": "Date"},
+  "@dateTime": {"description": "Purchase date"},
 
   "storage": "Накопитель",
   "@storage": {"description": "Storage"},
@@ -242,6 +242,30 @@
   "@invalidData": {"description": "Invalid data"},
 
   "tooManyRequests": "Слишком много запросов в ФНС",
-  "@tooManyRequests": {"description": "Too many requests"}
+  "@tooManyRequests": {"description": "Too many requests"},
+
+  "copying": "Выписка",
+  "@copying": {"description": "Copying"},
+
+  "date": "Дата",
+  "@date": {"description": "Date"},
+
+  "forAllTheTime": "За все время",
+  "@forAllTheTime": {"description": "For all the time"},
+
+  "forTheCurrentMonth": "За текущий месяц",
+  "@forTheCurrentMonth": {"description": "For the current month"},
+
+  "forThePreviousMonth": "За предыдущий месяц",
+  "@forThePreviousMonth": {"description": "For the previous month"},
+
+  "forTheLastWeek": "За последнюю неделю",
+  "@forTheLastWeek": {"description": "For the last week"},
+
+  "forTheLast3Days": "За последние три дня",
+  "@forTheLast3Days": {"description": "For the last 3 days"},
+
+  "selectDate": "Выбрать дату",
+  "@selectDate": {"description": "Select date"}
 
 }

@@ -63,10 +63,7 @@ class CameraScreen extends ConsumerWidget {
       return Center(
         child: Text(
           context.translate().cameraInit,
-          style: const TextStyle(
-            color: Colors.green,
-            fontSize: 30.0,
-          ),
+          style: const TextStyle(color: Colors.green, fontSize: 30.0),
         ),
       );
     } else {

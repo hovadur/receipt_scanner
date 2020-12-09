@@ -139,8 +139,8 @@
   "qtyy": "Qty",
   "@qtyy": {"description": "Qty"},
 
-  "dateTime": "Date",
-  "@dateTime": {"description": "Date"},
+  "dateTime": "Purchase date",
+  "@dateTime": {"description": "Purchase date"},
 
   "storage": "Storage",
   "@storage": {"description": "Storage"},
@@ -239,6 +239,30 @@
   "@invalidData": {"description": "Invalid data"},
 
   "tooManyRequests": "Too many requests to FNS",
-  "@tooManyRequests": {"description": "Too many requests"}
+  "@tooManyRequests": {"description": "Too many requests"},
+
+  "copying": "Copying",
+  "@copying": {"description": "Copying"},
+
+  "date": "Дата",
+  "@date": {"description": "Date"},
+
+  "forAllTheTime": "For all the time",
+  "@forAllTheTime": {"description": "For all the time"},
+
+  "forTheCurrentMonth": "For the current month",
+  "@forTheCurrentMonth": {"description": "For the current month"},
+
+  "forThePreviousMonth": "For the previous month",
+  "@forThePreviousMonth": {"description": "For the previous month"},
+
+  "forTheLastWeek": "For the last week",
+  "@forTheLastWeek": {"description": "For the last week"},
+
+  "forTheLast3Days": "For the last 3 days",
+  "@forTheLast3Days": {"description": "For the last 3 days"},
+
+  "selectDate": "Select date",
+  "@selectDate": {"description": "Select date"}
 
 }

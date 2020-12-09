@@ -5,6 +5,7 @@ import 'package:ctr/presentation/budgets/budget_add_param.dart';
 import 'package:ctr/presentation/budgets/budgets_notifier.dart';
 import 'package:ctr/presentation/budgets/budgets_ui.dart';
 import 'package:ctr/presentation/camera/camera_notifier.dart';
+import 'package:ctr/presentation/copying/copying_notifier.dart';
 import 'package:ctr/presentation/details/receipt_details_notifier.dart';
 import 'package:ctr/presentation/details/receipt_details_param.dart';
 import 'package:ctr/presentation/drawer/drawer_dropdown_notifier.dart';
@@ -161,4 +162,9 @@ final budgetAddNotifier =
 final fromParamNotifier = ChangeNotifierProvider<FromParamNotifier>((ref) {
   final db = ref.watch(databaseProvider);
   return FromParamNotifier(db);
+});
+
+final copyingNotifier = ChangeNotifierProvider<CopyingNotifier>((ref) {
+  //final u = ref.watch(userInteractor);
+  return CopyingNotifier();
 });

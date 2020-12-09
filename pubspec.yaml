@@ -48,6 +48,7 @@ dependencies:
   device_info: ^2.0.0-nullsafety.1
   shared_preferences: ^0.5.12+4
   image_picker: ^0.6.7+14
+  share: ^0.6.5+4
 
 dev_dependencies:
   flutter_test:
