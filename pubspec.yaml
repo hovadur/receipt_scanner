@@ -28,7 +28,7 @@ dependency_overrides:
    git: https://github.com/dart-lang/http.git
   http_parser: ^4.0.0-nullsafety
   google_sign_in_platform_interface: ^2.0.0-nullsafety
-  quiver: ^3.0.0-nullsafety.2
+  quiver: ^3.0.0-nullsafety.3
 dependencies:
   flutter:
     sdk: flutter
