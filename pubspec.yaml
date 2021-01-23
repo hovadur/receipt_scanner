@@ -52,6 +52,8 @@ dependencies:
   shared_preferences: ^0.5.12+4
   image_picker: ^0.6.7+21
   share: ^2.0.0-nullsafety.2
+  floating_action_bubble:
+    path: floating_action_bubble
 
 dev_dependencies:
   flutter_test:
