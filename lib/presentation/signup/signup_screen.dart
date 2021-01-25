@@ -4,7 +4,7 @@ import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:websafe_svg/websafe_svg.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../../app_module.dart';
 
@@ -23,7 +23,7 @@ class SignUpScreen extends StatelessWidget {
             const LoginForm(),
             ElevatedButton.icon(
                 onPressed: () => googleSignIn(context),
-                icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
+                icon: SvgPicture.asset('assets/icons/google-icon.svg'),
                 label: Text(context.translate().signInWithGoogle),
                 style: ElevatedButton.styleFrom(
                     primary: const Color(0xfff7f7f7),

@@ -7,7 +7,7 @@ import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
-import 'package:websafe_svg/websafe_svg.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);
@@ -24,7 +24,7 @@ class SignInScreen extends StatelessWidget {
               const LoginForm(),
               ElevatedButton.icon(
                   onPressed: () => googleSignIn(context),
-                  icon: WebsafeSvg.asset('assets/icons/google-icon.svg'),
+                  icon: SvgPicture.asset('assets/icons/google-icon.svg'),
                   label: Text(context.translate().signInWithGoogle),
                   style: ElevatedButton.styleFrom(
                       primary: const Color(0xfff7f7f7),
