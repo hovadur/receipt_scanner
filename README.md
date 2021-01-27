@@ -1,6 +1,6 @@
-# ctr
+# receipt_scanner
 
-CTR
+Receipt Scanner
 
 ## Getting Started
 

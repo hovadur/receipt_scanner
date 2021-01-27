@@ -1,18 +1,18 @@
 import 'package:camera/camera.dart';
-import 'package:ctr/domain/data/barcode_detector_painter.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/details/receipt_details_screen.dart';
-import 'package:ctr/presentation/drawer/main_drawer.dart';
-import 'package:ctr/presentation/fromFile/from_file_screen.dart';
-import 'package:ctr/presentation/fromParam/from_param_screen.dart';
-import 'package:ctr/presentation/manual/manual_screen.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/data/barcode_detector_painter.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/details/receipt_details_screen.dart';
+import '../../presentation/drawer/main_drawer.dart';
+import '../../presentation/fromFile/from_file_screen.dart';
+import '../../presentation/fromParam/from_param_screen.dart';
+import '../../presentation/manual/manual_screen.dart';
 
 class CameraScreen extends StatefulWidget {
   const CameraScreen({Key? key}) : super(key: key);

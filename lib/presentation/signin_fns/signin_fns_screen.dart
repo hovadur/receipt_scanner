@@ -1,10 +1,10 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
 
 class SignInFnsScreen extends StatelessWidget {
   const SignInFnsScreen({required this.onPressed, Key? key}) : super(key: key);

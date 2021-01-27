@@ -1,8 +1,9 @@
-import 'package:ctr/database.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../database.dart';
+import '../../domain/entity/receipt.dart';
+import '../../presentation/common/context_ext.dart';
 
 class FromParamNotifier extends ChangeNotifier {
   FromParamNotifier(this._db);

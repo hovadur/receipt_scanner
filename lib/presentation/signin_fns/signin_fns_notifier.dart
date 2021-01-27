@@ -1,9 +1,10 @@
-import 'package:ctr/domain/data/repo/irkkt_repo.dart';
-import 'package:ctr/domain/data/validation_item.dart';
-import 'package:ctr/domain/string_ext.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
+
+import '../../domain/data/repo/irkkt_repo.dart';
+import '../../domain/data/validation_item.dart';
+import '../../domain/string_ext.dart';
+import '../../presentation/common/context_ext.dart';
 
 class SignInFnsNotifier extends ChangeNotifier {
   SignInFnsNotifier(this._irkktRepo);

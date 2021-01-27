@@ -1,11 +1,12 @@
-import 'package:ctr/database.dart';
-import 'package:ctr/domain/data/error/irkkt_not_login.dart';
-import 'package:ctr/domain/data/error/irkkt_too_many_requests.dart';
-import 'package:ctr/domain/data/repo/irkkt_repo.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/mapper/receipt_mapper.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
 import 'package:flutter/material.dart';
+
+import '../../database.dart';
+import '../../domain/data/error/irkkt_not_login.dart';
+import '../../domain/data/error/irkkt_too_many_requests.dart';
+import '../../domain/data/repo/irkkt_repo.dart';
+import '../../domain/entity/receipt.dart';
+import '../mapper/receipt_mapper.dart';
+import '../myreceipts/my_receipt_ui.dart';
 
 class ReceiptDetailsNotifier extends ChangeNotifier {
   ReceiptDetailsNotifier(

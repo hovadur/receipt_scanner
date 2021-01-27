@@ -1,17 +1,18 @@
 import 'dart:convert';
 import 'dart:io' show HttpStatus, Platform;
 
-import 'package:ctr/domain/data/api/irkkt_api.dart';
-import 'package:ctr/domain/data/dto/auth_resp.dart';
-import 'package:ctr/domain/data/dto/refresh_resp.dart';
-import 'package:ctr/domain/data/dto/ticket_id_resp.dart';
-import 'package:ctr/domain/data/dto/ticket_resp.dart';
-import 'package:ctr/domain/data/error/irkkt_not_auth.dart';
-import 'package:ctr/domain/data/error/irkkt_not_login.dart';
-import 'package:ctr/domain/data/error/irkkt_too_many_requests.dart';
-import 'package:ctr/domain/data/repo/settings_repo.dart';
-import 'package:ctr/domain/entity/receipt.dart';
 import 'package:device_info/device_info.dart';
+
+import '../../entity/receipt.dart';
+import '../api/irkkt_api.dart';
+import '../dto/auth_resp.dart';
+import '../dto/refresh_resp.dart';
+import '../dto/ticket_id_resp.dart';
+import '../dto/ticket_resp.dart';
+import '../error/irkkt_not_auth.dart';
+import '../error/irkkt_not_login.dart';
+import '../error/irkkt_too_many_requests.dart';
+import 'settings_repo.dart';
 
 class IrkktRepo {
   IrkktRepo(this._api, this._settingsRepo);

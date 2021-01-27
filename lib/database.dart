@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctr/domain/data/repo/settings_repo.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/domain/entity/user.dart';
-import 'package:ctr/domain/interactor/user_interactor.dart';
 
+import 'domain/data/repo/settings_repo.dart';
 import 'domain/entity/budget.dart';
+import 'domain/entity/receipt.dart';
+import 'domain/entity/user.dart';
+import 'domain/interactor/user_interactor.dart';
 
 class Database {
   Database(this._settingsRepo, this._userInteractor);

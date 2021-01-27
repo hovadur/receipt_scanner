@@ -1,13 +1,14 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/camera/camera_screen.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/signup/signup_screen.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/camera/camera_screen.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/signup/signup_screen.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({Key? key}) : super(key: key);

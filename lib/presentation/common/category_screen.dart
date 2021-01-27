@@ -1,5 +1,6 @@
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
+
+import '../../presentation/common/context_ext.dart';
 
 class CategoryScreen extends StatelessWidget {
   const CategoryScreen({required this.onPressed, Key? key}) : super(key: key);

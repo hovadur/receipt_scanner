@@ -1,4 +1,4 @@
-import 'package:ctr/domain/entity/budget.dart';
+import '../../domain/entity/budget.dart';
 
 class BudgetUI {
   BudgetUI(

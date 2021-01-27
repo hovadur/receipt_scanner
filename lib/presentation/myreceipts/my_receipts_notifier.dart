@@ -1,12 +1,12 @@
-import 'package:ctr/database.dart';
-import 'package:ctr/presentation/mapper/receipt_mapper.dart';
-import 'package:ctr/presentation/myreceipts/my_header_ui.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
-import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
-import 'package:ctr/presentation/myreceipts/search_ui.dart';
 import 'package:flutter/material.dart';
 
+import '../../database.dart';
+import '../mapper/receipt_mapper.dart';
+import 'my_header_ui.dart';
 import 'my_item_ui.dart';
+import 'my_receipt_ui.dart';
+import 'my_search_item_ui.dart';
+import 'search_ui.dart';
 
 class MyReceiptsNotifier extends ChangeNotifier {
   MyReceiptsNotifier(this._db);

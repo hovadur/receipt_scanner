@@ -1,12 +1,13 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/category_screen.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/manual/manual_add_notifier.dart';
-import 'package:ctr/presentation/manual/manual_add_param.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
+
+import '../../app_module.dart';
+import '../../domain/entity/receipt.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/category_screen.dart';
+import '../../presentation/common/context_ext.dart';
+import 'manual_add_notifier.dart';
+import 'manual_add_param.dart';
 
 class ManualAddScreen extends ConsumerWidget {
   const ManualAddScreen({required this.onPressed, this.item, Key? key})

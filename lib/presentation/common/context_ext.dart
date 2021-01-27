@@ -1,5 +1,6 @@
-import 'package:ctr/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+
+import '../../l10n/app_localizations.dart';
 
 extension GoogleSignIn on BuildContext {
   AppLocalizations translate() {

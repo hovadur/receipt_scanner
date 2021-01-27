@@ -1,8 +1,9 @@
-import 'package:ctr/presentation/budgets/budgets_ui.dart';
-import 'package:ctr/presentation/mapper/budget_mapper.dart';
 import 'package:flutter/material.dart';
 
 import '../../database.dart';
+import '../../presentation/budgets/budgets_ui.dart';
+import '../../presentation/mapper/budget_mapper.dart';
+import 'budgets_ui.dart';
 
 class BudgetsNotifier extends ChangeNotifier {
   BudgetsNotifier(this._db);

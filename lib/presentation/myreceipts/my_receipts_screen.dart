@@ -1,17 +1,17 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/common/dismissible_card.dart';
-import 'package:ctr/presentation/copying/copying_screen.dart';
-import 'package:ctr/presentation/details/receipt_details_screen.dart';
-import 'package:ctr/presentation/drawer/main_drawer.dart';
-import 'package:ctr/presentation/myreceipts/my_header_ui.dart';
-import 'package:ctr/presentation/myreceipts/my_receipt_ui.dart';
-import 'package:ctr/presentation/myreceipts/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/common/dismissible_card.dart';
+import '../../presentation/copying/copying_screen.dart';
+import '../../presentation/details/receipt_details_screen.dart';
+import '../../presentation/drawer/main_drawer.dart';
+import 'my_header_ui.dart';
 import 'my_item_ui.dart';
+import 'my_receipt_ui.dart';
+import 'search.dart';
 
 class MyReceiptsScreen extends ConsumerWidget {
   const MyReceiptsScreen({Key? key}) : super(key: key);

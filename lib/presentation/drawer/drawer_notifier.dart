@@ -1,9 +1,9 @@
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/drawer/drawer_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/drawer/drawer_ui.dart';
 
 class DrawerNotifier extends ChangeNotifier {
   DrawerNotifier(BuildContext context) {

@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:ctr/domain/data/dto/ticket_resp.dart';
 import 'package:flutter/material.dart';
+
+import '../data/dto/ticket_resp.dart';
 
 class Receipt {
   Receipt(
@@ -15,7 +16,8 @@ class Receipt {
         fiscalDriveNumber = doc['fiscalDriveNumber'],
         fiscalSign = doc['fiscalSign'],
         qr = doc['qr'],
-        items = List.castFrom(doc['items']).toList()
+        items = List.castFrom(doc['items'])
+            .toList()
             .map((e) => ReceiptItem.fromJson(e))
             .toList();
 

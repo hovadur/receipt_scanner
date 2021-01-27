@@ -1,9 +1,10 @@
-import 'package:ctr/database.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../database.dart';
+import '../../domain/entity/receipt.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/myreceipts/my_search_item_ui.dart';
 
 class ManualNotifier extends ChangeNotifier {
   ManualNotifier(BuildContext context, Receipt? receipt, this._db) {

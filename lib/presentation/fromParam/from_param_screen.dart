@@ -1,11 +1,11 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/common/date_time_picker.dart';
-import 'package:ctr/presentation/details/receipt_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/common/date_time_picker.dart';
+import '../../presentation/details/receipt_details_screen.dart';
 import 'from_param_notifier.dart';
 
 class FromParamScreen extends ConsumerWidget {

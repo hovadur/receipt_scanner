@@ -1,11 +1,11 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/common/dismissible_card.dart';
-import 'package:ctr/presentation/drawer/main_drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/common/dismissible_card.dart';
+import '../../presentation/drawer/main_drawer.dart';
 import 'budget_add_screen.dart';
 import 'budgets_ui.dart';
 

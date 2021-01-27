@@ -1,6 +1,6 @@
 {
-    "name": "ctr",
-    "short_name": "ctr",
+    "name": "receipt_scanner",
+    "short_name": "receipt_scanner",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

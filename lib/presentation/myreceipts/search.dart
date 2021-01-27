@@ -1,12 +1,12 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/details/receipt_details_screen.dart';
-import 'package:ctr/presentation/myreceipts/search_param.dart';
-import 'package:ctr/presentation/myreceipts/search_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/details/receipt_details_screen.dart';
+import 'search_param.dart';
+import 'search_ui.dart';
 
 class Search extends SearchDelegate {
   Search(BuildContext context)

@@ -1,9 +1,9 @@
-import 'package:ctr/domain/data/repo/settings_repo.dart';
-import 'package:ctr/presentation/budgets/budgets_ui.dart';
-import 'package:ctr/presentation/mapper/budget_mapper.dart';
 import 'package:flutter/material.dart';
 
 import '../../database.dart';
+import '../../domain/data/repo/settings_repo.dart';
+import '../budgets/budgets_ui.dart';
+import '../mapper/budget_mapper.dart';
 
 class DrawerDropDownNotifier extends ChangeNotifier {
   DrawerDropDownNotifier(this._settingsRepo, this._db);

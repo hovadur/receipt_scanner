@@ -1,8 +1,9 @@
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/myreceipts/my_search_item_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../domain/entity/receipt.dart';
+import '../../l10n/app_localizations.dart';
+import '../../presentation/myreceipts/my_search_item_ui.dart';
 
 class ManualAddNotifier extends ChangeNotifier {
   ManualAddNotifier(BuildContext context, ReceiptItem? item) {
@@ -60,7 +61,7 @@ class ManualAddNotifier extends ChangeNotifier {
       _qtyError = null;
     } catch (_) {
       _qty = 0;
-      _qtyError = AppLocalizations.of(context)?.totalError??'';
+      _qtyError = AppLocalizations.of(context)?.totalError ?? '';
     }
     notifyListeners();
   }
@@ -73,7 +74,7 @@ class ManualAddNotifier extends ChangeNotifier {
       _sumError = null;
     } catch (_) {
       _sum = 0;
-      _sumError = AppLocalizations.of(context)?.sumError??'';
+      _sumError = AppLocalizations.of(context)?.sumError ?? '';
     }
     notifyListeners();
   }

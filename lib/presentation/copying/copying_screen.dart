@@ -1,9 +1,10 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_riverpod/all.dart';
 import 'package:share/share.dart';
+
+import '../../app_module.dart';
+import '../../presentation/common/context_ext.dart';
 
 class CopyingScreen extends ConsumerWidget {
   const CopyingScreen({Key? key}) : super(key: key);

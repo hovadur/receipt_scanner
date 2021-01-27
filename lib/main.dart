@@ -1,15 +1,15 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/l10n/app_localizations.dart';
-import 'package:ctr/presentation/camera/camera_screen.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart' hide Listener, Provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'app_module.dart';
 import 'domain/data/repo/settings_repo.dart';
+import 'domain/navigation/app_navigator.dart';
+import 'l10n/app_localizations.dart';
+import 'presentation/camera/camera_screen.dart';
+import 'presentation/common/context_ext.dart';
 
 Future<void> main() async {
   Fimber.plantTree(DebugTree());

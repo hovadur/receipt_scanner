@@ -1,12 +1,12 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/domain/entity/budget.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/budgets/budget_add_param.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
+import '../../app_module.dart';
+import '../../domain/entity/budget.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
 import 'budget_add_notifier.dart';
+import 'budget_add_param.dart';
 
 class BudgetAddScreen extends ConsumerWidget {
   const BudgetAddScreen({this.item, Key? key}) : super(key: key);

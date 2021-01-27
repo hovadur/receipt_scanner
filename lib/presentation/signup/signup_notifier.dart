@@ -1,10 +1,10 @@
-import 'package:ctr/domain/data/validation_item.dart';
-import 'package:ctr/domain/interactor/user_interactor.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:flutter/material.dart';
 
 import '../../database.dart';
+import '../../domain/data/validation_item.dart';
+import '../../domain/interactor/user_interactor.dart';
+import '../../presentation/common/context_ext.dart';
 
 class SignUpNotifier extends ChangeNotifier {
   SignUpNotifier(this._userInteractor, this._db);

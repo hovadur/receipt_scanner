@@ -1,13 +1,13 @@
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/budgets/budgets_screen.dart';
-import 'package:ctr/presentation/camera/camera_screen.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/myreceipts/my_receipts_screen.dart';
-import 'package:ctr/presentation/signin/signin_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
 
 import '../../app_module.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/budgets/budgets_screen.dart';
+import '../../presentation/camera/camera_screen.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/myreceipts/my_receipts_screen.dart';
+import '../../presentation/signin/signin_screen.dart';
 import 'drawer_dropdown.dart';
 
 class MainDrawer extends ConsumerWidget {

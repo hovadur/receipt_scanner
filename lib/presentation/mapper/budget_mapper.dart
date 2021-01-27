@@ -1,8 +1,9 @@
-import 'package:ctr/domain/entity/budget.dart';
-import 'package:ctr/presentation/budgets/budgets_ui.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+
+import '../../domain/entity/budget.dart';
+import '../../presentation/common/context_ext.dart';
+import '../budgets/budgets_ui.dart';
 
 class BudgetMapper {
   BudgetUI map(BuildContext context, Budget value) {

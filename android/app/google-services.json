@@ -1,50 +1,42 @@
 {
   "project_info": {
-    "project_number": "1039843265985",
-    "firebase_url": "https://checking-the-receipt.firebaseio.com",
-    "project_id": "checking-the-receipt",
-    "storage_bucket": "checking-the-receipt.appspot.com"
+    "project_number": "961489030826",
+    "project_id": "receipt-scanner-852a2",
+    "storage_bucket": "receipt-scanner-852a2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1039843265985:android:ae1d293aff1ce92a28b340",
+        "mobilesdk_app_id": "1:961489030826:android:3ece899393151f59c68ad3",
         "android_client_info": {
-          "package_name": "ru.julia.ctr"
+          "package_name": "ru.julia.receipt_scanner"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1039843265985-0v4hcd5e0l0p8aot5h8ppd00ctnjff5k.apps.googleusercontent.com",
+          "client_id": "961489030826-5m97uh6i9t6lnceh9f272edqioqfn11e.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "ru.julia.ctr",
+            "package_name": "ru.julia.receipt_scanner",
             "certificate_hash": "879bb724ab548ef39f6a6d86565a33fd8e27bbf5"
           }
         },
         {
-          "client_id": "1039843265985-212if4ng2acrfosgustjuhl9onl9eef6.apps.googleusercontent.com",
+          "client_id": "961489030826-l974tdp3oa6gonjhff9kchm0jdi47mp1.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAhH2Du0MYnEDBqh86xVD4KIL_OqqIeZkY"
+          "current_key": "AIzaSyAiqXVSfSKJtrmtG6MhPfpjgsV3eBQzlKo"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1039843265985-212if4ng2acrfosgustjuhl9onl9eef6.apps.googleusercontent.com",
+              "client_id": "961489030826-l974tdp3oa6gonjhff9kchm0jdi47mp1.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "1039843265985-r2mosqhce0ts43bkcb7f049oho4bebo7.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "ru.julia.ctr"
-              }
             }
           ]
         }

@@ -1,6 +1,7 @@
-import 'package:ctr/presentation/common/context_ext.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../../presentation/common/context_ext.dart';
 
 class DismissibleCard extends StatelessWidget {
   DismissibleCard(

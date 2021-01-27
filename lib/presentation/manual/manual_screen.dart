@@ -1,12 +1,13 @@
-import 'package:ctr/app_module.dart';
-import 'package:ctr/domain/entity/receipt.dart';
-import 'package:ctr/domain/navigation/app_navigator.dart';
-import 'package:ctr/presentation/common/context_ext.dart';
-import 'package:ctr/presentation/common/date_time_picker.dart';
-import 'package:ctr/presentation/manual/manual_param.dart';
-import 'package:ctr/presentation/manual/manual_add_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/all.dart';
+
+import '../../app_module.dart';
+import '../../domain/entity/receipt.dart';
+import '../../domain/navigation/app_navigator.dart';
+import '../../presentation/common/context_ext.dart';
+import '../../presentation/common/date_time_picker.dart';
+import 'manual_add_screen.dart';
+import 'manual_param.dart';
 
 class ManualScreen extends ConsumerWidget {
   const ManualScreen({Key? key, this.receipt}) : super(key: key);
