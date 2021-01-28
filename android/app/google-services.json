@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "961489030826-5m97uh6i9t6lnceh9f272edqioqfn11e.apps.googleusercontent.com",
+          "client_id": "961489030826-omv7dmdnba1a6lb3rnbgu4uhjifdmiec.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "ru.julia.receipt_scanner",
-            "certificate_hash": "879bb724ab548ef39f6a6d86565a33fd8e27bbf5"
+            "certificate_hash": "76b0ab6b85a6a9e9f4da6163c4241fc7a3aaf3a1"
           }
         },
         {
