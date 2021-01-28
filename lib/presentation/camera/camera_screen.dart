@@ -46,41 +46,7 @@ class CameraScreenState extends State<CameraScreen>
       builder: (context, watch, child) => Scaffold(
           appBar: AppBar(title: Text(context.translate().scanning)),
           drawer: const MainDrawer(),
-          floatingActionButton: FloatingActionBubble(
-              animation: _animation,
-              onPress: () => _animationController.isCompleted
-                  ? _animationController.reverse()
-                  : _animationController.forward(),
-              iconData: Icons.add,
-              items: <Bubble>[
-                Bubble(
-                  title: context.translate().fromFile,
-                  icon: Icons.attach_file,
-                  onPress: () {
-                    AppNavigator.of(context).push(const MaterialPage<Page>(
-                        name: FromFileScreen.routeName,
-                        child: FromFileScreen()));
-                  },
-                ),
-                Bubble(
-                  title: context.translate().manual,
-                  icon: Icons.approval,
-                  iconColor: Colors.white,
-                  onPress: () {
-                    AppNavigator.of(context).push(const MaterialPage<Page>(
-                        name: ManualScreen.routeName, child: ManualScreen()));
-                  },
-                ),
-                Bubble(
-                  title: context.translate().fromParam,
-                  icon: Icons.compare_arrows,
-                  onPress: () {
-                    AppNavigator.of(context).push(const MaterialPage<Page>(
-                        name: FromParamScreen.routeName,
-                        child: FromParamScreen()));
-                  },
-                ),
-              ]),
+          floatingActionButton: _buildFloatingButton(context),
           body: Container(
               constraints: const BoxConstraints.expand(),
               child: _buildPreview(context, watch))));
@@ -103,6 +69,41 @@ class CameraScreenState extends State<CameraScreen>
         ],
       );
     }
+  }
+
+  Widget _buildFloatingButton(BuildContext context) {
+    return FloatingActionBubble(
+        animation: _animation,
+        onPress: () => _animationController.isCompleted
+            ? _animationController.reverse()
+            : _animationController.forward(),
+        iconData: Icons.add,
+        items: <Bubble>[
+          Bubble(
+            title: context.translate().fromFile,
+            icon: Icons.attach_file,
+            onPress: () {
+              AppNavigator.of(context).push(const MaterialPage<Page>(
+                  name: FromFileScreen.routeName, child: FromFileScreen()));
+            },
+          ),
+          Bubble(
+            title: context.translate().manual,
+            icon: Icons.approval,
+            onPress: () {
+              AppNavigator.of(context).push(const MaterialPage<Page>(
+                  name: ManualScreen.routeName, child: ManualScreen()));
+            },
+          ),
+          Bubble(
+            title: context.translate().fromParam,
+            icon: Icons.compare_arrows,
+            onPress: () {
+              AppNavigator.of(context).push(const MaterialPage<Page>(
+                  name: FromParamScreen.routeName, child: FromParamScreen()));
+            },
+          ),
+        ]);
   }
 
   Widget _buildResults(
