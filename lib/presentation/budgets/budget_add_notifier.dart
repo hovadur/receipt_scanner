@@ -36,7 +36,7 @@ class BudgetAddNotifier extends ChangeNotifier {
 
   void changeSum(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context)?.languageCode;
+      final l = Localizations.localeOf(context).languageCode;
       final sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;

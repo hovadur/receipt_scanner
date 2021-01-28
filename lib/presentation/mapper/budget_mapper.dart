@@ -12,7 +12,7 @@ class BudgetMapper {
     }
     final locale = Localizations.localeOf(context);
     final sum =
-        NumberFormat.simpleCurrency(locale: locale?.languageCode, name: '')
+        NumberFormat.simpleCurrency(locale: locale.languageCode, name: '')
             .format(value.sum / 100);
     return BudgetUI(id: value.id, name: value.name, sum: sum, budget: value);
   }

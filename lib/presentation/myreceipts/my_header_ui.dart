@@ -11,11 +11,11 @@ class MyHeaderUI extends MyItemUI {
 
   String getDateTime(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    return DateFormat.yMMMMd(locale?.languageCode).format(dateTime);
+    return DateFormat.yMMMMd(locale.languageCode).format(dateTime);
   }
 
   String getSum(BuildContext context) {
     final locale = Localizations.localeOf(context);
-    return NumberFormat.decimalPattern(locale?.languageCode).format(sum / 100);
+    return NumberFormat.decimalPattern(locale.languageCode).format(sum / 100);
   }
 }

@@ -15,7 +15,7 @@ class ManualAddNotifier extends ChangeNotifier {
       final myItem = MySearchItemUI.fromReceiptItem(context, item);
       _nameController.text = item.name;
       final locale = Localizations.localeOf(context);
-      _qtyController.text = NumberFormat.decimalPattern(locale?.languageCode)
+      _qtyController.text = NumberFormat.decimalPattern(locale.languageCode)
           .format(item.quantity);
       _sumController.text = myItem.sum;
       _type = item.type;
@@ -55,7 +55,7 @@ class ManualAddNotifier extends ChangeNotifier {
 
   void changeQty(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context)?.languageCode;
+      final l = Localizations.localeOf(context).languageCode;
       final qty = NumberFormat.decimalPattern(l).parse(value);
       _qty = qty.toDouble();
       _qtyError = null;
@@ -68,7 +68,7 @@ class ManualAddNotifier extends ChangeNotifier {
 
   void changeSum(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context)?.languageCode;
+      final l = Localizations.localeOf(context).languageCode;
       final sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;

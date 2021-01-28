@@ -28,7 +28,7 @@ class FromParamNotifier extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context)?.languageCode;
+      final l = Localizations.localeOf(context).languageCode;
       final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;

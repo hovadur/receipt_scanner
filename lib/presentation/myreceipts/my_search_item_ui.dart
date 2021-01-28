@@ -11,9 +11,9 @@ class MySearchItemUI {
     name = item.name;
     final qty = context.translate().qty;
     final qtyNum =
-        NumberFormat.decimalPattern(locale?.languageCode).format(item.quantity);
+        NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
     quantity = '$qty $qtyNum';
-    sum = NumberFormat.decimalPattern(locale?.languageCode)
+    sum = NumberFormat.decimalPattern(locale.languageCode)
         .format(item.sum / 100);
   }
 

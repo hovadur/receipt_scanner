@@ -13,7 +13,7 @@ class ManualNotifier extends ChangeNotifier {
       _dateTime = receipt.dateTime;
       _products = receipt.items;
       _total = receipt.totalSum;
-      _totalController.text = NumberFormat.decimalPattern(locale?.languageCode)
+      _totalController.text = NumberFormat.decimalPattern(locale.languageCode)
           .format(receipt.totalSum / 100);
     } else {
       _dateTime = DateTime.now();
@@ -44,7 +44,7 @@ class ManualNotifier extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context)?.languageCode;
+      final l = Localizations.localeOf(context).languageCode;
       final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;
