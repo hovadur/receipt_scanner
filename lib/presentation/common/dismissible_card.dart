@@ -43,10 +43,10 @@ class DismissibleCard extends StatelessWidget {
                   title: Text(context.translate().deleteConfirmation),
                   content: Text(context.translate().sureDelete),
                   actions: <Widget>[
-                    FlatButton(
+                    TextButton(
                         onPressed: () => Navigator.of(context).pop(true),
                         child: Text(context.translate().delete)),
-                    FlatButton(
+                    TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
                       child: Text(context.translate().cancel),
                     ),
