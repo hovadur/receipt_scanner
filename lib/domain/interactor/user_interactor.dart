@@ -12,19 +12,20 @@ class UserInteractor {
   final auth.FirebaseAuth _auth = auth.FirebaseAuth.instance;
 
   User getCurrentUser() {
-    if (_auth.currentUser == null) {
+    final currentUser = _auth.currentUser;
+    if (currentUser == null) {
       return User(id: ' ', email: '', name: '');
     } else {
       return User(
-          id: _auth.currentUser.uid,
-          email: _auth.currentUser.email,
-          name: _auth.currentUser.displayName ?? '');
+          id: currentUser.uid,
+          email: currentUser.email ?? '',
+          name: currentUser.displayName ?? '');
     }
   }
 
   Future<User> _makeAuthResult(auth.UserCredential authResult) async {
-    Fimber.d('User Name: ${authResult.user.displayName}');
-    Fimber.d('User Email ${authResult.user.email}');
+    Fimber.d('User Name: ${authResult.user?.displayName}');
+    Fimber.d('User Email ${authResult.user?.email}');
     final _user = getCurrentUser();
     return _user;
   }
