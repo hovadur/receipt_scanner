@@ -65,7 +65,7 @@ class Search extends SearchDelegate {
   Widget _buildBody(BuildContext context) =>
       Consumer(builder: (context, watch, __) {
         final stream = watch(searchStreamProvider(SearchParam(context, query)));
-        if (query == null || query.trim() == '') {
+        if (query.trim() == '') {
           return const SizedBox();
         } else {
           return stream.when(
@@ -75,9 +75,7 @@ class Search extends SearchDelegate {
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {
                     final receipt = list[index];
-                    return receipt == null
-                        ? const SizedBox()
-                        : _buildCardItem(context, receipt);
+                    return _buildCardItem(context, receipt);
                   }));
         }
       });

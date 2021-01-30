@@ -38,9 +38,7 @@ class BudgetsScreen extends ConsumerWidget {
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
               final value = list[index];
-              return value == null
-                  ? const SizedBox()
-                  : _buildCardItem(context, value);
+              return _buildCardItem(context, value);
             }));
   }
 

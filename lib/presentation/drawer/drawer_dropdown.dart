@@ -14,8 +14,7 @@ class DrawerDropDown extends ConsumerWidget {
     return stream.when(
         loading: () => const LinearProgressIndicator(),
         error: (_, __) => Text(context.translate().wentWrong),
-        data: (value) =>
-            value == null ? const SizedBox() : _build(context, watch, value));
+        data: (value) => _build(context, watch, value));
   }
 
   Widget _build(

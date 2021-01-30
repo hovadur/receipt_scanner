@@ -203,26 +203,16 @@ class DateTimePicker extends FormField<String> {
     InputCounterWidgetBuilder? buildCounter,
     ScrollPhysics? scrollPhysics,
   })  : assert(initialValue == null || controller == null),
-        assert(type == DateTimePickerType.time || firstDate != null),
-        assert(type == DateTimePickerType.time || lastDate != null),
-        assert(textAlign != null),
-        assert(autofocus != null),
-        assert(readOnly != null),
-        assert(obscureText != null),
-        assert(autocorrect != null),
-        assert(enableSuggestions != null),
-        assert(autovalidate != null),
-        assert(maxLengthEnforced != null),
-        assert(scrollPadding != null),
-        assert(maxLines == null || maxLines > 0),
+        assert(type == DateTimePickerType.time),
+        assert(type == DateTimePickerType.time),
+        assert(maxLines > 0),
         assert(minLines == null || minLines > 0),
         assert(
-          (maxLines == null) || (minLines == null) || (maxLines >= minLines),
+          (minLines == null) || (maxLines >= minLines),
           "minLines can't be greater than maxLines",
         ),
-        assert(expands != null),
         assert(
-          !expands || (maxLines == null && minLines == null),
+          !expands || (minLines == null),
           'minLines and maxLines must be null when expands is true.',
         ),
         assert(
@@ -230,7 +220,6 @@ class DateTimePicker extends FormField<String> {
           'Obscured fields cannot be multiline.',
         ),
         assert(maxLength == null || maxLength > 0),
-        assert(enableInteractiveSelection != null),
         super(
           key: key,
           initialValue:
@@ -624,40 +613,36 @@ class _DateTimePickerState extends FormFieldState<String> {
           final lsOldTime = _sTime;
           _dDate = DateTime.tryParse(lsValue) ?? DateTime.now();
 
-          if (_dDate != null) {
-            _sDate = DateFormat('yyyy-MM-dd', languageCode).format(_dDate);
+          _sDate = DateFormat('yyyy-MM-dd', languageCode).format(_dDate);
 
-            if (lsOldTime != '') {
-              _tTime = TimeOfDay.fromDateTime(_dDate);
-              _sTime = DateFormat('HH:mm', languageCode).format(_dDate);
+          if (lsOldTime != '') {
+            _tTime = TimeOfDay.fromDateTime(_dDate);
+            _sTime = DateFormat('HH:mm', languageCode).format(_dDate);
 
-              if (!widget.use24HourFormat) {
-                _sTime = DateFormat('hh:mm a', languageCode).format(_dDate);
-              }
+            if (!widget.use24HourFormat) {
+              _sTime = DateFormat('hh:mm a', languageCode).format(_dDate);
             }
           }
 
           _dateLabelController.text = lsOldDate != '' ? _sDate : '';
           _timeLabelController.text = lsOldTime != '' ? _sTime : '';
 
-          if (_dDate != null) {
-            if (widget.dateMask != null && widget.dateMask != '') {
-              _dateLabelController.text =
-                  DateFormat(widget.dateMask, languageCode).format(_dDate);
-            } else {
-              var lsMask = 'yMd';
+          if (widget.dateMask != null && widget.dateMask != '') {
+            _dateLabelController.text =
+                DateFormat(widget.dateMask, languageCode).format(_dDate);
+          } else {
+            var lsMask = 'yMd';
 
-              if (widget.type == DateTimePickerType.dateTime && _sTime != '') {
-                lsMask = 'MMM d, yyyy - HH:mm';
+            if (widget.type == DateTimePickerType.dateTime && _sTime != '') {
+              lsMask = 'MMM d, yyyy - HH:mm';
 
-                if (!widget.use24HourFormat) {
-                  lsMask = 'MMM d, yyyy - hh:mm a';
-                }
+              if (!widget.use24HourFormat) {
+                lsMask = 'MMM d, yyyy - hh:mm a';
               }
-
-              _dateLabelController.text =
-                  DateFormat(lsMask, languageCode).format(_dDate);
             }
+
+            _dateLabelController.text =
+                DateFormat(lsMask, languageCode).format(_dDate);
           }
         } else {
           final llTime = lsValue.split(':');
