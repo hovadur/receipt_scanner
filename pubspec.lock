@@ -79,12 +79,12 @@ packages:
     source: hosted
     version: "1.15.0-nullsafety.5"
   cross_file:
-    dependency: transitive
+    dependency: "direct overridden"
     description:
       name: cross_file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.1.0"
+    version: "0.3.0-nullsafety"
   cupertino_icons:
     dependency: "direct main"
     description:
