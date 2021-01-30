@@ -39,17 +39,17 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   flutter_svg: ^0.20.0-nullsafety.3 # help us to use SVG in our app
-  flutter_riverpod: ^0.12.2
+  flutter_riverpod: ^0.13.0-nullsafety.0
   equatable: ^2.0.0-nullsafety.0
   fimber: ^0.5.0-nullsafety.1
   google_sign_in: ^5.0.0-nullsafety
   firebase_auth: ^0.20.0+1
   cloud_firestore: ^0.16.0
   firebase_ml_vision: ^0.10.0
-  camera: ^0.7.0
+  camera: ^0.7.0+1
   device_info: ^2.0.0-nullsafety.1
   shared_preferences: ^0.5.12+4
-  image_picker: ^0.6.7+21
+  image_picker: ^0.6.7+22
   share: ^2.0.0-nullsafety.2
   floating_action_bubble:
     path: floating_action_bubble
