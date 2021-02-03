@@ -56,21 +56,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.16.0"
+    version: "0.17.0-1.0.nullsafety.0"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.1"
+    version: "4.0.0-1.0.nullsafety.0"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.0+1"
+    version: "0.4.0-1.0.nullsafety.0"
   collection:
     dependency: transitive
     description:
@@ -220,7 +220,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0-nullsafety.0"
+    version: "0.13.0-nullsafety.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -267,7 +267,7 @@ packages:
     source: hosted
     version: "0.13.0-nullsafety.0"
   http_parser:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
       name: http_parser
       url: "https://pub.dartlang.org"
@@ -398,7 +398,7 @@ packages:
       name: plugin_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.1.0-nullsafety.1"
+    version: "1.1.0-nullsafety.2"
   process:
     dependency: transitive
     description:
@@ -419,7 +419,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0-nullsafety.0"
+    version: "0.13.0-nullsafety.1"
   share:
     dependency: "direct main"
     description:

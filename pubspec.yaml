@@ -25,7 +25,6 @@ dependency_overrides:
   firebase_core_platform_interface: ^4.0.0-nullsafety.0
   firebase_core: ^0.8.0-nullsafety.1
   firebase_core_web: ^0.3.0-nullsafety.0
-  http_parser: ^4.0.0-nullsafety
   google_sign_in_platform_interface: ^2.0.0-nullsafety
   quiver: ^3.0.0-nullsafety.2
   http: ^0.13.0-nullsafety.0
@@ -42,15 +41,15 @@ dependencies:
   cupertino_icons: ^1.0.2
   intl: ^0.17.0-nullsafety.2
   flutter_svg: ^0.20.0-nullsafety.3 # help us to use SVG in our app
-  flutter_riverpod: ^0.13.0-nullsafety.0
+  flutter_riverpod: ^0.13.0-nullsafety.1
   equatable: ^2.0.0-nullsafety.0
   fimber: ^0.5.0-nullsafety.1
   google_sign_in: ^5.0.0-nullsafety
   firebase_auth: ^0.21.0-nullsafety.0
-  cloud_firestore: ^0.16.0
+  cloud_firestore: ^0.17.0-1.0.nullsafety.0
   firebase_ml_vision: ^0.10.0
   camera: ^0.7.0+1
-  device_info: ^2.0.0-nullsafety.1
+  device_info: ^2.0.0-nullsafety.2
   shared_preferences: ^0.5.12+4
   image_picker: ^0.6.7+22
   share: ^2.0.0-nullsafety.2
