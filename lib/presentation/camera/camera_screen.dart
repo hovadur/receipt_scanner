@@ -2,7 +2,7 @@ import 'package:camera/camera.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
-import 'package:flutter_riverpod/all.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app_module.dart';
 import '../../domain/data/barcode_detector_painter.dart';

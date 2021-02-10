@@ -1,7 +1,7 @@
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/all.dart' hide Listener, Provider;
+import 'package:flutter_riverpod/flutter_riverpod.dart' hide Listener, Provider;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'app_module.dart';
