@@ -111,18 +111,7 @@ class Database {
         .doc(_userInteractor.getCurrentUser().id)
         .collection('receipts')
         .doc(value.id)
-        .set({
-      'id': value.id,
-      'operationType': value.operationType,
-      'dateTime': value.dateTime,
-      'totalSum': value.totalSum,
-      'fiscalDocumentNumber': value.fiscalDocumentNumber,
-      'fiscalDriveNumber': value.fiscalDriveNumber,
-      'fiscalSign': value.fiscalSign,
-      'qr': value.qr,
-      'budget': _settingsRepo.getCurrentBudget(),
-      'items': value.items.map((e) => e.toJson()).toList()
-    });
+        .set(value.toJson(_settingsRepo.getCurrentBudget()));
     if (isBudget) {
       final budget = await getCurrentBudget();
       budget.sum -= value.totalSum;

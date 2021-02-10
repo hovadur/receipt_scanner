@@ -69,6 +69,19 @@ class Receipt {
   int fiscalSign = 0;
   String qr = '';
   List<ReceiptItem> items = [];
+
+  Map<String, dynamic> toJson(String currentBudget) => {
+        'id': id,
+        'operationType': operationType,
+        'dateTime': dateTime,
+        'totalSum': totalSum,
+        'fiscalDocumentNumber': fiscalDocumentNumber,
+        'fiscalDriveNumber': fiscalDriveNumber,
+        'fiscalSign': fiscalSign,
+        'qr': qr,
+        'budget': currentBudget,
+        'items': items.map((e) => e.toJson()).toList()
+      };
 }
 
 class ReceiptItem {
