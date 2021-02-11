@@ -96,10 +96,10 @@ abstract class AppLocalizations {
     Locale('ru')
   ];
 
-  /// Checking The Receipt
+  /// Receipt Scanner
   ///
   /// In en, this message translates to:
-  /// **'Checking The Receipt'**
+  /// **'Receipt Scanner'**
   String get appTitle;
 
   /// Sign In

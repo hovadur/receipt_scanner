@@ -1,8 +1,8 @@
 {
   "@@locale": "en",
 
-  "appTitle": "Checking The Receipt",
-  "@appTitle": {"description": "Checking The Receipt"},
+  "appTitle": "Receipt Scanner",
+  "@appTitle": {"description": "Receipt Scanner"},
 
   "signIn": "Sign In",
   "@signIn": {"description": "Sign In"},

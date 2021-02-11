@@ -1,8 +1,8 @@
 {
   "@@locale": "ru",
 
-  "appTitle": "Проверка чека",
-  "@appTitle": {"description": "Checking The Receipt"},
+  "appTitle": "Сканер чеков",
+  "@appTitle": {"description": "Receipt Scanner"},
 
   "signIn": "Вход",
   "@signIn": {"description": "Sign In"},

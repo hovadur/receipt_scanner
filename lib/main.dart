@@ -54,7 +54,7 @@ class _MyAppState extends State<MyApp> {
                 ),
               );
             },
-            title: 'Checking The Receipt',
+            title: 'Receipt Scanner',
             onGenerateTitle: (context) => context.translate().appTitle,
             // Add the `localizationsDelegate` and `supportedLocales` lines.
             localizationsDelegates: AppLocalizations.localizationsDelegates,
