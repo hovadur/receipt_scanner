@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fimber/fimber_base.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,7 @@ Future<void> main() async {
   Fimber.plantTree(DebugTree());
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+  FirebaseFirestore.instance.settings = const Settings();
   final prefs = await SharedPreferences.getInstance();
   runApp(ProviderScope(
       overrides: [settingsRepo.overrideWithValue(SettingsRepo(prefs))],
