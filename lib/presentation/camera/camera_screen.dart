@@ -115,8 +115,8 @@ class CameraScreenState extends State<CameraScreen>
     }
 
     final imageSize = Size(
-      camera.value.previewSize.height,
-      camera.value.previewSize.width,
+      camera.value.previewSize?.height ?? 0,
+      camera.value.previewSize?.width ?? 0,
     );
     if (scanResults.isEmpty) {
       return CustomPaint(
