@@ -42,7 +42,11 @@ dependencies:
   google_sign_in: ^5.0.0-nullsafety
   firebase_auth: ^0.21.0-nullsafety.0
   cloud_firestore: ^0.17.0-1.0.nullsafety.1
-  firebase_ml_vision: ^0.10.0
+  firebase_ml_vision:
+    git:
+      path: packages/firebase_ml_vision
+      ref: feature/googlemlkit-migration
+      url: "https://github.com/fmauro/flutterfire"
   camera: ^0.8.0-nullsafety.1
   device_info: ^2.0.0-nullsafety.2
   shared_preferences: ^2.0.0-nullsafety.1
