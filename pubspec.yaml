@@ -46,7 +46,7 @@ dependencies:
   camera: ^0.8.0-nullsafety.1
   device_info: ^2.0.0-nullsafety.2
   shared_preferences: ^2.0.0-nullsafety.1
-  image_picker: ^0.7.0-nullsafety
+  image_picker: ^0.7.0
   share: ^2.0.0-nullsafety.2
   floating_action_bubble:
     path: floating_action_bubble
