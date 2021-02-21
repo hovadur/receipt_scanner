@@ -188,8 +188,8 @@ packages:
     description:
       path: "packages/firebase_ml_vision"
       ref: "feature/googlemlkit-migration"
-      resolved-ref: e72a4bf4285273d56594d6c709692c2e2b3b96d3
-      url: "https://github.com/fmauro/flutterfire"
+      resolved-ref: c3b748cc6295375b0e87107ad3c56901c697a5c9
+      url: "https://github.com/hovadur/flutterfire"
     source: git
     version: "0.10.0"
   floating_action_bubble:

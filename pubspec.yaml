@@ -46,7 +46,7 @@ dependencies:
     git:
       path: packages/firebase_ml_vision
       ref: feature/googlemlkit-migration
-      url: "https://github.com/fmauro/flutterfire"
+      url: "https://github.com/hovadur/flutterfire"
   camera: ^0.8.0-nullsafety.1
   device_info: ^2.0.0-nullsafety.2
   shared_preferences: ^2.0.0-nullsafety.1

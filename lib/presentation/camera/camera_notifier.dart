@@ -23,7 +23,7 @@ class CameraNotifier extends ChangeNotifier {
   @override
   void dispose() {
     _isMounted = false;
-    _camera?.dispose()?.then((_) {
+    _camera?.dispose().then((_) {
       _barcodeDetector.close();
     });
     super.dispose();
@@ -122,8 +122,8 @@ class CameraNotifier extends ChangeNotifier {
         (Plane plane) {
           return FirebaseVisionImagePlaneMetadata(
             bytesPerRow: plane.bytesPerRow,
-            height: plane.height,
-            width: plane.width,
+            height: plane.height ?? 0,
+            width: plane.width ?? 0,
           );
         },
       ).toList(),

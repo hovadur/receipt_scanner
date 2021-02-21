@@ -14,10 +14,10 @@ class BarcodeDetectorPainter extends CustomPainter {
 
     Rect scaleRect(Barcode barcode) {
       return Rect.fromLTRB(
-        barcode.boundingBox.left * scaleX,
-        barcode.boundingBox.top * scaleY,
-        barcode.boundingBox.right * scaleX,
-        barcode.boundingBox.bottom * scaleY,
+        barcode.boundingBox?.left ?? 0 * scaleX,
+        barcode.boundingBox?.top ?? 0 * scaleY,
+        barcode.boundingBox?.right ?? 0 * scaleX,
+        barcode.boundingBox?.bottom ?? 0 * scaleY,
       );
     }
 
