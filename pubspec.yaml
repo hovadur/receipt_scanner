@@ -21,8 +21,8 @@ environment:
   sdk: ">=2.12.0-0 <3.0.0"
 
 dependency_overrides:
-  firebase_core_platform_interface: ^4.0.0-nullsafety.0
-  firebase_core: ^0.8.0-nullsafety.1
+  firebase_core_platform_interface: ^4.0.0-1.0.nullsafety.1
+  firebase_core: ^0.8.0-1.0.nullsafety.2
   firebase_core_web: ^0.3.0-nullsafety.0
 dependencies:
   flutter:
@@ -41,7 +41,7 @@ dependencies:
   fimber: ^0.5.0-nullsafety.1
   google_sign_in: ^5.0.0-nullsafety
   firebase_auth: ^0.21.0-nullsafety.0
-  cloud_firestore: ^0.17.0-1.0.nullsafety.1
+  cloud_firestore: ^0.17.0-1.0.nullsafety.2
   firebase_ml_vision:
     git:
       path: packages/firebase_ml_vision
