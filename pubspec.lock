@@ -140,7 +140,7 @@ packages:
       name: fimber
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.0-nullsafety.1"
+    version: "0.6.1"
   firebase_auth:
     dependency: "direct main"
     description:
@@ -188,10 +188,10 @@ packages:
     description:
       path: "packages/firebase_ml_vision"
       ref: "feature/googlemlkit-migration"
-      resolved-ref: c3b748cc6295375b0e87107ad3c56901c697a5c9
+      resolved-ref: a87dcdcbaa387f32500da81a2819c87c2926ecbb
       url: "https://github.com/hovadur/flutterfire"
     source: git
-    version: "0.10.0"
+    version: "0.11.0"
   floating_action_bubble:
     dependency: "direct main"
     description:
@@ -222,7 +222,7 @@ packages:
       name: flutter_riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0-nullsafety.3"
+    version: "0.13.1"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -246,7 +246,7 @@ packages:
       name: freezed_annotation
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0-nullsafety.0"
+    version: "0.14.0"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -428,7 +428,7 @@ packages:
       name: riverpod
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.0-nullsafety.3"
+    version: "0.13.1"
   share:
     dependency: "direct main"
     description:
@@ -559,7 +559,7 @@ packages:
       name: very_good_analysis
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0-nullsafety.0"
+    version: "2.0.0"
   win32:
     dependency: transitive
     description:

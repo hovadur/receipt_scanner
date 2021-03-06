@@ -1,4 +1,4 @@
-import 'package:fimber/fimber_base.dart';
+import 'package:fimber/fimber.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:google_sign_in/google_sign_in.dart';
 

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:fimber/fimber_base.dart';
+import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
