@@ -48,6 +48,9 @@ dependencies:
   shared_preferences: ^2.0.3
   image_picker: ^0.7.2
   share: ^2.0.0
+  date_time_picker:
+    git:
+      url: "https://github.com/hovadur/date_time_picker"
   floating_action_bubble:
     path: floating_action_bubble
 

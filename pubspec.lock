@@ -92,6 +92,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
+  date_time_picker:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "00b9f6ed3581850b0be4677726d1700d3a3e78fc"
+      url: "https://github.com/hovadur/date_time_picker"
+    source: git
+    version: "1.2.0"
   device_info:
     dependency: "direct main"
     description:
