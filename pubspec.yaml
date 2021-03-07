@@ -38,11 +38,9 @@ dependencies:
   google_sign_in: ^5.0.0
   firebase_auth: ^1.0.0
   cloud_firestore: ^1.0.0
-  firebase_ml_vision:
+  google_ml_kit:
     git:
-      path: packages/firebase_ml_vision
-      ref: feature/googlemlkit-migration
-      url: "https://github.com/hovadur/flutterfire"
+      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
   camera: ^0.8.0
   device_info: ^2.0.0
   shared_preferences: ^2.0.3

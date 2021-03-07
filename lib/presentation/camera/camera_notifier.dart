@@ -2,9 +2,9 @@ import 'dart:typed_data';
 
 import 'package:camera/camera.dart';
 import 'package:fimber/fimber.dart';
-import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:google_ml_kit/google_ml_kit.dart';
 
 import '../../database.dart';
 import '../../domain/entity/receipt.dart';
@@ -38,8 +38,8 @@ class CameraNotifier extends ChangeNotifier {
     return null;
   }
 
-  final _barcodeDetector = FirebaseVision.instance.barcodeDetector(
-      const BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
+  final _barcodeDetector =
+      GoogleMlKit.instance.barcodeScanner([Barcode.FORMAT_QR_Code]);
   CameraController? _camera;
   bool _isDetecting = false;
   bool _isMounted = true;
@@ -67,10 +67,10 @@ class CameraNotifier extends ChangeNotifier {
 
       _detect(
         image: image,
-        detectInImage: _barcodeDetector.detectInImage,
+        detectInImage: _barcodeDetector.processImage,
         imageRotation: description.sensorOrientation,
       ).then(
-        (List<Barcode> results) {
+        (dynamic results) {
           _scanResults = results;
           if (_isMounted) {
             notifyListeners();
@@ -88,18 +88,16 @@ class CameraNotifier extends ChangeNotifier {
     );
   }
 
-  static Future<List<Barcode>> _detect({
+  static Future<dynamic> _detect({
     required CameraImage image,
-    required Future<List<Barcode>> Function(FirebaseVisionImage image)
-        detectInImage,
+    required Future<dynamic> Function(InputImage image) detectInImage,
     required int imageRotation,
   }) async {
-    return detectInImage(
-      FirebaseVisionImage.fromBytes(
-        _concatenatePlanes(image.planes),
-        _buildMetaData(image, _rotationIntToImageRotation(imageRotation)),
-      ),
-    );
+    return detectInImage(InputImage.fromBytes(
+        bytes: _concatenatePlanes(image.planes),
+        inputImageData: InputImageData(
+            size: Size(image.width.toDouble(), image.height.toDouble()),
+            imageRotation: _rotationIntToImageRotation(imageRotation))));
   }
 
   static Uint8List _concatenatePlanes(List<Plane> planes) {
@@ -110,37 +108,17 @@ class CameraNotifier extends ChangeNotifier {
     return allBytes.done().buffer.asUint8List();
   }
 
-  static FirebaseVisionImageMetadata _buildMetaData(
-    CameraImage image,
-    ImageRotation rotation,
-  ) {
-    return FirebaseVisionImageMetadata(
-      rawFormat: image.format.raw,
-      size: Size(image.width.toDouble(), image.height.toDouble()),
-      rotation: rotation,
-      planeData: image.planes.map(
-        (Plane plane) {
-          return FirebaseVisionImagePlaneMetadata(
-            bytesPerRow: plane.bytesPerRow,
-            height: plane.height ?? 0,
-            width: plane.width ?? 0,
-          );
-        },
-      ).toList(),
-    );
-  }
-
-  static ImageRotation _rotationIntToImageRotation(int rotation) {
+  static InputImageRotation _rotationIntToImageRotation(int rotation) {
     switch (rotation) {
       case 0:
-        return ImageRotation.rotation0;
+        return InputImageRotation.Rotation_0deg;
       case 90:
-        return ImageRotation.rotation90;
+        return InputImageRotation.Rotation_90deg;
       case 180:
-        return ImageRotation.rotation180;
+        return InputImageRotation.Rotation_180deg;
       default:
         assert(rotation == 270);
-        return ImageRotation.rotation270;
+        return InputImageRotation.Rotation_270deg;
     }
   }
 }

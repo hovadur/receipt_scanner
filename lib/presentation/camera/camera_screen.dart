@@ -122,7 +122,7 @@ class CameraScreenState extends State<CameraScreen>
       return CustomPaint(
           painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
-      final qr = scanResults[0].rawValue;
+      final qr = scanResults[0].barcodeUnknown?.rawValue ?? '';
       SchedulerBinding.instance?.addPostFrameCallback((_) {
         if (AppNavigator.of(context).getLast().name !=
             ReceiptDetailsScreen.routeName) {

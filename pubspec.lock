@@ -192,15 +192,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
-  firebase_ml_vision:
-    dependency: "direct main"
-    description:
-      path: "packages/firebase_ml_vision"
-      ref: "feature/googlemlkit-migration"
-      resolved-ref: a87dcdcbaa387f32500da81a2819c87c2926ecbb
-      url: "https://github.com/hovadur/flutterfire"
-    source: git
-    version: "0.11.0"
   floating_action_bubble:
     dependency: "direct main"
     description:
@@ -258,6 +249,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.0"
+  google_ml_kit:
+    dependency: "direct main"
+    description:
+      path: "."
+      ref: HEAD
+      resolved-ref: "5d0cf9c44513528ed7d22e0b2dbd37122935b8f9"
+      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
+    source: git
+    version: "0.1.0"
   google_sign_in:
     dependency: "direct main"
     description:
