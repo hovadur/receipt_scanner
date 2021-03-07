@@ -52,7 +52,9 @@ dependencies:
     git:
       url: "https://github.com/hovadur/date_time_picker"
   floating_action_bubble:
-    path: floating_action_bubble
+    git:
+      url: "https://github.com/hovadur/floating_action_bubble"
+      ref: development
 
 dev_dependencies:
   flutter_test:

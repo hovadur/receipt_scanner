@@ -204,10 +204,12 @@ packages:
   floating_action_bubble:
     dependency: "direct main"
     description:
-      path: floating_action_bubble
-      relative: true
-    source: path
-    version: "1.2.0-nullsafety.0"
+      path: "."
+      ref: development
+      resolved-ref: "5521a335092be27da5023ab0496b13460f13d9e8"
+      url: "https://github.com/hovadur/floating_action_bubble"
+    source: git
+    version: "1.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
