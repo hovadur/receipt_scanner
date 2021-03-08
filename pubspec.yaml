@@ -29,30 +29,30 @@ dependencies:
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
-  intl: ^0.17.0
-  flutter_svg: ^0.21.0-nullsafety.0 # help us to use SVG in our app
-  flutter_riverpod: ^0.13.1
-  equatable: ^2.0.0
-  fimber: ^0.6.1
-  google_sign_in: ^5.0.0
-  firebase_auth: ^1.0.0
-  cloud_firestore: ^1.0.0
-  google_ml_kit:
-    git:
-      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
   camera: ^0.8.0
-  device_info: ^2.0.0
-  shared_preferences: ^2.0.3
-  image_picker: ^0.7.2
-  share: ^2.0.0
+  cloud_firestore: ^1.0.0
+  cupertino_icons: ^1.0.2
   date_time_picker:
     git:
       url: "https://github.com/hovadur/date_time_picker"
+  device_info: ^2.0.0
+  equatable: ^2.0.0
+  fimber: ^0.6.1
+  firebase_auth: ^1.0.0
   floating_action_bubble:
     git:
       url: "https://github.com/hovadur/floating_action_bubble"
       ref: development
+  flutter_riverpod: ^0.13.1
+  flutter_svg: ^0.21.0-nullsafety.0 # help us to use SVG in our app
+  google_ml_kit:
+    git:
+      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
+  google_sign_in: ^5.0.0
+  image_picker: ^0.7.2
+  intl: ^0.17.0
+  share: ^2.0.0
+  shared_preferences: ^2.0.3
 
 dev_dependencies:
   flutter_test:
