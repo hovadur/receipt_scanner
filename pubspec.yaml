@@ -30,7 +30,7 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   camera: ^0.8.0
-  cloud_firestore: ^1.0.0
+  cloud_firestore: ^1.0.1
   cupertino_icons: ^1.0.2
   date_time_picker:
     git:
@@ -38,7 +38,7 @@ dependencies:
   device_info: ^2.0.0
   equatable: ^2.0.0
   fimber: ^0.6.1
-  firebase_auth: ^1.0.0
+  firebase_auth: ^1.0.1
   floating_action_bubble:
     git:
       url: "https://github.com/hovadur/floating_action_bubble"
@@ -51,7 +51,7 @@ dependencies:
   google_sign_in: ^5.0.0
   image_picker: ^0.7.2
   intl: ^0.17.0
-  share: ^2.0.0
+  share: ^2.0.1
   shared_preferences: ^2.0.3
 
 dev_dependencies:
