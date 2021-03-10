@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,7 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(context.translate().signUp)),
+      appBar: AppBar(title: const Text('signUp').tr()),
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
         child: Column(
@@ -24,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
             ElevatedButton.icon(
                 onPressed: () => googleSignIn(context),
                 icon: SvgPicture.asset('assets/icons/google-icon.svg'),
-                label: Text(context.translate().signInWithGoogle),
+                label: const Text('signInWithGoogle').tr(),
                 style: ElevatedButton.styleFrom(
                     primary: const Color(0xfff7f7f7),
                     shape: RoundedRectangleBorder(
@@ -57,20 +58,20 @@ class LoginForm extends ConsumerWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: context.translate().email,
+                labelText: 'email'.tr(),
                 errorText: watch(signUpNotifier).emailError),
             onChanged: (String value) =>
-                context.read(signUpNotifier).changeEmail(value, context),
+                context.read(signUpNotifier).changeEmail(value),
           ),
           const SizedBox(height: 16),
           TextField(
             obscureText: true,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: context.translate().password,
+                labelText: 'password'.tr(),
                 errorText: watch(signUpNotifier).passwordError),
             onChanged: (String value) =>
-                context.read(signUpNotifier).changePassword(value, context),
+                context.read(signUpNotifier).changePassword(value),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -78,11 +79,10 @@ class LoginForm extends ConsumerWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: context.translate().confirmPassword,
+                labelText: 'confirmPassword'.tr(),
                 errorText: watch(signUpNotifier).confirmPasswordError),
-            onChanged: (String value) => context
-                .read(signUpNotifier)
-                .changeConfirmPassword(value, context),
+            onChanged: (String value) =>
+                context.read(signUpNotifier).changeConfirmPassword(value),
           ),
           SizedBox(
             width: double.infinity,
@@ -95,7 +95,7 @@ class LoginForm extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(context.translate().cont),
+                child: const Text('cont').tr(),
               ),
             ),
           )
@@ -103,7 +103,7 @@ class LoginForm extends ConsumerWidget {
       );
 
   void submit(BuildContext context) {
-    context.read(signUpNotifier).submit(context).then((_) {
+    context.read(signUpNotifier).submit().then((_) {
       AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
           name: CameraScreen.routeName, child: CameraScreen()));
     }).catchError((e) {

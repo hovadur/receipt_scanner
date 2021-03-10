@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -17,13 +18,13 @@ class FromFileScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) => Scaffold(
-        appBar: AppBar(title: Text(context.translate().fromFile)),
+        appBar: AppBar(title: const Text('fromFile').tr()),
         body: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Center(
                   child: Text(
-                context.translate().emailCheque,
+                'emailCheque'.tr(),
                 textAlign: TextAlign.center,
               )),
               const SizedBox(height: 8),
@@ -31,7 +32,7 @@ class FromFileScreen extends ConsumerWidget {
                   onPressed: () {
                     _getAndScanImage(context);
                   },
-                  child: Text(context.translate().uploadFile)),
+                  child: const Text('uploadFile').tr()),
               const SizedBox(height: 8),
               _buildFile(context, watch)
             ]),
@@ -42,7 +43,7 @@ class FromFileScreen extends ConsumerWidget {
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          if (path == null) Text(context.translate().noFile),
+          if (path == null) const Text('noFile').tr(),
           if (path != null)
             Image.file(File(path), fit: BoxFit.cover, width: 100),
           const SizedBox(height: 8),
@@ -51,7 +52,7 @@ class FromFileScreen extends ConsumerWidget {
                 onPressed: () {
                   context.read(fromFileNotifier).scanImage().then((qr) {
                     if (qr == null) {
-                      context.showError(context.translate().invalidBarcode);
+                      context.showError('invalidBarcode'.tr());
                     } else {
                       final receipt = Receipt.fromQr(qr);
                       AppNavigator.of(context).push(MaterialPage<Page>(
@@ -59,11 +60,11 @@ class FromFileScreen extends ConsumerWidget {
                           child: ReceiptDetailsScreen(receipt: receipt)));
                     }
                   }).catchError((e) {
-                    context.showError(context.translate().invalidBarcode);
+                    context.showError('invalidBarcode'.tr());
                     Fimber.e(e.toString());
                   });
                 },
-                child: Text(context.translate().processFile)),
+                child: const Text('processFile').tr()),
         ]);
   }
 

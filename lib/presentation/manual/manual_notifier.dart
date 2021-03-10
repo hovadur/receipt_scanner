@@ -1,15 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../database.dart';
 import '../../domain/entity/receipt.dart';
-import '../../presentation/common/context_ext.dart';
 import '../../presentation/myreceipts/my_search_item_ui.dart';
 
 class ManualNotifier extends ChangeNotifier {
   ManualNotifier(BuildContext context, Receipt? receipt, this._db) {
     if (receipt != null) {
-      final locale = Localizations.localeOf(context);
+      final locale = context.locale;
       _dateTime = receipt.dateTime;
       _products = receipt.items;
       _total = receipt.totalSum;
@@ -44,12 +43,12 @@ class ManualNotifier extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = context.locale.languageCode;
       final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;
     } catch (_) {
-      _totalError = context.translate().totalError;
+      _totalError = 'totalError'.tr();
     }
     notifyListeners();
   }

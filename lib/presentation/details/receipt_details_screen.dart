@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -24,7 +25,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) => Scaffold(
       appBar: AppBar(
-        title: Text(context.translate().details),
+        title: const Text('details').tr(),
         actions: [
           IconButton(
               icon: const Icon(Icons.edit),
@@ -42,7 +43,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
         receiptDetailsUIStreamProvider(ReceiptDetailsParam(context, receipt)));
     return stream.when(
         loading: () => const LinearProgressIndicator(),
-        error: (_, __) => Text(context.translate().wentWrong),
+        error: (_, __) => const Text('wentWrong').tr(),
         data: (ui) => Column(
               children: <Widget>[
                 Expanded(
@@ -53,7 +54,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
                   children: [
                     const Divider(),
                     ListTile(
-                      leading: Text(context.translate().total),
+                      leading: const Text('total').tr(),
                       trailing: Text(ui.totalSum),
                     ),
                     _buildIrkktBody(context, watch),
@@ -72,23 +73,23 @@ class ReceiptDetailsScreen extends ConsumerWidget {
               Container(
                   padding: const EdgeInsets.all(8.0),
                   child: Align(
-                    child: Text(context.translate().checkReceiptInFNS),
+                    child: const Text('checkReceiptInFNS').tr(),
                   ))
             ]),
-        error: (_, __) => Text(context.translate().wentWrong),
+        error: (_, __) => const Text('wentWrong').tr(),
         data: (value) {
           if (value == 1) {
-            return Text(context.translate().dataReceivedFromFNS);
+            return const Text('dataReceivedFromFNS').tr();
           }
           if (value == 3) {
-            return Text(context.translate().tooManyRequests);
+            return const Text('tooManyRequests').tr();
           }
           if (value == 2) {
             return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: RichText(
                     text: TextSpan(
-                        text: context.translate().dontHaveFnsAccount,
+                        text: 'dontHaveFnsAccount'.tr(),
                         style: TextStyle(color: Theme.of(context).errorColor),
                         children: <TextSpan>[_nalogRu(context)])));
           }
@@ -100,7 +101,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
     final notifier =
         receiptDetailsNotifier(ReceiptDetailsParam(context, receipt));
     return TextSpan(
-        text: context.translate().nalogruAccount,
+        text: 'nalogruAccount'.tr(),
         style: const TextStyle(
             color: Colors.blue, decoration: TextDecoration.underline),
         recognizer: TapGestureRecognizer()
@@ -118,22 +119,22 @@ class ReceiptDetailsScreen extends ConsumerWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
-          leading: Text(context.translate().dateTime),
+          leading: const Text('dateTime').tr(),
           trailing: Text(ui.dateTime),
         ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(context.translate().storage),
+            leading: const Text('storage').tr(),
             trailing: Text(ui.fn),
           ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(context.translate().document),
+            leading: const Text('document').tr(),
             trailing: Text(ui.fd),
           ),
         if (ui.fn.isNotEmpty)
           ListTile(
-            leading: Text(context.translate().documentAttribute),
+            leading: const Text('documentAttribute').tr(),
             trailing: Text(ui.fpd),
           ),
         Expanded(

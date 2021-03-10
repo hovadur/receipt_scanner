@@ -1,4 +1,5 @@
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -19,10 +20,10 @@ class ManualScreen extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final notifier = manualNotifier(ManualParam(context, receipt));
     return Scaffold(
-      appBar: AppBar(title: Text(context.translate().manual)),
+      appBar: AppBar(title: const Text('manual').tr()),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.approval),
-        label: Text(context.translate().apply),
+        label: const Text('apply').tr(),
         onPressed: () {
           if (context.read(notifier).apply()) {
             AppNavigator.of(context).pop();
@@ -40,7 +41,7 @@ class ManualScreen extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(children: [
             DateTimePicker(
-              locale: Localizations.localeOf(context),
+              locale: context.locale,
               type: DateTimePickerType.dateTimeSeparate,
               initialValue: watch(notifier).dateTime.toString(),
               firstDate: DateTime.fromMillisecondsSinceEpoch(0),
@@ -55,7 +56,7 @@ class ManualScreen extends ConsumerWidget {
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: context.translate().totalAmount,
+                  labelText: 'totalAmount'.tr(),
                   errorText: watch(notifier).totalError),
               onChanged: (String value) =>
                   context.read(notifier).changeTotal(value, context),
@@ -73,12 +74,12 @@ class ManualScreen extends ConsumerWidget {
                         )));
                   },
                   icon: const Icon(Icons.add),
-                  label: Text(context.translate().product)),
+                  label: const Text('product').tr()),
               const SizedBox(width: 8),
               ElevatedButton.icon(
                   onPressed: () => context.read(notifier).removeProduct(),
                   icon: const Icon(Icons.remove),
-                  label: Text(context.translate().product)),
+                  label: const Text('product').tr()),
             ])
           ])),
       Expanded(

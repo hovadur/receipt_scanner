@@ -1,8 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../domain/entity/receipt.dart';
-import '../../l10n/app_localizations.dart';
 import '../../presentation/myreceipts/my_search_item_ui.dart';
 
 class ManualAddNotifier extends ChangeNotifier {
@@ -14,7 +14,7 @@ class ManualAddNotifier extends ChangeNotifier {
     } else {
       final myItem = MySearchItemUI.fromReceiptItem(context, item);
       _nameController.text = item.name;
-      final locale = Localizations.localeOf(context);
+      final locale = context.locale;
       _qtyController.text = NumberFormat.decimalPattern(locale.languageCode)
           .format(item.quantity);
       _sumController.text = myItem.sum;
@@ -55,26 +55,26 @@ class ManualAddNotifier extends ChangeNotifier {
 
   void changeQty(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = context.locale.languageCode;
       final qty = NumberFormat.decimalPattern(l).parse(value);
       _qty = qty.toDouble();
       _qtyError = null;
     } catch (_) {
       _qty = 0;
-      _qtyError = AppLocalizations.of(context)?.totalError ?? '';
+      _qtyError = 'totalError'.tr();
     }
     notifyListeners();
   }
 
   void changeSum(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = context.locale.languageCode;
       final sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;
     } catch (_) {
       _sum = 0;
-      _sumError = AppLocalizations.of(context)?.sumError ?? '';
+      _sumError = 'sumError'.tr();
     }
     notifyListeners();
   }

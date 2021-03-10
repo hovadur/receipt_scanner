@@ -1,4 +1,5 @@
 import 'package:date_time_picker/date_time_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -16,12 +17,12 @@ class FromParamScreen extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     final notifier = fromParamNotifier;
     return Scaffold(
-        appBar: AppBar(title: Text(context.translate().fromParam)),
+        appBar: AppBar(title: const Text('fromParam').tr()),
         body: SingleChildScrollView(
             padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
             child: Column(children: [
               DateTimePicker(
-                locale: Localizations.localeOf(context),
+                locale: context.locale,
                 type: DateTimePickerType.dateTimeSeparate,
                 initialValue: watch(notifier).dateTime.toString(),
                 firstDate: DateTime.fromMillisecondsSinceEpoch(0),
@@ -35,7 +36,7 @@ class FromParamScreen extends ConsumerWidget {
                     const TextInputType.numberWithOptions(decimal: true),
                 textInputAction: TextInputAction.next,
                 decoration: InputDecoration(
-                    labelText: context.translate().totalAmount,
+                    labelText: 'totalAmount'.tr(),
                     errorText: watch(notifier).totalError),
                 onChanged: (String value) =>
                     context.read(notifier).changeTotal(value, context),
@@ -44,16 +45,14 @@ class FromParamScreen extends ConsumerWidget {
               TextField(
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
-                decoration:
-                    InputDecoration(labelText: context.translate().storage),
+                decoration: InputDecoration(labelText: 'storage'.tr()),
                 onChanged: (String value) => context.read(notifier).fn = value,
               ),
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.next,
-                decoration:
-                    InputDecoration(labelText: context.translate().document),
+                decoration: InputDecoration(labelText: 'document'.tr()),
                 onChanged: (String value) => context.read(notifier).fd = value,
               ),
               const SizedBox(height: 8),
@@ -61,8 +60,8 @@ class FromParamScreen extends ConsumerWidget {
                 keyboardType: TextInputType.number,
                 textInputAction: TextInputAction.done,
                 onSubmitted: (_) => apply(context, notifier),
-                decoration: InputDecoration(
-                    labelText: context.translate().documentAttribute),
+                decoration:
+                    InputDecoration(labelText: 'documentAttribute'.tr()),
                 onChanged: (String value) => context.read(notifier).fpd = value,
               ),
               SizedBox(
@@ -76,7 +75,7 @@ class FromParamScreen extends ConsumerWidget {
                           padding: const EdgeInsets.symmetric(
                               vertical: 16.0, horizontal: 4.0),
                         ),
-                        child: Text(context.translate().apply),
+                        child: const Text('apply').tr(),
                       ))),
             ])));
   }
@@ -85,7 +84,7 @@ class FromParamScreen extends ConsumerWidget {
       ChangeNotifierProvider<FromParamNotifier> notifier) async {
     final receipt = context.read(notifier).apply();
     if (receipt == null) {
-      context.showError(context.translate().invalidData);
+      context.showError('invalidData'.tr());
     } else {
       AppNavigator.of(context).push(MaterialPage<Page>(
           name: ReceiptDetailsScreen.routeName,

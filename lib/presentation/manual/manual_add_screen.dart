@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -22,11 +23,11 @@ class ManualAddScreen extends ConsumerWidget {
     final notifier = manualAddNotifier(ManualAddParam(context, item));
     return Scaffold(
         appBar: AppBar(
-          title: Text(context.translate().addProduct),
+          title: const Text('addProduct').tr(),
         ),
         floatingActionButton: FloatingActionButton.extended(
           icon: const Icon(Icons.add),
-          label: Text(context.translate().cont),
+          label: const Text('cont').tr(),
           onPressed: () => submit(context, notifier),
         ),
         body: SingleChildScrollView(child: _buildColumn(context, watch)));
@@ -57,8 +58,7 @@ class ManualAddScreen extends ConsumerWidget {
               controller: watch(notifier).nameController,
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
-              decoration:
-                  InputDecoration(labelText: context.translate().product),
+              decoration: InputDecoration(labelText: 'product'.tr()),
               onChanged: (String value) => context.read(notifier).name = value,
             ),
             TextField(
@@ -67,8 +67,7 @@ class ManualAddScreen extends ConsumerWidget {
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: context.translate().qtyy,
-                  errorText: watch(notifier).qtyError),
+                  labelText: 'qtyy'.tr(), errorText: watch(notifier).qtyError),
               onChanged: (String value) =>
                   context.read(notifier).changeQty(value, context),
             ),
@@ -79,8 +78,7 @@ class ManualAddScreen extends ConsumerWidget {
               textInputAction: TextInputAction.done,
               onSubmitted: (_) => submit(context, notifier),
               decoration: InputDecoration(
-                  labelText: context.translate().sum,
-                  errorText: watch(notifier).sumError),
+                  labelText: 'sum'.tr(), errorText: watch(notifier).sumError),
               onChanged: (String value) =>
                   context.read(notifier).changeSum(value, context),
             ),

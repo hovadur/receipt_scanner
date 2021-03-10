@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,10 +10,9 @@ import 'search_param.dart';
 import 'search_ui.dart';
 
 class Search extends SearchDelegate {
-  Search(BuildContext context)
+  Search()
       : super(
-            searchFieldLabel: context.translate().search,
-            keyboardType: TextInputType.text);
+            searchFieldLabel: 'search'.tr(), keyboardType: TextInputType.text);
 
   @override
   ThemeData appBarTheme(BuildContext context) {
@@ -70,7 +70,7 @@ class Search extends SearchDelegate {
         } else {
           return stream.when(
               loading: () => const LinearProgressIndicator(),
-              error: (_, __) => Text(context.translate().wentWrong),
+              error: (_, __) => const Text('wentWrong').tr(),
               data: (list) => ListView.builder(
                   itemCount: list.length,
                   itemBuilder: (BuildContext context, int index) {

@@ -79,8 +79,9 @@ final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((ref) {
 });
 
 final drawerNotifier =
-    ChangeNotifierProvider.family<DrawerNotifier, BuildContext>((_, context) {
-  return DrawerNotifier(context);
+    ChangeNotifierProvider<DrawerNotifier>((ref) {
+      final s = ref.watch(userInteractor);
+  return DrawerNotifier(s);
 });
 
 final signInFnsNotifier = ChangeNotifierProvider<SignInFnsNotifier>((ref) {

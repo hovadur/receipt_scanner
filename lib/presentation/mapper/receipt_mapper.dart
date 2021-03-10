@@ -1,5 +1,5 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../domain/entity/receipt.dart';
 import '../myreceipts/my_receipt_ui.dart';
@@ -7,7 +7,7 @@ import '../myreceipts/my_search_item_ui.dart';
 
 class ReceiptMapper {
   MyReceiptUI map(BuildContext context, Receipt value) {
-    final locale = Localizations.localeOf(context);
+    final locale = context.locale;
     final dateTime =
         DateFormat.yMd(locale.languageCode).add_Hm().format(value.dateTime);
     final totalSum = NumberFormat.decimalPattern(locale.languageCode)

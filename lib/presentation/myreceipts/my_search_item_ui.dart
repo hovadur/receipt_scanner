@@ -1,20 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../domain/entity/receipt.dart';
-import '../../presentation/common/context_ext.dart';
 
 class MySearchItemUI {
   MySearchItemUI.fromReceiptItem(BuildContext context, this.item) {
-    final locale = Localizations.localeOf(context);
+    final locale = context.locale;
     type = item.type;
     name = item.name;
-    final qty = context.translate().qty;
+    final qty = 'qty'.tr();
     final qtyNum =
         NumberFormat.decimalPattern(locale.languageCode).format(item.quantity);
     quantity = '$qty $qtyNum';
-    sum = NumberFormat.decimalPattern(locale.languageCode)
-        .format(item.sum / 100);
+    sum =
+        NumberFormat.decimalPattern(locale.languageCode).format(item.sum / 100);
   }
 
   late int type;

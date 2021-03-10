@@ -151,9 +151,6 @@
   "documentAttribute": "Признак документа",
   "@documentAttribute": {"description": "Document attribute"},
 
-  "ti": "Документ",
-  "@document": {"description": "Document"},
-
   "total": "Итого",
   "@total": {"description": "Total"},
 

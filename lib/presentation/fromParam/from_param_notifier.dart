@@ -1,9 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../database.dart';
 import '../../domain/entity/receipt.dart';
-import '../../presentation/common/context_ext.dart';
 
 class FromParamNotifier extends ChangeNotifier {
   FromParamNotifier(this._db);
@@ -28,12 +27,12 @@ class FromParamNotifier extends ChangeNotifier {
 
   void changeTotal(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = context.locale.languageCode;
       final total = NumberFormat.decimalPattern(l).parse(value);
       _total = (total * 100).toInt();
       _totalError = null;
     } catch (_) {
-      _totalError = context.translate().totalError;
+      _totalError = 'totalError'.tr();
     }
     notifyListeners();
   }

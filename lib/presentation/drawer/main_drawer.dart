@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,7 +6,6 @@ import '../../app_module.dart';
 import '../../domain/navigation/app_navigator.dart';
 import '../../presentation/budgets/budgets_screen.dart';
 import '../../presentation/camera/camera_screen.dart';
-import '../../presentation/common/context_ext.dart';
 import '../../presentation/myreceipts/my_receipts_screen.dart';
 import '../../presentation/signin/signin_screen.dart';
 import 'drawer_dropdown.dart';
@@ -18,20 +18,20 @@ class MainDrawer extends ConsumerWidget {
       Drawer(child: _listView(context, watch));
 
   Widget _listView(BuildContext context, ScopedReader watch) {
-    final notifier = watch(drawerNotifier(context));
+    final notifier = watch(drawerNotifier);
     return ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
         _makeHeader(context, watch),
         ListTile(
-          title: Text(context.translate().scanning),
+          title: const Text('scanning').tr(),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: CameraScreen.routeName, child: CameraScreen()));
           },
         ),
         ListTile(
-          title: Text(context.translate().myReceipts),
+          title: const Text('myReceipts').tr(),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: MyReceiptsScreen.routeName, child: MyReceiptsScreen()));
@@ -39,7 +39,7 @@ class MainDrawer extends ConsumerWidget {
         ),
         const Divider(),
         ListTile(
-          title: Text(context.translate().budgets),
+          title: const Text('budgets').tr(),
           onTap: () {
             AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
                 name: BudgetsScreen.routeName, child: BudgetsScreen()));
@@ -59,7 +59,7 @@ class MainDrawer extends ConsumerWidget {
   }
 
   Widget _makeHeader(BuildContext context, ScopedReader watch) {
-    final notifier = watch(drawerNotifier(context));
+    final notifier = watch(drawerNotifier);
     if (notifier.ui.isSignIn) {
       return SafeArea(
           child: Center(
@@ -76,7 +76,7 @@ class MainDrawer extends ConsumerWidget {
           child: Center(
               child: Column(children: [
         const SizedBox(height: 16),
-        Text(context.translate().notAuthorized)
+        const Text('notAuthorized').tr()
       ])));
     }
   }

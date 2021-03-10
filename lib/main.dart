@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fimber/fimber.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -8,19 +9,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_module.dart';
 import 'domain/data/repo/settings_repo.dart';
 import 'domain/navigation/app_navigator.dart';
-import 'l10n/app_localizations.dart';
 import 'presentation/camera/camera_screen.dart';
-import 'presentation/common/context_ext.dart';
 
 Future<void> main() async {
   Fimber.plantTree(DebugTree());
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseFirestore.instance.settings = const Settings();
   final prefs = await SharedPreferences.getInstance();
-  runApp(ProviderScope(
-      overrides: [settingsRepo.overrideWithValue(SettingsRepo(prefs))],
-      child: MyApp()));
+  runApp(EasyLocalization(
+      supportedLocales: [const Locale('en', 'US'), const Locale('ru', 'RU')],
+      path: 'assets/translations',
+      // <-- change the path of the translation files
+      fallbackLocale: const Locale('en', 'US'),
+      child: ProviderScope(
+          overrides: [settingsRepo.overrideWithValue(SettingsRepo(prefs))],
+          child: MyApp())));
 }
 
 class MyApp extends StatefulWidget {
@@ -57,10 +62,11 @@ class _MyAppState extends State<MyApp> {
               );
             },
             title: 'Receipt Scanner',
-            onGenerateTitle: (context) => context.translate().appTitle,
+            onGenerateTitle: (context) => 'appTitle'.tr(),
             // Add the `localizationsDelegate` and `supportedLocales` lines.
-            localizationsDelegates: AppLocalizations.localizationsDelegates,
-            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: context.localizationDelegates,
+            supportedLocales: context.supportedLocales,
+            locale: context.locale,
             theme: ThemeData.light().copyWith(
                 colorScheme:
                     ColorScheme.fromSwatch(primarySwatch: Colors.orange)),

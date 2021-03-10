@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,7 +17,7 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(context.translate().signIn)),
+      appBar: AppBar(title: const Text('signIn').tr()),
       body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
           child: Column(
@@ -26,7 +27,7 @@ class SignInScreen extends StatelessWidget {
               ElevatedButton.icon(
                   onPressed: () => googleSignIn(context),
                   icon: SvgPicture.asset('assets/icons/google-icon.svg'),
-                  label: Text(context.translate().signInWithGoogle),
+                  label: const Text('signInWithGoogle').tr(),
                   style: ElevatedButton.styleFrom(
                       primary: const Color(0xfff7f7f7),
                       shape: RoundedRectangleBorder(
@@ -35,16 +36,14 @@ class SignInScreen extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    context.translate().dontHaveAccount,
-                  ),
+                  const Text('dontHaveAccount').tr(),
                   InkWell(
                     onTap: () {
                       AppNavigator.of(context).push(const MaterialPage<Page>(
                           name: SignUpScreen.routeName, child: SignUpScreen()));
                     },
                     child: Text(
-                      context.translate().signUp,
+                      'signUp'.tr(),
                       style: const TextStyle(
                           color: Colors.blue,
                           decoration: TextDecoration.underline),
@@ -79,10 +78,10 @@ class LoginForm extends ConsumerWidget {
             keyboardType: TextInputType.emailAddress,
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: context.translate().email,
+                labelText: 'email'.tr(),
                 errorText: watch(signInNotifier).emailError),
             onChanged: (String value) =>
-                context.read(signInNotifier).changeEmail(value, context),
+                context.read(signInNotifier).changeEmail(value),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -90,10 +89,10 @@ class LoginForm extends ConsumerWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: context.translate().password,
+                labelText: 'password'.tr(),
                 errorText: watch(signInNotifier).passwordError),
             onChanged: (String value) =>
-                context.read(signInNotifier).changePassword(value, context),
+                context.read(signInNotifier).changePassword(value),
           ),
           SizedBox(
             width: double.infinity,
@@ -106,7 +105,7 @@ class LoginForm extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(context.translate().cont),
+                child: const Text('cont').tr(),
               ),
             ),
           )
@@ -114,7 +113,7 @@ class LoginForm extends ConsumerWidget {
       );
 
   void submit(BuildContext context) {
-    context.read(signInNotifier).submit(context).then((_) {
+    context.read(signInNotifier).submit().then((_) {
       AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
           name: CameraScreen.routeName, child: CameraScreen()));
     }).catchError((e) {

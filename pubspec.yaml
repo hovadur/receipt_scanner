@@ -23,9 +23,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  # Internationalization support.
-  flutter_localizations:
-    sdk: flutter
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -36,6 +33,7 @@ dependencies:
     git:
       url: "https://github.com/hovadur/date_time_picker"
   device_info: ^2.0.0
+  easy_localization: ^3.0.0
   equatable: ^2.0.0
   fimber: ^0.6.1
   firebase_auth: ^1.0.1
@@ -50,7 +48,6 @@ dependencies:
       url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
   google_sign_in: ^5.0.0
   image_picker: ^0.7.2
-  intl: ^0.17.0
   share: ^2.0.1
   shared_preferences: ^2.0.3
 
@@ -70,6 +67,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/icons/
+    - assets/translations/
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

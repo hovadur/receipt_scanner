@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/material.dart';
 
 import '../../database.dart';
 import '../../domain/data/validation_item.dart';
 import '../../domain/interactor/user_interactor.dart';
-import '../../presentation/common/context_ext.dart';
 
 class SignInNotifier extends ChangeNotifier {
   SignInNotifier(this._userInteractor, this._db);
@@ -22,27 +22,27 @@ class SignInNotifier extends ChangeNotifier {
 
   String? get passwordError => _password.error;
 
-  void changeEmail(String? value, BuildContext context) {
+  void changeEmail(String? value) {
     if (value != null && emailCheck.hasMatch(value)) {
       _email = ValidationItem(value, null);
     } else {
-      _email = ValidationItem(value, context.translate().invalidEmail);
+      _email = ValidationItem(value, 'invalidEmail'.tr());
     }
     notifyListeners();
   }
 
-  void changePassword(String? value, BuildContext context) {
+  void changePassword(String? value) {
     if (value == null || value.length < 8) {
-      _password = ValidationItem(value, context.translate().invalidPassword);
+      _password = ValidationItem(value, 'invalidPassword'.tr());
     } else {
       _password = ValidationItem(value, null);
     }
     notifyListeners();
   }
 
-  bool _isValid(BuildContext context) {
-    changeEmail(_email.value, context);
-    changePassword(_password.value, context);
+  bool _isValid() {
+    changeEmail(_email.value);
+    changePassword(_password.value);
     if (_email.error == null && _password.error == null) {
       return true;
     } else {
@@ -50,8 +50,8 @@ class SignInNotifier extends ChangeNotifier {
     }
   }
 
-  Future<void> submit(BuildContext context) async {
-    if (_isValid(context)) {
+  Future<void> submit() async {
+    if (_isValid()) {
       Fimber.d('submit');
       final email = _email.value;
       final password = _password.value;

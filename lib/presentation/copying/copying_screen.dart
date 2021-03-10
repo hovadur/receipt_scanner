@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share/share.dart';
 
 import '../../app_module.dart';
-import '../../presentation/common/context_ext.dart';
 
 class CopyingScreen extends ConsumerWidget {
   const CopyingScreen({Key? key}) : super(key: key);
@@ -11,7 +11,7 @@ class CopyingScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) => Scaffold(
-      appBar: AppBar(title: Text(context.translate().copying), actions: [
+      appBar: AppBar(title: const Text('copying').tr(), actions: [
         IconButton(
             icon: const Icon(Icons.share),
             onPressed: () => Share.share(
@@ -21,13 +21,12 @@ class CopyingScreen extends ConsumerWidget {
       body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
           child: Column(children: [
-            Text(context.translate().date,
-                style: Theme.of(context).textTheme.subtitle1),
+            Text('date'.tr(), style: Theme.of(context).textTheme.subtitle1),
             Column(children: _genDateListTile(context, watch))
           ])));
 
   List<Widget> _genDateListTile(BuildContext context, ScopedReader watch) {
-    final uniqueList = Set.from(_genDatString(context)).toList();
+    final uniqueList = Set.from(_genDatString()).toList();
     return uniqueList.map((val) {
       final idx = uniqueList.indexOf(val);
       return RadioListTile(
@@ -42,13 +41,13 @@ class CopyingScreen extends ConsumerWidget {
     }).toList();
   }
 
-  List<String> _genDatString(BuildContext context) {
+  List<String> _genDatString() {
     return [
-      context.translate().forAllTheTime,
-      context.translate().forTheCurrentMonth,
-      context.translate().forThePreviousMonth,
-      context.translate().forTheLastWeek,
-      context.translate().forTheLast3Days,
+      'forAllTheTime'.tr(),
+      'forTheCurrentMonth'.tr(),
+      'forThePreviousMonth'.tr(),
+      'forTheLastWeek'.tr(),
+      'forTheLast3Days'.tr(),
     ];
   }
 }

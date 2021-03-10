@@ -1,38 +1,33 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
-import '../../l10n/app_localizations.dart';
-
 extension GoogleSignIn on BuildContext {
-  AppLocalizations translate() {
-    return AppLocalizations.of(this)!;
-  }
-
   void showError(String message) {
     showDialog(
         context: this,
         builder: (dialogContext) => AlertDialog(
-              title: Text(translate().warning),
+              title: const Text('warning').tr(),
               content: Text(message),
               actions: [
                 ElevatedButton(
                     onPressed: () {
                       Navigator.of(dialogContext).pop();
                     },
-                    child: Text(translate().close))
+                    child: const Text('close').tr())
               ],
             ));
   }
 
   Map<IconData, String> category() {
     return {
-      Icons.local_dining: translate().food,
-      Icons.house: translate().home,
-      Icons.commute: translate().transport,
-      Icons.sports_esports: translate().entertainment,
-      Icons.shopping_bag: translate().clothes,
-      Icons.local_phone: translate().connection,
-      Icons.medical_services: translate().health,
-      Icons.beach_access: translate().cosmetics,
+      Icons.local_dining: 'food'.tr(),
+      Icons.house: 'home'.tr(),
+      Icons.commute: 'transport'.tr(),
+      Icons.sports_esports: 'entertainment'.tr(),
+      Icons.shopping_bag: 'clothes'.tr(),
+      Icons.local_phone: 'connection'.tr(),
+      Icons.medical_services: 'health'.tr(),
+      Icons.beach_access: 'cosmetics'.tr(),
     };
   }
 }

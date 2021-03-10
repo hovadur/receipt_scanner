@@ -1,4 +1,5 @@
 import 'package:camera/camera.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -7,7 +8,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../app_module.dart';
 import '../../domain/data/barcode_detector_painter.dart';
 import '../../domain/navigation/app_navigator.dart';
-import '../../presentation/common/context_ext.dart';
 import '../../presentation/details/receipt_details_screen.dart';
 import '../../presentation/drawer/main_drawer.dart';
 import '../../presentation/fromFile/from_file_screen.dart';
@@ -44,7 +44,7 @@ class CameraScreenState extends State<CameraScreen>
   @override
   Widget build(BuildContext context) => Consumer(
       builder: (context, watch, child) => Scaffold(
-          appBar: AppBar(title: Text(context.translate().scanning)),
+          appBar: AppBar(title: const Text('scanning').tr()),
           drawer: const MainDrawer(),
           floatingActionButton: _buildFloatingButton(context),
           body: Container(
@@ -53,10 +53,11 @@ class CameraScreenState extends State<CameraScreen>
 
   Widget _buildPreview(BuildContext context, ScopedReader watch) {
     final camera = watch(cameraNotifier).camera;
+
     if (camera == null) {
       return Center(
         child: Text(
-          context.translate().cameraInit,
+          'cameraInit'.tr(),
           style: const TextStyle(color: Colors.green, fontSize: 30.0),
         ),
       );
@@ -80,7 +81,7 @@ class CameraScreenState extends State<CameraScreen>
         iconData: Icons.add,
         items: <Bubble>[
           Bubble(
-            title: context.translate().fromFile,
+            title: 'fromFile'.tr(),
             icon: Icons.attach_file,
             onPress: () {
               AppNavigator.of(context).push(const MaterialPage<Page>(
@@ -88,7 +89,7 @@ class CameraScreenState extends State<CameraScreen>
             },
           ),
           Bubble(
-            title: context.translate().manual,
+            title: 'manual'.tr(),
             icon: Icons.approval,
             onPress: () {
               AppNavigator.of(context).push(const MaterialPage<Page>(
@@ -96,7 +97,7 @@ class CameraScreenState extends State<CameraScreen>
             },
           ),
           Bubble(
-            title: context.translate().fromParam,
+            title: 'fromParam'.tr(),
             icon: Icons.compare_arrows,
             onPress: () {
               AppNavigator.of(context).push(const MaterialPage<Page>(

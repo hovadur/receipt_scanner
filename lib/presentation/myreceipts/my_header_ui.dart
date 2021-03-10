@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
 
@@ -10,12 +11,11 @@ class MyHeaderUI extends MyItemUI {
   int sum;
 
   String getDateTime(BuildContext context) {
-    final locale = Localizations.localeOf(context);
-    return DateFormat.yMMMMd(locale.languageCode).format(dateTime);
+    return DateFormat.yMMMMd(context.locale.languageCode).format(dateTime);
   }
 
   String getSum(BuildContext context) {
-    final locale = Localizations.localeOf(context);
-    return NumberFormat.decimalPattern(locale.languageCode).format(sum / 100);
+    return NumberFormat.decimalPattern(context.locale.languageCode)
+        .format(sum / 100);
   }
 }

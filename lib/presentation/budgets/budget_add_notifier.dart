@@ -1,9 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../database.dart';
 import '../../domain/entity/budget.dart';
-import '../../presentation/common/context_ext.dart';
 import '../mapper/budget_mapper.dart';
 
 class BudgetAddNotifier extends ChangeNotifier {
@@ -36,13 +35,13 @@ class BudgetAddNotifier extends ChangeNotifier {
 
   void changeSum(String value, BuildContext context) {
     try {
-      final l = Localizations.localeOf(context).languageCode;
+      final l = context.locale.languageCode;
       final sum = NumberFormat.decimalPattern(l).parse(value);
       _sum = (sum * 100).toInt();
       _sumError = null;
     } catch (_) {
       _sum = 0;
-      _sumError = context.translate().sumError;
+      _sumError = 'sumError'.tr();
     }
     notifyListeners();
   }

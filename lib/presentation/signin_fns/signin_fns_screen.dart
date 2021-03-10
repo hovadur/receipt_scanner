@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,13 +15,13 @@ class SignInFnsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-      appBar: AppBar(title: Text(context.translate().fnsAccount)),
+      appBar: AppBar(title: const Text('fnsAccount').tr()),
       body: SingleChildScrollView(
           padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
           child: Column(
             children: [
               const SizedBox(height: 40),
-              Text(context.translate().ftsWarning),
+              const Text('ftsWarning').tr(),
               LoginForm(onPressed: onPressed),
             ],
           )));
@@ -39,10 +40,10 @@ class LoginForm extends ConsumerWidget {
             keyboardType: const TextInputType.numberWithOptions(),
             textInputAction: TextInputAction.next,
             decoration: InputDecoration(
-                labelText: context.translate().inn,
+                labelText: 'inn'.tr(),
                 errorText: watch(signInFnsNotifier).innError),
             onChanged: (String value) =>
-                context.read(signInFnsNotifier).changeEmail(value, context),
+                context.read(signInFnsNotifier).changeEmail(value),
           ),
           const SizedBox(height: 16),
           TextField(
@@ -50,10 +51,10 @@ class LoginForm extends ConsumerWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (String value) => submit(context),
             decoration: InputDecoration(
-                labelText: context.translate().password,
+                labelText: 'password'.tr(),
                 errorText: watch(signInFnsNotifier).passwordError),
             onChanged: (String value) =>
-                context.read(signInFnsNotifier).changePassword(value, context),
+                context.read(signInFnsNotifier).changePassword(value),
           ),
           SizedBox(
             width: double.infinity,
@@ -66,7 +67,7 @@ class LoginForm extends ConsumerWidget {
                   padding: const EdgeInsets.symmetric(
                       vertical: 16.0, horizontal: 4.0),
                 ),
-                child: Text(context.translate().cont),
+                child: const Text('cont').tr(),
               ),
             ),
           )
@@ -74,12 +75,12 @@ class LoginForm extends ConsumerWidget {
       );
 
   void submit(BuildContext context) {
-    context.read(signInFnsNotifier).submit(context).then((value) {
+    context.read(signInFnsNotifier).submit().then((value) {
       if (value) {
         onPressed();
         AppNavigator.of(context).pop();
       } else {
-        context.showError(context.translate().invalidCredentials);
+        context.showError('invalidCredentials'.tr());
       }
     });
   }

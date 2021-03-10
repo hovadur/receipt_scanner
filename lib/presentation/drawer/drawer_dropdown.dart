@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app_module.dart';
 import '../../presentation/budgets/budgets_ui.dart';
-import '../../presentation/common/context_ext.dart';
 
 class DrawerDropDown extends ConsumerWidget {
   const DrawerDropDown({Key? key}) : super(key: key);
@@ -13,7 +13,7 @@ class DrawerDropDown extends ConsumerWidget {
     final stream = watch(dropDownStreamProvider(context));
     return stream.when(
         loading: () => const LinearProgressIndicator(),
-        error: (_, __) => Text(context.translate().wentWrong),
+        error: (_, __) => const Text('wentWrong').tr(),
         data: (value) => _build(context, watch, value));
   }
 

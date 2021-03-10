@@ -1,9 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app_module.dart';
 import '../../domain/navigation/app_navigator.dart';
-import '../../presentation/common/context_ext.dart';
 import '../../presentation/common/dismissible_card.dart';
 import '../../presentation/drawer/main_drawer.dart';
 import 'budget_add_screen.dart';
@@ -16,12 +16,12 @@ class BudgetsScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ScopedReader watch) => Scaffold(
       appBar: AppBar(
-        title: Text(context.translate().budgets),
+        title: const Text('budgets').tr(),
       ),
       drawer: const MainDrawer(),
       floatingActionButton: FloatingActionButton.extended(
         icon: const Icon(Icons.add),
-        label: Text(context.translate().addBudget),
+        label: const Text('addBudget').tr(),
         onPressed: () {
           AppNavigator.of(context).push(const MaterialPage<Page>(
               name: BudgetAddScreen.routeName, child: BudgetAddScreen()));
@@ -33,7 +33,7 @@ class BudgetsScreen extends ConsumerWidget {
     final stream = watch(budgetsStreamProvider(context));
     return stream.when(
         loading: () => const LinearProgressIndicator(),
-        error: (_, __) => Text(context.translate().wentWrong),
+        error: (_, __) => const Text('wentWrong').tr(),
         data: (list) => ListView.builder(
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
@@ -47,8 +47,7 @@ class BudgetsScreen extends ConsumerWidget {
       id: value.id,
       confirmDismiss: (_) async {
         if (value.id == '0') {
-          final snackBar =
-              SnackBar(content: Text(context.translate().cantBeDeleted));
+          final snackBar = SnackBar(content: const Text('cantBeDeleted').tr());
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
           return false;
         } else {

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../presentation/common/context_ext.dart';
@@ -13,7 +14,7 @@ class CategoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final categoryMap = context.category();
     return Scaffold(
-        appBar: AppBar(title: Text(context.translate().categories)),
+        appBar: AppBar(title: const Text('categories').tr()),
         body: SingleChildScrollView(
             child: ListView.builder(
                 shrinkWrap: true,

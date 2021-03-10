@@ -1,7 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../../presentation/common/context_ext.dart';
 
 class DismissibleCard extends StatelessWidget {
   DismissibleCard(
@@ -29,7 +28,7 @@ class DismissibleCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: <Widget>[
                   const Icon(Icons.delete, color: Colors.white),
-                  Text(context.translate().deleteEllipsis,
+                  Text('deleteEllipsis'.tr(),
                       style: const TextStyle(color: Colors.white)),
                 ],
               ),
@@ -40,15 +39,15 @@ class DismissibleCard extends StatelessWidget {
               context: context,
               builder: (BuildContext context) {
                 return AlertDialog(
-                  title: Text(context.translate().deleteConfirmation),
-                  content: Text(context.translate().sureDelete),
+                  title: const Text('deleteConfirmation').tr(),
+                  content: const Text('sureDelete').tr(),
                   actions: <Widget>[
                     TextButton(
                         onPressed: () => Navigator.of(context).pop(true),
-                        child: Text(context.translate().delete)),
+                        child: const Text('delete').tr()),
                     TextButton(
                       onPressed: () => Navigator.of(context).pop(false),
-                      child: Text(context.translate().cancel),
+                      child: const Text('cancel').tr(),
                     ),
                   ],
                 );

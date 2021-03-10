@@ -1,10 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../app_module.dart';
 import '../../domain/entity/budget.dart';
 import '../../domain/navigation/app_navigator.dart';
-import '../../presentation/common/context_ext.dart';
 import 'budget_add_notifier.dart';
 import 'budget_add_param.dart';
 
@@ -18,7 +18,7 @@ class BudgetAddScreen extends ConsumerWidget {
   Widget build(BuildContext context, ScopedReader watch) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(context.translate().addBudget),
+          title: const Text('addBudget').tr(),
         ),
         body: SingleChildScrollView(child: _buildColumn(context, watch)));
   }
@@ -29,19 +29,16 @@ class BudgetAddScreen extends ConsumerWidget {
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: Column(mainAxisSize: MainAxisSize.min, children: [
           const SizedBox(height: 32),
-          Text(context.translate().createNewBudget,
-              textAlign: TextAlign.center),
+          Text('createNewBudget'.tr(), textAlign: TextAlign.center),
           const SizedBox(height: 32),
-          Text(context.translate().comeUpBudget, textAlign: TextAlign.center),
-          Text(context.translate().forExampleBudget,
-              textAlign: TextAlign.center),
+          Text('comeUpBudget'.tr(), textAlign: TextAlign.center),
+          Text('forExampleBudget'.tr(), textAlign: TextAlign.center),
           const SizedBox(height: 8),
           TextField(
             controller: watch(notifier).nameController,
             keyboardType: TextInputType.streetAddress,
             textInputAction: TextInputAction.next,
-            decoration:
-                InputDecoration(labelText: context.translate().budgetName),
+            decoration: InputDecoration(labelText: 'budgetName'.tr()),
             onChanged: (String value) => context.read(notifier).name = value,
           ),
           const SizedBox(height: 8),
@@ -51,7 +48,7 @@ class BudgetAddScreen extends ConsumerWidget {
             textInputAction: TextInputAction.done,
             onSubmitted: (_) => apply(context, notifier),
             decoration: InputDecoration(
-                labelText: context.translate().startingBalance,
+                labelText: 'startingBalance'.tr(),
                 errorText: watch(notifier).sumError),
             onChanged: (String value) =>
                 context.read(notifier).changeSum(value, context),
@@ -67,7 +64,7 @@ class BudgetAddScreen extends ConsumerWidget {
                       padding: const EdgeInsets.symmetric(
                           vertical: 16.0, horizontal: 4.0),
                     ),
-                    child: Text(context.translate().apply),
+                    child: const Text('apply').tr(),
                   ))),
         ]));
   }
