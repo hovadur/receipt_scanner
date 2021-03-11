@@ -91,7 +91,7 @@ packages:
       name: cross_file
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1"
+    version: "0.3.1+1"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -102,12 +102,10 @@ packages:
   date_time_picker:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "00b9f6ed3581850b0be4677726d1700d3a3e78fc"
-      url: "https://github.com/hovadur/date_time_picker"
-    source: git
-    version: "1.2.0"
+      name: date_time_picker
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   device_info:
     dependency: "direct main"
     description:
@@ -320,7 +318,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.7.2"
+    version: "0.7.2+1"
   image_picker_platform_interface:
     dependency: transitive
     description:
