@@ -41,9 +41,7 @@ dependencies:
       ref: development
   flutter_riverpod: ^0.13.1
   flutter_svg: ^0.21.0-nullsafety.0 # help us to use SVG in our app
-  google_ml_kit:
-    git:
-      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
+  google_ml_kit: ^0.1.0
   google_sign_in: ^5.0.0
   image_picker: ^0.7.2+1
   share: ^2.0.1

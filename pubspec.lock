@@ -271,11 +271,9 @@ packages:
   google_ml_kit:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "5d0cf9c44513528ed7d22e0b2dbd37122935b8f9"
-      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
-    source: git
+      name: google_ml_kit
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "0.1.0"
   google_sign_in:
     dependency: "direct main"
@@ -596,7 +594,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.3"
   xdg_directories:
     dependency: transitive
     description:
