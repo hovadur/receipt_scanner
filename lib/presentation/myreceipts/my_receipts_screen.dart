@@ -53,11 +53,9 @@ class MyReceiptsScreen extends ConsumerWidget {
     if (value is MyReceiptUI) {
       return DismissibleCard(
         id: value.id,
-        confirmDismiss: (_) async => true,
-        onDismissed: (DismissDirection direction) {
-          if (direction == DismissDirection.startToEnd) {
-            context.read(myReceiptsNotifier).deleteReceipt(value);
-          }
+        confirmDismiss: () async => true,
+        onDismissed: () {
+          context.read(myReceiptsNotifier).deleteReceipt(value);
         },
         child: ListTile(
           leading: value.items.isEmpty

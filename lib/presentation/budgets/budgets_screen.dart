@@ -45,7 +45,7 @@ class BudgetsScreen extends ConsumerWidget {
   Widget _buildCardItem(BuildContext context, BudgetUI value) {
     return DismissibleCard(
       id: value.id,
-      confirmDismiss: (_) async {
+      confirmDismiss: () async {
         if (value.id == '0') {
           final snackBar = SnackBar(content: const Text('cantBeDeleted').tr());
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
@@ -54,10 +54,8 @@ class BudgetsScreen extends ConsumerWidget {
           return true;
         }
       },
-      onDismissed: (DismissDirection direction) {
-        if (direction == DismissDirection.startToEnd) {
-          context.read(budgetsNotifier).deleteBudget(value);
-        }
+      onDismissed: () {
+        context.read(budgetsNotifier).deleteBudget(value);
       },
       child: ListTile(
         leading: const CircleAvatar(child: Icon(Icons.fact_check)),

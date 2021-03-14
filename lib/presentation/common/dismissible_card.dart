@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class DismissibleCard extends StatelessWidget {
   DismissibleCard(
@@ -10,54 +10,56 @@ class DismissibleCard extends StatelessWidget {
       required this.child});
 
   final String id;
-  final ConfirmDismissCallback confirmDismiss;
-  final DismissDirectionCallback onDismissed;
+  final Future<bool> Function() confirmDismiss;
+  final VoidCallback onDismissed;
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
-    return Dismissible(
+    return Slidable(
         key: Key(id),
-        dragStartBehavior: DragStartBehavior.down,
-        direction: DismissDirection.startToEnd,
-        background: Container(
+        actionPane: const SlidableDrawerActionPane(),
+        actionExtentRatio: 0.25,
+        actions: <Widget>[
+          IconSlideAction(
+            caption: 'deleteEllipsis'.tr(),
             color: Colors.red,
-            child: Padding(
-              padding: const EdgeInsets.all(15),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: <Widget>[
-                  const Icon(Icons.delete, color: Colors.white),
-                  Text('deleteEllipsis'.tr(),
-                      style: const TextStyle(color: Colors.white)),
-                ],
-              ),
-            )),
-        confirmDismiss: (DismissDirection direction) async {
-          if (await confirmDismiss(direction) == true) {
-            return await showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('deleteConfirmation').tr(),
-                  content: const Text('sureDelete').tr(),
-                  actions: <Widget>[
-                    TextButton(
-                        onPressed: () => Navigator.of(context).pop(true),
-                        child: const Text('delete').tr()),
-                    TextButton(
-                      onPressed: () => Navigator.of(context).pop(false),
-                      child: const Text('cancel').tr(),
-                    ),
-                  ],
-                );
-              },
-            );
-          } else {
-            return false;
-          }
-        },
-        onDismissed: onDismissed,
+            icon: Icons.delete,
+            onTap: () async {
+              if (await confirmDismiss()) {
+                onDismissed();
+              }
+            },
+          )
+        ],
+        dismissal: SlidableDismissal(
+            child: const SlidableDrawerDismissal(),
+            onDismissed: (_) => onDismissed(),
+            onWillDismiss: (actionType) async {
+              final result = await showDialog<bool>(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    title: const Text('deleteConfirmation').tr(),
+                    content: const Text('sureDelete').tr(),
+                    actions: <Widget>[
+                      TextButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          child: const Text('delete').tr()),
+                      TextButton(
+                        onPressed: () => Navigator.of(context).pop(false),
+                        child: const Text('cancel').tr(),
+                      ),
+                    ],
+                  );
+                },
+              );
+              if (result == true) {
+                return await confirmDismiss();
+              } else {
+                return false;
+              }
+            }),
         child: Card(child: child));
   }
 }

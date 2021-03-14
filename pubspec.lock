@@ -244,6 +244,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.13.1"
+  flutter_slidable:
+    dependency: "direct main"
+    description:
+      name: flutter_slidable
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.0-nullsafety.0"
   flutter_svg:
     dependency: "direct main"
     description:
@@ -596,7 +603,7 @@ packages:
       name: win32
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.3"
   xdg_directories:
     dependency: transitive
     description:
