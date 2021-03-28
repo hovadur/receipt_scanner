@@ -9,7 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'app_module.dart';
 import 'domain/data/repo/settings_repo.dart';
 import 'domain/navigation/app_navigator.dart';
-import 'presentation/camera/camera_screen.dart';
+import 'presentation/myreceipts/my_receipts_screen.dart';
 
 Future<void> main() async {
   Fimber.plantTree(DebugTree());
@@ -40,8 +40,8 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const Page _defaultHome =
-        MaterialPage<Page>(name: CameraScreen.routeName, child: CameraScreen());
+    const Page _defaultHome = MaterialPage<Page>(
+        name: MyReceiptsScreen.routeName, child: MyReceiptsScreen());
 
     return Listener(
         onPointerDown: (_) {

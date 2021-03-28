@@ -78,9 +78,8 @@ final signUpNotifier = ChangeNotifierProvider<SignUpNotifier>((ref) {
   return SignUpNotifier(s, db);
 });
 
-final drawerNotifier =
-    ChangeNotifierProvider<DrawerNotifier>((ref) {
-      final s = ref.watch(userInteractor);
+final drawerNotifier = ChangeNotifierProvider<DrawerNotifier>((ref) {
+  final s = ref.watch(userInteractor);
   return DrawerNotifier(s);
 });
 
@@ -93,7 +92,8 @@ final fromFileNotifier = ChangeNotifierProvider<FromFileNotifier>((_) {
   return FromFileNotifier();
 });
 
-final cameraNotifier = ChangeNotifierProvider<CameraNotifier>((ref) {
+final cameraNotifier =
+    ChangeNotifierProvider.autoDispose<CameraNotifier>((ref) {
   final db = ref.watch(databaseProvider);
   return CameraNotifier(db);
 });

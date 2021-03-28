@@ -23,6 +23,7 @@ dependencies:
     git:
       url: "https://github.com/hovadur/floating_action_bubble"
       ref: development
+  flutter_hooks: ^0.16.0
   flutter_riverpod: ^0.13.1+1
   flutter_slidable: ^0.6.0-nullsafety.0
   flutter_svg: ^0.21.0-nullsafety.0 # help us to use SVG in our app

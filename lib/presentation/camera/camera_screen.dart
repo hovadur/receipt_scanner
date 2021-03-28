@@ -1,6 +1,5 @@
 import 'package:camera/camera.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -10,43 +9,16 @@ import '../../domain/data/barcode_detector_painter.dart';
 import '../../domain/navigation/app_navigator.dart';
 import '../../presentation/details/receipt_details_screen.dart';
 import '../../presentation/drawer/main_drawer.dart';
-import '../../presentation/fromFile/from_file_screen.dart';
-import '../../presentation/fromParam/from_param_screen.dart';
-import '../../presentation/manual/manual_screen.dart';
 
-class CameraScreen extends StatefulWidget {
+class CameraScreen extends StatelessWidget {
   const CameraScreen({Key? key}) : super(key: key);
   static const String routeName = 'CameraScreen';
-
-  @override
-  CameraScreenState createState() => CameraScreenState();
-}
-
-class CameraScreenState extends State<CameraScreen>
-    with SingleTickerProviderStateMixin {
-  late Animation<double> _animation;
-  late AnimationController _animationController;
-
-  @override
-  void initState() {
-    _animationController = AnimationController(
-      vsync: this,
-      duration: const Duration(milliseconds: 260),
-    );
-
-    final curvedAnimation =
-        CurvedAnimation(curve: Curves.easeInOut, parent: _animationController);
-    _animation = Tween<double>(begin: 0, end: 1).animate(curvedAnimation);
-
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) => Consumer(
       builder: (context, watch, child) => Scaffold(
           appBar: AppBar(title: const Text('scanning').tr()),
           drawer: const MainDrawer(),
-          floatingActionButton: _buildFloatingButton(context),
           body: Container(
               constraints: const BoxConstraints.expand(),
               child: _buildPreview(context, watch))));
@@ -70,41 +42,6 @@ class CameraScreenState extends State<CameraScreen>
         ],
       );
     }
-  }
-
-  Widget _buildFloatingButton(BuildContext context) {
-    return FloatingActionBubble(
-        animation: _animation,
-        onPress: () => _animationController.isCompleted
-            ? _animationController.reverse()
-            : _animationController.forward(),
-        iconData: Icons.add,
-        items: <Bubble>[
-          Bubble(
-            title: 'fromFile'.tr(),
-            icon: Icons.attach_file,
-            onPress: () {
-              AppNavigator.of(context).push(const MaterialPage<Page>(
-                  name: FromFileScreen.routeName, child: FromFileScreen()));
-            },
-          ),
-          Bubble(
-            title: 'manual'.tr(),
-            icon: Icons.approval,
-            onPress: () {
-              AppNavigator.of(context).push(const MaterialPage<Page>(
-                  name: ManualScreen.routeName, child: ManualScreen()));
-            },
-          ),
-          Bubble(
-            title: 'fromParam'.tr(),
-            icon: Icons.compare_arrows,
-            onPress: () {
-              AppNavigator.of(context).push(const MaterialPage<Page>(
-                  name: FromParamScreen.routeName, child: FromParamScreen()));
-            },
-          ),
-        ]);
   }
 
   Widget _buildResults(
