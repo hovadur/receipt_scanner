@@ -4,10 +4,12 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class DismissibleCard extends StatelessWidget {
   DismissibleCard(
-      {required this.id,
+      {Key? key,
+      required this.id,
       required this.confirmDismiss,
       required this.onDismissed,
-      required this.child});
+      required this.child})
+      : super(key: key);
 
   final String id;
   final Future<bool> Function() confirmDismiss;
@@ -33,7 +35,6 @@ class DismissibleCard extends StatelessWidget {
           )
         ],
         dismissal: SlidableDismissal(
-            child: const SlidableDrawerDismissal(),
             onDismissed: (_) => onDismissed(),
             onWillDismiss: (actionType) async {
               final result = await showDialog<bool>(
@@ -59,7 +60,8 @@ class DismissibleCard extends StatelessWidget {
               } else {
                 return false;
               }
-            }),
+            },
+            child: const SlidableDrawerDismissal()),
         child: Card(child: child));
   }
 }

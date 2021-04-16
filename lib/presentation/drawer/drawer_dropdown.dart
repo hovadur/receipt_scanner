@@ -25,7 +25,8 @@ class DrawerDropDown extends ConsumerWidget {
             isExpanded: true,
             items: values
                 .map((value) => DropdownMenuItem(
-                    child: _budgetToWidget(context, value), value: value))
+                    value: value,
+                    child: _budgetToWidget(context, value)))
                 .toList(),
             onChanged: (value) {
               if (value != null) {

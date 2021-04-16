@@ -39,7 +39,7 @@ class CameraNotifier extends ChangeNotifier {
   }
 
   final _barcodeDetector =
-      GoogleMlKit.instance.barcodeScanner([Barcode.FORMAT_QR_Code]);
+      GoogleMlKit.vision.barcodeScanner([Barcode.FORMAT_QR_Code]);
   CameraController? _camera;
   bool _isDetecting = false;
   bool _isMounted = true;

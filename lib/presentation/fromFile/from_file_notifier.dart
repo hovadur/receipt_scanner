@@ -6,7 +6,7 @@ import 'package:google_ml_kit/google_ml_kit.dart';
 class FromFileNotifier extends ChangeNotifier {
   String? _path;
   final _barcodeDetector =
-      GoogleMlKit.instance.barcodeScanner([Barcode.FORMAT_QR_Code]);
+      GoogleMlKit.vision.barcodeScanner([Barcode.FORMAT_QR_Code]);
 
   String? get path => _path;
 
