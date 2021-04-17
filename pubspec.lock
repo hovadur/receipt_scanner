@@ -281,27 +281,11 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.2"
-  floating_action_bubble:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: development
-      resolved-ref: cd7b90426ea63bef1223a066629f638700b20235
-      url: "https://github.com/hovadur/floating_action_bubble"
-    source: git
-    version: "1.2.0"
   flutter:
     dependency: "direct main"
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_hooks:
-    dependency: "direct main"
-    description:
-      name: flutter_hooks
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.16.0"
   flutter_localizations:
     dependency: transitive
     description: flutter
@@ -328,6 +312,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.0"
+  flutter_speed_dial:
+    dependency: "direct main"
+    description:
+      name: flutter_speed_dial
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.5"
   flutter_svg:
     dependency: "direct main"
     description:
