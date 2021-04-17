@@ -13,14 +13,12 @@ class UserInteractor {
 
   User getCurrentUser() {
     final currentUser = _auth.currentUser;
-    if (currentUser == null) {
-      return User(id: ' ', email: '', name: '');
-    } else {
-      return User(
-          id: currentUser.uid,
-          email: currentUser.email ?? '',
-          name: currentUser.displayName ?? '');
-    }
+    return currentUser == null
+        ? User(id: ' ', email: '', name: '')
+        : User(
+            id: currentUser.uid,
+            email: currentUser.email ?? '',
+            name: currentUser.displayName ?? '');
   }
 
   Future<User> _makeAuthResult(auth.UserCredential authResult) async {

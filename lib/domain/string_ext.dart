@@ -5,11 +5,7 @@ extension IsValidINN on String {
       return false;
     }
     final length = inn.length;
-    if (length == 12) {
-      return _innStep(inn, 2, 1) && _innStep(inn, 1, 0);
-    } else {
-      return _innStep(inn, 1, 2);
-    }
+    return length == 12 ? _innStep(inn, 2, 1) && _innStep(inn, 1, 0) : _innStep(inn, 1, 2);
   }
 
   static final _innPattern = RegExp(r'\d{10}|\d{12}');

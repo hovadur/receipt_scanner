@@ -11,7 +11,7 @@ class SignInFnsScreen extends StatelessWidget {
   const SignInFnsScreen({required this.onPressed, Key? key}) : super(key: key);
   static const String routeName = 'SignInFnsScreen';
 
-  final Function onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -30,7 +30,7 @@ class SignInFnsScreen extends StatelessWidget {
 class LoginForm extends ConsumerWidget {
   const LoginForm({required this.onPressed, Key? key}) : super(key: key);
 
-  final Function onPressed;
+  final Function() onPressed;
 
   @override
   Widget build(BuildContext context, ScopedReader watch) => Column(

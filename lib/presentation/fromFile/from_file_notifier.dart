@@ -22,11 +22,9 @@ class FromFileNotifier extends ChangeNotifier {
       final visionImage = InputImage.fromFile(imageFile);
       final List<Barcode> scanResults =
           await _barcodeDetector.processImage(visionImage);
-      if (scanResults.isNotEmpty) {
-        return scanResults[0].barcodeUnknown?.rawValue;
-      } else {
-        return null;
-      }
+      return scanResults.isNotEmpty
+          ? scanResults[0].barcodeUnknown?.rawValue
+          : null;
     }
   }
 

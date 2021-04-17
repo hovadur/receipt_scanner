@@ -65,19 +65,17 @@ class Search extends SearchDelegate {
   Widget _buildBody(BuildContext context) =>
       Consumer(builder: (context, watch, __) {
         final stream = watch(searchStreamProvider(SearchParam(context, query)));
-        if (query.trim() == '') {
-          return const SizedBox();
-        } else {
-          return stream.when(
-              loading: () => const LinearProgressIndicator(),
-              error: (_, __) => const Text('wentWrong').tr(),
-              data: (list) => ListView.builder(
-                  itemCount: list.length,
-                  itemBuilder: (BuildContext context, int index) {
-                    final receipt = list[index];
-                    return _buildCardItem(context, receipt);
-                  }));
-        }
+        return query.trim() == ''
+            ? const SizedBox()
+            : stream.when(
+                loading: () => const LinearProgressIndicator(),
+                error: (_, __) => const Text('wentWrong').tr(),
+                data: (list) => ListView.builder(
+                    itemCount: list.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final receipt = list[index];
+                      return _buildCardItem(context, receipt);
+                    }));
       });
 
   Widget _buildCardItem(BuildContext context, SearchUI ui) {

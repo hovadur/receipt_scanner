@@ -26,22 +26,14 @@ class CameraScreen extends StatelessWidget {
   Widget _buildPreview(BuildContext context, ScopedReader watch) {
     final camera = watch(cameraNotifier).camera;
 
-    if (camera == null) {
-      return Center(
-        child: Text(
-          'cameraInit'.tr(),
-          style: const TextStyle(color: Colors.green, fontSize: 30.0),
-        ),
-      );
-    } else {
-      return Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-          CameraPreview(camera),
-          _buildResults(camera, context, watch),
-        ],
-      );
-    }
+    return camera == null
+        ? Center(
+            child: Text('cameraInit'.tr(),
+                style: const TextStyle(color: Colors.green, fontSize: 30.0)))
+        : Stack(fit: StackFit.expand, children: <Widget>[
+            CameraPreview(camera),
+            _buildResults(camera, context, watch)
+          ]);
   }
 
   Widget _buildResults(

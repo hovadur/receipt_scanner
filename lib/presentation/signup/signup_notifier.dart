@@ -26,29 +26,23 @@ class SignUpNotifier extends ChangeNotifier {
   String? get confirmPasswordError => _confirmPassword.error;
 
   void changeEmail(String? value) {
-    if (value != null && emailCheck.hasMatch(value)) {
-      _email = ValidationItem(value, null);
-    } else {
-      _email = ValidationItem(value, 'invalidEmail'.tr());
-    }
+    _email = value != null && emailCheck.hasMatch(value)
+        ? ValidationItem(value, null)
+        : ValidationItem(value, 'invalidEmail'.tr());
     notifyListeners();
   }
 
   void changePassword(String? value) {
-    if (value == null || (value.length < 8)) {
-      _password = ValidationItem(value, 'invalidPassword'.tr());
-    } else {
-      _password = ValidationItem(value, null);
-    }
+    _password = value == null || (value.length < 8)
+        ? ValidationItem(value, 'invalidPassword'.tr())
+        : ValidationItem(value, null);
     notifyListeners();
   }
 
   void changeConfirmPassword(String? value) {
-    if (value != _password.value) {
-      _confirmPassword = ValidationItem(value, 'invalidConfirmPassword'.tr());
-    } else {
-      _confirmPassword = ValidationItem(value, null);
-    }
+    _confirmPassword = value != _password.value
+        ? ValidationItem(value, 'invalidConfirmPassword'.tr())
+        : ValidationItem(value, null);
     notifyListeners();
   }
 
@@ -56,11 +50,7 @@ class SignUpNotifier extends ChangeNotifier {
     changeEmail(_email.value);
     changePassword(_password.value);
     changeConfirmPassword(_confirmPassword.value);
-    if (_email.error == null && _password.error == null) {
-      return true;
-    } else {
-      return false;
-    }
+    return _email.error == null && _password.error == null ? true : false;
   }
 
   Future<void> submit() async {

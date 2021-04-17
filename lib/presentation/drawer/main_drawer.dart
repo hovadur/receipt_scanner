@@ -60,24 +60,22 @@ class MainDrawer extends ConsumerWidget {
 
   Widget _makeHeader(BuildContext context, ScopedReader watch) {
     final notifier = watch(drawerNotifier);
-    if (notifier.ui.isSignIn) {
-      return SafeArea(
-          child: Center(
-              child: Column(children: [
-        const SizedBox(height: 16),
-        Text(notifier.ui.email),
-        const SizedBox(height: 8),
-        Text(notifier.ui.displayName),
-        const SizedBox(height: 8),
-        const DrawerDropDown(),
-      ])));
-    } else {
-      return SafeArea(
-          child: Center(
-              child: Column(children: [
-        const SizedBox(height: 16),
-        const Text('notAuthorized').tr()
-      ])));
-    }
+    return notifier.ui.isSignIn
+        ? SafeArea(
+            child: Center(
+                child: Column(children: [
+            const SizedBox(height: 16),
+            Text(notifier.ui.email),
+            const SizedBox(height: 8),
+            Text(notifier.ui.displayName),
+            const SizedBox(height: 8),
+            const DrawerDropDown()
+          ])))
+        : SafeArea(
+            child: Center(
+                child: Column(children: [
+            const SizedBox(height: 16),
+            const Text('notAuthorized').tr()
+          ])));
   }
 }

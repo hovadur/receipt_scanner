@@ -80,14 +80,10 @@ class ManualAddNotifier extends ChangeNotifier {
 
   ReceiptItem getProduct(BuildContext context) {
     final item = _item;
-    if (item == null) {
-      return ReceiptItem(_type, name, 0, _qty, _sum);
-    } else {
-      return item
-        ..type = _type
-        ..name = name
-        ..quantity = _qty
-        ..sum = _sum;
-    }
+    return item == null ? ReceiptItem(_type, name, 0, _qty, _sum) : item
+      ..type = _type
+      ..name = name
+      ..quantity = _qty
+      ..sum = _sum;
   }
 }

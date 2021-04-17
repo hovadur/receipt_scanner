@@ -18,31 +18,23 @@ class SignInFnsNotifier extends ChangeNotifier {
   String? get passwordError => _password.error;
 
   void changeEmail(String? value) {
-    if (value != null && value.isValidINN()) {
-      _inn = ValidationItem(value, null);
-    } else {
-      _inn = ValidationItem(value, 'invalidInn'.tr());
-    }
+    _inn = value != null && value.isValidINN()
+        ? ValidationItem(value, null)
+        : ValidationItem(value, 'invalidInn'.tr());
     notifyListeners();
   }
 
   void changePassword(String? value) {
-    if (value == null || value.isEmpty) {
-      _password = ValidationItem(value, 'invalidPassword'.tr());
-    } else {
-      _password = ValidationItem(value, null);
-    }
+    _password = value == null || value.isEmpty
+        ? ValidationItem(value, 'invalidPassword'.tr())
+        : ValidationItem(value, null);
     notifyListeners();
   }
 
   bool _isValid() {
     changeEmail(_inn.value);
     changePassword(_password.value);
-    if (_inn.error == null && _password.error == null) {
-      return true;
-    } else {
-      return false;
-    }
+    return _inn.error == null && _password.error == null ? true : false;
   }
 
   Future<bool> submit() async {
