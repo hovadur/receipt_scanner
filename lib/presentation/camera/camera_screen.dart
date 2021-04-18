@@ -20,33 +20,37 @@ class CameraScreen extends StatelessWidget {
           appBar: AppBar(title: const Text('scanning').tr()),
           drawer: const MainDrawer(),
           body: Container(
-              constraints: const BoxConstraints.expand(),
-              child: _buildPreview(context, watch))));
+              constraints: const BoxConstraints.expand(), child: _Preview())));
+}
 
-  Widget _buildPreview(BuildContext context, ScopedReader watch) {
+class _Preview extends ConsumerWidget {
+  _Preview({Key? key}) : super(key: key);
+  Widget build(BuildContext context, ScopedReader watch) {
     final camera = watch(cameraNotifier).camera;
 
     return camera == null
         ? Center(
             child: Text('cameraInit'.tr(),
                 style: const TextStyle(color: Colors.green, fontSize: 30.0)))
-        : Stack(fit: StackFit.expand, children: <Widget>[
-            CameraPreview(camera),
-            _buildResults(camera, context, watch)
-          ]);
+        : Stack(
+            fit: StackFit.expand,
+            children: <Widget>[CameraPreview(camera), _Results(camera)]);
   }
+}
 
-  Widget _buildResults(
-      CameraController camera, BuildContext context, ScopedReader watch) {
+class _Results extends ConsumerWidget {
+  _Results(this._camera, {Key? key}) : super(key: key);
+  final CameraController _camera;
+  Widget build(BuildContext context, ScopedReader watch) {
     const noResultsText = Text('No results!');
     final scanResults = watch(cameraNotifier).scanResults;
-    if (!camera.value.isInitialized) {
+    if (!_camera.value.isInitialized) {
       return noResultsText;
     }
 
     final imageSize = Size(
-      camera.value.previewSize?.height ?? 0,
-      camera.value.previewSize?.width ?? 0,
+      _camera.value.previewSize?.height ?? 0,
+      _camera.value.previewSize?.width ?? 0,
     );
     if (scanResults.isEmpty) {
       return CustomPaint(

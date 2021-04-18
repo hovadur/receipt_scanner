@@ -8,22 +8,28 @@ import '../../domain/navigation/app_navigator.dart';
 import 'budget_add_notifier.dart';
 import 'budget_add_param.dart';
 
-class BudgetAddScreen extends ConsumerWidget {
+class BudgetAddScreen extends StatelessWidget {
   const BudgetAddScreen({this.item, Key? key}) : super(key: key);
   static const String routeName = 'BudgetAddScreen';
 
   final Budget? item;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           title: const Text('addBudget').tr(),
         ),
-        body: SingleChildScrollView(child: _buildColumn(context, watch)));
+        body: SingleChildScrollView(child: _Column(item)));
   }
+}
 
-  Widget _buildColumn(BuildContext context, ScopedReader watch) {
+class _Column extends ConsumerWidget {
+  _Column(this.item, {Key? key}) : super(key: key);
+
+  final Budget? item;
+
+  Widget build(BuildContext context, ScopedReader watch) {
     final notifier = budgetAddNotifier(BudgetAddParam(context, item));
     return Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),

@@ -14,19 +14,22 @@ class DrawerDropDown extends ConsumerWidget {
     return stream.when(
         loading: () => const LinearProgressIndicator(),
         error: (_, __) => const Text('wentWrong').tr(),
-        data: (value) => _build(context, watch, value));
+        data: (value) => _Item(value));
   }
+}
 
-  Widget _build(
-      BuildContext context, ScopedReader watch, List<BudgetUI> values) {
+class _Item extends ConsumerWidget {
+  const _Item(this._values, {Key? key}) : super(key: key);
+  final List<BudgetUI> _values;
+
+  Widget build(BuildContext context, ScopedReader watch) {
     return DropdownButtonHideUnderline(
         child: DropdownButton(
             value: watch(drawerDropDownNotifier).currentBudget,
             isExpanded: true,
-            items: values
+            items: _values
                 .map((value) => DropdownMenuItem(
-                    value: value,
-                    child: _budgetToWidget(context, value)))
+                    value: value, child: _BudgetToWidget(value)))
                 .toList(),
             onChanged: (value) {
               if (value != null) {
@@ -36,14 +39,19 @@ class DrawerDropDown extends ConsumerWidget {
               }
             }));
   }
+}
 
-  Widget _budgetToWidget(BuildContext context, BudgetUI value) {
+class _BudgetToWidget extends StatelessWidget {
+  const _BudgetToWidget(this._value, {Key? key}) : super(key: key);
+  final BudgetUI _value;
+
+  Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme.primaryVariant;
     return Center(
         child: Column(
       children: [
-        Text(value.name),
-        Text(value.sum, style: TextStyle(color: color))
+        Text(_value.name),
+        Text(_value.sum, style: TextStyle(color: color))
       ],
     ));
   }

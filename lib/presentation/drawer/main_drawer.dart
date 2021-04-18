@@ -15,14 +15,17 @@ class MainDrawer extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) =>
-      Drawer(child: _listView(context, watch));
+      Drawer(child: _ListView());
+}
 
-  Widget _listView(BuildContext context, ScopedReader watch) {
+class _ListView extends ConsumerWidget {
+  const _ListView({Key? key}) : super(key: key);
+  Widget build(BuildContext context, ScopedReader watch) {
     final notifier = watch(drawerNotifier);
     return ListView(
       padding: EdgeInsets.zero,
       children: <Widget>[
-        _makeHeader(context, watch),
+        _Header(),
         ListTile(
           title: const Text('scanning').tr(),
           onTap: () {
@@ -57,8 +60,12 @@ class MainDrawer extends ConsumerWidget {
       ],
     );
   }
+}
 
-  Widget _makeHeader(BuildContext context, ScopedReader watch) {
+class _Header extends ConsumerWidget {
+  const _Header({Key? key}) : super(key: key);
+
+  Widget build(BuildContext context, ScopedReader watch) {
     final notifier = watch(drawerNotifier);
     return notifier.ui.isSignIn
         ? SafeArea(

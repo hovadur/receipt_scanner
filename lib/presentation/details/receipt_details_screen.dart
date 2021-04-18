@@ -14,16 +14,14 @@ import '../../presentation/myreceipts/my_receipt_ui.dart';
 import '../../presentation/myreceipts/my_search_item_ui.dart';
 import '../../presentation/signin_fns/signin_fns_screen.dart';
 
-class ReceiptDetailsScreen extends ConsumerWidget {
+class ReceiptDetailsScreen extends StatelessWidget {
   const ReceiptDetailsScreen({required this.receipt, Key? key})
       : super(key: key);
-
   static const String routeName = 'ReceiptDetails';
-
   final Receipt receipt;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: const Text('details').tr(),
         actions: [
@@ -36,18 +34,22 @@ class ReceiptDetailsScreen extends ConsumerWidget {
               })
         ],
       ),
-      body: _streamBody(context, watch));
+      body: _Body(receipt));
+}
 
-  Widget _streamBody(BuildContext context, ScopedReader watch) {
+class _Body extends ConsumerWidget {
+  const _Body(this._receipt, {Key? key}) : super(key: key);
+  final Receipt _receipt;
+  Widget build(BuildContext context, ScopedReader watch) {
     final stream = watch(
-        receiptDetailsUIStreamProvider(ReceiptDetailsParam(context, receipt)));
+        receiptDetailsUIStreamProvider(ReceiptDetailsParam(context, _receipt)));
     return stream.when(
         loading: () => const LinearProgressIndicator(),
         error: (_, __) => const Text('wentWrong').tr(),
         data: (ui) => Column(
               children: <Widget>[
                 Expanded(
-                  child: _receiptBody(context, ui),
+                  child: _ReceiptBody(_receipt, ui),
                 ),
                 Column(
                   mainAxisSize: MainAxisSize.min,
@@ -57,16 +59,21 @@ class ReceiptDetailsScreen extends ConsumerWidget {
                       leading: const Text('total').tr(),
                       trailing: Text(ui.totalSum),
                     ),
-                    _buildIrkktBody(context, watch),
+                    _IrkktBody(_receipt),
                   ],
                 )
               ],
             ));
   }
+}
 
-  Widget _buildIrkktBody(BuildContext context, ScopedReader watch) {
+class _IrkktBody extends ConsumerWidget {
+  const _IrkktBody(this._receipt, {Key? key}) : super(key: key);
+  final Receipt _receipt;
+
+  Widget build(BuildContext context, ScopedReader watch) {
     final future = watch(receiptDetailsIrkktFutureProvider(
-        ReceiptDetailsParam(context, receipt)));
+        ReceiptDetailsParam(context, _receipt)));
     return future.when(
         loading: () => Stack(children: [
               const LinearProgressIndicator(),
@@ -99,7 +106,7 @@ class ReceiptDetailsScreen extends ConsumerWidget {
 
   TextSpan _nalogRu(BuildContext context) {
     final notifier =
-        receiptDetailsNotifier(ReceiptDetailsParam(context, receipt));
+        receiptDetailsNotifier(ReceiptDetailsParam(context, _receipt));
     return TextSpan(
         text: 'nalogruAccount'.tr(),
         style: const TextStyle(
@@ -113,45 +120,58 @@ class ReceiptDetailsScreen extends ConsumerWidget {
                 )));
           });
   }
+}
 
-  Widget _receiptBody(BuildContext context, MyReceiptUI ui) {
+class _ReceiptBody extends StatelessWidget {
+  const _ReceiptBody(this._receipt, this._ui, {Key? key}) : super(key: key);
+  final Receipt _receipt;
+  final MyReceiptUI _ui;
+  Widget build(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         ListTile(
           leading: const Text('dateTime').tr(),
-          trailing: Text(ui.dateTime),
+          trailing: Text(_ui.dateTime),
         ),
-        if (ui.fn.isNotEmpty)
+        if (_ui.fn.isNotEmpty)
           ListTile(
             leading: const Text('storage').tr(),
-            trailing: Text(ui.fn),
+            trailing: Text(_ui.fn),
           ),
-        if (ui.fn.isNotEmpty)
+        if (_ui.fn.isNotEmpty)
           ListTile(
             leading: const Text('document').tr(),
-            trailing: Text(ui.fd),
+            trailing: Text(_ui.fd),
           ),
-        if (ui.fn.isNotEmpty)
+        if (_ui.fn.isNotEmpty)
           ListTile(
             leading: const Text('documentAttribute').tr(),
-            trailing: Text(ui.fpd),
+            trailing: Text(_ui.fpd),
           ),
         Expanded(
             child: ListView.builder(
-                itemCount: ui.items.length,
+                itemCount: _ui.items.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: _buildItem(context, ui.items[index], index));
+                      child: _Item(_receipt, _ui.items[index], index));
                 })),
       ],
     );
   }
+}
 
-  Widget _buildItem(BuildContext context, MySearchItemUI item, int index) {
+class _Item extends StatelessWidget {
+  const _Item(this._receipt, this._item, this._index, {Key? key})
+      : super(key: key);
+  final Receipt _receipt;
+  final MySearchItemUI _item;
+  final int _index;
+
+  Widget build(BuildContext context) {
     final notifier =
-        receiptDetailsNotifier(ReceiptDetailsParam(context, receipt));
+        receiptDetailsNotifier(ReceiptDetailsParam(context, _receipt));
     final entries = context.category().entries.toList();
     return ListTile(
         leading: InkWell(
@@ -159,14 +179,14 @@ class ReceiptDetailsScreen extends ConsumerWidget {
               name: CategoryScreen.routeName,
               child: CategoryScreen(
                 onPressed: (type) {
-                  context.read(notifier).saveType(index, type);
+                  context.read(notifier).saveType(_index, type);
                   Navigator.of(context).pop();
                 },
               ))),
-          child: CircleAvatar(child: Icon(entries.elementAt(item.type).key)),
+          child: CircleAvatar(child: Icon(entries.elementAt(_item.type).key)),
         ),
-        title: Text(item.quantity),
-        subtitle: Text(item.name),
-        trailing: Text(item.sum));
+        title: Text(_item.quantity),
+        subtitle: Text(_item.name),
+        trailing: Text(_item.sum));
   }
 }

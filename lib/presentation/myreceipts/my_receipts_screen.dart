@@ -22,30 +22,31 @@ class MyReceiptsScreen extends StatelessWidget {
   static const String routeName = 'MyReceiptsScreen';
 
   @override
-  Widget build(BuildContext context) {
-    return Consumer(
-        builder: (context, watch, child) => Scaffold(
-            appBar: AppBar(
-              title: const Text('myReceipts').tr(),
-              actions: [
-                IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () =>
-                        showSearch(context: context, delegate: Search())),
-                IconButton(
-                    icon: const Icon(Icons.file_copy),
-                    onPressed: () => AppNavigator.of(context).push(
-                        const MaterialPage<Page>(
-                            name: CopyingScreen.routeName,
-                            child: CopyingScreen())))
-              ],
-            ),
-            drawer: const MainDrawer(),
-            floatingActionButton: _buildFloatingButton(context),
-            body: _buildBody(context, watch)));
-  }
+  Widget build(BuildContext context) => Scaffold(
+      appBar: AppBar(
+        title: const Text('myReceipts').tr(),
+        actions: [
+          IconButton(
+              icon: const Icon(Icons.search),
+              onPressed: () =>
+                  showSearch(context: context, delegate: Search())),
+          IconButton(
+              icon: const Icon(Icons.file_copy),
+              onPressed: () => AppNavigator.of(context).push(
+                  const MaterialPage<Page>(
+                      name: CopyingScreen.routeName, child: CopyingScreen())))
+        ],
+      ),
+      drawer: const MainDrawer(),
+      floatingActionButton: _FloatingButton(),
+      body: _Body());
+}
 
-  Widget _buildFloatingButton(BuildContext context) {
+class _FloatingButton extends StatelessWidget {
+  _FloatingButton({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
     return SpeedDial(icon: Icons.add, children: [
       SpeedDialChild(
         label: 'fromFile'.tr(),
@@ -73,8 +74,13 @@ class MyReceiptsScreen extends StatelessWidget {
       ),
     ]);
   }
+}
 
-  Widget _buildBody(BuildContext context, ScopedReader watch) {
+class _Body extends ConsumerWidget {
+  _Body({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
     final stream = watch(myReceiptsStreamProvider(context));
     return stream.when(
         loading: () => const LinearProgressIndicator(),
@@ -83,12 +89,19 @@ class MyReceiptsScreen extends StatelessWidget {
             itemCount: list.length,
             itemBuilder: (BuildContext context, int index) {
               final value = list[index];
-              return _buildCardItem(context, value);
+              return _CardItem(value);
             }));
   }
+}
 
-  Widget _buildCardItem(BuildContext context, MyItemUI value) {
-    if (value is MyReceiptUI) {
+class _CardItem extends StatelessWidget {
+  final MyItemUI _cardItem;
+  _CardItem(this._cardItem, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    if (_cardItem is MyReceiptUI) {
+      final value = _cardItem as MyReceiptUI;
       return DismissibleCard(
         id: value.id,
         confirmDismiss: () async => true,
@@ -108,7 +121,8 @@ class MyReceiptsScreen extends StatelessWidget {
           },
         ),
       );
-    } else if (value is MyHeaderUI) {
+    } else if (_cardItem is MyHeaderUI) {
+      final value = _cardItem as MyHeaderUI;
       return ListTile(
         title: Center(child: Text(value.getDateTime(context))),
         trailing: Text(value.getSum(context)),
