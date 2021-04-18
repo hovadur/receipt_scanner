@@ -47,9 +47,11 @@ class _FloatingButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SpeedDial(icon: Icons.add, children: [
+    final color = Theme.of(context).colorScheme.primaryVariant;
+    return SpeedDial(icon: Icons.add, backgroundColor: color, children: [
       SpeedDialChild(
         label: 'fromFile'.tr(),
+        backgroundColor: color,
         child: Icon(Icons.attach_file),
         onTap: () {
           AppNavigator.of(context).push(const MaterialPage<Page>(
@@ -58,6 +60,7 @@ class _FloatingButton extends StatelessWidget {
       ),
       SpeedDialChild(
         label: 'manual'.tr(),
+        backgroundColor: color,
         child: Icon(Icons.approval),
         onTap: () {
           AppNavigator.of(context).push(const MaterialPage<Page>(
@@ -66,6 +69,7 @@ class _FloatingButton extends StatelessWidget {
       ),
       SpeedDialChild(
         label: 'fromParam'.tr(),
+        backgroundColor: color,
         child: Icon(Icons.compare_arrows),
         onTap: () {
           AppNavigator.of(context).push(const MaterialPage<Page>(

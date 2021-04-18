@@ -19,9 +19,9 @@ dependencies:
   equatable: ^2.0.0
   fimber: ^0.6.1
   firebase_auth: ^1.1.0
-  flutter_speed_dial: ^3.0.5
   flutter_riverpod: ^0.14.0+1
   flutter_slidable: ^0.6.0
+  flutter_speed_dial: ^3.0.5
   flutter_svg: ^0.21.0+1 # help us to use SVG in our app
   google_ml_kit:
     git:
