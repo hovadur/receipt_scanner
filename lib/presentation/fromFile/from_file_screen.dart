@@ -34,11 +34,22 @@ class FromFileScreen extends ConsumerWidget {
                   },
                   child: const Text('uploadFile').tr()),
               const SizedBox(height: 8),
-              _buildFile(context, watch)
+              _File()
             ]),
       );
 
-  Widget _buildFile(BuildContext context, ScopedReader watch) {
+  Future<void> _getAndScanImage(BuildContext context) async {
+    final _picker = ImagePicker();
+    final pickedImage = await _picker.getImage(source: ImageSource.gallery);
+    if (pickedImage != null) {
+      context.read(fromFileNotifier).changeFile(pickedImage.path);
+    }
+  }
+}
+
+class _File extends ConsumerWidget {
+  const _File({Key? key}) : super(key: key);
+  Widget build(BuildContext context, ScopedReader watch) {
     final path = watch(fromFileNotifier).path;
     return Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -66,13 +77,5 @@ class FromFileScreen extends ConsumerWidget {
                 },
                 child: const Text('processFile').tr()),
         ]);
-  }
-
-  Future<void> _getAndScanImage(BuildContext context) async {
-    final _picker = ImagePicker();
-    final pickedImage = await _picker.getImage(source: ImageSource.gallery);
-    if (pickedImage != null) {
-      context.read(fromFileNotifier).changeFile(pickedImage.path);
-    }
   }
 }

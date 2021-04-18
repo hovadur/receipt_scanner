@@ -30,11 +30,24 @@ class ManualAddScreen extends ConsumerWidget {
           label: const Text('cont').tr(),
           onPressed: () => submit(context, notifier),
         ),
-        body: SingleChildScrollView(child: _buildColumn(context, watch)));
+        body: SingleChildScrollView(child: _Column(onPressed, item)));
   }
 
-  Widget _buildColumn(BuildContext context, ScopedReader watch) {
-    final notifier = manualAddNotifier(ManualAddParam(context, item));
+  void submit(BuildContext context,
+      ChangeNotifierProvider<ManualAddNotifier> notifier) {
+    onPressed(context.read(notifier).getProduct(context));
+    AppNavigator.of(context).pop();
+  }
+}
+
+class _Column extends ConsumerWidget {
+  const _Column(this.onPressed, this._item, {Key? key}) : super(key: key);
+
+  final ValueChanged<ReceiptItem> onPressed;
+  final ReceiptItem? _item;
+
+  Widget build(BuildContext context, ScopedReader watch) {
+    final notifier = manualAddNotifier(ManualAddParam(context, _item));
     final entries = context.category().entries.toList();
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       const SizedBox(height: 16),

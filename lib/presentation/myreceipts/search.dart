@@ -54,31 +54,39 @@ class Search extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    return _buildBody(context);
+    return _Body(query);
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    return _buildBody(context);
+    return _Body(query);
   }
+}
 
-  Widget _buildBody(BuildContext context) =>
-      Consumer(builder: (context, watch, __) {
-        final stream = watch(searchStreamProvider(SearchParam(context, query)));
-        return query.trim() == ''
-            ? const SizedBox()
-            : stream.when(
-                loading: () => const LinearProgressIndicator(),
-                error: (_, __) => const Text('wentWrong').tr(),
-                data: (list) => ListView.builder(
-                    itemCount: list.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final receipt = list[index];
-                      return _buildCardItem(context, receipt);
-                    }));
-      });
+class _Body extends ConsumerWidget {
+  const _Body(this._query, {Key? key}) : super(key: key);
+  final String _query;
+  Widget build(BuildContext context, ScopedReader watch) {
+    final stream = watch(searchStreamProvider(SearchParam(context, _query)));
+    return _query.trim() == ''
+        ? const SizedBox()
+        : stream.when(
+            loading: () => const LinearProgressIndicator(),
+            error: (_, __) => const Text('wentWrong').tr(),
+            data: (list) => ListView.builder(
+                itemCount: list.length,
+                itemBuilder: (BuildContext context, int index) {
+                  final receipt = list[index];
+                  return _CardItem(receipt);
+                }));
+  }
+}
 
-  Widget _buildCardItem(BuildContext context, SearchUI ui) {
+class _CardItem extends StatelessWidget {
+  const _CardItem(this._ui, {Key? key}) : super(key: key);
+  final SearchUI _ui;
+
+  Widget build(BuildContext context) {
     final entries = context.category().entries.toList();
     return Card(
         child: Column(
@@ -86,13 +94,13 @@ class Search extends SearchDelegate {
       children: <Widget>[
         ListTile(
           leading:
-              CircleAvatar(child: Icon(entries.elementAt(ui.item.type).key)),
-          title: Text(ui.item.name),
-          trailing: Text(ui.item.sum),
+              CircleAvatar(child: Icon(entries.elementAt(_ui.item.type).key)),
+          title: Text(_ui.item.name),
+          trailing: Text(_ui.item.sum),
           onTap: () {
             AppNavigator.of(context).push(MaterialPage<Page>(
                 name: ReceiptDetailsScreen.routeName,
-                child: ReceiptDetailsScreen(receipt: ui.receipt.receipt)));
+                child: ReceiptDetailsScreen(receipt: _ui.receipt.receipt)));
           },
         ),
       ],

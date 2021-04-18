@@ -10,14 +10,14 @@ import '../../presentation/common/context_ext.dart';
 import 'manual_add_screen.dart';
 import 'manual_param.dart';
 
-class ManualScreen extends ConsumerWidget {
+class ManualScreen extends StatelessWidget {
   const ManualScreen({Key? key, this.receipt}) : super(key: key);
   static const String routeName = 'ManualScreen';
 
   final Receipt? receipt;
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) {
+  Widget build(BuildContext context) {
     final notifier = manualNotifier(ManualParam(context, receipt));
     return Scaffold(
       appBar: AppBar(title: const Text('manual').tr()),
@@ -30,12 +30,17 @@ class ManualScreen extends ConsumerWidget {
           }
         },
       ),
-      body: _buildBody(context, watch),
+      body: _Body(receipt),
     );
   }
+}
 
-  Widget _buildBody(BuildContext context, ScopedReader watch) {
-    final notifier = manualNotifier(ManualParam(context, receipt));
+class _Body extends ConsumerWidget {
+  const _Body(this._receipt, {Key? key}) : super(key: key);
+  final Receipt? _receipt;
+
+  Widget build(BuildContext context, ScopedReader watch) {
+    final notifier = manualNotifier(ManualParam(context, _receipt));
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -86,16 +91,21 @@ class ManualScreen extends ConsumerWidget {
           child: ListView.builder(
               itemCount: watch(notifier).productCount,
               itemBuilder: (BuildContext context, int index) {
-                return Builder(
-                    builder: (context) => _buildItem(context, index, watch));
+                return Builder(builder: (context) => _Item(_receipt, index));
               }))
     ]);
   }
+}
 
-  Widget _buildItem(BuildContext context, int index, ScopedReader watch) {
-    final notifier = manualNotifier(ManualParam(context, receipt));
+class _Item extends StatelessWidget {
+  const _Item(this._receipt, this._index, {Key? key}) : super(key: key);
+  final Receipt? _receipt;
+  final int _index;
+
+  Widget build(BuildContext context) {
+    final notifier = manualNotifier(ManualParam(context, _receipt));
     final entries = context.category().entries.toList();
-    final item = context.read(notifier).getProducts(context)[index];
+    final item = context.read(notifier).getProducts(context)[_index];
     return ListTile(
         onTap: () {
           AppNavigator.of(context).push(MaterialPage<Page>(
