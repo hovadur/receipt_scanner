@@ -8,6 +8,7 @@ import '../../app_module.dart';
 import '../../domain/navigation/app_navigator.dart';
 import '../../presentation/camera/camera_screen.dart';
 import '../../presentation/common/context_ext.dart';
+import '../../presentation/myreceipts/my_receipts_screen.dart';
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -105,7 +106,7 @@ class LoginForm extends ConsumerWidget {
   void submit(BuildContext context) {
     context.read(signUpNotifier).submit().then((_) {
       AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
-          name: CameraScreen.routeName, child: CameraScreen()));
+          name: MyReceiptsScreen.routeName, child: MyReceiptsScreen()));
     }).catchError((e) {
       context.showError(e.message);
       Fimber.e(e.toString());

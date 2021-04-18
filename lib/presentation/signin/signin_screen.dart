@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:receipt_scanner/presentation/myreceipts/my_receipts_screen.dart';
 
 import '../../app_module.dart';
 import '../../domain/navigation/app_navigator.dart';
@@ -58,7 +59,7 @@ class SignInScreen extends StatelessWidget {
     context.read(signInNotifier).googleSignIn().then((value) {
       if (value) {
         AppNavigator.of(context).clearAndPush(const MaterialPage<Page>(
-            name: CameraScreen.routeName, child: CameraScreen()));
+            name: MyReceiptsScreen.routeName, child: MyReceiptsScreen()));
       }
     }).catchError((e) {
       context.showError(e.message);
