@@ -22,3 +22,4 @@ dart_code_metrics:
     - no-empty-block
     - prefer-conditional-expressions
     - no-equal-then-else
+    - avoid-returning-widgets

@@ -55,7 +55,11 @@ class DismissibleCard extends StatelessWidget {
                   );
                 },
               );
-              return result == true ? await confirmDismiss() : false;
+              return result == null
+                  ? false
+                  : result
+                      ? await confirmDismiss()
+                      : false;
             },
             child: const SlidableDrawerDismissal()),
         child: Card(child: child));

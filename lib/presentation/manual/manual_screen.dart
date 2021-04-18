@@ -67,25 +67,7 @@ class _Body extends ConsumerWidget {
                   context.read(notifier).changeTotal(value, context),
             ),
             const SizedBox(height: 8),
-            Row(children: <Widget>[
-              ElevatedButton.icon(
-                  onPressed: () {
-                    AppNavigator.of(context).push(MaterialPage<Page>(
-                        name: ManualAddScreen.routeName,
-                        child: ManualAddScreen(
-                          onPressed: (item) {
-                            context.read(notifier).addProduct(item);
-                          },
-                        )));
-                  },
-                  icon: const Icon(Icons.add),
-                  label: const Text('product').tr()),
-              const SizedBox(width: 8),
-              ElevatedButton.icon(
-                  onPressed: () => context.read(notifier).removeProduct(),
-                  icon: const Icon(Icons.remove),
-                  label: const Text('product').tr()),
-            ])
+            _Row(_receipt),
           ])),
       Expanded(
           child: ListView.builder(
@@ -93,6 +75,33 @@ class _Body extends ConsumerWidget {
               itemBuilder: (BuildContext context, int index) {
                 return Builder(builder: (context) => _Item(_receipt, index));
               }))
+    ]);
+  }
+}
+
+class _Row extends StatelessWidget {
+  const _Row(this._receipt, {Key? key}) : super(key: key);
+  final Receipt? _receipt;
+  Widget build(BuildContext context) {
+    final notifier = manualNotifier(ManualParam(context, _receipt));
+    return Row(children: <Widget>[
+      ElevatedButton.icon(
+          onPressed: () {
+            AppNavigator.of(context).push(MaterialPage<Page>(
+                name: ManualAddScreen.routeName,
+                child: ManualAddScreen(
+                  onPressed: (item) {
+                    context.read(notifier).addProduct(item);
+                  },
+                )));
+          },
+          icon: const Icon(Icons.add),
+          label: const Text('product').tr()),
+      const SizedBox(width: 8),
+      ElevatedButton.icon(
+          onPressed: () => context.read(notifier).removeProduct(),
+          icon: const Icon(Icons.remove),
+          label: const Text('product').tr()),
     ]);
   }
 }

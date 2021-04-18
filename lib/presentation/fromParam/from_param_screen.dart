@@ -30,31 +30,7 @@ class FromParamScreen extends ConsumerWidget {
                 onChanged: (String value) =>
                     context.read(notifier).changeDateTime(value),
               ),
-              const SizedBox(height: 8),
-              TextField(
-                keyboardType:
-                    const TextInputType.numberWithOptions(decimal: true),
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(
-                    labelText: 'totalAmount'.tr(),
-                    errorText: watch(notifier).totalError),
-                onChanged: (String value) =>
-                    context.read(notifier).changeTotal(value, context),
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(labelText: 'storage'.tr()),
-                onChanged: (String value) => context.read(notifier).fn = value,
-              ),
-              const SizedBox(height: 8),
-              TextField(
-                keyboardType: TextInputType.number,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(labelText: 'document'.tr()),
-                onChanged: (String value) => context.read(notifier).fd = value,
-              ),
+              _TextFields(),
               const SizedBox(height: 8),
               TextField(
                 keyboardType: TextInputType.number,
@@ -90,5 +66,38 @@ class FromParamScreen extends ConsumerWidget {
           name: ReceiptDetailsScreen.routeName,
           child: ReceiptDetailsScreen(receipt: receipt)));
     }
+  }
+}
+
+class _TextFields extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, ScopedReader watch) {
+    final notifier = fromParamNotifier;
+    return Column(children: [
+      const SizedBox(height: 8),
+      TextField(
+        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(
+            labelText: 'totalAmount'.tr(),
+            errorText: watch(notifier).totalError),
+        onChanged: (String value) =>
+            context.read(notifier).changeTotal(value, context),
+      ),
+      const SizedBox(height: 8),
+      TextField(
+        keyboardType: TextInputType.number,
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(labelText: 'storage'.tr()),
+        onChanged: (String value) => context.read(notifier).fn = value,
+      ),
+      const SizedBox(height: 8),
+      TextField(
+        keyboardType: TextInputType.number,
+        textInputAction: TextInputAction.next,
+        decoration: InputDecoration(labelText: 'document'.tr()),
+        onChanged: (String value) => context.read(notifier).fd = value,
+      ),
+    ]);
   }
 }
