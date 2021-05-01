@@ -11,15 +11,15 @@ dependencies:
     sdk: flutter
 
   camera: ^0.8.1
-  cloud_firestore: ^1.0.6
+  cloud_firestore: ^1.0.7
   cupertino_icons: ^1.0.2
   date_time_picker: ^2.0.0
   device_info: ^2.0.0
   easy_localization: ^3.0.0
   equatable: ^2.0.0
   fimber: ^0.6.1
-  firebase_auth: ^1.1.1
-  flutter_riverpod: ^0.14.0+2
+  firebase_auth: ^1.1.2
+  flutter_riverpod: ^0.14.0+3
   flutter_slidable: ^0.6.0
   flutter_speed_dial: ^3.0.5
   flutter_svg: ^0.22.0 # help us to use SVG in our app
@@ -32,7 +32,7 @@ dependencies:
   shared_preferences: ^2.0.5
 
 dev_dependencies:
-  dart_code_metrics: ^3.0.0
+  dart_code_metrics: ^3.1.0
   flutter_test:
     sdk: flutter
 flutter:
