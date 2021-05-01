@@ -1,6 +1,8 @@
 analyzer:
   plugins:
     - dart_code_metrics
+  exclude:
+    - "ios/.symlinks/**"
 
 linter:
   rules:

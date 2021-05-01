@@ -5,12 +5,12 @@ import 'package:share/share.dart';
 
 import '../../app_module.dart';
 
-class CopyingScreen extends ConsumerWidget {
+class CopyingScreen extends StatelessWidget {
   const CopyingScreen({Key? key}) : super(key: key);
   static const String routeName = 'CopyingScreen';
 
   @override
-  Widget build(BuildContext context, ScopedReader watch) => Scaffold(
+  Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(title: const Text('copying').tr(), actions: [
         IconButton(
             icon: const Icon(Icons.share),
@@ -22,12 +22,15 @@ class CopyingScreen extends ConsumerWidget {
           padding: const EdgeInsets.fromLTRB(32.0, 26, 32, 32),
           child: Column(children: [
             Text('date'.tr(), style: Theme.of(context).textTheme.subtitle1),
-            Column(children: _genDateListTile(context, watch))
+            _GenDateListTile()
           ])));
+}
 
-  List<Widget> _genDateListTile(BuildContext context, ScopedReader watch) {
+class _GenDateListTile extends ConsumerWidget {
+  Widget build(BuildContext context, ScopedReader watch) {
     final uniqueList = Set.from(_genDatString()).toList();
-    return uniqueList.map((val) {
+    return Column(
+        children: uniqueList.map((val) {
       final idx = uniqueList.indexOf(val);
       return RadioListTile(
         value: idx,
@@ -38,7 +41,7 @@ class CopyingScreen extends ConsumerWidget {
         },
         selected: watch(copyingNotifier).selectedDate == idx,
       );
-    }).toList();
+    }).toList());
   }
 
   List<String> _genDatString() {
