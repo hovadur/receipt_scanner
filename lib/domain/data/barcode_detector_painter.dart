@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_ml_vision/google_ml_vision.dart';
 
 class BarcodeDetectorPainter extends CustomPainter {
   BarcodeDetectorPainter(this.absoluteImageSize, this.barcodeLocations);
@@ -14,10 +14,10 @@ class BarcodeDetectorPainter extends CustomPainter {
 
     Rect scaleRect(Barcode barcode) {
       return Rect.fromLTRB(
-        barcode.barcodeUnknown?.boundingBox.left ?? 0 * scaleX,
-        barcode.barcodeUnknown?.boundingBox.top ?? 0 * scaleY,
-        barcode.barcodeUnknown?.boundingBox.right ?? 0 * scaleX,
-        barcode.barcodeUnknown?.boundingBox.bottom ?? 0 * scaleY,
+        barcode.boundingBox?.left ?? 0 * scaleX,
+        barcode.boundingBox?.top ?? 0 * scaleY,
+        barcode.boundingBox?.right ?? 0 * scaleX,
+        barcode.boundingBox?.bottom ?? 0 * scaleY,
       );
     }
 

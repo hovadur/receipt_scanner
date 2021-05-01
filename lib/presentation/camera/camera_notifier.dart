@@ -4,7 +4,7 @@ import 'package:camera/camera.dart';
 import 'package:fimber/fimber.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_ml_vision/google_ml_vision.dart';
 
 import '../../database.dart';
 import '../../domain/entity/receipt.dart';
@@ -38,8 +38,8 @@ class CameraNotifier extends ChangeNotifier {
     return null;
   }
 
-  final _barcodeDetector =
-      GoogleMlKit.vision.barcodeScanner([Barcode.FORMAT_QR_Code]);
+  final _barcodeDetector = GoogleVision.instance.barcodeDetector(
+      BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
   CameraController? _camera;
   bool _isDetecting = false;
   bool _isMounted = true;
@@ -67,7 +67,7 @@ class CameraNotifier extends ChangeNotifier {
 
       _detect(
         image: image,
-        detectInImage: _barcodeDetector.processImage,
+        detectInImage: _barcodeDetector.detectInImage,
         imageRotation: description.sensorOrientation,
       ).then(
         (dynamic results) {
@@ -90,14 +90,13 @@ class CameraNotifier extends ChangeNotifier {
 
   static Future<dynamic> _detect({
     required CameraImage image,
-    required Future<dynamic> Function(InputImage image) detectInImage,
+    required Future<List<Barcode>> Function(GoogleVisionImage image)
+        detectInImage,
     required int imageRotation,
   }) async {
-    return detectInImage(InputImage.fromBytes(
-        bytes: _concatenatePlanes(image.planes),
-        inputImageData: InputImageData(
-            size: Size(image.width.toDouble(), image.height.toDouble()),
-            imageRotation: _rotationIntToImageRotation(imageRotation))));
+    return detectInImage(GoogleVisionImage.fromBytes(
+        _concatenatePlanes(image.planes),
+        _buildMetaData(image, _rotationIntToImageRotation(imageRotation))));
   }
 
   static Uint8List _concatenatePlanes(List<Plane> planes) {
@@ -108,17 +107,37 @@ class CameraNotifier extends ChangeNotifier {
     return allBytes.done().buffer.asUint8List();
   }
 
-  static InputImageRotation _rotationIntToImageRotation(int rotation) {
+  static ImageRotation _rotationIntToImageRotation(int rotation) {
     switch (rotation) {
       case 0:
-        return InputImageRotation.Rotation_0deg;
+        return ImageRotation.rotation0;
       case 90:
-        return InputImageRotation.Rotation_90deg;
+        return ImageRotation.rotation90;
       case 180:
-        return InputImageRotation.Rotation_180deg;
+        return ImageRotation.rotation180;
       default:
         assert(rotation == 270);
-        return InputImageRotation.Rotation_270deg;
+        return ImageRotation.rotation270;
     }
+  }
+
+  static GoogleVisionImageMetadata _buildMetaData(
+    CameraImage image,
+    ImageRotation rotation,
+  ) {
+    return GoogleVisionImageMetadata(
+      rawFormat: image.format.raw,
+      size: Size(image.width.toDouble(), image.height.toDouble()),
+      rotation: rotation,
+      planeData: image.planes.map(
+        (Plane plane) {
+          return GoogleVisionImagePlaneMetadata(
+            bytesPerRow: plane.bytesPerRow,
+            height: plane.height,
+            width: plane.width,
+          );
+        },
+      ).toList(),
+    );
   }
 }

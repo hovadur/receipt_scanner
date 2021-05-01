@@ -23,9 +23,9 @@ dependencies:
   flutter_slidable: ^0.6.0
   flutter_speed_dial: ^3.0.5
   flutter_svg: ^0.22.0 # help us to use SVG in our app
-  google_ml_kit:
+  google_ml_vision:
     git:
-      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
+      url: "https://github.com/brianmtully/flutter_google_ml_vision.git"
   google_sign_in: ^5.0.2
   image_picker: ^0.7.4
   share: ^2.0.1

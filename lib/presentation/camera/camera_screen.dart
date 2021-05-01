@@ -25,6 +25,7 @@ class CameraScreen extends StatelessWidget {
 
 class _Preview extends ConsumerWidget {
   _Preview({Key? key}) : super(key: key);
+
   Widget build(BuildContext context, ScopedReader watch) {
     final camera = watch(cameraNotifier).camera;
 
@@ -41,6 +42,7 @@ class _Preview extends ConsumerWidget {
 class _Results extends ConsumerWidget {
   _Results(this._camera, {Key? key}) : super(key: key);
   final CameraController _camera;
+
   Widget build(BuildContext context, ScopedReader watch) {
     const noResultsText = Text('No results!');
     final scanResults = watch(cameraNotifier).scanResults;
@@ -56,7 +58,7 @@ class _Results extends ConsumerWidget {
       return CustomPaint(
           painter: BarcodeDetectorPainter(imageSize, scanResults));
     } else {
-      final qr = scanResults[0].barcodeUnknown?.rawValue ?? '';
+      final qr = scanResults[0].rawValue ?? '';
       SchedulerBinding.instance?.addPostFrameCallback((_) {
         if (AppNavigator.of(context).getLast().name !=
             ReceiptDetailsScreen.routeName) {

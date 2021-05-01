@@ -1,12 +1,12 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:google_ml_kit/google_ml_kit.dart';
+import 'package:google_ml_vision/google_ml_vision.dart';
 
 class FromFileNotifier extends ChangeNotifier {
   String? _path;
-  final _barcodeDetector =
-      GoogleMlKit.vision.barcodeScanner([Barcode.FORMAT_QR_Code]);
+  final _barcodeDetector = GoogleVision.instance.barcodeDetector(
+      BarcodeDetectorOptions(barcodeFormats: BarcodeFormat.qrCode));
 
   String? get path => _path;
 
@@ -19,12 +19,10 @@ class FromFileNotifier extends ChangeNotifier {
     final path = _path;
     if (path != null) {
       final imageFile = File(path);
-      final visionImage = InputImage.fromFile(imageFile);
+      final visionImage = GoogleVisionImage.fromFile(imageFile);
       final List<Barcode> scanResults =
-          await _barcodeDetector.processImage(visionImage);
-      return scanResults.isNotEmpty
-          ? scanResults[0].barcodeUnknown?.rawValue
-          : null;
+          await _barcodeDetector.detectInImage(visionImage);
+      return scanResults.isNotEmpty ? scanResults[0].rawValue : null;
     }
   }
 

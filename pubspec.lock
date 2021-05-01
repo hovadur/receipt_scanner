@@ -350,15 +350,15 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
-  google_ml_kit:
+  google_ml_vision:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: e33ac16fbf7bb1fa4403422fe7f51a11081d74bd
-      url: "https://github.com/hovadur/Google-Ml-Kit-plugin.git"
+      resolved-ref: "74f72daa3517ff65976327300b7e1b837462f895"
+      url: "https://github.com/brianmtully/flutter_google_ml_vision.git"
     source: git
-    version: "0.2.0"
+    version: "0.0.2+1"
   google_sign_in:
     dependency: "direct main"
     description:
