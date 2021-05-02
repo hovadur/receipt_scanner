@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>1039843265985-r2mosqhce0ts43bkcb7f049oho4bebo7.apps.googleusercontent.com</string>
+	<string>961489030826-jur889rnitnc7hn14bgr1ogbc5q04iqi.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1039843265985-r2mosqhce0ts43bkcb7f049oho4bebo7</string>
+	<string>com.googleusercontent.apps.961489030826-jur889rnitnc7hn14bgr1ogbc5q04iqi</string>
 	<key>ANDROID_CLIENT_ID</key>
-	<string>1039843265985-0v4hcd5e0l0p8aot5h8ppd00ctnjff5k.apps.googleusercontent.com</string>
+	<string>961489030826-efhs19otgr38lo90r1ftojrqaqstc0ju.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBwy-qwpQW-XTkF-aX6nv7eQzjT-nV3Glo</string>
+	<string>AIzaSyALMwHQ7ISsMN5p5OrjHoBdUNcqNSOCNGE</string>
 	<key>GCM_SENDER_ID</key>
-	<string>1039843265985</string>
+	<string>961489030826</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>ru.julia.receipt_scanner</string>
+	<string>ru.julia.receipt-scanner</string>
 	<key>PROJECT_ID</key>
-	<string>checking-the-receipt</string>
+	<string>receipt-scanner-852a2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>checking-the-receipt.appspot.com</string>
+	<string>receipt-scanner-852a2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
 	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
@@ -31,8 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1039843265985:ios:3bf8657c8cc2b0eb28b340</string>
-	<key>DATABASE_URL</key>
-	<string>https://checking-the-receipt.firebaseio.com</string>
+	<string>1:961489030826:ios:74715c81cc9ad161c68ad3</string>
 </dict>
 </plist>
