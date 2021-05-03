@@ -30,7 +30,7 @@ class ManualAddScreen extends ConsumerWidget {
           label: const Text('cont').tr(),
           onPressed: () => submit(context, notifier),
         ),
-        body: SingleChildScrollView(child: _Column(onPressed, item)));
+        body: SingleChildScrollView(child: _Column(onPressed, notifier)));
   }
 
   void submit(BuildContext context,
@@ -41,25 +41,24 @@ class ManualAddScreen extends ConsumerWidget {
 }
 
 class _Column extends ConsumerWidget {
-  const _Column(this.onPressed, this._item, {Key? key}) : super(key: key);
+  const _Column(this.onPressed, this._notifier, {Key? key}) : super(key: key);
 
   final ValueChanged<ReceiptItem> onPressed;
-  final ReceiptItem? _item;
+  final ChangeNotifierProvider<ManualAddNotifier> _notifier;
 
   Widget build(BuildContext context, ScopedReader watch) {
-    final notifier = manualAddNotifier(ManualAddParam(context, _item));
     final entries = context.category().entries.toList();
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       const SizedBox(height: 16),
       ListTile(
         leading: CircleAvatar(
-            child: Icon(entries.elementAt(watch(notifier).type).key)),
-        title: Text(entries.elementAt(watch(notifier).type).value),
+            child: Icon(entries.elementAt(watch(_notifier).type).key)),
+        title: Text(entries.elementAt(watch(_notifier).type).value),
         onTap: () => AppNavigator.of(context).push(MaterialPage<Page>(
             name: CategoryScreen.routeName,
             child: CategoryScreen(
               onPressed: (type) {
-                context.read(notifier).saveType(type);
+                context.read(_notifier).saveType(type);
                 Navigator.of(context).pop();
               },
             ))),
@@ -68,32 +67,32 @@ class _Column extends ConsumerWidget {
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           child: Column(children: [
             TextField(
-              controller: watch(notifier).nameController,
+              controller: watch(_notifier).nameController,
               keyboardType: TextInputType.streetAddress,
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(labelText: 'product'.tr()),
-              onChanged: (String value) => context.read(notifier).name = value,
+              onChanged: (String value) => context.read(_notifier).name = value,
             ),
             TextField(
-              controller: watch(notifier).qtyController,
+              controller: watch(_notifier).qtyController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
-                  labelText: 'qtyy'.tr(), errorText: watch(notifier).qtyError),
+                  labelText: 'qtyy'.tr(), errorText: watch(_notifier).qtyError),
               onChanged: (String value) =>
-                  context.read(notifier).changeQty(value, context),
+                  context.read(_notifier).changeQty(value, context),
             ),
             TextField(
-              controller: watch(notifier).sumController,
+              controller: watch(_notifier).sumController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.done,
-              onSubmitted: (_) => submit(context, notifier),
+              onSubmitted: (_) => submit(context, _notifier),
               decoration: InputDecoration(
-                  labelText: 'sum'.tr(), errorText: watch(notifier).sumError),
+                  labelText: 'sum'.tr(), errorText: watch(_notifier).sumError),
               onChanged: (String value) =>
-                  context.read(notifier).changeSum(value, context),
+                  context.read(_notifier).changeSum(value, context),
             ),
           ]))
     ]);

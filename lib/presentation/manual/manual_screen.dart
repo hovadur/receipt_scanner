@@ -2,6 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:receipt_scanner/presentation/manual/manual_notifier.dart';
 
 import '../../app_module.dart';
 import '../../domain/entity/receipt.dart';
@@ -30,17 +31,16 @@ class ManualScreen extends StatelessWidget {
           }
         },
       ),
-      body: _Body(receipt),
+      body: _Body(notifier),
     );
   }
 }
 
 class _Body extends ConsumerWidget {
-  const _Body(this._receipt, {Key? key}) : super(key: key);
-  final Receipt? _receipt;
+  const _Body(this._notifier, {Key? key}) : super(key: key);
+  final ChangeNotifierProvider<ManualNotifier> _notifier;
 
   Widget build(BuildContext context, ScopedReader watch) {
-    final notifier = manualNotifier(ManualParam(context, _receipt));
     return Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
       Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -48,42 +48,42 @@ class _Body extends ConsumerWidget {
             DateTimePicker(
               locale: context.locale,
               type: DateTimePickerType.dateTimeSeparate,
-              initialValue: watch(notifier).dateTime.toString(),
+              initialValue: watch(_notifier).dateTime.toString(),
               firstDate: DateTime.fromMillisecondsSinceEpoch(0),
               lastDate: DateTime.now(),
               onChanged: (String value) =>
-                  context.read(notifier).changeDateTime(value),
+                  context.read(_notifier).changeDateTime(value),
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: watch(notifier).totalController,
+              controller: watch(_notifier).totalController,
               keyboardType:
                   const TextInputType.numberWithOptions(decimal: true),
               textInputAction: TextInputAction.next,
               decoration: InputDecoration(
                   labelText: 'totalAmount'.tr(),
-                  errorText: watch(notifier).totalError),
+                  errorText: watch(_notifier).totalError),
               onChanged: (String value) =>
-                  context.read(notifier).changeTotal(value, context),
+                  context.read(_notifier).changeTotal(value, context),
             ),
             const SizedBox(height: 8),
-            _Row(_receipt),
+            _Row(_notifier),
           ])),
       Expanded(
           child: ListView.builder(
-              itemCount: watch(notifier).productCount,
+              itemCount: watch(_notifier).productCount,
               itemBuilder: (BuildContext context, int index) {
-                return Builder(builder: (context) => _Item(_receipt, index));
+                return Builder(builder: (context) => _Item(_notifier, index));
               }))
     ]);
   }
 }
 
 class _Row extends StatelessWidget {
-  const _Row(this._receipt, {Key? key}) : super(key: key);
-  final Receipt? _receipt;
+  const _Row(this._notifier, {Key? key}) : super(key: key);
+  final ChangeNotifierProvider<ManualNotifier> _notifier;
+
   Widget build(BuildContext context) {
-    final notifier = manualNotifier(ManualParam(context, _receipt));
     return Row(children: <Widget>[
       ElevatedButton.icon(
           onPressed: () {
@@ -91,7 +91,7 @@ class _Row extends StatelessWidget {
                 name: ManualAddScreen.routeName,
                 child: ManualAddScreen(
                   onPressed: (item) {
-                    context.read(notifier).addProduct(item);
+                    context.read(_notifier).addProduct(item);
                   },
                 )));
           },
@@ -99,7 +99,7 @@ class _Row extends StatelessWidget {
           label: const Text('product').tr()),
       const SizedBox(width: 8),
       ElevatedButton.icon(
-          onPressed: () => context.read(notifier).removeProduct(),
+          onPressed: () => context.read(_notifier).removeProduct(),
           icon: const Icon(Icons.remove),
           label: const Text('product').tr()),
     ]);
@@ -107,21 +107,20 @@ class _Row extends StatelessWidget {
 }
 
 class _Item extends StatelessWidget {
-  const _Item(this._receipt, this._index, {Key? key}) : super(key: key);
-  final Receipt? _receipt;
+  const _Item(this._notifier, this._index, {Key? key}) : super(key: key);
+  final ChangeNotifierProvider<ManualNotifier> _notifier;
   final int _index;
 
   Widget build(BuildContext context) {
-    final notifier = manualNotifier(ManualParam(context, _receipt));
     final entries = context.category().entries.toList();
-    final item = context.read(notifier).getProducts(context)[_index];
+    final item = context.read(_notifier).getProducts(context)[_index];
     return ListTile(
         onTap: () {
           AppNavigator.of(context).push(MaterialPage<Page>(
               name: ManualAddScreen.routeName,
               child: ManualAddScreen(
                 onPressed: (item) {
-                  context.read(notifier).changeProduct(item);
+                  context.read(_notifier).changeProduct(item);
                 },
                 item: item.item,
               )));
