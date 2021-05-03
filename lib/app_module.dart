@@ -44,20 +44,15 @@ final databaseProvider = Provider<Database>((ref) {
   return Database(s, u);
 });
 
-final myReceiptsNotifier = ChangeNotifierProvider<MyReceiptsNotifier>((ref) {
+final myReceiptsNotifier = ChangeNotifierProvider.autoDispose
+    .family<MyReceiptsNotifier, BuildContext>((ref, context) {
   final db = ref.watch(databaseProvider);
-  return MyReceiptsNotifier(db);
-});
-
-final myReceiptsStreamProvider = StreamProvider.autoDispose
-    .family<List<MyItemUI>, BuildContext>((ref, context) {
-  final notifier = ref.watch(myReceiptsNotifier);
-  return notifier.receipts(context);
+  return MyReceiptsNotifier(db, context);
 });
 
 final searchStreamProvider = StreamProvider.autoDispose
     .family<List<SearchUI>, SearchParam>((ref, param) {
-  final notifier = ref.watch(myReceiptsNotifier);
+  final notifier = ref.watch(myReceiptsNotifier(param.context));
   return notifier.search(param.context, param.filter);
 });
 

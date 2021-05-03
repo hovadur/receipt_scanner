@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_speed_dial/flutter_speed_dial.dart';
+import 'package:infinite_scroll_pagination/infinite_scroll_pagination.dart';
 
 import '../../app_module.dart';
 import '../../domain/navigation/app_navigator.dart';
@@ -85,21 +86,17 @@ class _Body extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, ScopedReader watch) {
-    final stream = watch(myReceiptsStreamProvider(context));
-    return stream.when(
-        loading: () => const LinearProgressIndicator(),
-        error: (_, __) => const Text('wentWrong').tr(),
-        data: (list) => ListView.builder(
-            itemCount: list.length,
-            itemBuilder: (BuildContext context, int index) {
-              final value = list[index];
-              return _CardItem(value);
-            }));
+    final notifier = watch(myReceiptsNotifier(context));
+    return PagedListView(
+        pagingController: notifier.pagingController,
+        builderDelegate: PagedChildBuilderDelegate<MyItemUI>(
+            itemBuilder: (context, item, index) => _CardItem(item)));
   }
 }
 
 class _CardItem extends StatelessWidget {
   final MyItemUI _cardItem;
+
   _CardItem(this._cardItem, {Key? key}) : super(key: key);
 
   @override
@@ -110,7 +107,7 @@ class _CardItem extends StatelessWidget {
         id: value.id,
         confirmDismiss: () async => true,
         onDismissed: () {
-          context.read(myReceiptsNotifier).deleteReceipt(value);
+          context.read(myReceiptsNotifier(context)).deleteReceipt(value);
         },
         child: ListTile(
           leading: value.items.isEmpty

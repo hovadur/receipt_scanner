@@ -69,15 +69,26 @@ class Database {
     }
   }
 
-  Stream<List<Receipt>> getReceipts() => _users
-          .doc(_userInteractor.getCurrentUser().id)
-          .collection('receipts')
-          .orderBy('dateTime', descending: true)
-          .where('budget', isEqualTo: _settingsRepo.getCurrentBudget())
-          .snapshots()
-          .map((event) {
-        return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
-      });
+  Stream<QuerySnapshot> getReceiptsSnapshots(DocumentSnapshot? ds, int? limit) {
+    final initialQuery = _users
+        .doc(_userInteractor.getCurrentUser().id)
+        .collection('receipts')
+        .orderBy('dateTime', descending: true)
+        .where('budget', isEqualTo: _settingsRepo.getCurrentBudget());
+    final query = limit != null
+        ? ds != null
+            ? initialQuery.limit(limit).startAfterDocument(ds)
+            : initialQuery.limit(limit)
+        : initialQuery;
+    return query.snapshots();
+  }
+
+  Stream<List<Receipt>> getReceipts() {
+    final snapshots = getReceiptsSnapshots(null, null);
+    return snapshots.map((event) {
+      return event.docs.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
+    });
+  }
 
   Stream<Receipt> getReceipt(String receiptId) => _users
       .doc(_userInteractor.getCurrentUser().id)

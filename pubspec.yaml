@@ -23,6 +23,7 @@ dependencies:
   flutter_slidable: ^0.6.0
   flutter_speed_dial: ^3.0.5
   flutter_svg: ^0.22.0 # help us to use SVG in our app
+  infinite_scroll_pagination: ^3.0.1
   google_ml_vision:
     git:
       url: "https://github.com/brianmtully/flutter_google_ml_vision.git"
