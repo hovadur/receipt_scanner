@@ -168,7 +168,7 @@ packages:
       name: dart_style
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.1"
   date_time_picker:
     dependency: "direct main"
     description:
@@ -353,12 +353,10 @@ packages:
   google_ml_vision:
     dependency: "direct main"
     description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "74f72daa3517ff65976327300b7e1b837462f895"
-      url: "https://github.com/brianmtully/flutter_google_ml_vision.git"
-    source: git
-    version: "0.0.2+1"
+      name: google_ml_vision
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.3+1"
   google_sign_in:
     dependency: "direct main"
     description:
@@ -393,7 +391,7 @@ packages:
       name: http
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.13.1"
+    version: "0.13.2"
   http_parser:
     dependency: transitive
     description:
