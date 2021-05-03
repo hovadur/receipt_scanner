@@ -22,7 +22,6 @@ import 'presentation/manual/manual_add_notifier.dart';
 import 'presentation/manual/manual_add_param.dart';
 import 'presentation/manual/manual_notifier.dart';
 import 'presentation/manual/manual_param.dart';
-import 'presentation/myreceipts/my_item_ui.dart';
 import 'presentation/myreceipts/my_receipt_ui.dart';
 import 'presentation/myreceipts/my_receipts_notifier.dart';
 import 'presentation/myreceipts/search_param.dart';
