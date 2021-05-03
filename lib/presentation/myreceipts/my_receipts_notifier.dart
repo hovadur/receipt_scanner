@@ -37,38 +37,43 @@ class MyReceiptsNotifier extends ChangeNotifier {
 
   Future<void> _fetchPage(
       BuildContext context, DocumentSnapshot? pageKey) async {
-    final startDateTime = _dateTime;
-    var dd = startDateTime == null
-        ? DateTime.fromMillisecondsSinceEpoch(0)
-        : startDateTime;
-    var h = MyHeaderUI(dd, 0);
-    var sum = 0;
-    final list = <MyItemUI>[];
-    await for (final snapshot in _db.getReceiptsSnapshots(pageKey, _pageSize)) {
-      final s = snapshot.docs;
-      final event = s.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
-      final isLastPage = event.length < _pageSize;
-      for (final e in event) {
-        final d = e.dateTime;
-        _dateTime = d;
-        final diff = DateTime(d.year, d.month, d.day).difference(dd);
-        if (diff.abs().inDays >= 1) {
-          sum = 0;
-          h = MyHeaderUI(e.dateTime, sum);
-          list.add(h);
+    try {
+      final startDateTime = _dateTime;
+      var dd = startDateTime == null
+          ? DateTime.fromMillisecondsSinceEpoch(0)
+          : startDateTime;
+      var h = MyHeaderUI(dd, 0);
+      var sum = 0;
+      final list = <MyItemUI>[];
+      await for (final snapshot
+          in _db.getReceiptsSnapshots(pageKey, _pageSize)) {
+        final s = snapshot.docs;
+        final event = s.map((e) => Receipt.fromDocumentSnapshot(e)).toList();
+        final isLastPage = event.length < _pageSize;
+        for (final e in event) {
           final d = e.dateTime;
-          dd = DateTime(d.year, d.month, d.day);
+          _dateTime = d;
+          final diff = DateTime(d.year, d.month, d.day).difference(dd);
+          if (diff.abs().inDays >= 1) {
+            sum = 0;
+            h = MyHeaderUI(e.dateTime, sum);
+            list.add(h);
+            final d = e.dateTime;
+            dd = DateTime(d.year, d.month, d.day);
+          }
+          final receipt = _receiptMapper.map(context, e);
+          h.sum += e.totalSum;
+          list.add(receipt);
         }
-        final receipt = _receiptMapper.map(context, e);
-        h.sum += e.totalSum;
-        list.add(receipt);
+        if (isLastPage) {
+          _pagingController.appendLastPage(list);
+        } else {
+          final nextPageKey = s.last;
+          _pagingController.appendPage(list, nextPageKey);
+        }
       }
-      if (isLastPage) {
-        _pagingController.appendLastPage(list);
-      } else {
-        final nextPageKey = s.last;
-        _pagingController.appendPage(list, nextPageKey);
-      }
+    } catch (error) {
+      _pagingController.error = error;
     }
   }
 
