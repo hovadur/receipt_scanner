@@ -25,7 +25,7 @@ dependencies:
   flutter_svg: ^0.22.0 # help us to use SVG in our app
   infinite_scroll_pagination: ^3.0.1
   google_ml_vision: ^0.0.3+1
-  google_sign_in: ^5.0.2
+  google_sign_in: ^5.0.3
   image_picker: ^0.7.5
   share: ^2.0.1
   shared_preferences: ^2.0.5
